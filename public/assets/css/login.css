@@ -1,0 +1,162 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;
+
+}
+
+
+.logo{
+    width: 20%;
+    /* height: 55px; */
+    background: var(--light);
+    padding-left: 10px;
+    padding-top: 2px;
+    padding-right:10px ;
+    margin-left:1%;
+
+}
+
+.logo-image{
+    width: 100%;
+    /* margin: auto; */
+
+}
+.navbar{
+    background-color:lightslategray ;
+    align-items: center;
+    display: flex;
+    
+}
+
+section{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+.vision{
+    margin-left: 60%;
+    font-size: large;
+    color:#FAB84C;
+}
+.vision strong{
+    -webkit-text-stroke: 1px black;
+}
+
+.img-bx{
+    position: relative;
+    width: 50%;
+    height: 100%;
+}
+.img-bx::before{
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(255deg,black,#FAB84C);
+    z-index: 1;
+    mix-blend-mode: screen;
+}
+
+.img-bx img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.content-bx{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+    background-color: lightgrey;
+}
+.content-bx.form-bx{
+    width: 50%;
+}
+.form-bx h1{
+    color: black;
+    font-weight: 600;
+    font-size: 2em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    border-bottom: 4px solid #FAB84C;
+    display: inline-block;
+    letter-spacing: 1px;
+}
+.content-bx .form-bx .input-bx{
+    margin-top: 20px;
+}
+
+.content-bx .form-bx .input-bx input{
+    width: 100%;
+    padding: 10px 20px;
+    outline: none;
+    font-weight: 400;
+    border: 1px solid black;
+    letter-spacing: 1px;
+    color: b#FAB84C;
+    background: transparent;
+    border-radius: 30px;
+}
+
+.content-bx .form-bx .input-bx input[type="submit"]{
+    background:#FAB84C;
+    color: black;
+    outline: none;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+
+}
+.login_errormessage{
+    color: red;
+}
+
+.content-bx .form-bx .input-bx input[type="submit"]:hover{
+    background: linear-gradient(255deg,black,#FAB84C);
+    color: white;
+}
+
+.content-bx .form-bx .forgot{
+    margin-bottom: 10px;
+}
+#accept{
+    display: inline-flex;
+    
+}
+
+
+@media(max-width: 768px){
+    section .img-bx{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    section .content-bx{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        background: transparent;
+    }
+    section .content-bx .form-bx{
+        width: 100%;
+        padding: 40px;
+        background: rgb(255, 255,255/0.9);
+        margin: 50px;
+    }
+    
+}

@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--body-color);
+}
+
+.navbar {
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 12px;
+
+    box-shadow: 2px 10px 20px 0px rgba(0,0,0,0.16);
+    -webkit-box-shadow: 2px 10px 20px 0px rgba(0,0,0,0.16);
+    -moz-box-shadow: 2px 10px 20px 0px rgba(0,0,0,0.16);
+}
+
+.logo {
+    height: 18px;
+    margin-left: 20px;
+}
+
+.nav-list {
+
+    width: 100%;
+    list-style-type: none;
+    text-align: center;
+    list-style-type: none;
+    padding-right: 20px;
+    display: flex;
+    justify-content: right;
+    transition: 0.8s;
+}
+
+.nav-list .list-item {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px 4px;
+}
+
+.list-item {
+    background-color: #333;
+    border-radius: 25px;
+    transition: 0.4s;
+}
+
+.list-item:hover {
+    background-color: #FAB84C;
+}
+
+.navbar a {
+    font-size: 0.6 rem;
+    text-decoration: none;
+    color: white;
+}
+
+.navbar a:hover {
+    color: #333;
+}
+
+
+.menu-container {
+    display: none;
+}
+
+.bar1, .bar2, .bar3 {
+    width: 20px;
+    height: 3px;
+    border-radius: 15px;
+    background-color: #333;
+    margin: 4px 0;
+    transition: 0.4s;
+}
+
+.change .bar1 {
+    transform: translate(0, 9px) rotate(-45deg);
+}
+
+.change .bar2 {opacity: 0;}
+
+.change .bar3 {
+    transform: translate(0, -5px) rotate(45deg);
+}
+
+
+
+
+
+@media all and (max-width: 480px) {
+    .navbar {
+        flex-direction: column;
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+    .nav-list .list-item {
+        display: block;
+        border-top: 1px solid;
+    }
+
+    .navbar .container-icon {
+        width: 100%;
+    }
+
+    .nav-list {
+        display: none;
+    }
+
+    .logo {
+        margin-top: 10px;
+        margin-left: 10px;
+    }
+
+    .menu-container {
+        display: block;
+        cursor: pointer;
+        position: absolute;
+        right: 15px;
+        top: 10px;
+    }
+
+    .active {
+        display: block;
+        color: white;;
+    }
+}
+

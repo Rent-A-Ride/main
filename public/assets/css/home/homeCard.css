@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --body-color: #D9D9D9;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #D9D9D9;
+}
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+
+}
+
+.cards {
+    width: 207.5px;
+    height: 250px;
+    aspect-ratio: 83/100;
+    margin: 15px;
+    box-sizing: border-box;
+    float: left;
+    text-align: left;
+    border-radius: 15px;
+    transition: .4s;
+    cursor: pointer;
+    padding-top: 20px;
+    overflow: hidden;
+}
+
+.cards:hover {
+    box-shadow: -8px 10px 15px 0px rgba(0,0,0,0.21);
+    -webkit-box-shadow: -8px 10px 15px 0px rgba(0,0,0,0.21);
+    transform: scale(101%);
+}
+
+.scooter , .car {
+    background-color: white;
+}
+
+.moto, .van {
+    background-color: #FAB84C;
+}
+
+.cards-container p {
+    font-style: normal;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 10px;
+    margin: 0 20px;
+    color: #000000;
+}
+
+.cards-container h1 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 32px;
+    margin: 0 20px;
+    color: #000000;
+}
+
+.cards-container img {
+    position: relative;
+    width: 244px;
+    height: 244px;
+}
+
+.scooter img {
+    transform: translate(-40%, -17px);
+}
+
+.moto img {
+    transform: translate(-40%, -12px);
+}
+
+.car img {
+    transform: scaleX(-1) translate(-30%, 20px);
+}
+
+.van img {
+    transform: scaleX(-1) translate(-22%, 0px);
+}
+
+
+
