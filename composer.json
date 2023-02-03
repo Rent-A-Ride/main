@@ -1,0 +1,22 @@
+{
+    "name": "madma/mvc",
+    "autoload": {
+        "psr-4": {
+            "Madma\\Mvc\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "iamhasantha",
+            "email": "2020cs090@stu.ucsc.cmb.ac.lk"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "app\\": "./"
+        }
+    },
+    "require": {
+        "vlucas/phpdotenv": "^5.5"
+    }
+}
