@@ -20,8 +20,10 @@ class AuthController extends Controller
         // $params = [
         //     'name' => "Rent A Ride"
         // ];
-        // $this->setLayout('home');
-        // return $this->render('Home');
+        // $this->setLayout('main_1');
+        // return $this->render('login');
+        // $this->setLayout("main_1");
+        // return $this->render()
         return $res->render('login','main_1');
     }
 
@@ -115,7 +117,7 @@ class AuthController extends Controller
 
 
     }
-    public function adminLogout(Request $req, Response $res){
+    public function logout(Request $req, Response $res){
         // if ($req->session->get("authenticated") && $req->session->get("user_role") ==="owner") {
            $req->session->destroy();
             return $res->redirect("/");

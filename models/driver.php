@@ -81,6 +81,10 @@ class driver
         return Application::$app->db->pdo->query("SELECT * FROM driver INNER JOIN users WHERE driver.user_ID=users.user_ID ")->fetchAll(\PDO::FETCH_ASSOC);
 
     }
+
+    // public function getreviews($user_id){
+    //     return Application::$app->db->pdo->query("SELECT * FROM driver_reviews where driver.Id=$user_Id")->fetchAll(\PDO::FETCH_ASSOC);
+    // }
     
 
 

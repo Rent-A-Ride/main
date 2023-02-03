@@ -5,6 +5,7 @@ use app\controllers\SiteController;
 use app\controllers\OwnerController;
 use app\controllers\VehicleController;
 use app\controllers\VehicleOwnerController;
+use app\controllers\DriverController;
 use app\core\Application;
 
 
@@ -64,6 +65,6 @@ $app->router->get("/admin_customer", [OwnerController::class, "admin_Customer"])
 $app->router->get("/adminadd_vowner", [OwnerController::class, "admin_addVehicleOwner"]);
 
 
-
+$app->router->get("/review", [DriverController::class, "view_reviews"]);
 
 $app->run();
