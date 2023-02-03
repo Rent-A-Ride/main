@@ -1,0 +1,325 @@
+
+.VehicleownerSearch{
+    margin-left: 5%;
+    margin-top: 2%;
+    width: 300px ;
+    height:40px;
+    border-radius: 1rem 0 0 1rem;
+    border: solid;
+}
+
+.VehicleownerSearchbtn{
+    width: 100px ;
+    height:40px; 
+    border-radius: 0 1rem 1rem 0;
+}
+
+.ownervehicleownerdsearchform{
+    display: flex;
+}
+
+.ownervehicleownerdsearchform1{
+    width: 40%;
+}
+
+.addnewVehicleowner{
+    width: 100px;
+    background: whitesmoke;
+    margin-left: 100%;
+}
+
+.form-input-addvehicleowner{
+    width: 150px;
+    height: 40px;
+    padding: 0;
+    margin-top: 1.5%;
+    margin-left: 10%;
+    align-items: center;
+   
+    
+
+}
+select{
+    border: solid;
+}
+
+.form-input-addvehicleowner a{
+    align-items: center;
+    background: white;
+    width: 150px;
+    height: 100%;
+    padding: 9px;
+    border-radius: 1rem;
+    border: solid;
+   
+}
+.Vehicleownerdetails{
+    background: #ffffff;
+    /* padding: 2rem; */
+    border-radius:  0.5rem;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 2rem;
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 20px;
+    display: flex;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+}
+.Vehicleownerdetails_1{
+    background: lightgray;
+    border-radius: 0 0.5rem 0.5rem 0;
+    /* box-shadow: 0 10px 10px lightgray; */
+    
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 20px;
+    display: flex;
+}
+
+.adminvehicleOwner_img{
+    /* background: red; */
+    /* padding: 2rem; */
+    border-radius: 0.5rem;
+    /* box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2); */
+    
+    width: 15%;
+    text-align: center;
+}
+.adminvehicleowner_img{
+    width: 25%;
+    border-radius: 50%;
+}
+.admin_vehicleOwnerView{
+    background: linear-gradient(300deg,#FAB84C,goldenrod);
+
+    color: black;
+    padding-right: 10px;
+    border-radius: 1rem;
+    cursor: pointer;
+    margin-right:10px;
+    font-weight: 600;
+}
+
+.adminvehicleOwner_name{
+    /* background: red; */
+    /* padding: 2rem; */
+    border-radius: 0.5rem;
+    /* box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2); */
+    margin-left: 2%;
+    width: 25%;
+    text-align: center;
+}
+.adminvehicleOwner_name_1{
+    background: whitesmoke;
+    /* padding: 2rem; */
+    border-radius: 0.5rem;
+    /* box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2); */
+    margin-left: 2%;
+    width: 25%;
+    text-align: center;
+}
+.adminvehicleOwner_location{
+    /* background: red; */
+    /* padding: 2rem; */
+    border-radius: 0.5rem;
+    /* box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2); */
+    margin-left: 2%;
+    width: 25%;
+    text-align: center;
+}
+.adminvehicleOwner_location_1{
+    background: whitesmoke;
+    /* padding: 2rem; */
+    border-radius: 0.5rem;
+    /* box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2); */
+    margin-left: 2%;
+    width: 25%;
+    text-align: center;
+}
+.adminvehicleOwner_Novehicles{
+    /* background: red; */
+    /* padding: 2rem; */
+    border-radius: 0.5rem;
+    /* box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2); */
+    margin-left: 2%;
+    width: 10%;
+    text-align: center;
+}
+.adminvehicleOwner_Novehicles_1{
+    background: whitesmoke;
+    /* padding: 2rem; */
+    border-radius: 0.5rem;
+    /* box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2); */
+    margin-left: 2%;
+    width: 10%;
+    text-align: center;
+}
+
+.adminvehicleowner_btn{
+    /* background: red; */
+    /* padding: 2rem; */
+    border-radius: 0.5rem;
+    /* box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2); */
+    margin-left: 2%;
+    width: 20%;
+    display: flex;
+    text-align: center;
+}
+.admin_vehicleOwnerView{
+    text-align: center;
+    padding: 1px;
+}
+
+.Vehicleownerdetails:hover{
+    transform: scale(1.02);
+    box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.2);
+}
+
+.vehicleOwnerlocationselect{
+    border-radius: 1rem;
+}
+
+.admin_acceptvowner{
+    display: flex;
+    width: 80%;
+    background-color: lightgreen;
+    border-radius: 50%;
+    align-items: center;
+    font-size: 1.4rem;
+}
+
+.admin_deletevowner{
+    display: flex;
+    width: 80%;
+    background-color: red;
+    border-radius: 50%;
+    align-items: center;
+    font-size: 1.4rem;
+}
+
+
+@media screen and (max-width: 1280px) {
+    .VehicleownerSearch{
+        
+        width: 200px ;
+        height:30px;
+        
+    }
+    
+
+}
+
+@media screen and (max-width: 11024px) {
+
+    .VehicleownerSearch{
+        
+        width: 150px ;
+        height:30px;
+        
+    }
+
+    .VehicleownerSearchbtn{
+        width: 80px ;
+        height:30px; 
+        
+    }
+    select{
+        height: 30px;
+        width: 120px;
+    }
+
+    .form-input-addvehicleowner a{
+        padding: 4.5px;
+        
+       
+    }
+    
+
+}
+
+
+@media screen and (max-width: 912px) {
+
+    .VehicleownerSearch{
+        
+        width: 100px ;
+        height:25px;
+        
+    }
+
+    .VehicleownerSearchbtn{
+        width: 80px ;
+        height: 25px; 
+        
+    }
+    select{
+        height: 25px;
+        width: 100px;
+    }
+
+    .form-input-addvehicleowner a{
+        padding: 2px;
+        
+       
+    }
+    .form-input-addvehicleowner{
+        
+        margin-left: 10px;
+        
+       
+        
+    
+    }
+    
+
+}
+
+
+@media screen and (max-width: 768px) {
+
+    .ownervehicleownerdsearchform{
+        display: block;
+    }
+
+    .VehicleownerSearch{
+        
+        width: 60%;
+        height:30px;
+        
+    }
+    .ownervehicleownerdsearchform1{
+        width: 100%;
+
+    }
+
+    .VehicleownerSearchbtn{
+        width: 30% ;
+        height: 30px; 
+        
+    }
+    select{
+        height:30% ;
+        width: 60%;
+        margin-left: 5%;
+        border: solid;
+    }
+
+    .form-input-addvehicleowner a{
+        padding-right: 4px;
+        margin-left: 5%;
+        
+        
+       
+    }
+    .form-input-addvehicleowner{
+        
+        margin-left: 10px;
+    }
+
+    
+    
+
+}
+
+

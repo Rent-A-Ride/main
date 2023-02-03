@@ -1,0 +1,397 @@
+@import "admin-vehicle.css";
+@import "adminaddVehicle.css";
+@import "ownerViewVehicleProfile.css";
+
+/* importing admin_Vehicleowner */
+@import "admin_Vehicleowner.css";
+
+@import "admin_driver.css";
+
+@import "admin_profile.css";
+
+@import "adminViewVehicleOwner.css";
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    min-height: 100vh;
+    /*background: var(--grey);*/
+    background:lightgrey;
+
+
+}
+a{
+    text-decoration: none;
+}
+li{
+    list-style: none;
+}
+
+:root{
+    --poppins: 'Poppins', sans-serif;
+    --lato: 'Lato', sans-serif;
+
+    --light: #F9F9F9;
+    --blue: #3C91E6;
+    --light-blue: #CFE8FF;
+    --grey: #eee;
+    --dark-grey: #AAAAAA;
+    --dark: #342E37;
+    --red: #DB504A;
+    --yellow: #FFCE26;
+    --light-yellow: #FFF2C6;
+    --orange: #FD7238;
+    --light-orange: #FFE0D3;
+}
+
+
+.pic{
+    width: 30px;
+    height: 30px;
+    min-width: calc(60px - ((4px + 6px)*2));
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.pic4{
+    width: 20px;
+    height: 20px;
+    min-width: calc(60px - ((4px + 6px)*2));
+
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.pic1{
+    width: 30px;
+    height: 30px;
+    min-width: calc(60px - ((4px + 6px)*2));
+
+    margin-right: 10px;
+
+
+}
+
+.pic3{
+    width: 30px;
+    height: 30px;
+    min-width: calc(60px - ((4px + 6px)*2));
+    border-radius: 50%;
+
+    margin-top: 10px;
+    margin-left: 10px;
+
+}
+#side-bar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100%;
+    background: linear-gradient(300deg,black,#FAB84C);
+    z-index: 1000;
+    font-family: var(--poppins) ;
+    transition: .3s ease;
+    overflow-x: hidden;
+}
+#side-bar.hide{
+    max-width: 65px;
+}
+
+.logo{
+    width: 100%;
+    height: 55px;
+    background: var(--light);
+    padding-left: 10px;
+    padding-top: 2px;
+    padding-right:10px ;
+
+}
+
+.logo-image{
+    width: 100%;
+    /* margin: auto; */
+
+}
+
+#side-bar .side-bar-menu{
+    width: 100%;
+    margin-top: 48px;
+
+}
+
+#side-bar .side-bar-menu li {
+
+    height: 48px;
+    background: transparent;
+    /* margin-left: 6px; */
+    /* border-radius: 48px 0 0 48px; */
+    padding: 4px;
+}
+#side-bar .side-bar-menu li.active{
+    background: linear-gradient(170deg,#FAB84C,black);
+    position: relative;
+    z-index: 100;
+}
+#side-bar .side-bar-menu li.active a{
+    color: var(--blue);
+}
+#side-bar .hide .side-bar-menu li.active a{
+    color: var(--blue);
+}
+#side-bar .hide .side-bar-menu li a{
+    width: calc(48px - (4px*2));
+}
+#side-bar .side-bar-menu li.active::before{
+    content:'';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    /* background: var(--blue); */
+    border-radius: 50%;
+    top: -40px;
+    right: 0;
+    box-shadow: 20px 20px 0 linear-gradient(170deg,#FAB84C,black);
+    z-index: -1;
+
+}
+#side-bar .side-bar-menu li.active::after{
+    content:'';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    /* background: var(--blue); */
+    border-radius: 50%;
+    top: -40px;
+    right: 0;
+    box-shadow: 20px -20px 0 linear-gradient(170deg,#FAB84C,black);
+    z-index: -1;
+
+}
+
+#bottum1{
+    margin-top: 300px;
+}
+
+#side-bar .side-bar-menu li a{
+    width: 100%;
+    height: 100%;
+    background: var(--light);
+    display: flex;
+    align-items: center;
+    border-radius: 48px;
+    font-size: 16px;
+    color: var(--dark);
+    white-space: nowrap;
+    overflow-x: hidden;
+}
+#side-bar .side-bar-menu.top li a:hover{
+    background: var(--grey);
+    color: chocolate;
+}
+
+#side-bar .side-bar-menu li a.logout{
+    color: red;
+}
+
+#content{
+    position: relative;
+    width: calc(100% - 280px);
+
+    left: 280px;
+    transition: .3s ease;
+}
+
+#side-bar.hide ~ #content{
+    width: calc(100% - 65px);
+    left: 65px;
+}
+
+#content nav{
+    width: 100%;
+    height: 56px;
+    background-color: var(--light);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    grid-gap: 24px;
+    font-family: var(--lato);
+    position: fixed;
+    z-index: 2;
+}
+
+#content nav::before{
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    /* background: var(--yellow); */
+    bottom: -40px;
+    left: 0;
+    border-radius: 50%;
+    box-shadow: -20px -20px 0 var(--light);
+}
+
+#content nav a{
+    color: var(--dark);
+}
+
+#content nav .pic1{
+    cursor: pointer;
+}
+
+#content nav .nav-link{
+    font-size: 16px;
+    transition: .3s ease;
+}
+
+#content nav .nav-link:hover{
+    color: var(--yellow);
+}
+
+#content nav form{
+    max-width: 400px;
+    width: 100%;
+    display: flex;
+    margin-right: auto;
+}
+
+#content nav form .form-input{
+    display: flex;
+    align-items: center;
+    height: 36px;
+}
+
+
+
+
+#content nav form .form-input input{
+    flex-grow: 1;
+    padding: 0 16px;
+    height: 100%;
+    border-radius: none;
+    background: var(--grey);
+    border-radius: 36px;
+    outline: none;
+
+}
+
+#content nav .notification{
+    font-size: 20px;
+    position: relative;
+    margin-left: 40%;
+}
+
+#content nav .notification .num{
+    font-size: 20px;
+    position: relative;
+    top: -6px;
+    right: -6px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid var(--light);
+    background: var(--red);
+    color: var(--light);
+    font-weight: 700;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile{
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.admin_dashboardrest{
+    overflow-y: scroll;
+    z-index: 5;
+}
+
+.admin-nav{
+    height: 56px;
+}
+
+#bottumadmin{
+    margin-top: 150px;
+}
+
+
+
+
+/* @media screen and (max-width: 1000px) {
+    #content nav .notification{
+        font-size: 20px;
+        position: relative;
+        margin-left: 40%;
+    }
+
+
+} */
+@media screen and (max-width: 1300px) {
+
+    #content nav .nav-link{
+        display: none;
+    }
+
+}
+
+
+
+@media screen and (max-width: 768px) {
+
+
+    #content{
+
+        width: calc(100% - 65px);
+        /* left: 65px; */
+    }
+    /* #content nav .notification{
+        font-size: 20px;
+        position: relative;
+        margin-right: 20%;
+    } */
+
+
+}
+@media screen and (max-width: 767px) {
+
+    #content nav .name{
+
+        display: none;
+    }
+    /* #content nav .notification{
+        font-size: 20px;
+        position: relative;
+        margin-right: 55%;
+    } */
+
+}
+
+@media screen and (max-width: 820px) {
+
+    #content nav .name{
+        display: none;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
