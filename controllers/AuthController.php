@@ -103,7 +103,7 @@ class AuthController extends Controller
                 $req->session->set("user_role","owner");
                 $ownerprofile = new owner();
                 $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
-                return $res->render("/admin/owner","owner-dashboard",[],['profile_img'=>$owner_img]);
+                return $res->render("/admin/owner","owner-dashboard",[],['profile_img'=>$owner_img, 'function'=>'Dashboard']);
                 
             }
 
