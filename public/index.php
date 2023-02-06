@@ -114,6 +114,9 @@ $app->router->get("/driver/driver_profile", [DriverController::class, 'driverVie
 
 $app->router->get("/driver/review", [DriverController::class, 'driverViewReview']);
 
+$app->router->get("/driver/requests", [DriverController::class, 'driverViewRequests']);
+
+
 
 $app->router->get("/vehicleOwner/Profile", [VehicleOwnerController::class, 'vehownerViewProfile']);
 

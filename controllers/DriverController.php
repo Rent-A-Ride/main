@@ -35,6 +35,16 @@ class DriverController extends Controller
         }
         return $res->redirect("/");
     }
+
+    public function driverViewRequests(Request $req, Response $res){
+        
+        if($req->session->get('authenticated')==true && $req->session->get('user_role')=="driver")
+        {   
+            
+           return $res->render("/driver/driver_requests","driver-dashboard");
+        }
+        return $res->redirect("/");
+    }
 }
 
 
