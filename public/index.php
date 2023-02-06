@@ -118,4 +118,7 @@ $app->router->get("/driver/requests", [DriverController::class, 'driverViewReque
 
 
 
+$app->router->get("/vehicleOwner/Profile", [VehicleOwnerController::class, 'vehownerViewProfile']);
+
+
 $app->run();

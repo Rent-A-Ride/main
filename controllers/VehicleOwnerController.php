@@ -32,7 +32,12 @@ class VehicleOwnerController
         return $vehiclesowner;
 
     }
+    public function vehownerViewProfile(Request $req,Response $res){
 
+        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="vehicleowner"){
+            return $res->render("VehicleOwner/vehicleOwnerProfile","vehicleOwner-dashboard");
+        }
+    }
     
 
     
