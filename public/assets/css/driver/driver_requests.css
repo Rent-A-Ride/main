@@ -1,0 +1,51 @@
+@import url('https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css');
+
+/* COMPONENTS */
+@import url('components/topnavbar_styles.css');
+@import url('components/form_style2.css');
+@import url('components/sidebar.css');
+@import url('addnewveh.css');
+
+
+/* FONTS */
+@font-face{
+    font-family: Poppins-Regular;
+    src: url(fonts/Poppins-Regular.ttf);
+}
+
+body {
+    margin: 0;
+    font-family: Poppins-Regular;
+    font-size: 25px;
+
+}
+
+.container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #f1f1f1;
+    padding-bottom: 20px;
+    /* color: black; */
+}
+
+.head-topic{
+    padding:10px 50px 10px 50px;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }

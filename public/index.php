@@ -78,4 +78,41 @@ $app->router->post("/Customer/Register", [AuthController::class, 'cusRegister'])
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Tharundya
+
+$app->router->get("/driver/driver_profile", [DriverController::class, 'driverViewProfile']);
+
+$app->router->get("/driver/review", [DriverController::class, 'driverViewReview']);
+
+
 $app->run();
