@@ -23,7 +23,7 @@ class VehicleOwnerController
          return $res->render("/VehicleOwner/vehicleOwner_vehicle","vehicleOwner-dashboard",['result'=>$vehicle]);
     }
 
-    public function viewVehicleownerProfile(Request $req, Response $res,){
+    public function viewVehicleownerProfile(Request $req, Response $res){
             
         $query=$req->query(); 
         $vehicleownerModel=new vehicle_Owner() ;
