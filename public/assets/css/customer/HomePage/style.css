@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
+
+.banner-msg {
+    margin: 50px;
+    padding: 15px;
+    width: 90%;
+    background-color: white;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.banner-msg h1{
+    font-size: medium;
+    font-weight: 600;
+}
+
+
+.bold {
+    font-weight: bold;
+}
+
+.yellow {
+    color: #FAB84C;
+}
