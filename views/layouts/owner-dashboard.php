@@ -36,14 +36,14 @@
 
         </li>
         <li >
-            <a href="admin-vehicle">
+            <a href="/admin-vehicle">
                 <img src="/assets/img/admin_img/d.jpg" class="pic">
                 <span>Vehicle</span>
             </a>
 
         </li>
         <li>
-            <a href="admin_customer">
+            <a href="/admin_customer">
 
                 <img src="/assets/img/admin_img/customer.png" class="pic">
                 <span>Customer</span>
@@ -52,14 +52,14 @@
 
         </li>
         <li>
-            <a href="viewVehicleowner">
+            <a href="/viewVehicleowner">
                 <img src="/assets/img/admin_img/e.jpg" class="pic">
                 <span>Vehicle Owner</span>
             </a>
 
         </li>
         <li>
-            <a href="viewownerDriver">
+            <a href="/viewownerDriver">
                 <img src="/assets/img/admin_img/driver.png" class="pic">
                 <span>Driver</span>
             </a>

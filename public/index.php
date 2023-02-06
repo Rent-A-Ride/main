@@ -40,8 +40,8 @@ $app->router->get("/owner", [OwnerController::class, "ownerFirstPage"]);
 
 $app->router->get("/admin-vehicle", [OwnerController::class, "ownerVehicle"]);
 
-$app->router->get("/logout", [AuthController::class, "adminLogout"]);
-$app->router->post("/logout", [AuthController::class, "adminLogout"]);
+$app->router->get("/logout", [AuthController::class, "logout"]);
+$app->router->post("/logout", [AuthController::class, "logout"]);
 
 $app->router->get("/admin/add-vehicle", [VehicleController::class, "add_VehiclePage"]);
 $app->router->post("/admin/add-vehicle", [VehicleController::class, "owneraddVehicle"]);

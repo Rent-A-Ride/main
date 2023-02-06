@@ -103,7 +103,7 @@ class AuthController extends Controller
                 $req->session->set("user_role","owner");
                 $ownerprofile = new owner();
                 $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
-                return $res->render("/admin/owner","owner-dashboard",['profile_img'=>$owner_img]);
+                return $res->render("/admin/owner","owner-dashboard",[],['profile_img'=>$owner_img]);
                 
             }
 
@@ -133,8 +133,10 @@ class AuthController extends Controller
             $customer->loadData($request->getBody());
 
             if ($customer->validate() && $customer->save()){
-                Application::$app->session->setFlash('success', 'Registration Successfully!');
-                Application::$app->response->redirect('/login');
+                // ->session->setFlash('success', 'Registration Successfully!');
+                $request->session->setFlash('success', 'Registration Successfully!');
+                // Application::$app->response->redirect('/login');
+                $response->redirect("/login");
                 exit();
             }
 
