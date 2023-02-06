@@ -9,7 +9,7 @@ use app\models\driver;
 class DriverController extends Controller
 {
 
-    public function view_reviews(Request $req, Response $res){
+    public function driverViewReview(Request $req, Response $res){
         if($req->session->get('authenticated')==true && $req->session->get('user_role')=="driver")
         {   
             // $user_id=$req->session->get('user_Id');
@@ -20,8 +20,20 @@ class DriverController extends Controller
             // return $this->render("driver_reviews",);
             return $res->render("/driver/driver_reviews","driver-dashboard");
         }
+        return $res->redirect("/");
+
         
        
+    }
+
+    public function driverViewProfile(Request $req, Response $res){
+        
+        if($req->session->get('authenticated')==true && $req->session->get('user_role')=="driver")
+        {   
+            
+           return $res->render("/driver/driver_profile","driver-dashboard");
+        }
+        return $res->redirect("/");
     }
 }
 
