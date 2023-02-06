@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use app\core\Request;
 use app\core\Response;
-use app\models\customer;
+use app\models\adminCustomer;
 use app\models\driver;
 use app\models\owner;
 use app\models\vehicle_Owner;
@@ -16,9 +16,9 @@ class OwnerController
         if ($req->session->get("authenticated")&&$req->session->get("user_role")==="owner"){
             $ownerprofile = new owner();
             $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
-            return $res->render("/admin/owner","owner-dashboard",layoutParams:['profile_img'=>$owner_img]);
+            return $res->render("/admin/owner","owner-dashboard",['profile_img'=>$owner_img]);
         }
-        return $res->render("Home","home");
+        return $res->render("HomePage","home");
     }
 
     public function ownerProfile(Request $req, Response $res){
@@ -30,9 +30,9 @@ class OwnerController
             $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
             
             
-            return $res->render("/admin/admin_profile",layout:"owner-dashboard",pageParams:['owner_details'=>$ownerdetails],layoutParams:['profile_img'=>$owner_img]);
+            return $res->render("/admin/admin_profile","owner-dashboard",['owner_details'=>$ownerdetails],['profile_img'=>$owner_img]);
         }
-        return $res->render("Home","home");
+        return $res->render("HomePage","home");
 
     }
 
@@ -44,9 +44,9 @@ class OwnerController
             $ownerprofile = new owner();
             $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
 //        print_r($vehicle);
-             return $res->render("/admin/admin-vehicle","owner-dashboard",['result'=>$vehicle],layoutParams:['profile_img'=>$owner_img]);
+             return $res->render("/admin/admin-vehicle","owner-dashboard",['result'=>$vehicle],['profile_img'=>$owner_img]);
         }
-        return $res->render("Home","home");
+        return $res->render("HomePage","home");
     }
     public function ownerVehicleProfile(Request $req, Response $res){
         if ($req->session->get("authenticated")&&$req->session->get("user_role")==="owner"){ 
@@ -57,9 +57,9 @@ class OwnerController
             $ownerprofile = new owner();
             $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
 //        print_r($vehicle);
-             return $res->render("/admin/ownerViewVehicleProfile","owner-dashboard",['result'=>$vehicle],layoutParams:['profile_img'=>$owner_img]);
+             return $res->render("/admin/ownerViewVehicleProfile","owner-dashboard",['result'=>$vehicle],['profile_img'=>$owner_img]);
         }
-        return $res->render("Home","home");
+        return $res->render("HomePage","home");
     }
 
     public function ownerVehicleOwner(Request $req, Response $res){
@@ -69,9 +69,9 @@ class OwnerController
             $vehicleowner = new vehicle_Owner();
             $vehicleownerdetails = $vehicleowner->getVehicleowner();
             
-            return $res->render("/admin/admin_VehicleOwner","owner-dashboard",pageParams:['vehicleowner'=>$vehicleownerdetails], layoutParams:['profile_img'=>$owner_img]);
+            return $res->render("/admin/admin_VehicleOwner","owner-dashboard",['vehicleowner'=>$vehicleownerdetails], ['profile_img'=>$owner_img]);
         }
-        return $res->render("Home","home");
+        return $res->render("HomePage","home");
     }
         
     public function ownerDriver(Request $req, Response $res){
@@ -81,9 +81,9 @@ class OwnerController
             $driver = new driver();
             $driverdetails = $driver->getDriver();  
              
-            return $res->render("/admin/admin_Driver","owner-dashboard",pageParams:['driver'=>$driverdetails],layoutParams:['profile_img'=>$owner_img]);
+            return $res->render("/admin/admin_Driver","owner-dashboard",['driver'=>$driverdetails],['profile_img'=>$owner_img]);
         }
-        return $res->render("Home","home");
+        return $res->render("HomePage","home");
     }
 
     public function ViewVehicleOwnerProfile(Request $req, Response $res){
@@ -95,9 +95,9 @@ class OwnerController
             $owner_img  = $owner->owner_img($req->session->get("user_id"));
             
             
-            return $res->render("/admin/adminViewVehicleOwnerProfile",layout:"owner-dashboard",pageParams:['owner_details'=>$Vehicleownerdetails],layoutParams:['profile_img'=>$owner_img]);
+            return $res->render("/admin/adminViewVehicleOwnerProfile","owner-dashboard",['owner_details'=>$Vehicleownerdetails],['profile_img'=>$owner_img]);
         }
-        return $res->render("Home","home");
+        return $res->render("HomePage","home");
 
     }
 
@@ -110,9 +110,9 @@ class OwnerController
             
             
              
-            return $res->render("/admin/admin_customer","owner-dashboard",pageParams:['customer'=>$customerdetails],layoutParams:['profile_img'=>$owner_img]);
+            return $res->render("/admin/admin_customer","owner-dashboard",['adminCustomer'=>$customerdetails],['profile_img'=>$owner_img]);
         }
-        return $res->render("Home","home");
+        return $res->render("HomePage","home");
     }
 
 
@@ -126,9 +126,9 @@ class OwnerController
             
             
              
-            return $res->render("/admin/adminadd_vehicleowner","owner-dashboard",pageParams:['vehicleowner'=>$vehnotApproved],layoutParams:['profile_img'=>$owner_img]);
+            return $res->render("/admin/adminadd_vehicleowner","owner-dashboard",['vehicleowner'=>$vehnotApproved],['profile_img'=>$owner_img]);
         }
-        return $res->render("Home","home");
+        return $res->render("HomePage","home");
     }
     
 

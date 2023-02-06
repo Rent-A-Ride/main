@@ -5,9 +5,10 @@ namespace app\controllers;
 use app\core\Controller;
 use app\core\Request;
 use app\core\Response;
+use app\models\Customer;
 use app\models\RegisterModel;
 use app\core\Session;
-use app\models\Customer;
+use app\models\adminCustomer;
 use app\models\driver;
 use app\models\owner;
 use app\models\user;
@@ -21,30 +22,30 @@ class AuthController extends Controller
         //     'name' => "Rent A Ride"
         // ];
         // $this->setLayout('home');
-        // return $this->render('Home');
+        // return $this->render('HomePage');
         return $res->render('login','main_1');
     }
 
-    public function register(Request $request)
-    {
-        $registerModel = new RegisterModel();
-        if ($request->isPost()){
-
-            $registerModel->loadData($request->getBody());
-
-            if ($registerModel->validate() && $registerModel->register()){
-                return 'Success';
-            }
-
-            return $this->render('register', [
-                'model' => $registerModel
-            ]);
-        }
-        $this->setLayout('auth');
-        return $this->render('register', [
-            'model' => $registerModel
-        ]);
-    }
+//    public function register(Request $request)
+//    {
+//        $registerModel = new RegisterModel();
+//        if ($request->isPost()){
+//
+//            $registerModel->loadData($request->getBody());
+//
+//            if ($registerModel->validate() && $registerModel->register()){
+//                return 'Success';
+//            }
+//
+//            return $this->render('register', [
+//                'model' => $registerModel
+//            ]);
+//        }
+//        $this->setLayout('auth');
+//        return $this->render('register', [
+//            'model' => $registerModel
+//        ]);
+//    }
 
     public function login(Request $req, Response $res)
     {
@@ -73,8 +74,8 @@ class AuthController extends Controller
                     if (is_array($result3)) {
                         // $req->session->set("authenticated",true);
                         // $req->session->set("user_email",$result->email);
-                        // $req->session->set("user_role","customer");
-                        // return $res->render("/customer/customer","customer-dashboard");
+                        // $req->session->set("user_role","adminCustomer");
+                        // return $res->render("/adminCustomer/adminCustomer","adminCustomer-dashboard");
                 
                     }
                     else {
@@ -106,7 +107,7 @@ class AuthController extends Controller
                 $req->session->set("user_role","owner");
                 $ownerprofile = new owner();
                 $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
-                return $res->render("/admin/owner","owner-dashboard",layoutParams:['profile_img'=>$owner_img]);
+                return $res->render("/admin/owner","owner-dashboard",['profile_img'=>$owner_img]);
                 
             }
 
@@ -122,5 +123,34 @@ class AuthController extends Controller
         // }
         // return $res->redirect("/");
     }
+
+    public function selectuser(Request $req, Response $res){
+        return $res->render('selectUserType','main_1');
+    }
+
+//    Customer
+    public function cusRegister(Request $request,Response $response)
+    {
+        $customer = new Customer();
+        if ($request->isPost()){
+
+            $customer->loadData($request->getBody());
+
+            if ($customer->validate() && $customer->save()){
+                Application::$app->session->setFlash('success', 'Registration Successfully!');
+                Application::$app->response->redirect('/login');
+                exit();
+            }
+
+            return $response->render('Customer/cus_Register','main', [
+                'model' => $customer
+            ]);
+        }
+//        $this->setLayout('main');
+        return $response->render('Customer/cus_Register','main', [
+            'model' => $customer
+        ]);
+    }
+
 
 }

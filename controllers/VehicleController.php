@@ -74,7 +74,7 @@ class VehicleController
         return $res->render("login","main");
     }
 
-    public function viewVehicleProfile(Request $req, Response $res,){
+    public function viewVehicleProfile(Request $req, Response $res){
             
             $query=$req->query(); 
             $vehicleModel=new vehicle();

@@ -1,5 +1,5 @@
 
-    <?php
+<?php
 
 use \app\controllers\VehicleController;
 ?>

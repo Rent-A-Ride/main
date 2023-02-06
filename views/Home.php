@@ -11,7 +11,7 @@
         </div>
         <ul class="nav-list" id="nav-list">
             <li class="list-item 1"><a href="/login">Sign in</a></li>
-            <li class="list-item 2"><a href="/register">Register</a></li>
+            <li class="list-item 2"><a href="/selectUserType">Register</a></li>
         </ul>
         <div id="toggle-btn" class="menu-container" onclick="myFunction(this)">
             <div class="bar1"></div>
