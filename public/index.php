@@ -78,4 +78,16 @@ $app->router->post("/Customer/Register", [AuthController::class, 'cusRegister'])
 
 
 
+
+
+
+
+
+
+
+
+
+
+$app->router->get("/vehicleOwner/Profile", [VehicleOwnerController::class, 'vehownerViewProfile']);
+
 $app->run();

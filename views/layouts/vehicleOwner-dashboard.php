@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/css/admin/admin-dashboard.css">
+    <link rel="stylesheet" href="/assets/css/vehicleOwner/vehicleOwner-dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <title>Rent-A-Ride</title>
 </head>
@@ -22,7 +22,7 @@
 
     <ul class="side-bar-menu top">
         <li class="active">
-            <a href="">
+            <a href="/vehicleOwner/Profile">
             <img src="/assets/img/vehicleOwner_img/profile.png" class="pic">
                 <span>Profile</span>
             </a>
