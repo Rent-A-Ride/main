@@ -20,6 +20,8 @@ body {
     box-shadow: 2px 10px 20px 0px rgba(0,0,0,0.16);
     -webkit-box-shadow: 2px 10px 20px 0px rgba(0,0,0,0.16);
     -moz-box-shadow: 2px 10px 20px 0px rgba(0,0,0,0.16);
+    z-index: -1;
+    
 }
 
 .logo {
@@ -101,6 +103,15 @@ body {
     margin-left: 0;
 }
 
+.profile-image{
+    width: 35px;
+    border-radius: 50%;
+}
+
+.navcontent{
+    position: relative;
+}
+
 @media all and (max-width: 480px) {
     .navbar {
         flex-direction: column;
@@ -143,4 +154,5 @@ body {
     
         margin-left: 0;
     }
+    
 }

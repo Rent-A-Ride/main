@@ -110,5 +110,16 @@ body {
     z-index: 5;
     width: 100%;
     min-height: 89vh;
-    background: grey;
+    background: lightgray;
+}
+
+.active{
+    background: #FAB84C;
+    position: relative;
+    z-index: 100;
+    border-radius: 1rem;
+}
+
+.active a{
+    color: #3C91E6;
 }
