@@ -144,7 +144,7 @@ class AuthController extends Controller
                 'model' => $customer
             ]);
         }
-//        $this->setLayout('main');
+       
         return $response->render('Customer/cus_Register','main', [
             'model' => $customer
         ]);
