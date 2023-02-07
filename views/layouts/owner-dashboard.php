@@ -21,29 +21,45 @@
 
 
     <ul class="side-bar-menu top">
-        <li class="active">
+        <li class="<?php 
+        if($function=='Dashboard'){
+            echo ('active');
+        }
+        ?>">
             <a href="/owner">
                 <img src="/assets/img/admin_img/dashboard.png" class="pic4">
                 <span>Dashboard</span>
             </a>
 
         </li>
-        <li >
+        <li class="<?php 
+        if($function=='Profile'){
+            echo ('active');
+        }
+        ?>">
             <a href="/ownerProfile">
                 <img src="/assets/img/admin_img/profile.png" class="pic">
                 <span>Profile</span>
             </a>
 
         </li>
-        <li >
-            <a href="admin-vehicle">
+        <li class="<?php 
+        if($function=='Vehicle'){
+            echo ('active');
+        }
+        ?>">
+            <a href="/admin-vehicle">
                 <img src="/assets/img/admin_img/d.jpg" class="pic">
                 <span>Vehicle</span>
             </a>
 
         </li>
-        <li>
-            <a href="admin_customer">
+        <li class="<?php 
+        if($function=='Customer'){
+            echo ('active');
+        }
+        ?>">
+            <a href="/admin_customer">
 
                 <img src="/assets/img/admin_img/customer.png" class="pic">
                 <span>Customer</span>
@@ -51,21 +67,33 @@
             </a>
 
         </li>
-        <li>
-            <a href="viewVehicleowner">
+        <li class="<?php 
+        if($function=='Vehicle Owner'){
+            echo ('active');
+        }
+        ?>">
+            <a href="/viewVehicleowner">
                 <img src="/assets/img/admin_img/e.jpg" class="pic">
                 <span>Vehicle Owner</span>
             </a>
 
         </li>
-        <li>
-            <a href="viewownerDriver">
+        <li class="<?php 
+        if($function=='Driver'){
+            echo ('active');
+        }
+        ?>">
+            <a href="/viewownerDriver">
                 <img src="/assets/img/admin_img/driver.png" class="pic">
                 <span>Driver</span>
             </a>
 
         </li>
-        <li>
+        <li class="<?php 
+        if($function=='Payment'){
+            echo ('active');
+        }
+        ?>">
             <a href="#">
                 <img src="/assets/img/admin_img/g.jpg" class="pic">
                 <span>Payment</span>
@@ -77,7 +105,11 @@
     <ul class="side-bar-menu bottum">
 
 
-        <li id="bottumadmin">
+        <li id="bottumadmin" class="<?php 
+        if($function=='Settings'){
+            echo ('active');
+        }
+        ?>">
             <a href="#">
                 <img src="/assets/img/admin_img/settings.jpg" class="pic">
                 <span>Settings</span>

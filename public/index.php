@@ -5,6 +5,7 @@ use app\controllers\SiteController;
 use app\controllers\OwnerController;
 use app\controllers\VehicleController;
 use app\controllers\VehicleOwnerController;
+use app\controllers\DriverController;
 use app\core\Application;
 
 
@@ -39,11 +40,11 @@ $app->router->get("/owner", [OwnerController::class, "ownerFirstPage"]);
 
 $app->router->get("/admin-vehicle", [OwnerController::class, "ownerVehicle"]);
 
-$app->router->get("/logout", [AuthController::class, "adminLogout"]);
-$app->router->post("/logout", [AuthController::class, "adminLogout"]);
+$app->router->get("/logout", [AuthController::class, "logout"]);
+$app->router->post("/logout", [AuthController::class, "logout"]);
 
-$app->router->get("/add-vehicle", [VehicleController::class, "add_VehiclePage"]);
-$app->router->post("/add-vehicle", [VehicleController::class, "owneraddVehicle"]);
+$app->router->get("/admin/add-vehicle", [VehicleController::class, "add_VehiclePage"]);
+$app->router->post("/admin/add-vehicle", [VehicleController::class, "owneraddVehicle"]);
 
 $app->router->get("/viewVehicleProfile", [OwnerController::class, "ownerVehicleProfile"]);
 $app->router->post("/viewVehicleProfile", [OwnerController::class, "ownerVehicleProfile"]);
@@ -62,6 +63,68 @@ $app->router->get("/adminViewVehicleOwner", [OwnerController::class, "ViewVehicl
 $app->router->get("/admin_customer", [OwnerController::class, "admin_Customer"]);
 
 $app->router->get("/adminadd_vowner", [OwnerController::class, "admin_addVehicleOwner"]);
+
+
+$app->router->get("/review", [DriverController::class, "view_reviews"]);
+
+//Hasantha
+
+$app->router->get("/selectUserType", [AuthController::class, "selectuser"]);
+
+$app->router->get("/Customer/Register", [AuthController::class, 'cusRegister']);
+$app->router->post("/Customer/Register", [AuthController::class, 'cusRegister']);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Tharundya
+
+$app->router->get("/driver/driver_profile", [DriverController::class, 'driverViewProfile']);
+
+$app->router->get("/driver/review", [DriverController::class, 'driverViewReview']);
+
+$app->router->get("/driver/requests", [DriverController::class, 'driverViewRequests']);
+
+$app->router->get("/Driver/Register", [AuthController::class, 'getDriverRegistration']);
+$app->router->post("/Driver/Register", [AuthController::class, 'getDriverRegistration']);
+
+
+
+$app->router->get("/vehicleOwner/Profile", [VehicleOwnerController::class, 'vehownerViewProfile']);
+
+$app->router->get("/vehicleOwner/Register", [AuthController::class, 'vehOwnerRegistration']);
+$app->router->post("/vehicleOwner/Register", [AuthController::class, 'vehOwnerRegistration']);
 
 
 

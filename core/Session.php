@@ -10,8 +10,8 @@ class Session
     {
         session_start();
         $flashMessages = $_SESSION[self::FLASH_KEY] ?? [];
-        foreach($flashMessages as $key=> &$flashMessages){
-            //Mark to be remove
+        foreach($flashMessages as $key=> &$flashMessage){
+            //Mark to be removed
             $flashMessages['remove'] = true;
 
         }

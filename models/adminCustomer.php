@@ -9,7 +9,7 @@ use app\core\Database;
 
 
 
-class customer
+class adminCustomer
 {
     private \PDO $pdo;
     private array $body;

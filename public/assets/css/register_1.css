@@ -1,0 +1,85 @@
+.reg_body{
+    background: lightgrey;
+    min-height: 100vh;
+    
+}
+/* .reg-userTypes{
+    
+    
+} */
+
+.reg_vehicleOwner{
+    background: red;
+    
+    border-radius: 0.5rem;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
+    /* margin-top: 8%; */
+    margin-bottom: 2rem;
+    width: 25%;
+    height: 25%;
+    margin-left: 8%;
+    /* margin-top: 20px; */
+    /* display: flex; */
+}
+
+.selectUsertype{
+    margin-top: 10%;
+    display: flex;
+}
+
+.reg_driver{
+    background: red;
+    
+    border-radius: 0.5rem;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
+    /* margin-top: 8%; */
+    margin-bottom: 2rem;
+    width: 25%;
+    height: 25%;
+    margin-left: 5%;
+    /* margin-top: 20px; */
+    /* display: flex; */
+}
+
+.reg_customer{
+    background: red;
+    
+    border-radius: 0.5rem;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
+    /* margin-top: 8%; */
+    margin-bottom: 2rem;
+    width: 25%;
+    height: 25%;
+    margin-left: 5%;
+    /* margin-top: 20px; */
+    /* display: flex; */
+}
+
+.driver_reg{
+    width: 100%;
+    height: 100%;
+    border-radius: 0 0 0.5rem 0.5rem;
+    
+}
+.reg_driver:hover{
+    transform: scale(1.02);
+    
+}
+.vowner_reg{
+    width: 100%;
+    height: 100%;
+    border-radius:0 0 0.5rem 0.5rem;
+    
+}
+.reg_customer:hover{
+    transform: scale(1.02);
+}
+.customer_reg{
+    width: 100%;
+    height: 100%;
+    border-radius:0 0 0.5rem 0.5rem;
+    
+}
+.reg_vehicleOwner:hover{
+    transform: scale(1.02);
+}
