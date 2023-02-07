@@ -79,7 +79,7 @@ class AuthController extends Controller
                         $req->session->set("authenticated",true);
                         $req->session->set("user_email",$result->email);
                         $req->session->set("user_role","driver");
-                        return $res->render("/driver/driver","driver-dashboard");
+                        return $res->render("/driver/driver_profile","driver-dashboard");
                     
                 }
                 
@@ -89,7 +89,7 @@ class AuthController extends Controller
                     $req->session->set("authenticated",true);
                     $req->session->set("user_email",$result->email);
                     $req->session->set("user_role","vehicleowner");
-                    return $res->render("/VehicleOwner/vehicleowner","vehicleOwner-dashboard");
+                    return $res->render("/VehicleOwner/vehicleOwnerProfile","vehicleOwner-dashboard");
                     
                 }
 

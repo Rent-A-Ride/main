@@ -32,6 +32,8 @@ body {
 
 .head-topic{
     padding:10px 50px 10px 50px;
+    background: grey;
+    color: white;
 }
 
 .profile-details{
