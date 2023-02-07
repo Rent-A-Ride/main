@@ -90,6 +90,17 @@ body {
     transform: translate(0, -5px) rotate(45deg);
 }
 
+/* .nav-cont{
+    display: flex;
+} */
+
+.vision{
+    color: #FAB84C;
+    width: 30%;
+
+    margin-left: 0;
+}
+
 @media all and (max-width: 480px) {
     .navbar {
         flex-direction: column;
@@ -125,5 +136,11 @@ body {
     .active {
         display: block;
         color: white;;
+    }
+    .vision{
+        
+        width: 100%;
+    
+        margin-left: 0;
     }
 }
