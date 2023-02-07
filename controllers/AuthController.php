@@ -150,5 +150,54 @@ class AuthController extends Controller
         ]);
     }
 
+    public function getDriverRegistration(Request $req, Response $res){
+        // return $res->render("/driver/driver_registration","main_2");
+        $customer = new Customer();
+        if ($req->isPost()){
 
+            $customer->loadData($req->getBody());
+
+            if ($customer->validate() && $customer->save()){
+                // ->session->setFlash('success', 'Registration Successfully!');
+                $req->session->setFlash('success', 'Registration Successfully!');
+                // Application::$app->response->redirect('/login');
+                $res->redirect("/login");
+                exit();
+            }
+
+            return $res->render('/driver/driver_registration','main_2', [
+                'model' => $customer
+            ]);
+        }
+       
+        return $res->render('/driver/driver_registration','main_2', [
+            'model' => $customer
+        ]);
+    }
+
+
+    public function vehOwnerRegistration(Request $req, Response $res){
+        // return $res->render("/driver/driver_registration","main_2");
+        $customer = new Customer();
+        if ($req->isPost()){
+
+            $customer->loadData($req->getBody());
+
+            if ($customer->validate() && $customer->save()){
+                // ->session->setFlash('success', 'Registration Successfully!');
+                $req->session->setFlash('success', 'Registration Successfully!');
+                // Application::$app->response->redirect('/login');
+                $res->redirect("/login");
+                exit();
+            }
+
+            return $res->render('/VehicleOwner/vehOwner_register','main_3', [
+                'model' => $customer
+            ]);
+        }
+       
+        return $res->render('/VehicleOwner/vehOwner_register','main_3', [
+            'model' => $customer
+        ]);
+    }
 }

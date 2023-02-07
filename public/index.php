@@ -116,9 +116,17 @@ $app->router->get("/driver/review", [DriverController::class, 'driverViewReview'
 
 $app->router->get("/driver/requests", [DriverController::class, 'driverViewRequests']);
 
+$app->router->get("/Driver/Register", [AuthController::class, 'getDriverRegistration']);
+$app->router->post("/Driver/Register", [AuthController::class, 'getDriverRegistration']);
+
 
 
 $app->router->get("/vehicleOwner/Profile", [VehicleOwnerController::class, 'vehownerViewProfile']);
+
+$app->router->get("/vehicleOwner/Register", [AuthController::class, 'vehOwnerRegistration']);
+$app->router->post("/vehicleOwner/Register", [AuthController::class, 'vehOwnerRegistration']);
+
+
 
 
 $app->run();

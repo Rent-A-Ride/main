@@ -3,7 +3,7 @@
 ?>
 
 
-<h1>Register</h1>
+<h1>Customer Register</h1>
 
 <main class="sign-up-mode">
     <div class="box">
