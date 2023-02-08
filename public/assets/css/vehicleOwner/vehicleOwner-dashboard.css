@@ -12,6 +12,11 @@
 /*@import "../admin/adminViewVehicleOwner.css";*/
 @import url("vehicleownerProfile.css");
 
+@import url("vehicleownerEditProfile.css");
+
+@import url("vehicleownerPayments.css");
+
+
 
 
 *{

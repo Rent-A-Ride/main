@@ -43,7 +43,7 @@
 
         </li>
         <li>
-            <a href="#">
+            <a href="/vehicleOwner/Payments">
 
                 <img src="/assets/img/vehicleOwner_img/g.jpg" class="pic">
                 <span>Payments</span>
