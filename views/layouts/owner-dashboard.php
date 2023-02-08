@@ -151,6 +151,7 @@
 
 <div class="home-section">
     <!-- nav bar -->
+   
     <nav class="navbar">
         <div class="container-icon">
             <a href=""><img class="logo" src="assets/img/logo.png" alt="Rent a Ride Logo"></a>
@@ -171,6 +172,7 @@
             <div class="bar3"></div>
         </div>
     </nav>
+   
 
     <!-- <div class="banner-msg">
         <h1>FAST AND EASY WAY TO <span class="bold yellow">RENT A VEHICLE</span></h1>
