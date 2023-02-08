@@ -106,9 +106,22 @@ body {
 }
 
 .dashboardRest{
-    overflow-y: scroll;
-    z-index: 5;
+    /* overflow-y: scroll; */
+    /* z-index: -1; */
     width: 100%;
-    min-height: 89vh;
-    background: grey;
+    min-height: 100vh;
+    /* background: lightgray; */
+    padding-top: 100px;
+    background-color:lightgrey;
+}
+
+.active{
+    background: #FAB84C;
+    position: relative;
+    z-index: 100;
+    border-radius: 1rem;
+}
+
+.active a{
+    color: #3C91E6;
 }

@@ -27,9 +27,9 @@
             </div>
 
         </div>
-        <div class="edit_profile">
+        <!-- <div class="edit_profile">
             <button class="edit_profile_btn">Edit Profile</button>
-        </div>
+        </div> -->
     
     </div>
 
