@@ -74,7 +74,7 @@
             <span class="tooltip">View Driver</span>
         </li>
         <li>
-            <a href="#">
+            <a href="/vehicleOwner/Payments">
                 <i class='bx bx-wallet' ></i>
                 <span class="links_name">Payment</span>
             </a>

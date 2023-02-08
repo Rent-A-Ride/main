@@ -129,6 +129,10 @@ $app->router->get("/vehicleOwner/Register", [AuthController::class, 'vehOwnerReg
 $app->router->post("/vehicleOwner/Register", [AuthController::class, 'vehOwnerRegistration']);
 
 
+$app->router->get("/vehicleOwner/editProfile", [VehicleOwnerController::class, 'getEditProfile']);
+
+$app->router->get("/vehicleOwner/Payments", [VehicleOwnerController::class, 'getPayments']);
+
 
 
 $app->run();
