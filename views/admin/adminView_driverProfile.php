@@ -13,16 +13,17 @@
                 <p><b>Location:</b></p>
                 <p><b>Phone No:</b></p>
                 <p><b>Nic:</b></p>
-                <p><b>License No:</b></p> 
+                <p><b>License No:</b></p>
+                <p><b>Vehicle Type:</b></p> 
 
             </div>
             <div class="details_values">
 
-                <p> <?php echo(" ".$owner_details[0]['owner_Fname']." ".$owner_details[0]['owner_Lname']) ?></p>
+                <p> <?php echo(" ".$owner_details[0]['driver_Fname']." ".$owner_details[0]['driver_Lname']) ?></p>
                 <p><?php echo(" ".$owner_details[0]['email'])  ?></p>
-                <p><?php echo(" ".$owner_details[0]['owner_area'])  ?></p>
+                <p><?php echo(" ".$owner_details[0]['driver_area'])  ?></p>
                 <p><?php echo(" ".$owner_details[0]['phone_No'])  ?></p>
-                <p><?php echo(" ".$owner_details[0]['Owner_Nic']) ?></p>
+                <p><?php echo(" ".$owner_details[0]['Driver_Nic']) ?></p>
                 <p><?php echo(" ".$owner_details[0]['email'])  ?></p>
             </div>
 

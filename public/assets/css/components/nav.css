@@ -11,15 +11,20 @@ body {
 }
 
 .navbar {
+    position: fixed;
+    width: 100%;
     background-color: white;
     display: flex;
     justify-content: space-around;
     align-items: center;
     font-size: 20px;
-
+    
     box-shadow: 2px 10px 20px 0px rgba(0,0,0,0.16);
     -webkit-box-shadow: 2px 10px 20px 0px rgba(0,0,0,0.16);
     -moz-box-shadow: 2px 10px 20px 0px rgba(0,0,0,0.16);
+    /* z-index: -1; */
+    z-index: 5;
+    
 }
 
 .logo {
@@ -90,6 +95,30 @@ body {
     transform: translate(0, -5px) rotate(45deg);
 }
 
+/* .nav-cont{
+    display: flex;
+} */
+
+.vision{
+    color: #FAB84C;
+    width: 30%;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 0;
+}
+
+.profile-image{
+    width: 35px;
+    border-radius: 50%;
+}
+.profile-cont{
+    margin-right: 7%;
+}
+
+.navcontent{
+    position: relative;
+}
+
 @media all and (max-width: 480px) {
     .navbar {
         flex-direction: column;
@@ -126,4 +155,11 @@ body {
         display: block;
         color: white;;
     }
+    .vision{
+        
+        width: 100%;
+    
+        margin-left: 0;
+    }
+    
 }
