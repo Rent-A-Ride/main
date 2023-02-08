@@ -21,7 +21,7 @@ class vehicle
 
     }
 
-    public function addVehicle($img_error,$img_name,$tmp_name)
+    public function addVehicle($img_error,$img_name,$tmp_name,$user_id)
     {
 //        $img_name = $this->body['vehicle_image']['name'];
 //        $img_size = $this->body['vehicle_image']['size'];
@@ -60,15 +60,15 @@ class vehicle
 
                 $vehicle_id=uniqid();
                 $new_img_name = $vehicle_id.'.'.$img_ex_lc;
-                $img_upload_path = '../public/assests/img/Vehicle_img/'.$new_img_name;
+                $img_upload_path = '../public/assets/img/Vehicle_img/'.$new_img_name;
                 move_uploaded_file($tmp_name, $img_upload_path);
+                var_dump($user_id);
+                $admin_approved=0;
 
-
-
-                $query1 = "INSERT INTO vehicle (veh_Id,plate_No,model,type,image,fuel_type,price,availability,veh_transmition) VALUES (:vehicle_id,:vehicle_plateNumber,:vehicle_model,:dropdown_vehicletype,:image,:dropdown_fueltype,:price,:availability,:dropdown_transmitiontype)";
-
-                $statement1= $this->pdo->prepare($query1);
-                $statement1->bindValue(":vehicle_id",$vehicle_id);
+                $query1 = "INSERT INTO vehicle (plate_No,user_ID,model,type,image,fuel_type,price,availability,veh_transmition,admin_approved) VALUES (:vehicle_plateNumber,:user_id,:vehicle_model,:dropdown_vehicletype,:image,:dropdown_fueltype,:price,:availability,:dropdown_transmitiontype,:admin_app)";
+                
+                $statement1= Application::$app->db->pdo->prepare($query1);
+                $statement1->bindValue(":user_id",$user_id);
                 $statement1->bindValue(":vehicle_plateNumber",$this->body["vehicle_plateNumber"]);
                 $statement1->bindValue(":vehicle_model",$this->body["vehicle_model"]);
                 $statement1->bindValue(":dropdown_vehicletype",$this->body["dropdown_vehicletype"]);
@@ -77,37 +77,43 @@ class vehicle
                 $statement1->bindValue(":price",$price);
                 $statement1->bindValue(":availability",$availability);
                 $statement1->bindValue(":dropdown_transmitiontype",$this->body["dropdown_transmitiontype"]);
+                $statement1->bindValue(":admin_app",$admin_approved);
 
                 $statement1->execute();
+                
+                $veh_No=$this->body["vehicle_plateNumber"];
+                // var_dump($veh_No);
+                // var_dump("SELECT * FROM vehicle Where plate_No=$veh_No");
+                // exit;
 
+                $vehicle_idt= Application::$app->db->pdo->query("SELECT * FROM vehicle Where plate_No='$veh_No'")->fetchAll(\PDO::FETCH_ASSOC);
+                
 
-
-
-                $query2 = "INSERT INTO vehicle_license (license_No,from_date,ex_date,year,capacity,chassis_No,owner,gross_weight,vehicle_Id) VALUES (:license_No,:license_from,:license_to,:vehicle_year,:vehicle_seat,:vehicle_chasisNo,:owner_name,:vehicle_weight,:vehicle_id)";
-
-                $statement2= $this->pdo->prepare($query2);
+                $query2 = "INSERT INTO vehicle_license (license_No,from_date,ex_date,year,capacity,owner,vehicle_Id) VALUES (:license_No,:license_from,:license_to,:vehicle_year,:vehicle_seat,:owner_name,:vehicle_id)";
+                
+                $statement2= Application::$app->db->pdo->prepare($query2);
                 $statement2->bindValue(":license_No",$this->body["license_No"]);
                 $statement2->bindValue(":license_from",$this->body["license_from"]);
                 $statement2->bindValue(":license_to",$this->body["license_to"]);
                 $statement2->bindValue(":vehicle_year",$this->body["vehicle_year"]);
                 $statement2->bindValue(":vehicle_seat",$this->body["vehicle_seat"]);
-                $statement2->bindValue(":vehicle_chasisNo",$this->body["vehicle_chasisNo"]);
+                // $statement2->bindValue(":vehicle_chasisNo",$this->body["vehicle_chasisNo"]);
                 $statement2->bindValue(":owner_name",$this->body["owner_name"]);
-                $statement2->bindValue(":vehicle_weight",$this->body["vehicle_weight"]);
-                $statement2->bindValue(":vehicle_id",$vehicle_id);
+                // $statement2->bindValue(":vehicle_weight",$this->body["vehicle_weight"]);
+                $statement2->bindValue(":vehicle_id",$vehicle_idt[0]['veh_Id']);
 //                $statement2->bindValue(":license_image",$this->body["license_image"]);
 
                 $statement2->execute();
 //
                 $query3 = "INSERT INTO vehicle_insuarance (Ins_No,Insuarence_com,from_date,ex_date,insure_type,vehicle_Id) VALUES (:ins_No,:ins_com,:ins_from,:ins_to,:ins_type,:vehicle_id)";
 
-                $statement3= $this->pdo->prepare($query3);
+                $statement3=Application::$app->db->pdo->prepare($query3);
                 $statement3->bindValue(":ins_No",$this->body["ins_No"]);
                 $statement3->bindValue(":ins_com",$this->body["ins_com"]);
                 $statement3->bindValue(":ins_from",$this->body["ins_from"]);
                 $statement3->bindValue(":ins_to",$this->body["ins_to"]);
                 $statement3->bindValue(":ins_type",$this->body["ins_type"]);
-                $statement3->bindValue(":vehicle_id",$vehicle_id);
+                $statement3->bindValue(":vehicle_id",$vehicle_idt[0]['veh_Id']);
 //                $statement3->bindValue(":ins_image",$this->body["ins_image"]);
                 $statement3->execute();
 
@@ -161,16 +167,16 @@ class vehicle
         if ($this->body['vehicle_year']===0){
             $errors['vehicle_year']="Enter Manufacturing year";
         }
-        if (strlen($this->body['vehicle_chasisNo'])===0){
-            $errors['vehicle_chasisNo']="Enter Vehicle chasis No";
-            if(preg_match("/(A-Za-z0-9]+)/", $this->body['vehicle_plateNumber']))
-            {
-                $errors['vehicle_chasisNo'] = "Only use numbers and letters please";
-            }
-        }
-        if ($this->body['vehicle_weight']===0){
-            $errors['vehicle_weight']="Enter Vehicle gross weight";
-        }
+        // if (strlen($this->body['vehicle_chasisNo'])===0){
+        //     $errors['vehicle_chasisNo']="Enter Vehicle chasis No";
+        //     if(preg_match("/(A-Za-z0-9]+)/", $this->body['vehicle_plateNumber']))
+        //     {
+        //         $errors['vehicle_chasisNo'] = "Only use numbers and letters please";
+        //     }
+        // }
+        // if ($this->body['vehicle_weight']===0){
+        //     $errors['vehicle_weight']="Enter Vehicle gross weight";
+        // }
         if ($this->body['vehicle_seat']===0){
             $errors['vehicle_seat']="Enter No of seats";
         }
