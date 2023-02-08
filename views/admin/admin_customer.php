@@ -70,8 +70,8 @@
                 
             </div> 
         </div>
-    <?php if ($customer){
-                foreach ($customer as $row){ ?>
+    <?php if ($adminCustomer){
+                foreach ($adminCustomer as $row){ ?>
          <div class="Driverdetails">
             <div class="admindriver_img">
                 <img class="adminDriver_img" src="/assets/img/user_profile/<?php echo $row['profile_img']?>" alt="" >

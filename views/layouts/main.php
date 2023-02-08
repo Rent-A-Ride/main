@@ -9,12 +9,12 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- Nav CSS -->
-    <link rel="stylesheet" href="<?php echo \app\core\Application::$ROOT_DIR?>/public/assets/css/main.css">
+<!--    <link rel="stylesheet" href="--><?php //echo \app\core\Application::$ROOT_DIR?><!--/public/assets/css/main.css">-->
 
     <title>Rent A Ride</title>
 
 
-    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
 
 </head>
 <body>
@@ -38,5 +38,6 @@
     {{content}}
 
 </body>
+<!--<script src="assets/javascript/compone"></script>-->
 
 </html>

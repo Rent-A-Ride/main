@@ -76,7 +76,7 @@
 
                 </div>
 
-                <div class="form-input-addvehicleowner"><a href="/add-vehicle" class="add-vehicleowner"><i class="fa-solid fa-plus"></i>ADD NEW</a></div>
+                <div class="form-input-addvehicleowner"><a href="/admin/add-vehicle" class="add-vehicleowner"><i class="fa-solid fa-plus"></i>ADD NEW</a></div>
         
             </div>
 

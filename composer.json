@@ -1,10 +1,5 @@
 {
     "name": "madma/mvc",
-    "autoload": {
-        "psr-4": {
-            "Madma\\Mvc\\": "src/"
-        }
-    },
     "authors": [
         {
             "name": "iamhasantha",

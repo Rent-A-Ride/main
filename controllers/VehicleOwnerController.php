@@ -23,7 +23,7 @@ class VehicleOwnerController
          return $res->render("/VehicleOwner/vehicleOwner_vehicle","vehicleOwner-dashboard",['result'=>$vehicle]);
     }
 
-    public function viewVehicleownerProfile(Request $req, Response $res,){
+    public function viewVehicleownerProfile(Request $req, Response $res){
             
         $query=$req->query(); 
         $vehicleownerModel=new vehicle_Owner() ;
@@ -32,7 +32,12 @@ class VehicleOwnerController
         return $vehiclesowner;
 
     }
+    public function vehownerViewProfile(Request $req,Response $res){
 
+        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="vehicleowner"){
+            return $res->render("VehicleOwner/vehicleOwnerProfile","vehicleOwner-dashboard");
+        }
+    }
     
 
     
