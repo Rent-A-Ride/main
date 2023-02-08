@@ -87,7 +87,8 @@
             </div>
             <div class="admindriver_btn">
                 <div>
-                    <button class="admin_driverView"><i class="fa-regular fa-eye"></i>view</button>
+                    <?php $user_id=$row["user_ID"];   ?>
+                    <button class="admin_driverView" onclick="location.href='/admin/driver/driverProfile?id=<?php echo $user_id; ?>'" ><i class="fa-regular fa-eye"></i>view</button>
                 </div>
                 <div>
                     <button class="admin_driverView"><i class="fa-solid fa-trash-can"></i>Delete</button>
