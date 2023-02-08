@@ -5,6 +5,7 @@ use app\core\Request;
 use app\core\Response;
 use app\core\Controller;
 use app\models\driver;
+use app\models\vehicle_Owner;
 
 class DriverController extends Controller
 {
@@ -44,6 +45,15 @@ class DriverController extends Controller
            return $res->render("/driver/driver_requests","driver-dashboard");
         }
         return $res->redirect("/");
+    }
+    public function viewDriverProfile(Request $req, Response $res){
+            
+        $query=$req->query(); 
+        $vehicleownerModel=new driver() ;
+        $vehiclesowner=$vehicleownerModel->getDriverbyId((int)$query["id"]);
+
+        return $vehiclesowner;
+
     }
 }
 

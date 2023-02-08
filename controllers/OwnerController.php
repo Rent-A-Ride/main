@@ -128,6 +128,22 @@ class OwnerController
         }
         return $res->render("Home","home");
     }
+
+    public function ViewDriverProfile(Request $req, Response $res){
+        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="owner"){
+
+            $Vehicleownerprofile = new DriverController();
+            $Vehicleownerdetails  = $Vehicleownerprofile->viewDriverProfile($req,$res);
+            $owner = new owner();
+            $owner_img  = $owner->owner_img($req->session->get("user_id"));
+            
+            // var_dump($Vehicleownerdetails);
+            // die();
+            return $res->render("/admin/adminView_driverProfile","owner-dashboard",['owner_details'=>$Vehicleownerdetails],['profile_img'=>$owner_img, 'function'=>'Driver']);
+        }
+        return $res->render("Home","home");
+
+    }
     
 
 
