@@ -3,7 +3,7 @@
 ?>
 
 
-<h1>Driver Register</h1>
+<h1>Vehicle Owner Register</h1>
 
 <main class="sign-up-mode">
     <div class="box">
