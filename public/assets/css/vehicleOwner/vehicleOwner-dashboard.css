@@ -22,7 +22,7 @@
 
 /* @import "../admin/admin_profile.css"; */
 
-@import "../admin/adminViewVehicleOwner.css";
+/*@import "../admin/adminViewVehicleOwner.css";*/
 @import url("vehicleownerProfile.css");
 
 @import url("vehicleownerEditProfile.css");
@@ -42,7 +42,7 @@
 body{
     min-height: 100vh;
     /*background: var(--grey);*/
-    /* background:lightgrey; */
+/* background:lightgrey; */
 
 
 /* } */
@@ -373,30 +373,30 @@ li{
 /* @media screen and (max-width: 768px) { */
 
 
-    /* #content{ */
+/* #content{ */
 
-        /* width: calc(100% - 65px); */
-        /* left: 65px; */
-    /* } */
-    /* #content nav .notification{
-        font-size: 20px;
-        position: relative;
-        margin-right: 20%;
-    } */
+/* width: calc(100% - 65px); */
+/* left: 65px; */
+/* } */
+/* #content nav .notification{
+    font-size: 20px;
+    position: relative;
+    margin-right: 20%;
+} */
 
 
 /* } */
 /* @media screen and (max-width: 767px) { */
 
-    /* #content nav .name{
+/* #content nav .name{
 
-        display: none;
-    } */
-    /* #content nav .notification{
-        font-size: 20px;
-        position: relative;
-        margin-right: 55%;
-    } */
+    display: none;
+} */
+/* #content nav .notification{
+    font-size: 20px;
+    position: relative;
+    margin-right: 55%;
+} */
 
 /* } */
 
@@ -404,16 +404,6 @@ li{
 
     #content nav .name{
         display: none;
-    }
+    }
 
-} */
-
-
-
-
-
-
-
-
-
-
+} */
