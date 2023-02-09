@@ -1,5 +1,5 @@
 <div class="container">
-        <div clas="head-topic">
+        <div class="head-topic">
             <h2 class="topic"><center>Profile</center></h2>
         </div>
 
