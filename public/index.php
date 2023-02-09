@@ -71,6 +71,10 @@ $app->router->get("/review", [DriverController::class, "view_reviews"]);
 
 $app->router->get("/admin/OverView", [OwnerController::class, "ownerFirstPage"]);
 
+$app->router->get("/admin/vehicle/add_vehicle", [OwnerController::class, "adminaddVehicle"]);
+
+
+$app->router->get("/admin/accept_vehicle", [OwnerController::class, "adminacceptedVehicle"]);
 //Hasantha
 
 $app->router->get("/selectUserType", [AuthController::class, "selectuser"]);
