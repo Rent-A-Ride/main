@@ -1,5 +1,5 @@
 <section>
-    <button class="show-modal">Next</button>
+    <button class="show-modal button_2_2">Next</button>
     <span class="overlay"></span>
 
     <div class="modal-box">
@@ -8,7 +8,7 @@
         <h3>You have sucessfully sent Add New Vehicle request.</h3>
 
         <div class="buttons">
-            <button class="close-btn" onclick="location.href='/vehicleowner_vehicle'">Ok, Close</button>
+            <button class="close-btn .button_2_2" onclick="location.href='/vehicleowner_vehicle'">Ok, Close</button>
             <!-- <button></button> -->
         </div>
     </div>
