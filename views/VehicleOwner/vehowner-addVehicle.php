@@ -28,7 +28,7 @@ $isPasswordError = $hasErrors && isset($errors['insure']);
         <form action="/vehicleOwner/add-vehicle" method="post" enctype="multipart/form-data">
 <!--            <div class="form first">-->
 <!--                <div class="vehicle details">-->
-                    <span class="title">Vehicle Details</span>
+                    <span class="title_1">Vehicle Details</span>
 
                 <div class="owneraddveh">
                     <div class="fields">
@@ -97,7 +97,7 @@ $isPasswordError = $hasErrors && isset($errors['insure']);
 
 
                 <div class="license details owneraddveh">
-                    <span class="title">License Details</span>
+                    <span class="title_1">License Details</span>
 
 
                     <div class="fields">
@@ -163,7 +163,7 @@ $isPasswordError = $hasErrors && isset($errors['insure']);
 
 <!--            <div class="form second">-->
                 <div class="Insurance details owneraddveh">
-                    <span class="title">Insurance Details</span>
+                    <span class="title_1">Insurance Details</span>
 
 
                     <div class="fields">
@@ -202,7 +202,7 @@ $isPasswordError = $hasErrors && isset($errors['insure']);
 
 
                 <div class="Eco Test details owneraddveh">
-                    <span class="title">Eco Test Details</span>
+                    <span class="title_1">Eco Test Details</span>
 
 
                     <div class="fields">

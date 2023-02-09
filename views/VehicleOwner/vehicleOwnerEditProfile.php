@@ -3,7 +3,8 @@
 
 <div class="wrapper-container">
     <div  class="wrapper_1">
-        <form action="" method="post">
+    
+        <form action="" method="post"  class="form">
             <h2>Edit Profile</h2><br>
 
             <div class="inputBox">
@@ -59,7 +60,7 @@
     </div>
 
     <div  class="wrapper_2">
-        <form action="" method="post">
+        <form action="" method="post"  class="form">
             <h2>Change Password</h2>
             <br>
             <br>

@@ -11,7 +11,8 @@
 
 
 
-@import "../admin/adminaddVehicle.css";
+/* @import url('vehowner_addVehicle.css'); */
+@import url('vehowner_addVehicle.css');
 @import "../admin/ownerViewVehicleProfile.css";
 
 /* importing admin_Vehicleowner */
@@ -19,9 +20,9 @@
 
 @import "../admin/admin_driver.css";
 
-@import "../admin/admin_profile.css";
+/* @import "../admin/admin_profile.css"; */
 
-/*@import "../admin/adminViewVehicleOwner.css";*/
+@import "../admin/adminViewVehicleOwner.css";
 @import url("vehicleownerProfile.css");
 
 @import url("vehicleownerEditProfile.css");
