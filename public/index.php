@@ -115,6 +115,7 @@ $app->router->post("/Customer/Register", [AuthController::class, 'cusRegister'])
 //Tharundya
 
 $app->router->get("/driver/driver_profile", [DriverController::class, 'driverViewProfile']);
+$app->router->get("/driver/editprofile", [DriverController::class, 'driverEditProfile']);
 
 $app->router->get("/driver/review", [DriverController::class, 'driverViewReview']);
 
@@ -122,6 +123,7 @@ $app->router->get("/driver/requests", [DriverController::class, 'driverViewReque
 
 $app->router->get("/Driver/Register", [AuthController::class, 'getDriverRegistration']);
 $app->router->post("/Driver/Register", [AuthController::class, 'getDriverRegistration']);
+
 
 
 
