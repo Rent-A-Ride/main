@@ -210,7 +210,7 @@ class vehicle
 
 
     public function getVehicle(){
-        return Application::$app->db->pdo->query("SELECT vehicle.veh_Id, vehicle.model, vehicle.type, vehicle.fuel_type,vehicle.image, vehicle.price, vehicle.availability, vehicle.veh_transmition, vehicle_license.capacity, vehicle_license.owner FROM vehicle INNER JOIN vehicle_license ON vehicle.veh_Id=vehicle_license.vehicle_Id ORDER BY vehicle.veh_Id DESC")->fetchAll(\PDO::FETCH_ASSOC);
+        return Application::$app->db->pdo->query("SELECT vehicle.veh_Id, vehicle.model, vehicle.type, vehicle.fuel_type,vehicle.image, vehicle.price, vehicle.availability, vehicle.veh_transmition, vehicle_license.capacity, vehicle_license.owner FROM vehicle INNER JOIN vehicle_license ON vehicle.veh_Id=vehicle_license.vehicle_Id AND vehicle.admin_approved=1 AND vehicle.availability=1 ORDER BY vehicle.veh_Id DESC")->fetchAll(\PDO::FETCH_ASSOC);
 
     }
 
@@ -221,6 +221,24 @@ class vehicle
     public function getVehiclebyId($vehicle_id){
         
         return Application::$app->db->pdo->query("SELECT * FROM vehicle INNER JOIN vehicle_license ON vehicle.veh_Id=$vehicle_id AND vehicle.veh_Id=vehicle_license.vehicle_Id")->fetchAll(\PDO::FETCH_ASSOC);
+
+    }
+
+    public function getVehicletoAdd(){
+        return Application::$app->db->pdo->query("SELECT vehicle.veh_Id, vehicle.model, vehicle.type, vehicle.fuel_type,vehicle.image, vehicle.price, vehicle.availability, vehicle.veh_transmition, vehicle_license.capacity, vehicle_license.owner FROM vehicle INNER JOIN vehicle_license ON vehicle.veh_Id=vehicle_license.vehicle_Id AND vehicle.admin_approved=0 ORDER BY vehicle.veh_Id DESC")->fetchAll(\PDO::FETCH_ASSOC);
+
+    }
+    //function for admin add vehicle after confirm informaion  
+    public  function adminacceptVehicle($vehicle_id){
+        $query1="UPDATE vehicle SET admin_approved = 1 WHERE veh_Id=$vehicle_id";
+        $statement1= Application::$app->db->pdo->prepare($query1);
+        $statement1->execute();
+// `       $query2="UPDATE vehicle_license SET admin_approved = 1 WHERE vehicle_Id=$vehicle_id";
+//         $statement2= Application::$app->db->pdo->prepare($query2);
+//         $statement2->execute();
+//         $query3="UPDATE vehicle_insuarance SET admin_approved = 1 WHERE vehicle_Id=$vehicle_id";
+//         $statement3= Application::$app->db->pdo->prepare($query3);
+//         $statement3->execute();
 
     }
 

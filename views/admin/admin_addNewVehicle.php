@@ -111,8 +111,8 @@ use \app\controllers\VehicleController;
                                     <?php $vehicle_id=$row["veh_Id"] ?>; 
                                     
                                     <button class="button_adminvehicle" onclick="location.href='/viewVehicleProfile?id=<?php echo $vehicle_id; ?>'"><i class="fa-regular fa-eye"></i> View</button>
-                                    <button class="button_adminvehicle"><i class="fa-regular fa-pen-to-square"></i>Update</button>
-                                    <button class="button_adminvehicle"><i class="fa-solid fa-trash-can"></i>Delete</button>
+                                    <button class="button_adminvehicle" onclick="location.href='/viewVehicleProfile?id=<?php echo $vehicle_id; ?>'"><i class="fa-regular fa-circle-check"></i> Accept</button>
+                                    <button class="button_adminvehicle"><i class="fa-solid fa-trash-can"></i>Decline</button>
                                 </div>
 
 
@@ -132,7 +132,7 @@ use \app\controllers\VehicleController;
                                         <?php echo "(Per day)" ?>
                                     </div>
                                     <div class="vehicle-availability">
-                                        <div class="vehicle-availability-show">
+                                        <!-- <div class="vehicle-availability-show">
                                             <?php
                                             if($row["availability"]===0){
 
@@ -141,8 +141,8 @@ use \app\controllers\VehicleController;
 
                                             }
                                             ?>
-                                        </div>
-                                        <div>
+                                        </div> -->
+                                        <!-- <div>
                                             <?php
                                             if($row["availability"]===1){
                                                 echo "Availabe";
@@ -152,7 +152,7 @@ use \app\controllers\VehicleController;
                                             }
                                             ?>
 
-                                        </div>
+                                        </div> -->
                                     </div>
 
                                 </div>
