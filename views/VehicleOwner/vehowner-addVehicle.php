@@ -25,10 +25,10 @@ $isPasswordError = $hasErrors && isset($errors['insure']);
     <div class="container">
         <header>Add New Vehicle</header>
 
-        <form action="/add-vehicle" method="post" enctype="multipart/form-data">
+        <form action="/vehicleOwner/add-vehicle" method="post" enctype="multipart/form-data">
 <!--            <div class="form first">-->
 <!--                <div class="vehicle details">-->
-                    <span class="title">Vehicle Details</span>
+                    <span class="title_1">Vehicle Details</span>
 
                 <div class="owneraddveh">
                     <div class="fields">
@@ -79,6 +79,10 @@ $isPasswordError = $hasErrors && isset($errors['insure']);
                             </select>
                         </div>
                         <div class="input-field">
+                            <label>No. of seats:</label>
+                            <input type="number" placeholder="Enter No. of seats" name="vehicle_seat" />
+                        </div>
+                        <div class="input-field">
                             <label>Vehicle image: </label>
                             <input type="file" accept="image/png, image/gif, image/jpeg" name="vehicle_image">
                         </div>
@@ -93,7 +97,7 @@ $isPasswordError = $hasErrors && isset($errors['insure']);
 
 
                 <div class="license details owneraddveh">
-                    <span class="title">License Details</span>
+                    <span class="title_1">License Details</span>
 
 
                     <div class="fields">
@@ -117,20 +121,15 @@ $isPasswordError = $hasErrors && isset($errors['insure']);
 <!--                            <input type="text" placeholder="Enter phone number"  />-->
 <!--                        </div>-->
 
-                        <div class="input-field">
+                        <!-- <div class="input-field">
                             <label>Chassis No:</label>
                             <input type="text" placeholder="Enter Chassis No" name="vehicle_chasisNo" />
-                        </div>
+                        </div> -->
 
-                        <div class="input-field">
+                        <!-- <div class="input-field">
                             <label>Unladen/Gross Weight:</label>
                             <input type="number" placeholder="Enter Unladen/Gross Weight:" name="vehicle_weight" />
-                        </div>
-
-                        <div class="input-field">
-                            <label>No. of seats:</label>
-                            <input type="number" placeholder="Enter No. of seats" name="vehicle_seat" />
-                        </div>
+                        </div> -->
 
                         <div class="input-field">
                             <label>The License valid from:</label>
@@ -164,7 +163,7 @@ $isPasswordError = $hasErrors && isset($errors['insure']);
 
 <!--            <div class="form second">-->
                 <div class="Insurance details owneraddveh">
-                    <span class="title">Insurance Details</span>
+                    <span class="title_1">Insurance Details</span>
 
 
                     <div class="fields">
@@ -203,7 +202,7 @@ $isPasswordError = $hasErrors && isset($errors['insure']);
 
 
                 <div class="Eco Test details owneraddveh">
-                    <span class="title">Eco Test Details</span>
+                    <span class="title_1">Eco Test Details</span>
 
 
                     <div class="fields">

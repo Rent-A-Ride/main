@@ -20,7 +20,7 @@
 
     <!-- JQUERY -->
     <script src="assets/javascript/jquery-3.6.3.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
 <body>
 
@@ -154,12 +154,12 @@
    
     <nav class="navbar">
         <div class="container-icon">
-            <a href=""><img class="logo" src="assets/img/logo.png" alt="Rent a Ride Logo"></a>
+            <a href=""><img class="logo" src="/assets/img/logo.png" alt="Rent a Ride Logo"></a>
         </div>
         <ul class="nav-list" id="nav-list">
             <!-- <li class="list-item 1"><a href="#">Sign in</a></li>
             <li class="list-item 2"><a href="#">Register</a></li>       -->
-            <div class="vision"><p>Mobility Without Hassel</p> </div>
+            <!-- <div class="vision"><p>Mobility Without Hassel</p> </div> -->
             <div class="profile-cont">
                 <span class="profile-name"><?php echo($profile_img[0]['first_Name']." ".$profile_img[0]['last_Name']) ?></span>
                 <div class="img-cont"><img  src="/assets/img/user_profile/<?php echo ($profile_img[0]['profile_img'])?>" class="profile-image"></div>
@@ -186,7 +186,8 @@
 
 
 </body>
-<script src="assets/javascript/component/navbar.js"></script>
-<script src="assets/javascript/component/sidebar.js"></script>
-<script src="assets/javascript/component/search.js"></script>
+<script src="/assets/javascript/component/navbar.js"></script>
+<script src="/assets/javascript/component/sidebar.js"></script>
+<script src="/assets/javascript/component/search.js"></script>
+<script src="/assets/javascript/adminOverview.js"></script>
 </html>

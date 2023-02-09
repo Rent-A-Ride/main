@@ -38,14 +38,26 @@ class VehicleOwnerController
             return $res->render("VehicleOwner/vehicleOwnerProfile","vehicleOwner-dashboard");
         }
     }
-    
 
-    
-        
-    
+    public function getEditProfile(Request $req,Response $res){
+        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="vehicleowner"){
+            return $res->render("/VehicleOwner/vehicleOwnerEditProfile","vehicleOwner-dashboard");
+        }
+    }
+
+    public function getPayments(Request $req,Response $res){
+        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="vehicleowner"){
+            return $res->render("/VehicleOwner/vehicleOwnerPayments","vehicleOwner-dashboard");
+        }
+    }
 
 
-    
+
+
+
+
+
+
 
 
 
