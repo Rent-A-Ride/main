@@ -1,0 +1,46 @@
+#detailBox {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border: 1px solid black;
+  }
+  
+  .invoice-container {
+    width: 500px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  .invoice-header {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .invoice-list {
+    padding: 0;
+    list-style: none;
+  }
+  
+  .invoice-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+  }
+  
+  .invoice-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .invoice-item-dropdown-icon {
+    font-size: 16px;
+  }
+  
+  .invoice-item-details {
+    padding: 10px;
+    display: none;
+  }
+  

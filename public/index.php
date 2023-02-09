@@ -120,6 +120,8 @@ $app->router->get("/driver/editprofile", [DriverController::class, 'driverEditPr
 $app->router->get("/driver/review", [DriverController::class, 'driverViewReview']);
 
 $app->router->get("/driver/requests", [DriverController::class, 'driverViewRequests']);
+$app->router->get("/driver/payments", [DriverController::class, 'driverViewPayments']);
+
 
 $app->router->get("/Driver/Register", [AuthController::class, 'getDriverRegistration']);
 $app->router->post("/Driver/Register", [AuthController::class, 'getDriverRegistration']);

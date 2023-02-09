@@ -73,7 +73,7 @@
             <span class="tooltip">Reviews</span>
         </li>
         <li>
-            <a href="#">
+            <a href="/driver/payments">
                 <i class='bx bx-wallet' ></i>
                 <span class="links_name">Payment</span>
             </a>
