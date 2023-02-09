@@ -213,7 +213,7 @@ class vehicle
     }
 
     public function vehicleOwnergetVehicle($user_id){
-        return Application::$app->db->pdo->query("SELECT vehicle.model, vehicle.type, vehicle.fuel_type,vehicle.image, vehicle.price, vehicle.availability, vehicle.veh_transmition, vehicle_license.capacity, vehicle_license.owner FROM vehicle INNER JOIN vehicle_license ON vehicle.veh_Id=vehicle_license.vehicle_Id AND vehicle.admin_approved=1 where vehicle.user_ID=$user_id")->fetchAll(\PDO::FETCH_ASSOC);
+        return Application::$app->db->pdo->query("SELECT * FROM vehicle INNER JOIN vehicle_license ON vehicle.veh_Id=vehicle_license.vehicle_Id AND vehicle.admin_approved=1 where vehicle.user_ID=$user_id")->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function getVehiclebyId($vehicle_id){
