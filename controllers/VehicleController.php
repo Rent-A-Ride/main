@@ -42,7 +42,7 @@ class VehicleController
             }
             $vehicleModel = new vehicle();
             $vehicles = $vehicleModel->vehicleOwnergetVehicle($req->session->get("user_id"));
-            return $res->render("/VehicleOwner/vehicleOwner_vehicle", "vehicleOwner-dashboard", ['result' => $vehicles]);
+            return $res->render("/VehicleOwner/vehicleOwnerDriverAssign", "vehicleOwner-dashboard", ['result' => $vehicles]);
 
         }
         return $res->render("login","main");

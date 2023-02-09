@@ -108,7 +108,7 @@ use \app\controllers\VehicleController;
 
                                 <div><img src="/assets/img/Vehicle_img/<?php echo $row['image']?>" alt="" class="vehicle-profile-image"></div>
                                 <div class="top-menu">
-                                    <?php $vehicle_id=$row["veh_Id"] ?>; 
+                                    <?php $vehicle_id=$row["veh_Id"] ?>
                                     
                                     <button class="button_adminvehicle" onclick="location.href='/viewVehicleProfile?id=<?php echo $vehicle_id; ?>'"><i class="fa-regular fa-eye"></i> View</button>
                                     <button class="button_adminvehicle" onclick="location.href='/admin/accept_vehicle?id=<?php echo $vehicle_id; ?>'"><i class="fa-regular fa-circle-check"></i> Accept</button>

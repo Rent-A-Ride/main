@@ -128,4 +128,5 @@
 <script src="/assets/javascript/component/navbar.js"></script>
 <script src="/assets/javascript/component/sidebar.js"></script>
 <script src="/assets/javascript/component/search.js"></script>
+<script src="/assets/javascript/vehicleOwner/popup.js"></script>
 </html>
