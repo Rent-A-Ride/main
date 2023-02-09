@@ -144,6 +144,37 @@ class OwnerController
         return $res->render("Home","home");
 
     }
+
+    public function adminaddVehicle(Request $req, Response $res){
+        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="owner"){    
+            $vehicles = new VehicleController();
+            $vehicle=[];
+            $vehicle = $vehicles->ownerGetVehicletoAdd($req,$res);
+            $ownerprofile = new owner();
+            $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
+//        print_r($vehicle);
+             return $res->render("/admin/admin_addNewVehicle","owner-dashboard",['result'=>$vehicle],['profile_img'=>$owner_img, 'function'=>'Vehicle']);
+        }
+        return $res->render("Home","home");
+    }
+
+    public function adminacceptedVehicle(Request $req, Response $res){
+        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="owner"){    
+            $vehicles = new VehicleController();
+            $vehicle=[];
+            $vehicle = $vehicles->addVehicle($req,$res);
+            $ownerprofile = new owner();
+            $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
+//        print_r($vehicle);
+             return $res->render("/admin/admin_addNewVehicle","owner-dashboard",['result'=>$vehicle],['profile_img'=>$owner_img, 'function'=>'Vehicle']);
+        }
+        return $res->render("Home","home");
+    }
+
+    
+    
+
+
     
 
 

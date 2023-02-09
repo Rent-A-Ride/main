@@ -43,8 +43,8 @@ $app->router->get("/admin-vehicle", [OwnerController::class, "ownerVehicle"]);
 $app->router->get("/logout", [AuthController::class, "logout"]);
 $app->router->post("/logout", [AuthController::class, "logout"]);
 
-$app->router->get("/admin/add-vehicle", [VehicleController::class, "add_VehiclePage"]);
-$app->router->post("/admin/add-vehicle", [VehicleController::class, "owneraddVehicle"]);
+$app->router->get("/vehicleOwner/add-vehicle", [VehicleController::class, "add_VehiclePage"]);
+$app->router->post("/vehicleOwner/add-vehicle", [VehicleController::class, "vehowneraddVehicle"]);
 
 $app->router->get("/viewVehicleProfile", [OwnerController::class, "ownerVehicleProfile"]);
 $app->router->post("/viewVehicleProfile", [OwnerController::class, "ownerVehicleProfile"]);
@@ -69,6 +69,12 @@ $app->router->get("/admin/driver/driverProfile", [OwnerController::class, "ViewD
 
 $app->router->get("/review", [DriverController::class, "view_reviews"]);
 
+$app->router->get("/admin/OverView", [OwnerController::class, "ownerFirstPage"]);
+
+$app->router->get("/admin/vehicle/add_vehicle", [OwnerController::class, "adminaddVehicle"]);
+
+
+$app->router->get("/admin/accept_vehicle", [OwnerController::class, "adminacceptedVehicle"]);
 //Hasantha
 
 $app->router->get("/selectUserType", [AuthController::class, "selectuser"]);
@@ -113,6 +119,7 @@ $app->router->post("/Customer/Register", [AuthController::class, 'cusRegister'])
 //Tharundya
 
 $app->router->get("/driver/driver_profile", [DriverController::class, 'driverViewProfile']);
+$app->router->get("/driver/editprofile", [DriverController::class, 'driverEditProfile']);
 
 $app->router->get("/driver/review", [DriverController::class, 'driverViewReview']);
 
@@ -120,6 +127,7 @@ $app->router->get("/driver/requests", [DriverController::class, 'driverViewReque
 
 $app->router->get("/Driver/Register", [AuthController::class, 'getDriverRegistration']);
 $app->router->post("/Driver/Register", [AuthController::class, 'getDriverRegistration']);
+
 
 
 
