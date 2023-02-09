@@ -1,0 +1,254 @@
+@import url('https://fonts.googleapis.com/css2?family=Nabla&family=Poppins:wght@200;300;400;500;600;700;800&family=Source+Sans+Pro:wght@300&display=swap');
+
+*, *::before, *::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+input, select {
+    font-family: 'Poppins', sans-serif;
+}
+
+
+main {
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    background-color: #e7e7e7;
+    padding: 2rem;
+    display: flex;
+    align-items: center; /* aligns the items vertically */
+    justify-content: center; /*`aligns the items horizontally */
+
+}
+
+.box {
+    position: relative;
+    width: 100%;
+    max-width: 1020px;
+    height: 700px;
+    background-color: #fff;
+    border-radius: 2rem;
+    box-shadow: 0 60px 40px -30px rgba(0, 0, 0, 0.2);
+
+}
+
+.inner-box {
+    position: absolute;
+    width: calc(100% - 4.1rem);
+    height: calc(100% - 4.1rem);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.forms-wrap {
+    position: absolute;
+    height: 100%;
+    width: 40%;
+    top: 0;
+    left: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    transition: .8s ease-in-out;
+}
+
+.carousel {
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    top: 0;
+    left: 0%;
+    border-radius: 1.2rem;
+    background-color: #303030;
+    transition: .8s ease-in-out;
+}
+
+form {
+    max-width: 300px;
+    width: 100%;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    grid-column: 1 / 2;
+    grid-row: 1/ 2;
+    transition: opacity 0.02s 0.4s;
+
+}
+
+form.sign-up-form {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.logo {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.logo img {
+    width: 150px;
+    margin: 0.3rem 0;
+}
+
+.logo p {
+    font-size: 0.65rem;
+    font-weight: 500;
+    margin-top: -2px;
+    letter-spacing: -0.2px;
+    color: #FAB84C;
+}
+
+.heading h2{
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #151111;
+}
+
+.heading h6 {
+    color: #bababa;
+    font-weight: 400;
+    font-size: 0.75rem;
+    display: inline;
+}
+
+.toggle {
+    color: #151111;
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.toggle:hover {
+    color: #FAB84C;
+}
+
+.actual-form {
+    margin-top: 1rem;
+}
+
+.input-wrap {
+    position: relative;
+    height: 37px;
+    margin-bottom: 2rem;
+}
+
+.input-field {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #bbb;
+    padding: 0;
+    font-size: .95 rem;
+    color: #151111;
+    transition: .4s;
+}
+
+.input-field.invalid {
+    border-bottom: 1px solid red !important;
+    text-decoration: wavy !important;
+}
+
+.input-wrap label {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: .85rem;
+    color: #bbb;
+    pointer-events: none;
+    transition: 0.2s;
+
+}
+
+.label {
+    color: #bbb !important;
+}
+
+.form-error {
+    position: absolute;
+    transform: translateY(260%);
+    color: red;
+    font-size: 0.75rem;
+    margin-top: -0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.input-field.active {
+    border-bottom-color: #151111;
+}
+
+.input-field + label {
+    font-size: 0.75rem;
+    top: -2px;
+}
+
+.sign-btn {
+    display: inline-block;
+    width: 100%;
+    height: 43px;
+    background-color: #151111;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 1.2rem;
+    font-size: 0.8rem;
+    margin-bottom: .4rem;
+    transition: 0.3s;
+
+}
+
+.sign-btn:hover {
+    background-color: #FAB84C;
+}
+
+.text {
+    color: #bbb;
+    font-size: 0.75rem;
+}
+
+.text a {
+    color: #bbb;
+    transition: 0.4s;
+}
+
+.text a:hover {
+    color: #FAB84C;
+}
+
+main.sign-up-mode form.sign-in-form {
+    opacity: 0;
+    pointer-events: none;
+}
+
+main.sign-up-mode form.sign-up-form {
+    opacity: 1;
+    pointer-events: all;
+}
+
+main.sign-up-mode .forms-wrap {
+    left: 55%;
+}
+
+main.sign-up-mode .carousel {
+    left: 0%;
+}
+
+main .carousel {
+    left: 50%;
+}
+
+
