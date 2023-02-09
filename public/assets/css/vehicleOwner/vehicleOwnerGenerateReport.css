@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+body {
+    font-family: "Poppins" , sans-serif;
+    background-color:  #D9D9D9;
+}
+
+.report_container{
+    height: 300px;
+}
+
+.reports{
+
+    background-color: #fffefe;
+    /* padding: 20px; */
+    width: 1000px;
+    height: 100%;
+    /* margin: 30px 0; */
+    margin-top: 160px;
+    margin-bottom: 5px;
+    margin-right: 200px;
+    margin-left: 200px;
+    border-radius: 5px;
+
+}
+/* .gen-rep{
+    margin-left: 320px;
+    margin-top: 220px;
+}
+} */
+
+.container-name{
+    text-align: left;
+    padding: 5px;
+}
+.report-names{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5vh;
+    margin-top: 10px;
+
+
+
+}
+
+.user-report, .vehicle-report {
+    padding: 4px 30px;
+    font-size: 12px;
+    font-weight: 400;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    border: none;
+    border: 1px solid black;
+
+}
+
+.user-report{
+
+    background-color: rgb(15, 15, 15);
+    color: #fff;
+    border-radius: 20px 0 0 20px;
+}
+
+
+
+.vehicle-report{
+
+    background-color:#fff;
+    color: rgb(15, 15, 15);
+    border-radius: 0 20px 20px 0;
+
+}
+/* .select-user{
+    margin-top:5px;
+    margin-left: 100px;
+    justify-content: space-between;
+} */
+
+.select-user {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.select-user p{
+    margin-top: 1px;
+    margin-left: 90px;
+}
+
+.dropbtn {
+
+    color: rgb(9, 9, 9);
+    background-color:  #ffffff;
+    padding: 16px;
+    font-size: 16px;
+    cursor: pointer;
+    width:300px;
+    border-radius: 10px;
+    margin-top: 1px;
+    margin-left: 100px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-top: 50px;
+    border-radius: 10px;
+    margin-top: 1px;
+    margin-left: 100px;
+
+
+}
+
+.row {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-content: space-around;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.col {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.generate-report-button{
+    margin-right:40px;
+}
+
+.gen-rep-button{
+    position: relative;
+    left: 40%;
+
+    background-color: #FAB84C;
+    border: none;
+    color: rgb(9, 9, 9);
+    padding: 15px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 40px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+
+}
+
