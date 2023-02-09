@@ -5,13 +5,7 @@
 
         <div class="profile-details">
             <div class="driver-img">
-                <div class="driver-pic "><img  src="./driver.png"></div>
-
-                <div class="edit-pic">
-                    <input type="file" id="profile-photo" accept="image/*">
-                    <button id="edit-button">Edit</button>
-                    
-                </div>
+                <div class="driver-pic "><img  src="/assets/img/driver.jpg"></div>
                 
             </div>
             <div class="driver-list">
@@ -25,10 +19,18 @@
                 </ul>
             </div>
             <div class="review">
-                <a href="#">Customer Reviews</a>
-                <img src="./review.webp">
-                <div class="submit-btn">
-                    <input type="submit" value="Edit Profile">
+                <div>Customer Reviews</div>
+                <!-- <img src="./review.webp"> -->
+                <div class="star-rating">
+                    <i class="bx bx-star"></i>
+                    <i class="bx bx-star"></i>
+                    <i class="bx bx-star"></i>
+                    <i class="bx bx-star"></i>
+                    <i class="bx bx-star"></i>
+                </div>
+                <div >
+                    <button class="submit-btn" onclick="location.href='/driver/editprofile'">Edit Profile</button>
+                    <!-- <input type="submit" value="Edit Profile"> -->
                 </div>
             </div>
         </div>

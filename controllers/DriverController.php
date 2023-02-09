@@ -55,6 +55,18 @@ class DriverController extends Controller
         return $vehiclesowner;
 
     }
+
+    public function driverEditProfile(Request $req, Response $res){
+        
+        if($req->session->get('authenticated')==true && $req->session->get('user_role')=="driver")
+        {   
+            
+           return $res->render("/driver/driver_editProfile","driver-dashboard");
+        }
+        return $res->redirect("/");
+    }
+
+    
 }
 
 
