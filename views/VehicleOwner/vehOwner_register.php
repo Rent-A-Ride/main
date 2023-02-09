@@ -63,6 +63,18 @@
                             <label>Email</label>
                             <span class="form-error"> <?= $model->getFirstError('email') ?></span>
                         </div>
+                        <div class="input-wrap">
+                            <input
+                                name="Owner_Nic"
+                                type="text"
+                                class="input-field<?= $model->hasError('Owner_Nic') ? ' invalid' : ''?>"
+                                autocomplete="off"
+                                value="<?= $model->thereIsError() ? $model->email : ''?>"
+
+                            />
+                            <label>Nic</label>
+                            <span class="form-error"> <?= $model->getFirstError('Owner_Nic') ?></span>
+                        </div>
 
                         <div class="input-wrap">
                             <input
@@ -87,6 +99,63 @@
                             </select>
                             <span class="form-error"> <?= $model->getFirstError('gender') ?></span>
 
+                        </div>
+                        <div class="input-wrap">
+                            <input
+                                name="owner_address"
+                                type="text"
+                                class="input-field<?= $model->hasError('owner_address') ? ' invalid' : ''?>"
+                                autocomplete="off"
+                                value="<?= $model->thereIsError() ? $model->email : ''?>"
+
+                            />
+                            <label>Address</label>
+                            <span class="form-error"> <?= $model->getFirstError('owner_address') ?></span>
+                        </div>
+                        <div class="input-wrap">
+                            <select class="input-field" name="owner_area">
+                                <option class="input-field label" value="" disabled selected>Select your District</option>
+                                <option value="Ampara">Ampara</option>
+                                <option value="Badulla">Badulla</option>
+                                <option value="Anuradhapura">Anuradhapura</option>
+                                <option value="Batticaloa">Batticaloa</option>
+                                <option value="Colombo">Colombo</option>
+                                <option value="Galle">Galle</option>
+                                <option value="Gampaha">Gampaha</option>
+                                <option value="Hambatota">Hambatota</option>
+                                <option value="Jaffna">Jaffna</option>
+                                <option value="Kaluthara">Kaluthara</option>
+                                <option value="Kandy">Kandy</option>
+                                <option value="Kegalle">Kegalle</option>
+                                <option value="Kilinochchi">Kilinochchi</option>
+                                <option value="Kurunegala">Kurunegala</option>
+                                <option value="Mannar">Mannar</option>
+                                <option value="Matale">Matale</option>
+                                <option value="Matara">Matara</option>
+                                <option value="Moneragala">Moneragala</option>
+                                <option value="Mullaitivu">Mullaitivu</option>
+                                <option value="Nuwara Eliya">Nuwara Eliya</option>
+                                <option value="Polonnaruwa">Polonnaruwa</option>
+                                <option value="Puttalama">Puttalama</option>
+                                <option value="Ratnapura">Ratnapura</option>
+                                <option value="Trincomalee">Trincomalee</option>
+                                <option value="Vavuniya" >Vavuniya</option>
+                        </select>
+                         
+                            <span class="form-error"> <?= $model->getFirstError('owner_area') ?></span>
+
+                        </div>
+                        <div class="input-wrap">
+                            <input
+                                name="license_No"
+                                type="text"
+                                class="input-field<?= $model->hasError('license_No') ? ' invalid' : ''?>"
+                                autocomplete="off"
+                                value="<?= $model->thereIsError() ? $model->email : ''?>"
+
+                            />
+                            <label>Nic</label>
+                            <span class="form-error"> <?= $model->getFirstError('license_No') ?></span>
                         </div>
 
                         <div class="input-wrap">

@@ -230,16 +230,22 @@ class vehicle
     }
     //function for admin add vehicle after confirm informaion  
     public  function adminacceptVehicle($vehicle_id){
+        
         $query1="UPDATE vehicle SET admin_approved = 1 WHERE veh_Id=$vehicle_id";
         $statement1= Application::$app->db->pdo->prepare($query1);
         $statement1->execute();
-// `       $query2="UPDATE vehicle_license SET admin_approved = 1 WHERE vehicle_Id=$vehicle_id";
-//         $statement2= Application::$app->db->pdo->prepare($query2);
-//         $statement2->execute();
-//         $query3="UPDATE vehicle_insuarance SET admin_approved = 1 WHERE vehicle_Id=$vehicle_id";
-//         $statement3= Application::$app->db->pdo->prepare($query3);
-//         $statement3->execute();
+    }
 
+    public  function adminacceptVehiclelicense($vehicle_id){
+        $query1="UPDATE vehicle_license SET admin_approved = 1 WHERE vehicle_Id=$vehicle_id";
+        $statement1= Application::$app->db->pdo->prepare($query1);
+        $statement1->execute();
+    }
+
+    public  function adminacceptVehicleinsuarance($vehicle_id){
+        $query1="UPDATE vehicle_insuarance SET admin_approved = 1 WHERE vehicle_Id=$vehicle_id";
+        $statement1= Application::$app->db->pdo->prepare($query1);
+        $statement1->execute();
     }
 
 

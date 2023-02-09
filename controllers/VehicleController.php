@@ -96,7 +96,12 @@ class VehicleController
 
     public function addVehicle(Request $req, Response $res){
         if ($req->session->get("authenticated")&&$req->session->get("user_role")==="owner"){
+            $query=$req->query();
             $vehicleModel = new vehicle();
+
+            $vehicleModel->getVehicletoAdd((int)$query["id"]);
+            $vehicleModel->adminacceptVehiclelicense((int)$query["id"]);
+            $vehicleModel->adminacceptVehicleinsuarance((int)$query["id"]);
             $vehicles = $vehicleModel->getVehicletoAdd();
 //            print_r($vehicles);
             return $vehicles;
