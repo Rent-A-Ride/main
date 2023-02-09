@@ -15,7 +15,7 @@
 
     <div class="wrapper-container">
         <div  class="wrapper">
-            <form action="" method="post">
+            <form action="" method="post" class="form_1">
                 <h3>Renew Eco Test Details</h3>
                 <div class="inputBox">
 
@@ -65,7 +65,7 @@
                 </script>
 
                 <div>
-                    <button type="submit" class="btn">Submit</button>
+                    <button type="submit" class="btn" onclick="location.href='/vehicleowner_vehicle'">Submit</button>
                 </div>
 
             </form>
