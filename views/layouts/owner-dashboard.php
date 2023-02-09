@@ -20,7 +20,7 @@
 
     <!-- JQUERY -->
     <script src="assets/javascript/jquery-3.6.3.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
 <body>
 
@@ -189,4 +189,5 @@
 <script src="/assets/javascript/component/navbar.js"></script>
 <script src="/assets/javascript/component/sidebar.js"></script>
 <script src="/assets/javascript/component/search.js"></script>
+<script src="/assets/javascript/adminOverview.js"></script>
 </html>

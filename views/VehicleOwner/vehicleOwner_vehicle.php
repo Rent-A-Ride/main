@@ -21,7 +21,7 @@ use \app\controllers\VehicleController;
                     </form>
                 </div>
 
-                <div class="form-input-add"><a href="/add-vehicle" class="add-vehicle"><i class="fa-solid fa-plus"></i>Add New</a></div>
+                <div class="form-input-add"><a href="/vehicleOwner/add-vehicle" class="add-vehicle"><i class="fa-solid fa-plus"></i>Add New</a></div>
 
             </div>
 
