@@ -9,7 +9,7 @@
 
     <div class="profile-b">
         <div class="EDIT-BUTTONS">
-            <button class="edit-pro-button">Edit Profile</button>
+            <button class="edit-pro-button" onclick="location.href='/vehicleOwner/editProfile'">Edit Profile</button>
         </div>
 
         <div class="user-data">
