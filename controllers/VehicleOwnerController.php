@@ -51,6 +51,12 @@ class VehicleOwnerController
         }
     }
 
+    public function completeAddNewVehicle(Request $req, Response $res){
+        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="vehicleowner"){
+            return $res->render("/VehicleOwner/popupbox/popupbox","vehicleOwner-dashboard");
+        }
+    }
+
 
 
 

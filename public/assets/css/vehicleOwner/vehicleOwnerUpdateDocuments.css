@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900');
 
-*{
+/* *{
     box-sizing: border-box;
     padding: 0;
     margin: 0;
@@ -11,7 +11,7 @@ body
     font-family: 'Poppins', sans-serif;
     background:   #d9d9d9;
     margin: 0;
-}
+} */
 .renew-page-name{
     text-align: center;
     margin-top: 40px;
