@@ -82,12 +82,12 @@ input {
 
 
 
-.btn {
+.btn_1 {
     width: 150px;
     background-color: #FAB84C;
     border: none;
     outline: none;
-    height: 49px;
+    height: 60px;
     border-radius: .3rem;
     /* display: block; *
     color: #fff;
@@ -124,7 +124,7 @@ input {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 100px;
+    padding: 0 5px;
 
 }
 
@@ -142,6 +142,7 @@ input {
     border-radius: 4px;
     padding: 2rem;
     background-color: #fff;
+    margin-left: 5%;
 
 
 }
