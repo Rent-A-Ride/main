@@ -69,6 +69,8 @@ $app->router->get("/admin/driver/driverProfile", [OwnerController::class, "ViewD
 
 $app->router->get("/review", [DriverController::class, "view_reviews"]);
 
+$app->router->get("/admin/OverView", [OwnerController::class, "ownerFirstPage"]);
+
 //Hasantha
 
 $app->router->get("/selectUserType", [AuthController::class, "selectuser"]);
