@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\core\Request;
 use app\core\Response;
+use app\models\owner;
 use app\models\vehicle_Owner;
 
 class VehicleOwnerController
@@ -50,6 +51,41 @@ class VehicleOwnerController
             return $res->render("/VehicleOwner/vehicleOwnerPayments","vehicleOwner-dashboard");
         }
     }
+
+    public function completeAddNewVehicle(Request $req, Response $res){
+        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="vehicleowner"){
+            return $res->render("/VehicleOwner/popupbox/popupbox","vehicleOwner-dashboard");
+        }
+    }
+
+    public function vehownerVehicleProfile(Request $req, Response $res){
+        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="vehicleowner"){ 
+             
+            $vehicles = new VehicleController();
+            $vehicle=[];
+            $vehicle = $vehicles->viewVehicleProfile($req,$res);
+            // $ownerprofile = new owner();
+            // $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
+//        print_r($vehicle);
+             return $res->render("/VehicleOwner/vehicleOwnerVehicleProfile","vehicleOwner-dashboard",['result'=>$vehicle]);
+        }
+        return $res->render("Home","home");
+    }
+
+    public function vehownerUpdateVehicle(Request $req, Response $res){
+        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="vehicleowner"){ 
+             
+            // $vehicles = new VehicleController();
+            // $vehicle=[];
+            // $vehicle = $vehicles->viewVehicleProfile($req,$res);
+            // $ownerprofile = new owner();
+            // $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
+//        print_r($vehicle);
+             return $res->render("/VehicleOwner/vehicleOwnerUpdateDocuments","vehicleOwner-dashboard");
+        }
+        return $res->render("Home","home");
+    }
+
 
 
 

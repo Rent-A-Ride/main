@@ -62,7 +62,7 @@ class vehicle
                 $new_img_name = $vehicle_id.'.'.$img_ex_lc;
                 $img_upload_path = '../public/assets/img/Vehicle_img/'.$new_img_name;
                 move_uploaded_file($tmp_name, $img_upload_path);
-                var_dump($user_id);
+                
                 $admin_approved=0;
 
                 $query1 = "INSERT INTO vehicle (plate_No,user_ID,model,type,image,fuel_type,price,availability,veh_transmition,admin_approved) VALUES (:vehicle_plateNumber,:user_id,:vehicle_model,:dropdown_vehicletype,:image,:dropdown_fueltype,:price,:availability,:dropdown_transmitiontype,:admin_app)";
@@ -82,9 +82,7 @@ class vehicle
                 $statement1->execute();
                 
                 $veh_No=$this->body["vehicle_plateNumber"];
-                // var_dump($veh_No);
-                // var_dump("SELECT * FROM vehicle Where plate_No=$veh_No");
-                // exit;
+                
 
                 $vehicle_idt= Application::$app->db->pdo->query("SELECT * FROM vehicle Where plate_No='$veh_No'")->fetchAll(\PDO::FETCH_ASSOC);
                 
@@ -215,7 +213,7 @@ class vehicle
     }
 
     public function vehicleOwnergetVehicle($user_id){
-        return Application::$app->db->pdo->query("SELECT vehicle.model, vehicle.type, vehicle.fuel_type,vehicle.image, vehicle.price, vehicle.availability, vehicle.veh_transmition, vehicle_license.capacity, vehicle_license.owner FROM vehicle INNER JOIN vehicle_license ON vehicle.veh_Id=vehicle_license.vehicle_Id where vehicle.user_ID=$user_id")->fetchAll(\PDO::FETCH_ASSOC);
+        return Application::$app->db->pdo->query("SELECT * FROM vehicle INNER JOIN vehicle_license ON vehicle.veh_Id=vehicle_license.vehicle_Id AND vehicle.admin_approved=1 where vehicle.user_ID=$user_id")->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function getVehiclebyId($vehicle_id){
@@ -230,21 +228,30 @@ class vehicle
     }
     //function for admin add vehicle after confirm informaion  
     public  function adminacceptVehicle($vehicle_id){
-        
-        $query1="UPDATE vehicle SET admin_approved = 1 WHERE veh_Id=$vehicle_id";
-        $statement1= Application::$app->db->pdo->prepare($query1);
+        // var_dump($vehicle_id);
+        $admin_approved=1;
+        $query1="UPDATE vehicle SET admin_approved =:admin_approved WHERE veh_Id=$vehicle_id";
+
+        $statement1= Application::$app->db->prepare($query1);
+        $statement1->bindValue(":admin_approved",$admin_approved);
         $statement1->execute();
     }
 
     public  function adminacceptVehiclelicense($vehicle_id){
-        $query1="UPDATE vehicle_license SET admin_approved = 1 WHERE vehicle_Id=$vehicle_id";
-        $statement1= Application::$app->db->pdo->prepare($query1);
+        $admin_approved=1;
+        // var_dump($vehicle_id);
+        $query1="UPDATE vehicle_license SET admin_approved =:admin_approved WHERE vehicle_Id=$vehicle_id";
+        $statement1= Application::$app->db->prepare($query1);
+        $statement1->bindValue(":admin_approved",$admin_approved);
         $statement1->execute();
     }
 
     public  function adminacceptVehicleinsuarance($vehicle_id){
-        $query1="UPDATE vehicle_insuarance SET admin_approved = 1 WHERE vehicle_Id=$vehicle_id";
-        $statement1= Application::$app->db->pdo->prepare($query1);
+        $admin_approved=1;
+        // var_dump($vehicle_id);
+        $query1="UPDATE vehicle_insuarance SET admin_approved =:admin_approved WHERE vehicle_Id=$vehicle_id";
+        $statement1= Application::$app->db->prepare($query1);
+        $statement1->bindValue(":admin_approved",$admin_approved);
         $statement1->execute();
     }
 

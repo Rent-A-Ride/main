@@ -1,6 +1,6 @@
 <?php
 
- ?>
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +16,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="/assets/css/vehicleOwner/vehicleOwner-dashboard.css">
-    
+
 
     <!-- JQUERY -->
     <script src="assets/javascript/jquery-3.6.3.min.js"></script>
@@ -119,7 +119,7 @@
         {{content}}
     </div>
 
-    
+
 
 </div>
 
@@ -128,4 +128,5 @@
 <script src="/assets/javascript/component/navbar.js"></script>
 <script src="/assets/javascript/component/sidebar.js"></script>
 <script src="/assets/javascript/component/search.js"></script>
+<script src="/assets/javascript/vehicleOwner/popup.js"></script>
 </html>

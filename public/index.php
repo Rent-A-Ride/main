@@ -143,6 +143,12 @@ $app->router->get("/vehicleOwner/editProfile", [VehicleOwnerController::class, '
 
 $app->router->get("/vehicleOwner/Payments", [VehicleOwnerController::class, 'getPayments']);
 
+$app->router->get("/vehicleOwner/completeAddNewVehicle", [VehicleOwnerController::class, 'completeAddNewVehicle']);
+
+$app->router->get("/vehicleOwner/viewVehicleProfile", [VehicleOwnerController::class, 'vehownerVehicleProfile']);
+
+$app->router->get("/vehicleOwner/UpdateVehicle", [VehicleOwnerController::class, 'vehownerUpdateVehicle']);
+
 
 
 $app->run();

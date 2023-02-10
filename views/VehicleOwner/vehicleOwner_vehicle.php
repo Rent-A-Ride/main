@@ -39,6 +39,7 @@ use \app\controllers\VehicleController;
         <?php
 
            if ($result){
+           
                foreach ($result as $row){
 
 //                       print_r($row);
@@ -49,12 +50,12 @@ use \app\controllers\VehicleController;
 
                             </div>
                             <div>
-
+                                <?php $vehicle_id=$row["veh_Id"] ?>
                                 <div><img src="/assets/img/Vehicle_img/<?php echo $row['image']?>" alt="" class="vehicle-profile-image"></div>
                                 <div class="top-menu">
-
-                                    <button onclick="location.href='viewVehicleProfile'"><i class="fa-regular fa-eye"></i> View</button>
-                                    <button><i class="fa-regular fa-pen-to-square"></i>Update</button>
+                                    
+                                    <button onclick="location.href='/vehicleOwner/viewVehicleProfile?id=<?php echo $vehicle_id; ?>'"><i class="fa-regular fa-eye"></i> View</button>
+                                    <button onclick="location.href='/vehicleOwner/UpdateVehicle?id=<?php echo $vehicle_id; ?>'"><i class="fa-regular fa-pen-to-square"></i>Update</button>
                                     <button><i class="fa-solid fa-trash-can"></i>Delete</button>
                                 </div>
 
