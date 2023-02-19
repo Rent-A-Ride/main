@@ -213,7 +213,7 @@ i {
 .form-input-add a{
     width: 100%;
     height: 100%;
-    background: whitesmoke;
+    /*background: red;*/
     /*width: 100px;*/
     /*height: 50px;*/
     border-radius: 1rem;
@@ -222,4 +222,3 @@ i {
     padding: 10px;
 
 }
-
