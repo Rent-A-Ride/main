@@ -12,7 +12,9 @@ use app\models\adminCustomer;
 use app\models\driver;
 use app\models\owner;
 use app\models\user;
+use app\models\users;
 use app\models\vehicle_Owner;
+use app\models\vehicleowner;
 
 class AuthController extends Controller
 {
@@ -153,16 +155,19 @@ class AuthController extends Controller
     public function getDriverRegistration(Request $req, Response $res){
         // return $res->render("/driver/driver_registration","main_2");
         $customer = new Customer();
+        
         if ($req->isPost()){
 
             $customer->loadData($req->getBody());
-
+            
             if ($customer->validate() && $customer->save()){
-                // ->session->setFlash('success', 'Registration Successfully!');
-                $req->session->setFlash('success', 'Registration Successfully!');
-                // Application::$app->response->redirect('/login');
-                $res->redirect("/login");
-                exit();
+               
+                    // ->session->setFlash('success', 'Registration Successfully!');
+                    $req->session->setFlash('success', 'Registration Successfully!');
+                    // Application::$app->response->redirect('/login');
+                    $res->redirect("/login");
+                    exit();
+    
             }
 
             return $res->render('/driver/driver_registration','main_2', [
@@ -176,28 +181,32 @@ class AuthController extends Controller
     }
 
 
-    public function vehOwnerRegistration(Request $req, Response $res){
+    public function vehOwnerRegistration(Request    $req, Response $res){
         // return $res->render("/driver/driver_registration","main_2");
-        $customer = new Customer();
+        $user = new users();
+        $vehicleowner = new vehicleowner();
         if ($req->isPost()){
 
-            $customer->loadData($req->getBody());
+            $user->loadData($req->getBody());
+            $vehicleowner->loadData($req->getBody());
 
-            if ($customer->validate() && $customer->save()){
-                // ->session->setFlash('success', 'Registration Successfully!');
-                $req->session->setFlash('success', 'Registration Successfully!');
-                // Application::$app->response->redirect('/login');
-                $res->redirect("/login");
-                exit();
+            if ($user->validate() && $user->save()){
+                if($vehicleowner->validate() && $vehicleowner->save()){
+                    // ->session->setFlash('success', 'Registration Successfully!');
+                    $req->session->setFlash('success', 'Registration Successfully!');
+                    // Application::$app->response->redirect('/login');
+                    $res->redirect("/login");
+                    exit();
+                }
             }
 
             return $res->render('/VehicleOwner/vehOwner_register','main_3', [
-                'model' => $customer
+                'model' => $user,'model'=>$vehicleowner
             ]);
         }
        
         return $res->render('/VehicleOwner/vehOwner_register','main_3', [
-            'model' => $customer
+            'model' => $user, 'model'=>$vehicleowner
         ]);
     }
 }
