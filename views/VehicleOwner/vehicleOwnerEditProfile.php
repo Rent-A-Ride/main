@@ -54,7 +54,7 @@
             <br>
 
             <div>
-                <button type="submit" class="btn">Save Changes</button>
+                <button type="submit" class="btn_1_1">Save Changes</button>
             </div>
         </form>
     </div>
@@ -80,7 +80,7 @@
             </div>
             <br>
             <div>
-                <button type="submit" class="btn">Save Changes</button>
+                <button type="submit" class="btn_1_1">Save Changes</button>
             </div>
         </form>
     </div>

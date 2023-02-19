@@ -25,30 +25,30 @@
                         <div class="input-wrap">
 
                             <input
-                                name="firstname"
+                                name="owner_Fname"
                                 type="text"
                                 minlength="4"
-                                class="input-field<?= $model->hasError('firstname') ? ' invalid' : ''?>"
+                                class="input-field<?= $model->hasError('owner_Fname') ? ' invalid' : ''?>"
                                 autocomplete="off"
-                                value="<?= $model->thereIsError() ? $model->firstname : ''?>"
+                                value="<?= $model->thereIsError() ? $model->owner_Fname : ''?>"
 
                             />
                             <label>Fisrt Name</label>
-                            <span class="form-error"><?= $model->getFirstError('firstname') ?></span>
+                            <span class="form-error"><?= $model->getFirstError('owner_Fname') ?></span>
                         </div>
 
                         <div class="input-wrap">
                             <input
-                                name="lastname"
+                                name="owner_Lname"
                                 type="text"
                                 minlength="4"
-                                class="input-field<?= $model->hasError('lastname') ? ' invalid' : ''?>"
+                                class="input-field<?= $model->hasError('owner_Lname') ? ' invalid' : ''?>"
                                 autocomplete="off"
-                                value="<?= $model->thereIsError() ? $model->lastname : ''?>"
+                                value="<?= $model->thereIsError() ? $model->owner_Lname : ''?>"
 
                             />
                             <label>Last Name</label>
-                            <span class="form-error"> <?= $model->getFirstError('lastname') ?></span>
+                            <span class="form-error"> <?= $model->getFirstError('owner_Lname') ?></span>
                         </div>
 
                         <div class="input-wrap">
@@ -69,7 +69,7 @@
                                 type="text"
                                 class="input-field<?= $model->hasError('Owner_Nic') ? ' invalid' : ''?>"
                                 autocomplete="off"
-                                value="<?= $model->thereIsError() ? $model->email : ''?>"
+                                value="<?= $model->thereIsError() ? $model->Owner_Nic : ''?>"
 
                             />
                             <label>Nic</label>
@@ -78,16 +78,16 @@
 
                         <div class="input-wrap">
                             <input
-                                name="phoneno"
+                                name="phone_No"
                                 type="Phone"
                                 minlength="4"
-                                class="input-field<?= $model->hasError('phoneno') ? ' invalid' : ''?>"
+                                class="input-field<?= $model->hasError('phone_No') ? ' invalid' : ''?>"
                                 autocomplete="off"
-                                value="<?= $model->thereIsError() ? $model->phoneno : ''?>"
+                                value="<?= $model->thereIsError() ? $model->phone_No : ''?>"
 
                             />
                             <label>Phone Number</label>
-                            <span class="form-error"> <?= str_replace('phoneno', 'Phone Number', $model->getFirstError('phoneno')) ?></span>
+                            <span class="form-error"> <?= str_replace('phone_No', 'Phone Number', $model->getFirstError('phone_No')) ?></span>
                         </div>
 
                         <div class="input-wrap">
@@ -106,7 +106,7 @@
                                 type="text"
                                 class="input-field<?= $model->hasError('owner_address') ? ' invalid' : ''?>"
                                 autocomplete="off"
-                                value="<?= $model->thereIsError() ? $model->email : ''?>"
+                                value="<?= $model->thereIsError() ? $model->owner_address : ''?>"
 
                             />
                             <label>Address</label>
@@ -151,7 +151,7 @@
                                 type="text"
                                 class="input-field<?= $model->hasError('license_No') ? ' invalid' : ''?>"
                                 autocomplete="off"
-                                value="<?= $model->thereIsError() ? $model->email : ''?>"
+                                value="<?= $model->thereIsError() ? $model->license_No : ''?>"
 
                             />
                             <label>Nic</label>

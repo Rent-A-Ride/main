@@ -196,6 +196,8 @@ i {
 
 
 
+
+
 .owner-addvehicleheader{
     display: flex;
 }
@@ -208,6 +210,12 @@ i {
     /*background: red;*/
 
 
+}
+
+.add-vehicleowner{
+    color: black;
+    background-color: #FAB84C;
+    text-transform: none;
 }
 
 .form-input-add a{
