@@ -256,5 +256,11 @@ class vehicle
     }
 
 
+    public function licenseExp(){
+        return Application::$app->db->pdo->query("SELECT * FROM vehicleowner INNER JOIN vehicle ON vehicleowner.user_ID=vehicle.user_ID INNER JOIN vehicle_license ON vehicle.veh_Id = vehicle_license.vehicle_Id")->fetchAll(\PDO::FETCH_ASSOC);
+
+    }
+
+
 
 }

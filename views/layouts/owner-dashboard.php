@@ -127,6 +127,39 @@
             <span class="tooltip">view Driver</span>
         </li>
         <li class="<?php 
+        if($function=='vehiclecomplaint'){
+            echo ('active');
+        }
+        ?>">
+            <a href="/admin/vehicleComplaint">
+                <i class="fa-sharp fa-regular fa-comment"></i>
+                <span class="links_name">Vehicle Complaint</span>
+            </a>
+            <span class="tooltip">Complaint Regarding Vehicles</span>
+        </li>
+        <li class="<?php 
+        if($function=='drivercomplaint'){
+            echo ('active');
+        }
+        ?>">
+            <a href="/admin/driverComplaint">
+                <i class="fa-light fa-address-book"></i>
+                <span class="links_name">Driver Complaint</span>
+            </a>
+            <span class="tooltip">Complaint Regarding Drivers</span>
+        </li>
+        <li class="<?php 
+        if($function=='licenseexpiring'){
+            echo ('active');
+        }
+        ?>">
+            <a href="/admin/license_Exp">
+                <i class="fa-regular fa-calendar-xmark"></i>
+                <span class="links_name">License Expiering</span>
+            </a>
+            <span class="tooltip">License Expiering</span>
+        </li>
+        <li class="<?php 
         if($function=='Payment'){
             echo ('active');
         }
@@ -137,6 +170,7 @@
             </a>
             <span class="tooltip">Payment</span>
         </li>
+        
 
         <li class="profile">
             <a href="/logout" class="logout">
