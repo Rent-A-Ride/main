@@ -45,12 +45,13 @@ select{
 
 .form-input-addvehicleowner a{
     align-items: center;
-    background: white;
+    background-color: #FAB84C;
     width: 150px;
     height: 100%;
     padding: 9px;
     border-radius: 1rem;
     border: solid;
+    text-decoration: none;
    
 }
 .Driverdetails{
@@ -109,6 +110,7 @@ select{
     margin-left: 2%;
     width: 25%;
     text-align: center;
+    
 }
 .admindriver_name_1{
     background: whitesmoke;
@@ -127,6 +129,7 @@ select{
     margin-left: 2%;
     width: 25%;
     text-align: center;
+    color: #FAB84C;
 }
 .admindriver_location_1{
     background: whitesmoke;
@@ -136,6 +139,7 @@ select{
     margin-left: 2%;
     width: 25%;
     text-align: center;
+    color: #FAB84C;
 }
 .admindriver_Novehicles{
     /* background: red; */
