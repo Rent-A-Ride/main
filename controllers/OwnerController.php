@@ -6,8 +6,11 @@ use app\core\Request;
 use app\core\Response;
 use app\models\adminCustomer;
 use app\models\driver;
+use app\models\drivercomplaint;
 use app\models\owner;
+use app\models\vehicle;
 use app\models\vehicle_Owner;
+use app\models\vehiclecomplaint;
 
 class OwnerController
 {
@@ -171,8 +174,38 @@ class OwnerController
         return $res->render("Home","home");
     }
 
+    public function admin_vehicleComplaint(Request $req, Response $res){
+        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="owner"){
+            $vehiclecom= new vehiclecomplaint();
+            $vehiclecomplaint=$vehiclecom->viewcomplaint();
+            // var_dump($vehiclecomplaint);
+            // die();
+            $ownerprofile = new owner();
+            $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
+            return $res->render("/admin/admin_vehicleComplaint","owner-dashboard",['complaint'=>$vehiclecomplaint],['profile_img'=>$owner_img, 'function'=>'vehiclecomplaint']);
+        }
+    }
+
+    public function admin_driverComplaint(Request $req, Response $res){
+        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="owner"){
+            $drivercom= new drivercomplaint();
+            $drivercomplaint=$drivercom->viewcomplaint();
+            $ownerprofile = new owner();
+            $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
+            return $res->render("/admin/admin_driverComplaint","owner-dashboard",['complaint'=>$drivercomplaint],['profile_img'=>$owner_img, 'function'=>'drivercomplaint']);
+        }
+    }
     
-    
+
+    public function admin_licenseExp(Request $req, Response $res){
+        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="owner"){
+            $license = new vehicle();
+            $licenseExp = $license->licenseExp();
+            $ownerprofile = new owner();
+            $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
+            return $res->render("/admin/admin_licenseExp","owner-dashboard",['complaint'=>$licenseExp],['profile_img'=>$owner_img, 'function'=>'licenseexpiring']);
+        }
+    }
 
 
     
