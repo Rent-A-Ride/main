@@ -17,7 +17,7 @@
                         <h2 class="owner"><?php echo($result[0]["owner"]); ?></h2>
 
                     </div>
-
+                    
                 </div>
                 <div class="vehicleProfileImageimg">
                     <img src="/assets/img/Vehicle_img/<?php echo($result[0]["image"]); ?>" alt="" class="vehicle_profileProfile">

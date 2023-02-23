@@ -82,14 +82,31 @@ class driver
 
     }
 
-    public function getDriverbyId($user_id){
-        return Application::$app->db->pdo->query("SELECT * FROM driver INNER JOIN users WHERE driver.user_ID=users.user_ID AND users.user_ID=$user_id")->fetchAll(\PDO::FETCH_ASSOC);
+    public function acceptRequests($user_id){
+        $sql="UPDATE driver_requests SET accept =1 WHERE reservation_id = $user_id";
+        Application::$app->db->pdo->query($sql)->execute();
+    }
 
+    public function rejectRequests($user_id){
+        $sql="UPDATE driver_requests SET accept =2 WHERE reservation_id = $user_id";
+        Application::$app->db->pdo->query($sql)->execute();
+    }
+
+    public function getDriverbyId($user_id){
+        return Application::$app->db->pdo->query("SELECT * FROM driver INNER JOIN users WHERE driver.user_ID=$user_id AND users.user_ID=$user_id")->fetchAll(\PDO::FETCH_ASSOC);
+
+    }
+
+    public function getrequest($user_id){
+        var_dump($user_id);
+        return Application::$app->db->pdo->query("SELECT * FROM driver_requests INNER JOIN users WHERE driver_requests.user_ID=$user_id AND users.user_ID=$user_id ORDER BY reservation_id DESC")->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     // public function getreviews($user_id){
     //     return Application::$app->db->pdo->query("SELECT * FROM driver_reviews where driver.Id=$user_Id")->fetchAll(\PDO::FETCH_ASSOC);
     // }
+
+
     
 
 

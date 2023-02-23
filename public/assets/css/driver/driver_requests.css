@@ -16,17 +16,17 @@
 body {
     margin: 0;
     font-family: Poppins-Regular;
-    font-size: 25px;
 
 }
 
-.container{
+
+.req-container{
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     background-color: #f1f1f1;
-    padding-bottom: 20px;
+    padding: 50px;
     /* color: black; */
 }
 
@@ -34,18 +34,64 @@ body {
     padding:10px 50px 10px 50px;
 }
 
-table {
-    font-family: arial, sans-serif;
+.req-show {
+    /* font-family: arial, sans-serif;
     border-collapse: collapse;
-    width: 100%;
+    width: 100%; */
+    font-size: 0.8rem;
+    border-collapse: collapse;
+    margin: 25px 0;
+    /* font-size: 15px; */
+    min-width: 100%;
+    overflow: hidden;
+    border-radius: 5px 15px 5px 5px;
+    padding: 10px;
+    transition: 0.4s;
   }
   
-  td, th {
+  .req-show td, th {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
   }
+
+  .req-show thead{
+    border-radius: 10px;
+  }
+  .req-show thead tr{
+    color: #fff;
+    background: #373636;
+    text-align: left;
+    font-weight: bold;
+    border-radius: 5px;
+  }
+  .req-show th, td{
+    padding: 12px 15px;
+  }
+
+  .req-show tbody tr{
+    border-bottom: 1px solid #29282847;
+    border-radius: 10px;
+  }
+  .req-show tbody tr:nth-of-type(odd){
+    /* background: #eaeaeb; */
+    width: 1000px;
+    border-radius: 5px;
+  }
   
-  tr:nth-child(even) {
-    background-color: #dddddd;
+
+  .req-btns{
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .req-btnName{
+    text-align: center;
+  }
+
+  .accept , .reject{
+    background-color: #FAB84C;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
   }

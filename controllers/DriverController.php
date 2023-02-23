@@ -31,18 +31,37 @@ class DriverController extends Controller
         
         if($req->session->get('authenticated')==true && $req->session->get('user_role')=="driver")
         {   
-            
-           return $res->render("/driver/driver_profile","driver-dashboard");
+            $driverModel=new driver();
+
+            $driver_profile=$driverModel->getDriverbyId($req->session->get('user_id'));            
+           return $res->render("/driver/driver_profile","driver-dashboard", ['driver'=>$driver_profile]);
         }
         return $res->redirect("/");
     }
 
     public function driverViewRequests(Request $req, Response $res){
+        $driverModel=new driver();
+        
+        if($req->isPost()){
+            if(!empty($_POST)){
+                $action=$_POST['action'];
+                if($action==='Accept'){
+    
+                    $driverModel->acceptRequests($_POST['res_id']);
+
+                }else if($action==='Reject'){
+                    $driverModel->rejectRequests($_POST['res_id']);
+                }
+            }
+        }
+        
         
         if($req->session->get('authenticated')==true && $req->session->get('user_role')=="driver")
         {   
-            
-           return $res->render("/driver/driver_requests","driver-dashboard");
+           
+           $driver_request=$driverModel->getrequest($req->session->get('user_id')); 
+           
+           return $res->render("/driver/driver_requests","driver-dashboard",['driver'=>$driver_request]);
         }
         return $res->redirect("/");
     }
@@ -58,9 +77,9 @@ class DriverController extends Controller
 
     public function driverEditProfile(Request $req, Response $res){
         
+        
         if($req->session->get('authenticated')==true && $req->session->get('user_role')=="driver")
         {   
-            
            return $res->render("/driver/driver_editProfile","driver-dashboard");
         }
         return $res->redirect("/");
