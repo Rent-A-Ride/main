@@ -6,6 +6,7 @@ use app\core\Request;
 use app\core\Response;
 use app\models\owner;
 use app\models\vehicle_Owner;
+use app\models\viewCustomerReq;
 
 class VehicleOwnerController
 {
@@ -34,9 +35,20 @@ class VehicleOwnerController
 
     }
     public function vehownerViewProfile(Request $req,Response $res){
+        // dump value
 
-        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="vehicleowner"){
-            return $res->render("VehicleOwner/vehicleOwnerProfile","vehicleOwner-dashboard");
+//        echo '<pre>';
+//        var_dump($req->session->get("user_id"));
+//        echo '</pre>';
+//        exit();
+
+        if ($req->session->get("authenticated") && $req->session->get("user_role")==="vehicleowner"){
+
+            $vehowner = new vehicle_Owner();
+            $vehicleowner=$vehowner->Vehicleowner_profile($req->session->get("user_id"));
+
+
+            return $res->render("VehicleOwner/vehicleOwnerProfile","vehicleOwner-dashboard",['vehicleowner'=>$vehicleowner]);
         }
     }
 
@@ -86,6 +98,35 @@ class VehicleOwnerController
         return $res->render("Home","home");
     }
 
+    public function viewCustomerPendingRequests(Request $request, Response $response): string
+    {
+        $cusReq = viewCustomerReq::retrieveAll();
+
+        $params = [
+            "model" => $cusReq
+        ];
+        return $response->render("/VehicleOwner/vehicleOwnerPendingCustomerReq", "vehicleOwner-dashboard", $params);
+    }
+
+    public function viewCustomerAcceptedRequests(Request $request, Response $response): string
+    {
+        $cusReq = viewCustomerReq::retrieveAll();
+
+        $params = [
+            "model" => $cusReq
+        ];
+        return $response->render("/VehicleOwner/vehicleOwnerAcceptedReq", "vehicleOwner-dashboard", $params);
+    }
+
+    public function viewCustomerRejectedRequests(Request $request, Response $response): string
+    {
+        $cusReq = viewCustomerReq::retrieveAll();
+
+        $params = [
+            "model" => $cusReq
+        ];
+        return $response->render("/VehicleOwner/vehicleOwnerRejectedReq", "vehicleOwner-dashboard", $params);
+    }
 
 
 

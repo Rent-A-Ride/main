@@ -85,6 +85,16 @@ $app->router->get("/selectUserType", [AuthController::class, "selectuser"]);
 $app->router->get("/Customer/Register", [AuthController::class, 'cusRegister']);
 $app->router->post("/Customer/Register", [AuthController::class, 'cusRegister']);
 
+// view customer Pending requests
+$app->router->get("/CustomerPendingRequest", [VehicleOwnerController::class, 'viewCustomerPendingRequests']);
+
+// view customer Accepted requests
+$app->router->get("/CustomerAcceptedRequest", [VehicleOwnerController::class, 'viewCustomerAcceptedRequests']);
+
+// view customer Rejected requests
+$app->router->get("/CustomerRejectedRequest", [VehicleOwnerController::class, 'viewCustomerRejectedRequests']);
+
+
 
 
 

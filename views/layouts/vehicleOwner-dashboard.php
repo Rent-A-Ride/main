@@ -21,6 +21,11 @@
     <!-- JQUERY -->
     <script src="assets/javascript/jquery-3.6.3.min.js"></script>
 
+    <!-- ajax -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+
 </head>
 <body>
 
@@ -62,16 +67,16 @@
         <li>
             <a href="/vehicleowner_vehicle">
                 <i class='bx bx-car' ></i>
-                <span class="links_name">View Vehicle</span>
+                <span class="links_name">Vehicles</span>
             </a>
-            <span class="tooltip">View Vehicle</span>
+            <span class="tooltip">Vehicles</span>
         </li>
         <li>
-            <a href="/driver/review">
+            <a href="/CustomerPendingRequest">
                 <i class="fa-regular fa-address-card"></i>
-                <span class="links_name">View Driver</span>
+                <span class="links_name">Requests</span>
             </a>
-            <span class="tooltip">View Driver</span>
+            <span class="tooltip">Requests</span>
         </li>
         <li>
             <a href="/vehicleOwner/Payments">
@@ -129,4 +134,8 @@
 <script src="/assets/javascript/component/sidebar.js"></script>
 <script src="/assets/javascript/component/search.js"></script>
 <script src="/assets/javascript/vehicleOwner/popup.js"></script>
+<script src="/assets/javascript/adminaddVehicle.js"></script>
+<script src="/assets/javascript/vehicleOwner/dateValidation/datevalidation.js"></script>
+<script src="/assets/javascript/vehicleOwner/components/popup.js"></script>
+<script src="/assets/javascript/vehicleOwner/profile.js"></script>
 </html>

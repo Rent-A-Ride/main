@@ -11,6 +11,8 @@ class Application
     public Database $db;
     public Session $session;
     public Controller $controller;
+
+    public string $layout = 'vehicleOwner-dashboard.php';
     
 
     public static Application $app;

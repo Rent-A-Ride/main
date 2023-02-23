@@ -4,10 +4,10 @@ namespace app\core;
 
 abstract class dbModel extends Model
 {
-    abstract public function tableName(): string;
+    abstract public static function tableName(): string;
 
     abstract public function attributes():array;
-    abstract public function primaryKey(): string;
+    abstract public static function primaryKey(): string;
 
 
     public function save(): bool
@@ -42,6 +42,25 @@ abstract class dbModel extends Model
         return $statement->fetchObject(static::class);
     }
 
+    public static function retrieveAll($where = [])
+    {
+        $tableName = static::tableName();
+        $statement = '';
+        if (empty($where)) {
+            $statement = self::prepare("SELECT * FROM $tableName");
+        } else {
+            $attributes = array_keys($where);
+            $sql = implode("AND ", array_map(fn($attr) => "$attr = :$attr", $attributes));
+            $statement = self::prepare("SELECT * FROM $tableName WHERE $sql");
+            foreach ($where as $key => $item) {
+                $statement->bindValue(":$key", $item);
+            }
+        }
+
+        $statement->execute();
+        return $statement->fetchAll(\PDO::FETCH_CLASS, static::class);
+
+    }
 
     public static function prepare($sql)
     {

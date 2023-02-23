@@ -1,0 +1,266 @@
+
+
+/*  import google fonts */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+.search-container {
+    display: flex;
+    justify-content:center;
+    margin-top: 500px;
+    margin-left: 2000px;
+}
+
+.search-container input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: none;
+    border-radius: 5px 0px 0px 5px;
+    background-color: #e7e7e198;
+    float: left;
+    /* box-shadow: #373636; */
+}
+
+.search-container button {
+    padding: 10px;
+    background: #ea1717;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+    border-radius: 0px 5px 5px 0px;
+}
+
+.search-container button:hover {
+    background: #2e0c72;
+}
+
+
+.requests{
+    margin-top: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
+
+    text-transform: capitalize;
+}
+.requests-list{
+
+    overflow: overlay;
+    max-height: 800px;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background: #f9f8f8;
+    border-radius: 10px;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+
+}
+.table{
+    font-size: 0.8rem;
+    border-collapse: collapse;
+    margin: 25px 0;
+    /* font-size: 15px; */
+    min-width: 100%;
+    overflow: hidden;
+    border-radius: 5px 15px 5px 5px;
+    padding: 10px;
+    transition: 0.4s;
+}
+
+.table thead {
+    border-radius: 10px;
+}
+
+
+.table thead tr{
+    color: #fff;
+    background: #373636;
+    text-align: left;
+    font-weight: bold;
+    border-radius: 5px;
+}
+.table th,
+.table td{
+    padding: 12px 15px;
+
+
+}
+/* .table td{
+  border-radius: 10px 0px;
+} */
+.table tbody tr{
+    border-bottom: 1px solid #29282847;
+    border-radius: 10px;
+}
+.table tbody tr:nth-of-type(odd){
+    /* background: #eaeaeb; */
+    width: 1000px;
+    border-radius: 5px;
+}
+
+/* .table button{
+  padding: 6px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid #080808;
+}
+.table button:hover{
+  background: #f3bb21;
+  color: #fff;
+  transition: 0.5rem;
+} */
+
+
+/* table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: left;
+} */
+
+.accept-button {
+    border: none;
+    padding: 6px;
+    border-radius: 4px;
+    cursor: pointer;
+
+}
+
+.reject-button {
+    margin-left: 5px;
+    border: none;
+    padding: 6px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.accept-button {
+    background-color: #f7ba58;
+    color:black;
+}
+
+.accept-button:hover {
+    background-color: #fab84c;
+
+}
+.accept-button.clicked{
+    background-color: #fab84c;
+
+}
+
+.reject-button {
+    background-color: rgb(218, 83, 83);
+    color: white;
+}
+
+.reject-button:hover {
+    background-color: rgb(213, 16, 16);
+}
+
+.reject-button.clicked {
+    background-color: rgb(213, 16, 16);
+}
+
+
+
+.status {
+    display: flex;
+    justify-content:space-evenly;
+}
+
+
+.table tbody tr:hover, tr:focus {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* selection navbar */
+.topnav {
+    overflow: hidden;
+    background-color: white;
+
+    border-radius: 10px;
+    width: 100%;
+    margin-top: 60px;
+}
+
+.topnav a {
+    float: left;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    transition: 0.2s;
+}
+
+#active {
+    background-color: #fcba50c4;
+    border-bottom: 2px solid rgb(49, 48, 48);
+}
+
+.topnav a:hover {
+     background-color: rgba(255, 215, 139, 0.48);
+    border-bottom: 2px solid grey;
+}
+
+/*.topnav a:focus {*/
+/*    background-color: #fcba50c4;*/
+/*    border-bottom: 2px solid rgb(49, 48, 48);*/
+/*}*/
+
+.topnav a.active {
+    background-color: #04AA6D;
+    color: white;
+}
+
+/* search bar */
+
+
+.search-container {
+    margin-left: 100px;
+    margin-top: 0.1px;
+
+
+}
+
+.topnav input[type=text] {
+    padding: 6px;
+    /* margin-top: 8px; */
+    font-size: 17px;
+    border: none;
+}
+
+.topnav .search-container button {
+    float: right;
+    padding: 6px 10px;
+    /* margin-top: 8px; */
+    margin-right: 16px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+
+.topnav .search-container button:hover {
+    background: #ccc;
+}
+
+@media screen and (max-width: 600px) {
+    .topnav .search-container {
+        float: none;
+    }
+    .topnav a, .topnav input[type=text], .topnav .search-container button {
+        float: none;
+        display: block;
+        text-align: left;
+        width: 100%;
+        margin: 0;
+        /* padding: 14px; */
+    }
+    .topnav input[type=text] {
+        border: 1px solid #ccc;
+    }
+}

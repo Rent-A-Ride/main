@@ -12,3 +12,4 @@ section.classList.remove("active")
 closeBtn.addEventListener("click", () =>
 section.classList.remove("active")
 );
+
