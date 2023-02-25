@@ -78,13 +78,13 @@ class vehicle_Owner
     }
 
     public function getVehicleowner(){
-        return Application::$app->db->pdo->query("SELECT * FROM vehicleowner INNER JOIN users WHERE vehicleowner.user_ID=users.user_ID AND vehicleowner.admin_approved=1 ")->fetchAll(\PDO::FETCH_ASSOC);
+        return Application::$app->db->pdo->query("SELECT * FROM vehicleowner WHERE vehicleowner.admin_approved=1 ")->fetchAll(\PDO::FETCH_ASSOC);
 
     }
 
     public function Vehicleowner_profile($user_id){
     
-        return Application::$app->db->pdo->query("SELECT * FROM users INNER JOIN vehicleowner where vehicleowner.user_ID=$user_id AND users.user_ID=$user_id")->fetchAll(\PDO::FETCH_ASSOC);
+        return Application::$app->db->pdo->query("SELECT * FROM vehicleowner where vehicleowner.vo_ID=$user_id ")->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function getnotApprovedVehicleowner(){

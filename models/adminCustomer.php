@@ -77,7 +77,7 @@ class adminCustomer
 
     public function getcustomer(){
         
-        return Application::$app->db->pdo->query("SELECT * FROM customer INNER JOIN users ON customer.user_ID=users.user_ID INNER JOIN customerdoc ON customer.custmer_ID=customerdoc.customer_ID")->fetchAll(\PDO::FETCH_ASSOC);
+        return Application::$app->db->pdo->query("SELECT * FROM customer")->fetchAll(\PDO::FETCH_ASSOC);
 
     }
                 
