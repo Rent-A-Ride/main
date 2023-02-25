@@ -224,4 +224,6 @@
 <script src="/assets/javascript/component/sidebar.js"></script>
 <script src="/assets/javascript/component/search.js"></script>
 <script src="/assets/javascript/adminOverview.js"></script>
+<script src="/assets/javascript/admin/details.js"></script>
+
 </html>

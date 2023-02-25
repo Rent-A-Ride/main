@@ -56,11 +56,14 @@ class OwnerController
              
             $vehicles = new VehicleController();
             $vehicle=[];
-            $vehicle = $vehicles->viewVehicleProfile($req,$res);
+            $query=$query=$req->query();
+            $vehicle1 = $vehicles->viewVehicleProfile($req,$res,$query);
+            $vehicle2=$vehicles->viewVehicleProfilelicense($req,$res,$query);
+            
             $ownerprofile = new owner();
             $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
 //        print_r($vehicle);
-             return $res->render("/admin/ownerViewVehicleProfile","owner-dashboard",['result'=>$vehicle],['profile_img'=>$owner_img, 'function'=>'Vehicle']);
+             return $res->render("/admin/ownerViewVehicleProfile","owner-dashboard",['veh_info'=>$vehicle1,'veh_li'=>$vehicle2],['profile_img'=>$owner_img, 'function'=>'Vehicle']);
         }
         return $res->render("Home","home");
     }
@@ -110,7 +113,6 @@ class OwnerController
             $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
             $customer = new CustomerController();
             $customerdetails=$customer->ownerGetCustomer($req,$res);
-             
             return $res->render("/admin/admin_customer","owner-dashboard",['adminCustomer'=>$customerdetails],['profile_img'=>$owner_img, 'function'=>'Customer']);
         }
         return $res->render("Home","home");

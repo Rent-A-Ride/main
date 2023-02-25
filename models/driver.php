@@ -78,12 +78,12 @@ class driver
     }
 
     public function getDriver(){
-        return Application::$app->db->pdo->query("SELECT * FROM driver INNER JOIN users WHERE driver.user_ID=users.user_ID ")->fetchAll(\PDO::FETCH_ASSOC);
+        return Application::$app->db->pdo->query("SELECT * FROM driver")->fetchAll(\PDO::FETCH_ASSOC);
 
     }
 
     public function getDriverbyId($user_id){
-        return Application::$app->db->pdo->query("SELECT * FROM driver INNER JOIN users WHERE driver.user_ID=users.user_ID AND users.user_ID=$user_id")->fetchAll(\PDO::FETCH_ASSOC);
+        return Application::$app->db->pdo->query("SELECT * FROM driver WHERE driver.driver_ID=$user_id")->fetchAll(\PDO::FETCH_ASSOC);
 
     }
 

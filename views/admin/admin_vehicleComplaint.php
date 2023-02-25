@@ -4,10 +4,11 @@
             <table>
                 <thead>
                 <th>No</th>
-                <th>Complaint ID</th>
                 <th>Customer Name</th>
                 <th>Vehicle No</th>
                 <th>Complaint</th>
+                <th>Proof</th>
+                <th>Resolved</th>
                 </thead>
                 
                 <tbody>
@@ -22,10 +23,11 @@
                 ?>
                     <tr>
                         <td><?php echo($num); ?></td>
-                        <td><?php echo($row['com_ID']); ?></td>
                         <td><?php echo($row['cus_Name']); ?></td>
                         <td><?php echo($row['Vehicle_No']); ?></td>
                         <td><?php echo($row['complaint']); ?></td>
+                        <td><button class="button_adminvehicle">Proof</button></td>
+                        <td><button class="button_adminvehicle">Resolved Complaint</button></td>
                     </tr>
 
                 <?php
