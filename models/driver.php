@@ -58,7 +58,7 @@ class driver
 
     public function driver_login($user_id)
     {
-        $sql = "SELECT * FROM driver WHERE user_ID=:user_id";
+        $sql = "SELECT * FROM driver WHERE driver_ID=:user_id";
         $statement = Application::$app->db->pdo->prepare($sql);
         $statement->bindValue(':user_id',$user_id);
         $statement->execute();
