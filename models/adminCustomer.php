@@ -6,10 +6,11 @@ use app\core\Application;
 use app\core\Request;
 use app\core\Response;
 use app\core\Database;
+use app\core\Model;
 
 
 
-class adminCustomer
+class adminCustomer 
 {
     private \PDO $pdo;
     private array $body;
@@ -56,24 +57,7 @@ class adminCustomer
         
     // }
 
-    public function driver_login($user_id)
-    {
-        $sql = "SELECT * FROM customer WHERE user_ID=:user_id";
-        $statement = Application::$app->db->pdo->prepare($sql);
-        $statement->bindValue(':user_id',$user_id);
-        $statement->execute();
-        $customer= $statement->fetchObject();
-        if(!$customer){
-            $errors['customer'] = 'Email does not have owner account';
-        }
-
-        if (empty($errors)){
-            return $customer;
-        }
-        else {
-            return $errors;
-        }
-    }
+    
 
     public function getcustomer(){
         

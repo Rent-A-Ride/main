@@ -58,7 +58,7 @@ class vehicle_Owner
 
     public function vehicle_Owner_login($user_id)
     {
-        $sql = "SELECT * FROM vehicleowner WHERE user_ID=:user_id";
+        $sql = "SELECT * FROM vehicleowner WHERE vo_ID=:user_id";
         $statement = Application::$app->db->pdo->prepare($sql);
         $statement->bindValue(':user_id',$user_id);
         $statement->execute();
