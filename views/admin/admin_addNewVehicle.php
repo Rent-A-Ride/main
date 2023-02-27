@@ -95,18 +95,19 @@ use \app\controllers\VehicleController;
           
 
            if ($result){
+                
                foreach ($result as $row){
 
 //                       print_r($row);
                    ?>
                     <div class="project">
                             <div class="veh_type">
-                                <h2><?php echo $row["model"] ?></h2>
+                                <h2><?php echo $row["veh_model"] ?></h2>
 
                             </div>
                             <div>
 
-                                <div><img src="/assets/img/Vehicle_img/<?php echo $row['image']?>" alt="" class="vehicle-profile-image"></div>
+                                <div><img src="/assets/img/Vehicle_img/<?php echo $row['front_view']?>" alt="" class="vehicle-profile-image"></div>
                                 <div class="top-menu">
                                     <?php $vehicle_id=$row["veh_Id"] ?>
                                     
@@ -120,8 +121,8 @@ use \app\controllers\VehicleController;
                                     <div class="vehicle-desc">
 
                                         <div>
-                                            <i class="fa-regular fa-user"></i><?php echo $row["capacity"]?>
-                                            <i class="fa-solid fa-sliders"></i><?php echo $row["veh_transmition"]?>
+                                            <i class="fa-regular fa-user"></i><?php echo $row["seatsCount"]?>
+                                            <i class="fa-solid fa-sliders"></i><?php echo $row["transmission"]?>
                                             <i class="fa-solid fa-gas-pump"></i><?php echo $row["fuel_type"]?>
                                         </div>
 
