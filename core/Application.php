@@ -9,6 +9,7 @@ class Application
     public Request $request;
     public Response $response;
     public Database $db;
+    public ?dbModel $customer;
     public Session $session;
     public Controller $controller;
     
@@ -47,6 +48,21 @@ class Application
     public function run()
     {
         echo $this->router->resolve();
+    }
+
+    public function login(dbModel $customer)
+    {
+        // var_dump($customer);
+        // die();
+        $this->customer = $customer;
+        
+        
+        // $primaryKey = $customer->primaryKey();
+        // $primaryValue = $customer->{$primaryKey};
+        // $this->session->set('customer', $primaryValue);
+
+        
+
     }
 
 }

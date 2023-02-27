@@ -1,6 +1,7 @@
 <?php
 
 use app\controllers\AuthController;
+use app\controllers\CustomerController;
 use app\controllers\SiteController;
 use app\controllers\OwnerController;
 use app\controllers\VehicleController;
@@ -84,6 +85,8 @@ $app->router->get("/selectUserType", [AuthController::class, "selectuser"]);
 
 $app->router->get("/Customer/Register", [AuthController::class, 'cusRegister']);
 $app->router->post("/Customer/Register", [AuthController::class, 'cusRegister']);
+
+$app->router->get("/customer", [CustomerController::class, 'home']);
 
 
 
