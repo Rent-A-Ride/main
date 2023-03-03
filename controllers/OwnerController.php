@@ -6,11 +6,14 @@ use app\core\Request;
 use app\core\Response;
 use app\models\adminCustomer;
 use app\models\driver;
+use app\models\driver_complaint_resolve_notification;
 use app\models\drivercomplaint;
 use app\models\owner;
 use app\models\vehicle;
 use app\models\vehicle_Owner;
 use app\models\vehiclecomplaint;
+use app\models\veh_license;
+use app\models\vehicle_complaint_resolve_notification;
 
 class OwnerController
 {
@@ -201,14 +204,44 @@ class OwnerController
 
     public function admin_licenseExp(Request $req, Response $res){
         if ($req->session->get("authenticated")&&$req->session->get("user_role")==="owner"){
-            $license = new vehicle();
-            $licenseExp = $license->licenseExp();
+            // $license = new vehicle();
+            // $licenseExp = $license->licenseExp();
             $ownerprofile = new owner();
             $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
-            return $res->render("/admin/admin_licenseExp","owner-dashboard",['complaint'=>$licenseExp],['profile_img'=>$owner_img, 'function'=>'licenseexpiring']);
+            $vehicle = new veh_license();
+            $veh_license=$vehicle->licenseExp();
+            return $res->render("/admin/admin_licenseExp","owner-dashboard",['complaint'=>$veh_license],['profile_img'=>$owner_img, 'function'=>'licenseexpiring']);
         }
     }
 
+
+    public function admin_resolve_vehicleComplaint(Request $req, Response $res){
+        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="owner"){
+            $notification = new vehicle_complaint_resolve_notification();
+            if ($req->isPost()){
+                $body=$req->getBody();
+                var_dump($body);
+                $notification->loadData($body);
+                $notification->save();
+                $res->redirect('/admin/vehicleComplaint');
+            }
+            
+        }
+    }
+
+    public function admin_resolve_driverComplaint(Request $req, Response $res){
+        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="owner"){
+            $notification = new driver_complaint_resolve_notification();
+            if ($req->isPost()){
+                $body=$req->getBody();
+                var_dump($body);
+                $notification->loadData($body);
+                $notification->save();
+                $res->redirect('/admin/driverComplaint');
+            }
+            
+        }
+    }
 
     
 

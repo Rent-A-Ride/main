@@ -119,7 +119,11 @@
 
                                     <div class="vehicle-intro">
                                         <div class="vehicle-desc">
-
+                                            <div class="vehicle-fee">
+                                                <?php  echo "RS:"?>
+                                                <?php echo $row["price"] ?>
+                                                <!-- <?php echo "(Per day)" ?> -->
+                                            </div>
                                             <div>
                                                 <i class="fa-regular fa-user"></i><?php echo $row["seatsCount"]?>
                                                 <i class="fa-solid fa-sliders"></i><?php echo $row["transmission"]?>
@@ -127,11 +131,7 @@
                                             </div>
 
                                         </div>
-                                        <div class="vehicle-fee">
-                                            <?php  echo "RS:"?>
-                                            <?php echo $row["price"] ?>
-                                            <!-- <?php echo "(Per day)" ?> -->
-                                        </div>
+                                        
                                         <div class="vehicle-availability">
                                             <div class="vehicle-availability-show">
                                                 <?php

@@ -3,6 +3,7 @@
 namespace app\core;
 
 use app\models\Customer;
+use app\models\vehicle_complaint_resolve_notification;
 
 abstract class dbModel extends Model
 {
@@ -14,7 +15,7 @@ abstract class dbModel extends Model
 
     public function save(): bool
     {
-        $tableName = (new Customer)->tableName();
+        $tableName = static::tableName();
         $attributes = $this->attributes();
         $params = array_map(fn($attr) => ":$attr", $attributes);
 

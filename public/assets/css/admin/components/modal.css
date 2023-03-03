@@ -1,0 +1,60 @@
+.modal{
+    min-width: 200px;
+    background-color: #fff;
+    color: #222;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    z-index: 100;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    display: none;
+}
+
+.modal-body{
+    width: 100%;
+    padding: 20px;
+}
+
+.modal-body img{
+    width: 100%;
+}
+
+.modal-header{
+    display: flex;
+}
+
+.modal-close-btn{
+    background: transparent;
+    font-size: 30px;
+    border: none;
+    margin-left: 28%;
+}
+
+.form-item{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.btn{
+    margin-top: 10px;
+   
+    color: white;
+    background-color:#FAB84C ;
+    border-radius: 0.5rem;
+    padding: 10px;
+    
+}

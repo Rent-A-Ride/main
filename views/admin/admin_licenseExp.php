@@ -19,8 +19,13 @@
                 if ($complaint){
                     // var_dump($complaint);
                     // die();
-                    $date=strtotime(date("Y-m-d"));
                    foreach ($complaint as $row){
+                    $string_date = $row['ex_date']; // A string representing a date
+                    $dateObject = date("Y-m-d",strtotime($string_date));
+                    // echo gettype($dateObject);
+                    var_dump($dateObject);
+                    
+                    die();
                     $period=$date-strtotime($row['ex_date']);
                     $year = (int)date('Y', $period); // extract the year from the timestamp
                     $month = (int)date('m', $period); // extract the month from the timestamp

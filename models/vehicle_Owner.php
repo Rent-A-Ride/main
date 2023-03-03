@@ -88,7 +88,7 @@ class vehicle_Owner
     }
 
     public function getnotApprovedVehicleowner(){
-        return Application::$app->db->pdo->query("SELECT * FROM vehicleowner INNER JOIN users WHERE vehicleowner.user_ID=users.user_ID AND vehicleowner.admin_approved=0 ")->fetchAll(\PDO::FETCH_ASSOC);
+        return Application::$app->db->pdo->query("SELECT * FROM vehicleowner WHERE vehicleowner.admin_approved=0 ")->fetchAll(\PDO::FETCH_ASSOC);
 
     }
     
