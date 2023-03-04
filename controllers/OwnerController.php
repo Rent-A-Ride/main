@@ -8,6 +8,7 @@ use app\models\adminCustomer;
 use app\models\driver;
 use app\models\driver_complaint_resolve_notification;
 use app\models\drivercomplaint;
+use app\models\license_expire_notification;
 use app\models\owner;
 use app\models\vehicle;
 use app\models\vehicle_Owner;
@@ -238,6 +239,20 @@ class OwnerController
                 $notification->loadData($body);
                 $notification->save();
                 $res->redirect('/admin/driverComplaint');
+            }
+            
+        }
+    }
+
+    public function admin_license_exp_notification(Request $req, Response $res){
+        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="owner"){
+            $notification = new license_expire_notification();
+            if ($req->isPost()){
+                $body=$req->getBody();
+                var_dump($body);
+                $notification->loadData($body);
+                $notification->save();
+                $res->redirect('/admin/license_Exp');
             }
             
         }

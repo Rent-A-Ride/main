@@ -147,7 +147,7 @@ class veh_license extends dbModel
     }
 
     public function licenseExp(){
-        return Application::$app->db->pdo->query("SELECT * FROM veh_license")->fetchAll(\PDO::FETCH_ASSOC);
+        return Application::$app->db->pdo->query("SELECT * FROM veh_license INNER JOIN vehicle ON vehicle.veh_Id=veh_license.veh_Id INNER JOIN vehicleowner ON vehicle.vo_Id=vehicleowner.vo_ID AND vehicle.admin_approved=1")->fetchAll(\PDO::FETCH_ASSOC);
 
     }
     

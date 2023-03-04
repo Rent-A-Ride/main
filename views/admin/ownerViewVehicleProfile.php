@@ -25,7 +25,7 @@
 
 
 <div class="vehicle-card">
-    <h2 class="vehicle-name"><?php echo($veh_info[0]['veh_brand'].' '.$veh_info[0]['veh_model'])?><span> • RR</span></h2>
+    <h2 class="vehicle-name"><?php echo($veh_info[0]['veh_brand'].' '.$veh_info[0]['veh_model'])?><span style="color:#FAB84C ;"> •<?php echo($veh_info[0]['owner_Fname'].' '.$veh_info[0]['owner_Lname'])?> </span></h2>
     <div class="details-cont">
         <div id="gallery">
             <div class="row">
