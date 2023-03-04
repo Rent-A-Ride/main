@@ -78,7 +78,7 @@ class driver
     }
 
     public function getDriver(){
-        return Application::$app->db->pdo->query("SELECT * FROM driver")->fetchAll(\PDO::FETCH_ASSOC);
+        return Application::$app->db->pdo->query("SELECT * FROM driver WHERE driver.admin_approved=1")->fetchAll(\PDO::FETCH_ASSOC);
 
     }
 
@@ -90,6 +90,15 @@ class driver
     // public function getreviews($user_id){
     //     return Application::$app->db->pdo->query("SELECT * FROM driver_reviews where driver.Id=$user_Id")->fetchAll(\PDO::FETCH_ASSOC);
     // }
+
+    public  function admindisabledriver($driver_id){
+        $availability=0;
+        // var_dump($vehicle_id);
+        $query1="UPDATE driver SET admin_approved =:availability WHERE driver_ID=$driver_id";
+        $statement1= Application::$app->db->prepare($query1);
+        $statement1->bindValue(":availability",$availability);
+        $statement1->execute();
+    }
     
 
 

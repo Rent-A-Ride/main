@@ -92,7 +92,7 @@
                     <button class="admin_driverView" onclick="location.href='/admin/driver/driverProfile?id=<?php echo $user_id; ?>'" ><i class="fa-regular fa-eye"></i>view</button>
                 </div>
                 <div>
-                    <button class="admin_driverView"><i class="fa-solid fa-trash-can"></i>Delete</button>
+                    <button class="admin_driverView disable_driver" data-driverid='<?php echo($row['driver_ID'])?>' data-drivername='<?php echo ($row["driver_Fname"]." ".$row["driver_Lname"]); ?>'><i class="fa-solid fa-trash-can"></i>Delete</button>
                 </div>
                 
             </div> 

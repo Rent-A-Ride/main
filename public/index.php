@@ -82,6 +82,11 @@ $app->router->get("/admin/driverComplaint", [OwnerController::class, "admin_driv
 $app->router->post("/admin/driverComplaint", [OwnerController::class, "admin_resolve_driverComplaint"]);
 $app->router->get("/admin/license_Exp", [OwnerController::class, "admin_licenseExp"]);
 $app->router->post("/admin/license_Exp", [OwnerController::class, "admin_license_exp_notification"]);
+
+$app->router->post("/admin/vehicle/disable", [OwnerController::class, "admin_vehicle_disable"]);
+$app->router->post("/admin/customer/disable", [OwnerController::class, "admin_customer_disable"]);
+$app->router->post("/admin/vehicleowner/disable", [OwnerController::class, "admin_vehowner_disable"]);
+$app->router->post("/admin/driver/disable", [OwnerController::class, "admin_driver_disable"]);
 //Hasantha
 
 $app->router->get("/selectUserType", [AuthController::class, "selectuser"]);

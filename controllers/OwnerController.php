@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\core\Request;
 use app\core\Response;
 use app\models\adminCustomer;
+use app\models\Customer;
 use app\models\driver;
 use app\models\driver_complaint_resolve_notification;
 use app\models\drivercomplaint;
@@ -15,6 +16,7 @@ use app\models\vehicle_Owner;
 use app\models\vehiclecomplaint;
 use app\models\veh_license;
 use app\models\vehicle_complaint_resolve_notification;
+use app\models\vehicleowner;
 
 class OwnerController
 {
@@ -253,6 +255,58 @@ class OwnerController
                 $notification->loadData($body);
                 $notification->save();
                 $res->redirect('/admin/license_Exp');
+            }
+            
+        }
+    }
+
+    public function admin_vehicle_disable(Request $req, Response $res){
+        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="owner"){
+            $vehicle = new vehicle();
+            if ($req->isPost()){
+                $body=$req->getBody();
+                $veh_id=$body['veh_Id'];
+                $vehicle->admindisablevehicle(intval($veh_id));
+                $res->redirect('/admin-vehicle');
+            }
+            
+        }
+    }
+
+    public function admin_customer_disable(Request $req, Response $res){
+        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="owner"){
+            $vehicle = new adminCustomer();
+            if ($req->isPost()){
+                $body=$req->getBody();
+                $cus_id=$body['cus_Id'];
+                $vehicle->admindisablecustomer(intval($cus_id));
+                $res->redirect('/admin_customer');
+            }
+            
+        }
+    }
+
+    public function admin_vehowner_disable(Request $req, Response $res){
+        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="owner"){
+            $vehicleowner = new vehicleowner();
+            if ($req->isPost()){
+                $body=$req->getBody();
+                $cus_id=$body['vo_Id'];
+                $vehicleowner->admindisablevehowner(intval($cus_id));
+                $res->redirect('/viewVehicleowner');
+            }
+            
+        }
+    }
+
+    public function admin_driver_disable(Request $req, Response $res){
+        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="owner"){
+            $driver = new driver();
+            if ($req->isPost()){
+                $body=$req->getBody();
+                $cus_id=$body['driver_Id'];
+                $driver->admindisabledriver(intval($cus_id));
+                $res->redirect('/viewownerDriver');
             }
             
         }
