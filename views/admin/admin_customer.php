@@ -71,6 +71,7 @@
             </div> 
         </div>
     <?php if ($adminCustomer){
+                
                 foreach ($adminCustomer as $row){ ?>
          <div class="Driverdetails">
             <div class="admindriver_img">
@@ -90,7 +91,7 @@
                     <button class="admin_driverView"><i class="fa-regular fa-eye"></i>view</button>
                 </div>
                 <div>
-                    <button class="admin_driverView"><i class="fa-solid fa-trash-can"></i>Delete</button>
+                    <button class="admin_driverView disable_customer" data-cusid='<?php echo($row['cus_Id'])?>' data-cusname='<?php echo ($row["firstname"]." ".$row["lastname"]); ?>'><i class="fa-solid fa-trash-can"></i>Delete</button>
                 </div>
                 
             </div> 

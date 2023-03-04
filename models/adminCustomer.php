@@ -61,8 +61,17 @@ class adminCustomer
 
     public function getcustomer(){
         
-        return Application::$app->db->pdo->query("SELECT * FROM customer")->fetchAll(\PDO::FETCH_ASSOC);
+        return Application::$app->db->pdo->query("SELECT * FROM customer WHERE customer.status=1")->fetchAll(\PDO::FETCH_ASSOC);
 
+    }
+
+    public  function admindisablecustomer($cus_id){
+        $admin_approved=0;
+        var_dump($cus_id);
+        $query1="UPDATE customer SET status =:availability WHERE cus_Id=$cus_id";
+        $statement1= Application::$app->db->prepare($query1);
+        $statement1->bindValue(":availability",$admin_approved);
+        $statement1->execute();
     }
                 
 

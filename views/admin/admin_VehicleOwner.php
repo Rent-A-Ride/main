@@ -92,7 +92,7 @@
                     <button class="admin_vehicleOwnerView" onclick="location.href='/adminViewVehicleOwner?id=<?php echo $user_id; ?>'" ><i class="fa-regular fa-eye"></i>view</button>
                 </div>
                 <div>
-                    <button class="admin_vehicleOwnerView"><i class="fa-solid fa-trash-can"></i>Delete</button>
+                    <button class="admin_vehicleOwnerView disable_vehicleowner" data-void='<?php echo($row['vo_ID'])?>' data-voname='<?php echo ($row["owner_Fname"]." ".$row["owner_Lname"]); ?>'><i class="fa-solid fa-trash-can"></i>Delete</button>
                 </div>
                 
             </div> 
