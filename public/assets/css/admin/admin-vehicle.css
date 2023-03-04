@@ -95,6 +95,7 @@ i {
 
 .vehicle-desc{
     width: 30%;
+   
 
 }
 
@@ -109,15 +110,19 @@ i {
 
 .vehicle-intro .vehicle-fee{
     margin-left: 15px;
-
-    text-align: center;
+    font-weight: 700;
+    font-size: 2rem;
+/* 
+    text-align: center; */
 }
 
 .vehicle-intro .vehicle-availability{
-    /*margin: 15px;*/
+    margin: 15px;
     display: flex;
-    margin-left: 30px;
+    margin-left: 90px;
     text-align: center;
+    font-weight: 600;
+    font-size: 1.2rem;
 }
 
 /* .veh_type{
@@ -129,6 +134,7 @@ i {
     height: 20px;
     background: green;
     border-radius: 50%;
+    margin-top: 5px;
 }
 
 

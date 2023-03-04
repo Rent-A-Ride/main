@@ -445,7 +445,7 @@ class vehicle extends dbModel
 
     public function getVehiclebyId($vehicle_id){
         
-        return Application::$app->db->pdo->query("SELECT * FROM vehicle INNER JOIN vehicle_info ON vehicle.veh_Id=$vehicle_id AND vehicle.veh_Id=vehicle_info.veh_Id")->fetchAll(\PDO::FETCH_ASSOC);
+        return Application::$app->db->pdo->query("SELECT * FROM vehicle_info INNER JOIN vehicle ON vehicle.veh_Id=$vehicle_id AND vehicle.veh_Id=vehicle_info.veh_Id INNER JOIN vehicleowner ON vehicle.vo_Id=vehicleowner.vo_ID")->fetchAll(\PDO::FETCH_ASSOC);
 
     }
     public function getVehiclelicensebyId($vehicle_id){
@@ -456,7 +456,7 @@ class vehicle extends dbModel
 
 
     public function getVehicletoAdd(){
-        return Application::$app->db->pdo->query("SELECT vehicle.veh_Id, vehicle.model, vehicle.type, vehicle.fuel_type,vehicle.image, vehicle.price, vehicle.availability, vehicle.veh_transmition, vehicle_license.capacity, vehicle_license.owner FROM vehicle INNER JOIN vehicle_license ON vehicle.veh_Id=vehicle_license.vehicle_Id AND vehicle.admin_approved=0 ORDER BY vehicle.veh_Id DESC")->fetchAll(\PDO::FETCH_ASSOC);
+        return Application::$app->db->pdo->query("SELECT * FROM vehicle INNER JOIN vehicle_info ON vehicle.veh_Id=vehicle_info.veh_Id AND vehicle.admin_approved=0 ORDER BY vehicle.veh_Id DESC")->fetchAll(\PDO::FETCH_ASSOC);
 
     }
     //function for admin add vehicle after confirm informaion  
@@ -489,10 +489,7 @@ class vehicle extends dbModel
     }
 
 
-    public function licenseExp(){
-        return Application::$app->db->pdo->query("SELECT * FROM vehicleowner INNER JOIN vehicle ON vehicleowner.user_ID=vehicle.user_ID INNER JOIN vehicle_license ON vehicle.veh_Id = vehicle_license.vehicle_Id")->fetchAll(\PDO::FETCH_ASSOC);
-
-    }
+    
 
 
 
