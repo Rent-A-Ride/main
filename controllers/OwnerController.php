@@ -312,6 +312,32 @@ class OwnerController
         }
     }
 
+    public function admin_accept_vehicle(Request $req, Response $res){
+        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="owner"){
+            $vehicle = new vehicle();
+            if ($req->isPost()){
+                $body=$req->getBody();
+                $veh_id=$body['veh_Id'];
+                $vehicle->adminaccept_vehicle(intval($veh_id));
+                $res->redirect('/admin/vehicle/add_vehicle');
+            }
+            
+        }
+    }
+
+    public function admin_vehowner_accept(Request $req, Response $res){
+        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="owner"){
+            $vehicleowner = new vehicleowner();
+            if ($req->isPost()){
+                $body=$req->getBody();
+                $cus_id=$body['vo_Id'];
+                $vehicleowner->adminacceptvehowner(intval($cus_id));
+                $res->redirect('/adminadd_vowner');
+            }
+            
+        }
+    }
+
     
 
 

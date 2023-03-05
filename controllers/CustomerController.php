@@ -32,7 +32,7 @@ class CustomerController
         ];
 
         
-        return $response->render('customer/cusHome','cus', $params);
+        return $response->render('customer/cus_Home','cus', $params);
     }
 
 }

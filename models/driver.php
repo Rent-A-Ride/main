@@ -56,15 +56,15 @@ class driver
         
     // }
 
-    public function driver_login($user_id)
+    public function driver_login($email)
     {
-        $sql = "SELECT * FROM driver WHERE driver_ID=:user_id";
+        $sql = "SELECT * FROM driver WHERE driver.email=:email";
         $statement = Application::$app->db->pdo->prepare($sql);
-        $statement->bindValue(':user_id',$user_id);
+        $statement->bindValue(':email',$email);
         $statement->execute();
         $driver= $statement->fetchObject();
         if(!$driver){
-            $errors['driver'] = 'Email does not have owner account';
+            $errors['driver'] = 'Email does not have driver account';
         }
 
         if (empty($errors)){

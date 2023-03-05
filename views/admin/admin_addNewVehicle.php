@@ -112,8 +112,8 @@ use \app\controllers\VehicleController;
                                     <?php $vehicle_id=$row["veh_Id"] ?>
                                     
                                     <button class="button_adminvehicle" onclick="location.href='/viewVehicleProfile?id=<?php echo $vehicle_id; ?>'"><i class="fa-regular fa-eye"></i> View</button>
-                                    <button class="button_adminvehicle" onclick="location.href='/admin/accept_vehicle?id=<?php echo $vehicle_id; ?>'"><i class="fa-regular fa-circle-check"></i> Accept</button>
-                                    <button class="button_adminvehicle"><i class="fa-solid fa-trash-can"></i>Decline</button>
+                                    <button class="button_adminvehicle accept_vehicle" data-vehId='<?php echo($row['veh_Id'])?>' data-vehNo='<?php echo($row['plate_No'])?>' ><i class="fa-regular fa-circle-check"></i> Accept</button>
+                                    <!-- <button class="button_adminvehicle"><i class="fa-solid fa-trash-can"></i>Decline</button> -->
                                 </div>
 
 

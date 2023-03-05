@@ -92,11 +92,11 @@
                     <button class="admin_vehicleOwnerView" onclick="location.href='/adminViewVehicleOwner?id=<?php echo $user_id; ?>'" ><i class="fa-regular fa-eye"></i>view</button>
                 </div>
                 <div>
-                    <button class="admin_acceptvowner"><i class="fa-solid fa-check"></i></button>
+                    <button class="button_adminvehicle accept_vehicleowner" data-void='<?php echo($row['vo_ID'])?>' data-voname='<?php echo ($row["owner_Fname"]." ".$row["owner_Lname"]); ?>' ><i class="fa-regular fa-circle-check"></i> Accept</button>
                 </div>
-                <div>
+                <!-- <div>
                     <button class="admin_deletevowner"><i class="fa-solid fa-xmark"></i></button>
-                </div>
+                </div> -->
                 
             </div> 
               

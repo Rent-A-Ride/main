@@ -26,11 +26,38 @@ driverComplaintProofButtons.forEach(function (btn) {
 
         const viewcomplaintProof = htmlToElement(
             `<div class="modal-body">
-                <strong>${complaint.comid}</strong>
-                <strong>${complaint.customer}</strong>
-                <strong>${complaint.driver}</strong>
-                <img src="/assets/img/VehicleComplaintProof/${complaint.proof}"></img>
+                <form action="/admin/driverComplaint" method="post" enctype="multipart/form-data" id="driver-complaint-resolve">
+                            
+            
+                <div class="grid gap-4">
+                
+                    <div class='form-item'>
+                        <label for='com_ID'>Complaint No:</label>
+                        <input type='number' name='com_ID' id='com_no' placeholder='' required  value='${complaint.comid}' readonly>
+                    </div>
+                    <div class='form-item'>
+                        <label for='customer_name'>Customer Name:</label>
+                        <input type='text' name='cus_Name' id='customer_name' placeholder='' required  value='${complaint.customer}' readonly>
+                    </div>
+
+                    <div class='form-item'>
+                        <label for='driver_name'>Driver Name:</label>
+                        <input type='text' name='driver_Name' id='driver_name' placeholder='' required  value='${complaint.driver}' readonly>      
+                    </div>
+                    <div class='form-item'>
+                        <img src="/assets/img/VehicleComplaintProof/${complaint.proof}"></img>        
+                    </div>
+                
+                
+                </div>
+
+                
+            </form>
+                
+               
+                
             </div>`
+            
         );
         
         Modal.show({
