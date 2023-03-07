@@ -64,7 +64,7 @@ $app->router->get("/adminViewVehicleOwner", [OwnerController::class, "ViewVehicl
 $app->router->get("/admin_customer", [OwnerController::class, "admin_Customer"]);
 
 $app->router->get("/adminadd_vowner", [OwnerController::class, "admin_addVehicleOwner"]);
-
+$app->router->post("/adminadd_vowner", [OwnerController::class, "admin_vehowner_accept"]);
 $app->router->get("/admin/driver/driverProfile", [OwnerController::class, "ViewDriverProfile"]);
 
 
@@ -73,6 +73,7 @@ $app->router->get("/review", [DriverController::class, "view_reviews"]);
 $app->router->get("/admin/OverView", [OwnerController::class, "ownerFirstPage"]);
 
 $app->router->get("/admin/vehicle/add_vehicle", [OwnerController::class, "adminaddVehicle"]);
+$app->router->post("/admin/vehicle/add_vehicle", [OwnerController::class, "admin_accept_vehicle"]);
 
 
 $app->router->get("/admin/accept_vehicle", [OwnerController::class, "adminacceptedVehicle"]);
@@ -87,6 +88,11 @@ $app->router->post("/admin/vehicle/disable", [OwnerController::class, "admin_veh
 $app->router->post("/admin/customer/disable", [OwnerController::class, "admin_customer_disable"]);
 $app->router->post("/admin/vehicleowner/disable", [OwnerController::class, "admin_vehowner_disable"]);
 $app->router->post("/admin/driver/disable", [OwnerController::class, "admin_driver_disable"]);
+
+$app->router->get("/admin/vehicle/update", [OwnerController::class, "admin_updateVehicle"]);
+$app->router->post("/admin/vehicle/update", [OwnerController::class, "admin_updateVehicle"]);
+
+$app->router->post("/admin/vehicle_ins/update", [OwnerController::class, "admin_updateins"]);
 //Hasantha
 
 $app->router->get("/selectUserType", [AuthController::class, "selectuser"]);

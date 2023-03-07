@@ -104,7 +104,10 @@ select{
     border-radius: 50%;
 }
 .admin_driverView{
-    background: linear-gradient(300deg,#FAB84C,goldenrod);
+    /* background: linear-gradient(300deg,#FAB84C,goldenrod); */
+    
+    text-align: center;
+    /* padding: 1px; */
     color: black;
     padding-right: 10px;
     border-radius: 1rem;
@@ -181,10 +184,7 @@ select{
     display: flex;
     text-align: center;
 }
-.admin_driverView{
-    text-align: center;
-    padding: 1px;
-}
+
 
 .Driverdetails:hover{
     transform: scale(1.02);

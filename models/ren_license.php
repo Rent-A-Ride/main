@@ -8,16 +8,15 @@ use app\core\Request;
 use app\core\Response;
 use app\core\dbModel;
 
-class veh_insurance extends dbModel
+class ren_license extends dbModel
 {
     protected string $veh_Id;
-    protected string $ins_No;
+    protected string $license_No;
     protected string $from_date;
     protected string $ex_date;
+    protected string $owner;
     protected string $scan_copy;
-    protected string $ins_com;
-    protected string $ins_type;
-    // protected string $admin_approved;
+    protected string $admin_approved;
     
     private array $body;
 
@@ -30,17 +29,17 @@ class veh_insurance extends dbModel
 
     public static function tableName(): string
     {
-        return 'veh_license';
+        return 'ren_license';
     }
 
     public function attributes(): array
     {
-       return ['veh_Id','ins_No','from_date','ex_date','scan_copy','ins_com','ins_type'];
+       return ['veh_Id','license_No','$from_date','$ex_date','$owner','scan_copy','$admin_approved'];
     }
 
     public static function primaryKey(): string
     {
-        return 'ins_No';
+        return 'license_No';
     }
 
     /**
@@ -62,17 +61,17 @@ class veh_insurance extends dbModel
     /**
      * @return string
      */
-    public function getins_No(): string
+    public function getlicense_No(): string
     {
-        return $this->ins_No;
+        return $this->license_No;
     }
 
     /**
      * @param string $plate_No
      */
-    public function setins_No(string $license_No): void
+    public function setlicense_No(string $license_No): void
     {
-        $this->ins_No = $license_No;
+        $this->license_No = $license_No;
     }
 
     /**
@@ -110,32 +109,22 @@ class veh_insurance extends dbModel
     /**
      * @return string
      */
-    public function getinsure_com(): string
+    public function getowner(): string
     {
-        return $this->ins_com;
+        return $this->owner;
     }
 
     /**
      * @param string $veh_type
      */
-    public function setinsure_com(string $insure_com): void
+    public function setowner(string $owner): void
     {
-        $this->ins_com = $insure_com;
-    }
-
-    public function getinsure_type(): string
-    {
-        return $this->ins_type;
+        $this->owner = $owner;
     }
 
     /**
-     * @param string $veh_type
+     * @return string
      */
-    public function setinsure_type(string $insure_type): void
-    {
-        $this->ins_type = $insure_type;
-    }
-
     public function getscan_copy(): string
     {
         return $this->scan_copy;
@@ -149,7 +138,21 @@ class veh_insurance extends dbModel
         $this->scan_copy = $scan_copy;
     }
 
-    
+    /**
+     * @return string
+     */
+    public function getadmin_approved(): string
+    {
+        return $this->admin_approved;
+    }
+
+    /**
+     * @param string $veh_location
+     */
+    public function setadmin_approved(string $admin_approved): void
+    {
+        $this->admin_approved = $admin_approved;
+    }
 
 
     public function __construct(array $registerBody=[])
@@ -159,20 +162,12 @@ class veh_insurance extends dbModel
 
 
     }
-   
-    public function updateinsuarance($body){
-        
-        $query1="UPDATE veh_insuarance SET ins_No=:ins_no, from_date=:from_date, ex_date=:ex_date, scan_copy=:scan_copy, insure_com=:ins_com, insure_type=:ins_type WHERE veh_Id=:veh_id";
-        $statement1= Application::$app->db->prepare($query1);
-        $statement1->bindValue(":ins_no",$body['ins_No']);
-        $statement1->bindValue(":from_date",$body['from_date']);
-        $statement1->bindValue(":ex_date",$body['ex_date']);
-        $statement1->bindValue(":scan_copy",$body['scan_copy']);
-        $statement1->bindValue(":ins_com",$body['ins_com']);
-        $statement1->bindValue(":ins_type",$body['ins_type']);
-        $statement1->bindValue(":veh_id",$body['veh_Id']);
-        $statement1->execute();
+
+    public function licenseren($vehicle_id){
+        return Application::$app->db->pdo->query("SELECT * FROM ren_license INNER JOIN vehicle ON vehicle.veh_Id=$vehicle_id AND ren_license.veh_Id=$vehicle_id")->fetchAll(\PDO::FETCH_ASSOC);
+
     }
+    
 
     
 

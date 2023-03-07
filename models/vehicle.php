@@ -497,6 +497,16 @@ class vehicle extends dbModel
         $statement1->execute();
     }
 
+    public  function adminaccept_vehicle($vehicle_id){
+        $availability=1;
+        $query1="UPDATE vehicle SET admin_approved =:availability WHERE veh_Id=$vehicle_id";
+        $statement1= Application::$app->db->prepare($query1);
+        $statement1->bindValue(":availability",$availability);
+        $statement1->execute();
+    }
+
+    
+
 
     
 

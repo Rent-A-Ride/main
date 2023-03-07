@@ -132,11 +132,11 @@ use app\core\Application; ?>
 
 
 </body>
-<script src="assets/javascript/components/navbar.js"></script>
-<script src="assets/javascript/components/sidebar.js"></script>
-<script src="assets/javascript/components/search.js"></script>
+<script src="assets/javascript/index.js"></script>
+<!-- <script src="assets/javascript/component/sidebar.js"></script> -->
+<!-- <script src="assets/javascript/components/search.js"></script>
 <script src="assets/javascript/components/details.js"></script>
 <script src="assets/javascript/components/booking.js"></script>
 <script src="assets/javascript/components/profile.js"></script>
-<script src="assets/javascript/components/date-validation.js"></script>
+<script src="assets/javascript/components/date-validation.js"></script> -->
 </html>

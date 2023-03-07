@@ -83,4 +83,13 @@ class vehicleowner extends dbModel
         $statement1->bindValue(":availability",$availability);
         $statement1->execute();
     }
+
+    public  function adminacceptvehowner($vo_id){
+        $availability=1;
+        // var_dump($vehicle_id);
+        $query1="UPDATE vehicleowner SET admin_approved =:availability WHERE vo_ID=$vo_id";
+        $statement1= Application::$app->db->prepare($query1);
+        $statement1->bindValue(":availability",$availability);
+        $statement1->execute();
+    }
 }

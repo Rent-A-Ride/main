@@ -59,19 +59,19 @@ class AuthController extends Controller
 
         }
         else {
-            $user_id=$result->user_ID;
+            // $user_id=$result->user_ID;
             $email = $result->email;
             
             $owner = new owner($body);
-            $result1=$owner->owner_login($user_id);
+            $result1=$owner->owner_login($email);
             
             if (is_array($result1)) {
 
                 $vehicle_owner=new vehicle_Owner($body);
-                $result2=$vehicle_owner->vehicle_Owner_login($user_id);
+                $result2=$vehicle_owner->vehicle_Owner_login($email);
                 if (is_array($result2)) {
                     $driver=new driver($body);
-                    $result3=$driver->driver_login($user_id);
+                    $result3=$driver->driver_login($email);
                     if (is_array($result3)) {
         
                         $req->session->set("authenticated",true);
