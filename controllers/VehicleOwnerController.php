@@ -63,11 +63,14 @@ class VehicleOwnerController
              
             $vehicles = new VehicleController();
             $vehicle=[];
-            $vehicle = $vehicles->viewVehicleProfile($req,$res);
+            $query=$query=$req->query();
+            $vehicle1 = $vehicles->viewVehicleProfile($req,$res,$query);
+            $vehicle2=$vehicles->viewVehicleProfilelicense($req,$res,$query);
+            // $vehicle = $vehicles->viewVehicleProfile($req,$res,$query);
             // $ownerprofile = new owner();
             // $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
 //        print_r($vehicle);
-             return $res->render("/VehicleOwner/vehicleOwnerVehicleProfile","vehicleOwner-dashboard",['result'=>$vehicle]);
+             return $res->render("/VehicleOwner/vehicleOwnerVehicleProfile","vehicleOwner-dashboard",['veh_info'=>$vehicle1,'veh_li'=>$vehicle2]);
         }
         return $res->render("Home","home");
     }

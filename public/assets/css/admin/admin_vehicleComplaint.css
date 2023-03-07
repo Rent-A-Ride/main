@@ -83,7 +83,7 @@
     text-align: center;
 }
 .complaintlist-table table th{
-    background-color: #FAB84C;
+    background-color: black;
     color: #fff;
 }
 .complaintlist-table table tbody tr:nth-child(even){

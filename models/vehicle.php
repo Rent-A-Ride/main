@@ -440,7 +440,7 @@ class vehicle extends dbModel
     }
 
     public function vehicleOwnergetVehicle($user_id){
-        return Application::$app->db->pdo->query("SELECT * FROM vehicle INNER JOIN vehicle_license ON vehicle.veh_Id=vehicle_license.vehicle_Id AND vehicle.admin_approved=1 where vehicle.user_ID=$user_id")->fetchAll(\PDO::FETCH_ASSOC);
+        return Application::$app->db->pdo->query("SELECT * FROM vehicle INNER JOIN vehicle_info ON vehicle.veh_Id=vehicle_info.veh_Id AND vehicle.admin_approved=1 where vehicle.vo_Id=$user_id")->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function getVehiclebyId($vehicle_id){
@@ -505,7 +505,7 @@ class vehicle extends dbModel
         $statement1->execute();
     }
 
-    
+
 
 
     
