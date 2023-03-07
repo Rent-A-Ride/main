@@ -505,6 +505,8 @@ class vehicle extends dbModel
         $statement1->execute();
     }
 
+    
+
 
     
 

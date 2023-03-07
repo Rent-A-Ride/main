@@ -13,3 +13,5 @@ import "./vehicleowner_disable.js"
 import "./driver_disable.js"
 import "./accept_vehicle.js"
 import "./accept_vehicleowner.js"
+import "./update_vehiclelin.js";
+import "./update_vehicleins.js"

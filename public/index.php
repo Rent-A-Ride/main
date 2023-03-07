@@ -88,6 +88,11 @@ $app->router->post("/admin/vehicle/disable", [OwnerController::class, "admin_veh
 $app->router->post("/admin/customer/disable", [OwnerController::class, "admin_customer_disable"]);
 $app->router->post("/admin/vehicleowner/disable", [OwnerController::class, "admin_vehowner_disable"]);
 $app->router->post("/admin/driver/disable", [OwnerController::class, "admin_driver_disable"]);
+
+$app->router->get("/admin/vehicle/update", [OwnerController::class, "admin_updateVehicle"]);
+$app->router->post("/admin/vehicle/update", [OwnerController::class, "admin_updateVehicle"]);
+
+$app->router->post("/admin/vehicle_ins/update", [OwnerController::class, "admin_updateins"]);
 //Hasantha
 
 $app->router->get("/selectUserType", [AuthController::class, "selectuser"]);

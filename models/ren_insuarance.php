@@ -8,7 +8,7 @@ use app\core\Request;
 use app\core\Response;
 use app\core\dbModel;
 
-class veh_insurance extends dbModel
+class ren_insuarance extends dbModel
 {
     protected string $veh_Id;
     protected string $ins_No;
@@ -159,20 +159,13 @@ class veh_insurance extends dbModel
 
 
     }
-   
-    public function updateinsuarance($body){
-        
-        $query1="UPDATE veh_insuarance SET ins_No=:ins_no, from_date=:from_date, ex_date=:ex_date, scan_copy=:scan_copy, insure_com=:ins_com, insure_type=:ins_type WHERE veh_Id=:veh_id";
-        $statement1= Application::$app->db->prepare($query1);
-        $statement1->bindValue(":ins_no",$body['ins_No']);
-        $statement1->bindValue(":from_date",$body['from_date']);
-        $statement1->bindValue(":ex_date",$body['ex_date']);
-        $statement1->bindValue(":scan_copy",$body['scan_copy']);
-        $statement1->bindValue(":ins_com",$body['ins_com']);
-        $statement1->bindValue(":ins_type",$body['ins_type']);
-        $statement1->bindValue(":veh_id",$body['veh_Id']);
-        $statement1->execute();
+
+    public function insren($vehicle_id){
+        return Application::$app->db->pdo->query("SELECT * FROM ren_insuarance INNER JOIN vehicle ON vehicle.veh_Id=$vehicle_id AND ren_insuarance.veh_Id=$vehicle_id")->fetchAll(\PDO::FETCH_ASSOC);
+
     }
+   
+    
 
     
 

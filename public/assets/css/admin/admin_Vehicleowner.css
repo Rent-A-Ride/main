@@ -91,8 +91,9 @@ select{
     border-radius: 50%;
 }
 .admin_vehicleOwnerView{
-    background: linear-gradient(300deg,#FAB84C,goldenrod);
-
+    /* background: linear-gradient(300deg,#FAB84C,goldenrod); */
+    text-align: center;
+    /* padding: 1px; */
     color: black;
     padding-right: 10px;
     border-radius: 1rem;
@@ -168,10 +169,7 @@ select{
     display: flex;
     text-align: center;
 }
-.admin_vehicleOwnerView{
-    text-align: center;
-    padding: 1px;
-}
+
 
 .Vehicleownerdetails:hover{
     transform: scale(1.02);

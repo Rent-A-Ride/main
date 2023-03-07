@@ -58,9 +58,10 @@ i {
 }
 
 .button_adminvehicle{
-    background: linear-gradient(300deg,#FAB84C,goldenrod);
+    /* background: linear-gradient(300deg,#FAB84C,goldenrod); */
 
     color: black;
+    padding-left: 10px;
     padding-right: 10px;
     border-radius: 1rem;
     cursor: pointer;

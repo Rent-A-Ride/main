@@ -15,6 +15,7 @@ class veh_license extends dbModel
     protected string $from_date;
     protected string $ex_date;
     protected string $owner;
+    protected string $scan_copy;
     protected string $admin_approved;
     
     private array $body;
@@ -33,7 +34,7 @@ class veh_license extends dbModel
 
     public function attributes(): array
     {
-       return ['veh_Id','license_No','$from_date','$ex_date','$owner','$admin_approved'];
+       return ['veh_Id','license_No','$from_date','$ex_date','$owner','scan_copy','$admin_approved'];
     }
 
     public static function primaryKey(): string
@@ -124,6 +125,22 @@ class veh_license extends dbModel
     /**
      * @return string
      */
+    public function getscan_copy(): string
+    {
+        return $this->scan_copy;
+    }
+
+    /**
+     * @param string $veh_type
+     */
+    public function setscan_copy(string $scan_copy): void
+    {
+        $this->scan_copy = $scan_copy;
+    }
+
+    /**
+     * @return string
+     */
     public function getadmin_approved(): string
     {
         return $this->admin_approved;
@@ -149,6 +166,16 @@ class veh_license extends dbModel
     public function licenseExp(){
         return Application::$app->db->pdo->query("SELECT * FROM veh_license INNER JOIN vehicle ON vehicle.veh_Id=veh_license.veh_Id INNER JOIN vehicleowner ON vehicle.vo_Id=vehicleowner.vo_ID AND vehicle.admin_approved=1")->fetchAll(\PDO::FETCH_ASSOC);
 
+    }
+
+    public function updatelicense($body){
+        $query1="UPDATE veh_license SET license_No=:lin_no, from_date=:from_date, ex_date=:ex_date WHERE veh_Id=:veh_id";
+        $statement1= Application::$app->db->prepare($query1);
+        $statement1->bindValue(":lin_no",$body['license_No']);
+        $statement1->bindValue(":from_date",$body['from_date']);
+        $statement1->bindValue(":ex_date",$body['ex_date']);
+        $statement1->bindValue(":veh_id",$body['veh_Id']);
+        $statement1->execute();
     }
     
 

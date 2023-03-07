@@ -11,6 +11,9 @@ use app\models\driver_complaint_resolve_notification;
 use app\models\drivercomplaint;
 use app\models\license_expire_notification;
 use app\models\owner;
+use app\models\ren_insuarance;
+use app\models\ren_license;
+use app\models\veh_insurance;
 use app\models\vehicle;
 use app\models\vehicle_Owner;
 use app\models\vehiclecomplaint;
@@ -338,6 +341,45 @@ class OwnerController
         }
     }
 
+    public function admin_updateVehicle(Request $req, Response $res){
+        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="owner"){
+            $ren_license = new ren_license();
+            $ren_ins=new ren_insuarance();
+
+            if ($req->isPost()){
+                $body=$req->getBody();
+                // var_dump($body);
+                // die();
+                $vehicle_lin=new veh_license();
+                $vehicle_lin->updatelicense($body);
+                $res->redirect("/admin-vehicle");
+
+
+            }
+            else{
+                $query=$req->query();
+                $reneve_license=$ren_license->licenseren((int)$query["id"]);
+                $reneve_ins=$ren_ins->insren((int)$query["id"]);
+                $ownerprofile = new owner();
+                $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
+                return $res->render('/admin/vehicleUpdate',"owner-dashboard",['ren_lin'=>$reneve_license,'ren_ins'=>$reneve_ins],['profile_img'=>$owner_img,'function'=>'Vehicle']);
+            }
+            
+        }
+    }
+
+    public function admin_updateins(Request $req, Response $res){
+        if ($req->isPost()){
+            $body=$req->getBody();
+            // var_dump($body);
+            // die();
+            $vehicle_lin=new veh_insurance();
+            $vehicle_lin->updateinsuarance($body);
+            $res->redirect("/admin-vehicle");
+
+
+        }
+    }
     
 
 
