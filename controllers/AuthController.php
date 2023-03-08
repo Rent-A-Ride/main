@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\core\Application;
 use app\core\Controller;
 use app\core\Request;
 use app\core\Response;
@@ -10,6 +11,7 @@ use app\models\RegisterModel;
 use app\core\Session;
 use app\models\adminCustomer;
 use app\models\driver;
+use app\models\LoginForm;
 use app\models\owner;
 use app\models\user;
 use app\models\users;
@@ -57,31 +59,36 @@ class AuthController extends Controller
 
         }
         else {
-            $user_id=$result->user_ID;
+            // $user_id=$result->user_ID;
+            $email = $result->email;
             
             $owner = new owner($body);
-            $result1=$owner->owner_login($user_id);
+            $result1=$owner->owner_login($email);
             
             if (is_array($result1)) {
 
                 $vehicle_owner=new vehicle_Owner($body);
-                $result2=$vehicle_owner->vehicle_Owner_login($user_id);
+                $result2=$vehicle_owner->vehicle_Owner_login($email);
                 if (is_array($result2)) {
                     $driver=new driver($body);
-                    $result3=$driver->driver_login($user_id);
+                    $result3=$driver->driver_login($email);
                     if (is_array($result3)) {
-                        // $req->session->set("authenticated",true);
-                        // $req->session->set("user_email",$result->email);
-                        // $req->session->set("user_role","adminCustomer");
+        
+                        $req->session->set("authenticated",true);
+                        $req->session->set("user_email",$result->email);
+                        $req->session->set("user_role","customer");
+                        $res->redirect('/customer');
+                       
                         // return $res->render("/adminCustomer/adminCustomer","adminCustomer-dashboard");
                 
                     }
                     else {
+                        
                         $req->session->set("user_id",$result->user_ID);
                         $req->session->set("authenticated",true);
                         $req->session->set("user_email",$result->email);
                         $req->session->set("user_role","driver");
-                        return $res->render("/driver/driver_profile","driver-dashboard");
+                        $res->redirect('../driver/driver_profile');
                     
                 }
                 

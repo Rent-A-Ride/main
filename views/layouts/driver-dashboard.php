@@ -59,6 +59,13 @@
             <span class="tooltip">Profile</span>
         </li>
         <li>
+            <a href="/driver/availability">
+                <i class='bx bx-calendar'></i>
+                <span class="links_name">Availability</span>
+            </a>
+            <span class="tooltip">Availability</span>
+        </li>
+        <li>
             <a href="/driver/requests">
                 <i class='bx bxs-user-plus' ></i>
                 <span class="links_name">Request</span>
@@ -73,11 +80,11 @@
             <span class="tooltip">Reviews</span>
         </li>
         <li>
-            <a href="#">
+            <a href="/driver/payments">
                 <i class='bx bx-wallet' ></i>
-                <span class="links_name">Payment</span>
+                <span class="links_name">Finance</span>
             </a>
-            <span class="tooltip">Payment</span>
+            <span class="tooltip">Finance</span>
         </li>
 
         <li class="/logout">
@@ -127,4 +134,35 @@
 <script src="/assets/javascript/component/navbar.js"></script>
 <script src="/assets/javascript/component/sidebar.js"></script>
 <script src="/assets/javascript/component/search.js"></script>
+<script>
+//     document.getElementById("edit-button").addEventListener("click", function(){
+//     document.getElementById("profile-photo").style.display = "block";
+//   });
+
+        const modal = document.getElementById("profileModal");
+
+        // Get the button that opens the modal
+        const btn = document.getElementById("button28");
+
+        // Get the <span> element that closes the modal
+        const span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal
+        function openModal() {
+            console.log(modal)
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+</script>
 </html>

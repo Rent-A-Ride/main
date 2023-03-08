@@ -43,6 +43,18 @@ select{
     border: solid;
 }
 
+.form-input-add a{
+    align-items: center;
+    background-color: #FAB84C;
+    width: 150px;
+    height: 100%;
+    padding: 9px;
+    border-radius: 1rem;
+    border: solid black;
+    text-decoration: none;
+    color: black;
+}
+
 .form-input-addvehicleowner a{
     align-items: center;
     background-color: #FAB84C;
@@ -92,7 +104,10 @@ select{
     border-radius: 50%;
 }
 .admin_driverView{
-    background: linear-gradient(300deg,#FAB84C,goldenrod);
+    /* background: linear-gradient(300deg,#FAB84C,goldenrod); */
+    
+    text-align: center;
+    /* padding: 1px; */
     color: black;
     padding-right: 10px;
     border-radius: 1rem;
@@ -169,10 +184,7 @@ select{
     display: flex;
     text-align: center;
 }
-.admin_driverView{
-    text-align: center;
-    padding: 1px;
-}
+
 
 .Driverdetails:hover{
     transform: scale(1.02);

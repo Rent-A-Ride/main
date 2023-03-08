@@ -12,7 +12,7 @@
     <div class="box">
         <div class="inner-box">
             <div class="forms-wrap">
-                <form action="/login" method="post" class="sign-in-form">
+                <form action="/login" method="post" autocomplete="off" class="sign-in-form">
                     <div class="logo">
                         <img src="assets/img/logo.png" alt="Logo">
                         <p>Mobility without Hassle</p>
@@ -67,7 +67,7 @@
 
             <div class="carousel">
                 <div class="slides" style="width: 100%; height: 100%; border-radius: 15px">
-                    <img style="width: 100%; height: 100%; border-radius: 15px" src="assets/img/login_img/b.jpg" alt="Image 1">
+                    <img style="width: 100%; height: 100%; border-radius: 15px" src="assets/img/rentCover.jpg" alt="Image 1">
                 </div>
 
             </div>

@@ -75,12 +75,21 @@ class VehicleController extends Controller
         return $res->render("login","main");
     }
 
-    public function viewVehicleProfile(Request $req, Response $res){
+    public function viewVehicleProfile(Request $req, Response $res,$query){
             
-            $query=$req->query(); 
+             
             $vehicleModel=new vehicle();
             $vehicles=$vehicleModel->getVehiclebyId((int)$query["id"]);
             return $vehicles;
+
+
+    }
+    public function viewVehicleProfilelicense(Request $req, Response $res,$query){
+            
+        
+        $vehicleModel=new vehicle();
+        $vehicles=$vehicleModel->getVehiclelicensebyId((int)$query["id"]);
+        return $vehicles;
 
 
     }

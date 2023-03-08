@@ -71,10 +71,11 @@
             </div> 
         </div>
     <?php if ($vehicleowner){
+            
                 foreach ($vehicleowner as $row){ ?>
          <div class="Vehicleownerdetails">
             <div class="adminvehicleOwner_img">
-                <img class="adminvehicleowner_img" src="/assests/img/user_profile/<?php echo $row['profile_img']?>" alt="" >
+                <img class="adminvehicleowner_img" src="/assests/img/user_profile/<?php echo $row['profile_pic']?>" alt="" >
             </div>
             <div class="adminvehicleOwner_name">
                 <?php echo ($row["owner_Fname"]." ".$row["owner_Lname"]); ?>
@@ -83,19 +84,19 @@
                 <?php echo ($row["owner_area"]); ?>
             </div>
             <div class="adminvehicleOwner_Novehicles">
-                <?php echo ($row["Owner_Nic"]); ?>
+                <?php echo ($row["Nic"]); ?>
             </div>
             <div class="adminvehicleowner_btn">
-                <?php $user_id=$row["user_ID"];   ?>
+                <?php $user_id=$row["vo_ID"];   ?>
                 <div>
                     <button class="admin_vehicleOwnerView" onclick="location.href='/adminViewVehicleOwner?id=<?php echo $user_id; ?>'" ><i class="fa-regular fa-eye"></i>view</button>
                 </div>
                 <div>
-                    <button class="admin_acceptvowner"><i class="fa-solid fa-check"></i></button>
+                    <button class="button_adminvehicle accept_vehicleowner" data-void='<?php echo($row['vo_ID'])?>' data-voname='<?php echo ($row["owner_Fname"]." ".$row["owner_Lname"]); ?>' ><i class="fa-regular fa-circle-check"></i> Accept</button>
                 </div>
-                <div>
+                <!-- <div>
                     <button class="admin_deletevowner"><i class="fa-solid fa-xmark"></i></button>
-                </div>
+                </div> -->
                 
             </div> 
               

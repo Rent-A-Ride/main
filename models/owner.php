@@ -56,11 +56,11 @@ class owner
         
     // }
 
-    public function owner_login($user_id)
+    public function owner_login($email)
     {
-        $sql = "SELECT * FROM owner WHERE user_ID=:user_id";
+        $sql = "SELECT * FROM owner WHERE email=:email";
         $statement = Application::$app->db->pdo->prepare($sql);
-        $statement->bindValue(':user_id',$user_id);
+        $statement->bindValue(':email',$email);
         $statement->execute();
         $owner= $statement->fetchObject();
         if(!$owner){
