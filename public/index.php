@@ -95,38 +95,9 @@ $app->router->get("/CustomerAcceptedRequest", [VehicleOwnerController::class, 'v
 $app->router->get("/CustomerRejectedRequest", [VehicleOwnerController::class, 'viewCustomerRejectedRequests']);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//// Vehicle Owner
+//$app->router->get("/vehicleOwner/Profile", [VehicleOwnerController::class, 'vehownerViewProfile']);
+//$app->router->post("/vehicleOwner/Profile", [VehicleOwnerController::class, 'vehownerViewProfile']);
 
 
 //Tharundya
@@ -145,6 +116,7 @@ $app->router->post("/Driver/Register", [AuthController::class, 'getDriverRegistr
 
 
 $app->router->get("/vehicleOwner/Profile", [VehicleOwnerController::class, 'vehownerViewProfile']);
+$app->router->post("/vehicleOwner/Profile", [VehicleOwnerController::class, 'vehownerViewProfile']);
 
 $app->router->get("/vehicleOwner/Register", [AuthController::class, 'vehOwnerRegistration']);
 $app->router->post("/vehicleOwner/Register", [AuthController::class, 'vehOwnerRegistration']);
@@ -159,6 +131,9 @@ $app->router->get("/vehicleOwner/completeAddNewVehicle", [VehicleOwnerController
 $app->router->get("/vehicleOwner/viewVehicleProfile", [VehicleOwnerController::class, 'vehownerVehicleProfile']);
 
 $app->router->get("/vehicleOwner/UpdateVehicle", [VehicleOwnerController::class, 'vehownerUpdateVehicle']);
+
+$app->router->post("/vehicleOwner/acceptBooking", [VehicleOwnerController::class, 'acceptBooking']);
+$app->router->get("/vehicleOwner/acceptBooking", [VehicleOwnerController::class, 'acceptBooking']);
 
 
 

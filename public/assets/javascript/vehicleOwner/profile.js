@@ -27,7 +27,11 @@ const span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal
 function openModal() {
-    modal.style.display = "block";
+    if (modal !== null) {
+        modal.style.display = "block";
+    } else {
+        console.log("Error: modal element not found");
+    }
 }
 
 // When the user clicks on <span> (x), close the modal

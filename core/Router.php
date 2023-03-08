@@ -36,6 +36,7 @@ class Router
         $callback = $this->routes[$method][$path] ?? false;
 
         if ($callback === false) {
+
             $this->response->setStatusCode(404);
             return $this->response->renderView('_404'); 
             
@@ -46,8 +47,8 @@ class Router
 
         if (is_array($callback)) {
             $callback[0] = new $callback[0]();
-//             Application::$app->controller = new $callback[0]();
-//             $callback[0] = Application::$app->controller;
+             Application::$app->controller = new $callback[0]();
+             $callback[0] = Application::$app->controller;
 
         }
         return call_user_func($callback, $this->request, $this->response );

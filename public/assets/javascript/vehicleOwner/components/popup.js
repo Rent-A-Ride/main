@@ -9,23 +9,13 @@ var reject = document.getElementById("reject")
 // const noButton = document.getElementById("no-button");
 
 
-function openPopup(str, btn = "") {
+function openPopup(booking_Id) {
+    accept.style.display = "block";
+    accept.dataset.booking_Id = booking_Id;
+}
 
-    if(btn == "yes") {
-        function yesBtn() {
-            console.log('this is inner');
-            str.style.display = "none";
-        }
-
-        return yesBtn();
-    } else if(btn == "no") {
-        function noBtn() {
-            str.style.display = "none";
-        }
-        return noBtn();
-    } else {
-        str.style.display = "block";
-    }
+function closePopup() {
+    accept.style.display = "none";
 }
 
 // When the user clicks the confirm button, show the popup box
@@ -45,5 +35,35 @@ function openPopup(str, btn = "") {
 // });
 
 
+function acceptBooking(booking_Id) {
+    console.log(booking_Id);
+    // Show confirmation popup dialog
+    if (confirm("Are you sure you want to accept this booking?")) {
+        // If user clicked "yes", update the booking status in the database
+        fetch('/vehicleOwner/acceptBooking', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                booking_Id: booking_Id
+            })
+        }).then(res => res.json())
+            .then(res => {
+                if (res.status) {
+                    alert("Booking accepted successfully");
+                    location.reload();
+                }
+            });
+    }
+
+    // Close the popup dialog (assuming you have a function called closePopup)
+    closePopup();
+}
+
+function displayRejectPopup() {
+    const popup = document.getElementById("reject");
+    popup.style.display = "block";
+}
 
 

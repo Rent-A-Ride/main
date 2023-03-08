@@ -264,3 +264,80 @@ th, td {
         border: 1px solid #ccc;
     }
 }
+
+/* Switching between w/o and w/ Driver */
+.pending-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.req-switch {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.req-switch input[type="radio"] {
+    display: none;
+}
+
+.req-switch label {
+    cursor: pointer;
+    margin-right: 10px;
+    padding: 5px 10px;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    background-color: #ffffff;
+}
+
+.req-switch input[type="radio"]:checked + label {
+    background-color: #9d9d9d;
+}
+
+.content {
+    width: 100%;
+}
+
+.with-driver-container {
+    display: none;
+}
+
+.without-driver-container {
+    display: block;
+}
+
+
+/* For small screens, change the display property to flex for the content */
+@media (max-width: 600px) {
+    .content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .with-driver-container, .without-driver-container {
+        display: block;
+    }
+}
+
+  /*select button*/
+.select-button {
+    border: none;
+    padding: 6px;
+    border-radius: 4px;
+    cursor: pointer;
+
+}
+.select-button {
+    background-color: #f7ba58;
+    color:black;
+}
+
+.select-button:hover {
+    background-color: #fab84c;
+
+}
+.select-button.clicked{
+    background-color: #fab84c;
+
+}

@@ -1,5 +1,5 @@
 <?php
-
+use app\core\Application;
 ?>
 
 <!DOCTYPE html>
@@ -108,7 +108,7 @@
             <li class="list-item 2"><a href="#">Register</a></li>       -->
             <div class="vision"><p>Mobility Without Hassel</p> </div>
             <div class="profile-cont">
-                <span class="profile-name">Kalana</span>
+                <span class="profile-name">Buddhi Yapa</span>
                 <div class="img-cont"><img src="img/profile.png" class="profile-image"></div>
             </div>
 
@@ -119,6 +119,11 @@
             <div class="bar3"></div>
         </div>
     </nav>
+<!--    --><?php //if (Application::$app->session->getFlash('profileUpdate')):?>
+<!--        <div class="flash-message success">-->
+<!--            --><?php //= Application::$app->session->getFlash('profileUpdate') ?>
+<!--        </div>-->
+<!--    --><?php //endif; ?>
 
     <div class="dashboardRest">
         {{content}}
@@ -137,5 +142,6 @@
 <script src="/assets/javascript/adminaddVehicle.js"></script>
 <script src="/assets/javascript/vehicleOwner/dateValidation/datevalidation.js"></script>
 <script src="/assets/javascript/vehicleOwner/components/popup.js"></script>
+<script src="/assets/javascript/vehicleOwner/components/CustomerReq.js"></script>
 <script src="/assets/javascript/vehicleOwner/profile.js"></script>
 </html>

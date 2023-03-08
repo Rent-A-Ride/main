@@ -34,12 +34,10 @@
     border-radius: 5px;
     cursor: pointer;
     margin-right: 10px;
-    margin-left: 20px;
 }
 
 #no-button {
-    background-color: #f44336;
-    margin-left: 40px;
+    background-color: #444343;
 }
 
 #confirm-button {

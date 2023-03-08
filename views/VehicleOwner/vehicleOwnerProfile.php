@@ -1,7 +1,10 @@
 <?php
-// dump a value with <pre> tags
+use app\core\Application;
 ?>
 <h2 class="page-name">Profile</h2>
+
+
+
 
 <!--<div class="profile-container">-->
 <!---->
@@ -50,7 +53,7 @@
 <!--    </div>-->
 <!---->
 
-
+<!--New Profile of Vehicle Owner-->
 <div class="profile-wrapper">
     <div class="left">
         <!--        <img src="assets/img/profile.png"-->
@@ -104,7 +107,7 @@
                 </div>
                 <div class="data">
                     <h6>Address</h6>
-                    <p><?php echo $vehicleowner[0]["owner_area"] ?></p>
+                    <p><?php echo $vehicleowner[0]["owner_address"] ?></p>
                 </div>
                 <div class="data">
                     <h6>License Number</h6>
@@ -118,3 +121,38 @@
         </div>
     </div>
 </div>
+
+<div id="profileModal" class="profileModal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <form method="post" class="up-profile">
+            <label for="nic">NIC:</label>
+            <input disabled value="<?= $vehicleowner[0]["Owner_Nic"] ?>" type="text" id="nic" name="Owner_Nic">
+
+            <label for="fname">First Name:</label>
+            <input value="<?= $vehicleowner[0]["owner_Fname"] ?>" type="text" id="fname" name="owner_Fname">
+
+            <label for="lname">Last Name:</label>
+            <input value="<?= $vehicleowner[0]["owner_Lname"] ?>" type="text" id="lname" name="owner_Lname">
+
+            <label for="email">Email:</label>
+            <input disabled value="<?= $vehicleowner[0]["email"] ?>" type="email" id="email" name="email">
+
+            <label for="phone">Phone Number:</label>
+            <input value="<?= $vehicleowner[0]["phone_No"] ?>" type="tel" id="phone" name="phone_No">
+
+            <label for="address">Address:</label>
+            <textarea id="address" name="owner_address"><?=$vehicleowner[0]["owner_address"]?></textarea>
+
+            <label for="licenseNo">License No:</label>
+            <textarea id="address" name="license_No"><?=$vehicleowner[0]["license_No"]?></textarea>
+
+            <div class="errors">
+                <span class="form-error"></span>
+            </div>
+
+            <input type="submit" value="Save Changes">
+        </form>
+    </div>
+</div>
+

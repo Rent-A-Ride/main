@@ -30,7 +30,7 @@ class Response
 
     protected function layoutContent()
     {
-//        $layout = Application::$app->layout;
+        $layout = Application::$app->layout;
         if (Application::$app->controller){
             $layout = Application::$app->controller->layout;
         }

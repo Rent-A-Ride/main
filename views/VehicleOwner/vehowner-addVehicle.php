@@ -134,12 +134,12 @@ $isPasswordError = $hasErrors && isset($errors['insure']);
 
                     <div class="input-field">
                         <label>The License valid from:</label>
-                        <input  placeholder="Enter The License valid from date" name="license_from" id="TxtFrom"/>
+                        <input type="date"  placeholder="Enter The License valid from date" name="license_from" id="from-date-1"/>
                     </div>
 
                     <div class="input-field">
                         <label>To:</label>
-                        <input  placeholder="Enter The License valid to date" name="license_to" id="TxtTo"/>
+                        <input type="date"  placeholder="Enter The License valid to date" name="license_to" id="to-date-1"/>
                     </div>
 
                     <div class="input-field">
@@ -186,12 +186,12 @@ $isPasswordError = $hasErrors && isset($errors['insure']);
 
                     <div class="input-field">
                         <label>The Insurance valid from:</label>
-                        <input  placeholder="Enter The Insurance valid from date" name="ins_from" id="TxtFrom1"/>
+                        <input type="date"  placeholder="Enter The Insurance valid from date" name="ins_from" id="from-date-2"/>
                     </div>
 
                     <div class="input-field">
                         <label>To:</label>
-                        <input  placeholder="Enter The Insurance valid to date" name="ins_to" id="TxtTo1" />
+                        <input type="date" placeholder="Enter The Insurance valid to date" name="ins_to" id="to-date-2" />
                     </div>
 
                     <div class="input-field">

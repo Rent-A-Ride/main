@@ -2,12 +2,13 @@
 
 namespace app\controllers;
 
+use app\core\Controller;
 use app\core\Request;
 use app\core\Response;
 use app\models\vehicle;
 
 
-class VehicleController
+class VehicleController extends Controller
 {
 
     public function add_VehiclePage(Request $req, Response $res){

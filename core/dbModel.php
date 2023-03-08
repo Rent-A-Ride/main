@@ -28,7 +28,37 @@ abstract class dbModel extends Model
 
     }
 
-    public function findOne($where)
+    public function update($id, $Include=[], $Exclude = []): bool
+    {
+        $tableName = static::tableName();
+        $attributes = $this->attributes();
+        $params = array_map(fn($attr) => ":$attr", $attributes);
+
+        $demo = 'UPDATE ' . $tableName . ' SET ';
+        if (!empty($Include)) :
+            foreach ($Include as $attribute) {
+                $demo .= $attribute . '="' . $this->{$attribute} . '", ';
+            }
+        else :
+            foreach ($attributes as $attribute) {
+                if ($attribute == static::PrimaryKey()) {
+                    continue;
+                }
+                if (in_array($attribute, $Exclude)) {
+                    continue;
+                }
+                $demo .= $attribute . '="' . $this->{$attribute} . '", ';
+            }
+        endif;
+        $demo=substr($demo,0,-2);
+        $demo.=' WHERE '.static::PrimaryKey().'="'.$id.'"';
+        $statement=self::prepare($demo);
+        $statement->execute();
+        return true;
+
+    }
+
+    public static function findOne($where)
     {
         $tableName = static::tableName();
         $attributes = array_keys($where);

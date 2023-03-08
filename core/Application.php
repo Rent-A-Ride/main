@@ -2,18 +2,20 @@
 
 namespace app\core;
 
+use app\models\vehicle_Owner;
+
 class Application
 {
     public static string $ROOT_DIR;
+    public string $layout = 'vehicleOwner-dashboard';
+
     public Router $router;
     public Request $request;
     public Response $response;
     public Database $db;
     public Session $session;
-    public Controller $controller;
-
-    public string $layout = 'vehicleOwner-dashboard.php';
-    
+    public ?Controller $controller = null;
+    public ?dbModel $vehicleOwner;
 
     public static Application $app;
     
@@ -40,9 +42,9 @@ class Application
         self::$app = $this;
         $this->request = new Request();
         $this->response = new Response();
-        // $this->session = new Session();
+//         $this->session = new Session();
         $this->router = new Router($this->request,$this->response);
-        $this->db = new Database($config['db']); 
+        $this->db = new Database($config['db']);
 
     }
 

@@ -48,6 +48,7 @@ use app\models\viewCustomerReq;
                 <tbody>
                 <?php
                 foreach ($model as $row):
+                if ($row->getStatus() == 2 && $row->getDriverReq() == 0):
                     ?>
                     <tr>
                         <td><?php echo $row->getBookingId() ?></td>
@@ -68,6 +69,7 @@ use app\models\viewCustomerReq;
                         <!--                            </div></td>-->
                     </tr>
                 <?php
+                endif;
                 endforeach;
                 ?>
 
