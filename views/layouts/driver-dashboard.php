@@ -82,9 +82,9 @@
         <li>
             <a href="/driver/payments">
                 <i class='bx bx-wallet' ></i>
-                <span class="links_name">Payment</span>
+                <span class="links_name">Finance</span>
             </a>
-            <span class="tooltip">Payment</span>
+            <span class="tooltip">Finance</span>
         </li>
 
         <li class="/logout">

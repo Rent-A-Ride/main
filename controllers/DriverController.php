@@ -13,19 +13,15 @@ class DriverController extends Controller
     public function driverViewReview(Request $req, Response $res){
         if($req->session->get('authenticated')==true && $req->session->get('user_role')=="driver")
         {   
-            // $user_id=$req->session->get('user_Id');
-            // $driver = new driver();
-            // $driver_review = $driver->getreviews($user_Id);
-            // var_dump($driver_review);
-            // $this->setLayout('driver-dashboard');
-            // return $this->render("driver_reviews",);
-            return $res->render("/driver/driver_reviews","driver-dashboard");
+            $driverModel=new driver();
+
+            $driver_reviews=$driverModel->getReviews($req->session->get('user_id'));            
+           return $res->render("/driver/driver_reviews","driver-dashboard", ['driver'=>$driver_reviews]);
         }
         return $res->redirect("/");
-
-        
        
     }
+
 
     public function driverViewProfile(Request $req, Response $res){
         
@@ -33,11 +29,27 @@ class DriverController extends Controller
         {   
             $driverModel=new driver();
 
-            $driver_profile=$driverModel->getDriverbyId($req->session->get('user_id'));            
-           return $res->render("/driver/driver_profile","driver-dashboard", ['driver'=>$driver_profile]);
+            $driver_profile=$driverModel->getDriverbyId($req->session->get('user_id')); 
+
+            $Reviews=$driverModel->avgReviews($req->session->get('user_id'));
+
+            $Remainder= $Reviews['Average']*100- ceil($Reviews['Average'])*100;
+
+            if($Remainder<50){
+                $Reviews['Average'] =floor($Reviews['Average']);
+            }else{
+                $Reviews['Average']=floor($Reviews['Average']) + 0.5;
+            }
+
+            return $res->render("/driver/driver_profile","driver-dashboard", ['driver'=>$driver_profile,'reviews'=>$Reviews['Average']]);
+
+            
         }
         return $res->redirect("/");
     }
+
+
+    
 
     public function driverViewRequests(Request $req, Response $res){
         $driverModel=new driver();
@@ -65,6 +77,62 @@ class DriverController extends Controller
         }
         return $res->redirect("/");
     }
+
+    public function driverViewAcceptRequests(Request $req, Response $res){
+        $driverModel=new driver();
+        
+        if($req->isPost()){
+            if(!empty($_POST)){
+                $action=$_POST['action'];
+                if($action==='Accept'){
+    
+                    $driverModel->acceptRequests($_POST['res_id']);
+
+                }else if($action==='Reject'){
+                    $driverModel->rejectRequests($_POST['res_id']);
+                }
+            }
+        }
+        
+        
+        if($req->session->get('authenticated')==true && $req->session->get('user_role')=="driver")
+        {   
+           
+           $driver_request=$driverModel->getrequest($req->session->get('user_id')); 
+           
+           return $res->render("/driver/driver_AcceptedRequest","driver-dashboard",['driver'=>$driver_request]);
+        }
+        return $res->redirect("/");
+    }
+
+    public function driverViewRejectRequests(Request $req, Response $res){
+        $driverModel=new driver();
+        
+        if($req->isPost()){
+            if(!empty($_POST)){
+                $action=$_POST['action'];
+                if($action==='Accept'){
+    
+                    $driverModel->acceptRequests($_POST['res_id']);
+
+                }else if($action==='Reject'){
+                    $driverModel->rejectRequests($_POST['res_id']);
+                }
+            }
+        }
+        
+        
+        if($req->session->get('authenticated')==true && $req->session->get('user_role')=="driver")
+        {   
+           
+           $driver_request=$driverModel->getrequest($req->session->get('user_id')); 
+           
+           return $res->render("/driver/driver_RejectedRequests","driver-dashboard",['driver'=>$driver_request]);
+        }
+        return $res->redirect("/");
+    }
+
+
     public function viewDriverProfile(Request $req, Response $res){
             
         $query=$req->query(); 
@@ -89,13 +157,13 @@ class DriverController extends Controller
         
         if($req->session->get('authenticated')==true && $req->session->get('user_role')=="driver")
         {   
-            
-           return $res->render("/driver/driver_payment","driver-dashboard");
+            $driverModel=new driver();
+
+            $driver_invoice=$driverModel->getPayments($req->session->get('user_id'));            
+           return $res->render("/driver/driver_payment","driver-dashboard", ['driver'=>$driver_invoice]);
         }
         return $res->redirect("/");
     }
-
-    
 }
 
 

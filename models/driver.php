@@ -97,18 +97,27 @@ class driver
 
     }
 
+    public function update_driver($user_id){
+        return Application::$app->db->pdo->query("UPDATE driver SET ")->fetchAll(\PDO::FETCH_ASSOC);
+
+    }
+
     public function getrequest($user_id){
-        var_dump($user_id);
+        // var_dump($user_id);
         return Application::$app->db->pdo->query("SELECT * FROM driver_requests INNER JOIN users WHERE driver_requests.user_ID=$user_id AND users.user_ID=$user_id ORDER BY reservation_id DESC")->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    // public function getreviews($user_id){
-    //     return Application::$app->db->pdo->query("SELECT * FROM driver_reviews where driver.Id=$user_Id")->fetchAll(\PDO::FETCH_ASSOC);
-    // }
+    public function getReviews($user_id){
+        return Application::$app->db->pdo->query("SELECT * FROM drivers_reviews INNER JOIN users WHERE drivers_reviews.user_ID=$user_id AND users.user_ID=$user_id ORDER BY reservation_id DESC")->fetchAll(\PDO::FETCH_ASSOC);
+    }
 
+    public function avgReviews($user_id){
+        return Application::$app->db->pdo->query("SELECT AVG(points) as Average FROM drivers_reviews WHERE drivers_reviews.user_ID=$user_id")->fetch(\PDO::FETCH_ASSOC);
+    }
 
+    public function getPayments($user_id){
+        return Application::$app->db->pdo->query("SELECT * FROM drivers_invoice INNER JOIN users WHERE drivers_invoice.user_ID=$user_id AND users.user_ID=$user_id ORDER BY invoice_no DESC")->fetchAll(\PDO::FETCH_ASSOC);
+    }
     
-
-
 
 }

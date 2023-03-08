@@ -1,32 +1,47 @@
-<div class="container">
-        <div class="head-topic">
+<div class="review-container">
+        <div class="review-head-topic">
             <h2 class="topic"><center>Reviews</center></h2>
         </div>
-        <div class="show-req">
-            <table>
+        <div class="show-rew">
+            <table class="rew-show">
+                <thead>
                 <tr>
-                  <th>No</th>
+                  <th>Reservation ID</th>
                   <th>Customer Name</th>
-                  <th>Contact Number</th>
-                  <th>Review</th>
+                  <th>Comment</th>
+                  <th>Stars</th>
                 </tr>
+                </thead>
 
+                
+                <?php
+              
+
+              if ($driver){
+                  foreach ($driver as $row){
+
+//                       print_r($row);
+            ?>
+                <tboady>
                 <tr>
-                    <td>1</td>
-                    <td></td>
-                    <td>0780000000</td>
-                    <td>**</td>
+                    <td><?php echo $row["reservation_id"] ?></td>
+                    <td><?php echo $row["Customer_name"] ?></td>
+                    <td><?php echo $row["comment"] ?></td>
+                    <td><?php echo $row["points"] ?></td>
 
                 </tr>
+                </tboady>
 
-                <tr>
-                    <td>1</td>
-                    <td>Pabasara Perera</td>
-                    <td>0780000000</td>
-                    <td>**</td>
+              <?php
+                  }
+                ?>
 
-                </tr>
-               
               </table>
+            
+
         </div>
-    </div>
+</div>
+
+<?php
+    }
+?>

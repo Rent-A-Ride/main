@@ -48,14 +48,25 @@
                 <div>
                     
                     <div>Customer Reviews</div>
-                    
-                    <div class="star-rating">
-                        <i class="bx bx-star"></i>
-                        <i class="bx bx-star"></i>
-                        <i class="bx bx-star"></i>
-                        <i class="bx bx-star"></i>
-                        <i class="bx bx-star"></i>
-                    </div>
+
+                        <div class="star-rating">
+                            <?php
+                                $stars=floor($reviews);
+                                $remainder=$reviews * 100 - $stars*100;
+                                for($i=0;$i<$stars;$i++):
+                            ?>
+                            <!-- <i class="fa-regular fa-star"></i> -->
+                            <img class="strs-rev" src ='/assets/img/driver/fullStar.png'>
+                            <?php
+                            endfor;
+                            if($remainder===50):
+                                echo ("<img src ='/assets/img/driver/halfStar.png' >");
+                            endif;
+
+                            echo($stars. "." .$remainder);
+                            
+                            ?>
+                        </div>
 
                 </div>
                 <!-- <img src="./review.webp"> -->
@@ -75,7 +86,7 @@
 <div id="profileModal" class="profileModal">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
-        <form class="up-profile">
+        <form class="up-profile" id="edit-profile-form" action="profile_controller.php?action=edit_profile" method="post">
             <label for="nic">NIC:</label>
             <input disabled value="<?php echo $driver[0]["Driver_Nic"] ?>" type="text" id="nic" name="nic">
 

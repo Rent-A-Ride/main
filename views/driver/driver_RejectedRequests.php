@@ -1,14 +1,14 @@
 
- <?php
+<?php
 
 ?>
 <section class="requests">
 
     <div class="topnav">
 
-        <a id="active" href="/driver/requests">Pending Requests</a>
+        <a  href="/driver/requests">Pending Requests</a>
         <a href="/driver/driver_AcceptedRequest">Accepted Requests</a>
-        <a href="/driver/driver_RejectedRequests">Rejected Requests</a>
+        <a id="active" href="/driver/driver_RejectedRequests">Rejected Requests</a>
 
 
     </div>
@@ -37,7 +37,7 @@
 
               if ($driver):
                   foreach ($driver as $row):
-                    if($row["accept"]==0):
+                    if($row["accept"]==2):
 
 //                       print_r($row);
             ?>

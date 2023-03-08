@@ -1,13 +1,13 @@
 
  <?php
-
+    // use app\models\viewCustomerReq;
 ?>
 <section class="requests">
 
     <div class="topnav">
 
-        <a id="active" href="/driver/requests">Pending Requests</a>
-        <a href="/driver/driver_AcceptedRequest">Accepted Requests</a>
+        <a href="/driver/requests">Pending Requests</a>
+        <a id="active" href="/driver/driver_AcceptedRequest">Accepted Requests</a>
         <a href="/driver/driver_RejectedRequests">Rejected Requests</a>
 
 
@@ -37,7 +37,7 @@
 
               if ($driver):
                   foreach ($driver as $row):
-                    if($row["accept"]==0):
+                    if($row["accept"]==1):
 
 //                       print_r($row);
             ?>
