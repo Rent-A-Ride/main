@@ -71,10 +71,11 @@
             </div> 
         </div>
     <?php if ($vehicleowner){
+        
                 foreach ($vehicleowner as $row){ ?>
          <div class="Vehicleownerdetails">
             <div class="adminvehicleOwner_img">
-                <img class="adminvehicleowner_img" src="/assets/img/user_profile/<?php echo $row['profile_img']?>" alt="" >
+                <img class="adminvehicleowner_img" src="/assets/img/user_profile/<?php echo $row['profile_pic']?>" alt="" >
             </div>
             <div class="adminvehicleOwner_name">
                 <?php echo ($row["owner_Fname"]." ".$row["owner_Lname"]); ?>
@@ -86,12 +87,12 @@
 
             </div>
             <div class="adminvehicleowner_btn">
-                <?php $user_id=$row["user_ID"];   ?>
+                <?php $user_id=$row["vo_ID"];   ?>
                 <div>
                     <button class="admin_vehicleOwnerView" onclick="location.href='/adminViewVehicleOwner?id=<?php echo $user_id; ?>'" ><i class="fa-regular fa-eye"></i>view</button>
                 </div>
                 <div>
-                    <button class="admin_vehicleOwnerView"><i class="fa-solid fa-trash-can"></i>Delete</button>
+                    <button class="admin_vehicleOwnerView disable_vehicleowner" data-void='<?php echo($row['vo_ID'])?>' data-voname='<?php echo ($row["owner_Fname"]." ".$row["owner_Lname"]); ?>'><i class="fa-solid fa-trash-can"></i>Delete</button>
                 </div>
                 
             </div> 

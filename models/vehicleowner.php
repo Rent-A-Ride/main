@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\core\Application;
 use app\core\dbModel;
 use app\core\Model;
 
@@ -27,12 +28,12 @@ class vehicleowner extends dbModel
 
 
 
-    public function tableName(): string
+    public static function tableName(): string
     {
         return 'users';
     }
 
-    public function primaryKey():string
+    public static function primaryKey():string
     {
         return 'id';
     }
@@ -72,5 +73,23 @@ class vehicleowner extends dbModel
     public function attributes(): array
     {
         return ['Owner_Nic', 'user_ID', 'owner_Fname', 'owner_Lname', 'owner_area', 'owner_address', 'phone_No','email','gender','admin_approved'];
+    }
+
+    public  function admindisablevehowner($vo_id){
+        $availability=0;
+        // var_dump($vehicle_id);
+        $query1="UPDATE vehicleowner SET admin_approved =:availability WHERE vo_ID=$vo_id";
+        $statement1= Application::$app->db->prepare($query1);
+        $statement1->bindValue(":availability",$availability);
+        $statement1->execute();
+    }
+
+    public  function adminacceptvehowner($vo_id){
+        $availability=1;
+        // var_dump($vehicle_id);
+        $query1="UPDATE vehicleowner SET admin_approved =:availability WHERE vo_ID=$vo_id";
+        $statement1= Application::$app->db->prepare($query1);
+        $statement1->bindValue(":availability",$availability);
+        $statement1->execute();
     }
 }

@@ -22,7 +22,7 @@
 
                         <div>
                             <label for="email">Email:</label>
-                            <input type="text" id="email" name="email" value="<?php echo $driver[0]["driver_email"] ?>" readonly>        
+                            <input type="text" id="email" name="email" value="<?php echo $driver[0]["email"] ?>" readonly>        
                         </div>
 
                         <div>
@@ -97,7 +97,7 @@
             <input value="<?php echo $driver[0]["driver_Lname"] ?>" type="text" id="lname" name="lastname">
 
             <label for="email">Email:</label>
-            <input disabled value="<?php echo $driver[0]["driver_email"] ?>" type="email" id="email" name="email">
+            <input disabled value="<?php echo $driver[0]["email"] ?>" type="email" id="email" name="email">
 
             <label for="phone">Phone Number:</label>
             <input value="<?php echo $driver[0]["phone_No"] ?>" type="tel" id="phone" name="phone">

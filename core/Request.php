@@ -9,6 +9,7 @@ class Request extends Controller
     public function __construct()
     {
         $this->session = new Session();
+        Application::$app->session=$this->session;
     }
 
     public function getPath()

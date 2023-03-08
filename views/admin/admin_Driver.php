@@ -71,27 +71,28 @@
             </div> 
         </div>
     <?php if ($driver){
+      
                 foreach ($driver as $row){ ?>
          <div class="Driverdetails">
             <div class="admindriver_img">
-                <img class="adminDriver_img" src="/assets/img/user_profile/<?php echo $row['profile_img']?>" alt="" >
+                <img class="adminDriver_img" src="/assets/img/user_profile/<?php echo $row['profile_pic']?>" alt="" >
             </div>
             <div class="admindriver_name">
                 <?php echo ($row["driver_Fname"]." ".$row["driver_Lname"]); ?>
             </div>
             <div class="admindriver_location">
-                <?php echo ($row["driver_area"]); ?>
+                <?php echo ($row["area"]); ?>
             </div>
             <div class="admindriver_Novehicles">
 
             </div>
             <div class="admindriver_btn">
                 <div>
-                    <?php $user_id=$row["user_ID"];   ?>
+                    <?php $user_id=$row["driver_ID"];   ?>
                     <button class="admin_driverView" onclick="location.href='/admin/driver/driverProfile?id=<?php echo $user_id; ?>'" ><i class="fa-regular fa-eye"></i>view</button>
                 </div>
                 <div>
-                    <button class="admin_driverView"><i class="fa-solid fa-trash-can"></i>Delete</button>
+                    <button class="admin_driverView disable_driver" data-driverid='<?php echo($row['driver_ID'])?>' data-drivername='<?php echo ($row["driver_Fname"]." ".$row["driver_Lname"]); ?>'><i class="fa-solid fa-trash-can"></i>Delete</button>
                 </div>
                 
             </div> 
