@@ -113,6 +113,8 @@ body {
     /* background: lightgray; */
     padding-top: 100px;
     background-color:lightgrey;
+    align-items: center;
+    text-align: center;
 }
 
 .active{

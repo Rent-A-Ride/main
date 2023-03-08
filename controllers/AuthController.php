@@ -88,7 +88,7 @@ class AuthController extends Controller
                         $req->session->set("authenticated",true);
                         $req->session->set("user_email",$result->email);
                         $req->session->set("user_role","driver");
-                        return $res->render("/driver/driver_profile","driver-dashboard");
+                        $res->redirect('../driver/driver_profile');
                     
                 }
                 

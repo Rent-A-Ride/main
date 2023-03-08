@@ -20,9 +20,24 @@
         </div>
     </div>
 
+<<<<<<< HEAD
+                    </div>
+                    
+                </div>
+                <div class="vehicleProfileImageimg">
+                    <img src="/assets/img/Vehicle_img/<?php echo($result[0]["image"]); ?>" alt="" class="vehicle_profileProfile">
+                    <div class="icons">
+                        <i class="fa-regular fa-user"></i>
+                        <span><?php echo($result[0]["capacity"]); ?></span>
+                        <i class="fa-solid fa-sliders"></i>
+                        <span><?php echo($result[0]["veh_transmition"]); ?></span>
+                        <i class="fa-solid fa-gas-pump"></i>
+                        <span><?php echo($result[0]["fuel_type"]); ?></span>
+=======
 </div>
 <div class="ownerProfile_rest"></div> -->
 
+>>>>>>> 56414bcd1d4147a7006689d173b7108d0f41941c
 
 <div class="vehicle-card">
     <h2 class="vehicle-name"><?php echo($veh_info[0]['veh_brand'].' '.$veh_info[0]['veh_model'])?><span style="color:#FAB84C ;"> •<?php echo($veh_info[0]['owner_Fname'].' '.$veh_info[0]['owner_Lname'])?> </span></h2>
