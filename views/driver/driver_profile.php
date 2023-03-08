@@ -9,7 +9,7 @@
                 
             </div>
             <div>
-                <form class="driver-list">
+          <form class="driver-list">
                         <div>
                             <label for="name">Name:</label>
                             <input type="text" id="name" name="name" value="<?php echo $driver[0]["driver_Fname"] ?>  <?php echo $driver[0]["driver_Lname"] ?>" readonly>
