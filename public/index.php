@@ -100,40 +100,19 @@ $app->router->get("/selectUserType", [AuthController::class, "selectuser"]);
 $app->router->get("/Customer/Register", [AuthController::class, 'cusRegister']);
 $app->router->post("/Customer/Register", [AuthController::class, 'cusRegister']);
 
-$app->router->get("/customer", [CustomerController::class, 'home']);
+// view customer Pending requests
+$app->router->get("/CustomerPendingRequest", [VehicleOwnerController::class, 'viewCustomerPendingRequests']);
+
+// view customer Accepted requests
+$app->router->get("/CustomerAcceptedRequest", [VehicleOwnerController::class, 'viewCustomerAcceptedRequests']);
+
+// view customer Rejected requests
+$app->router->get("/CustomerRejectedRequest", [VehicleOwnerController::class, 'viewCustomerRejectedRequests']);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//// Vehicle Owner
+//$app->router->get("/vehicleOwner/Profile", [VehicleOwnerController::class, 'vehownerViewProfile']);
+//$app->router->post("/vehicleOwner/Profile", [VehicleOwnerController::class, 'vehownerViewProfile']);
 
 
 //Tharundya
@@ -159,6 +138,7 @@ $app->router->post("/Driver/Register", [AuthController::class, 'getDriverRegistr
 
 
 $app->router->get("/vehicleOwner/Profile", [VehicleOwnerController::class, 'vehownerViewProfile']);
+$app->router->post("/vehicleOwner/Profile", [VehicleOwnerController::class, 'vehownerViewProfile']);
 
 $app->router->get("/vehicleOwner/Register", [AuthController::class, 'vehOwnerRegistration']);
 $app->router->post("/vehicleOwner/Register", [AuthController::class, 'vehOwnerRegistration']);
@@ -173,6 +153,9 @@ $app->router->get("/vehicleOwner/completeAddNewVehicle", [VehicleOwnerController
 $app->router->get("/vehicleOwner/viewVehicleProfile", [VehicleOwnerController::class, 'vehownerVehicleProfile']);
 
 $app->router->get("/vehicleOwner/UpdateVehicle", [VehicleOwnerController::class, 'vehownerUpdateVehicle']);
+
+$app->router->post("/vehicleOwner/acceptBooking", [VehicleOwnerController::class, 'acceptBooking']);
+
 
 
 

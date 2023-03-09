@@ -98,7 +98,11 @@ class AuthController extends Controller
                     $req->session->set("authenticated",true);
                     $req->session->set("user_email",$result->email);
                     $req->session->set("user_role","vehicleowner");
-                    return $res->render("/VehicleOwner/vehicleOwnerProfile","vehicleOwner-dashboard");
+                    $vehicle_owner=new vehicle_Owner();
+                    $veh = $vehicle_owner->Vehicleowner_profile($req->session->get("user_id"));
+                    return $res->render("/VehicleOwner/vehicleOwnerProfile","vehicleOwner-dashboard",['vehicleowner'=>$veh]);
+//                    $res->redirect("/vehicleOwner/Profile");
+//                    return ;
                     
                 }
 

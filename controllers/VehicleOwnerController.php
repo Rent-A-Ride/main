@@ -2,12 +2,15 @@
 
 namespace app\controllers;
 
+use app\core\Application;
+use app\core\Controller;
 use app\core\Request;
 use app\core\Response;
 use app\models\owner;
 use app\models\vehicle_Owner;
+use app\models\viewCustomerReq;
 
-class VehicleOwnerController
+class VehicleOwnerController extends Controller
 {
 
     // public function VehicleOwnerProfile(Request $req, Response $res){
@@ -35,8 +38,33 @@ class VehicleOwnerController
     }
     public function vehownerViewProfile(Request $req,Response $res){
 
-        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="vehicleowner"){
-            return $res->render("VehicleOwner/vehicleOwnerProfile","vehicleOwner-dashboard");
+        if ($req->session->get("authenticated") && $req->session->get("user_role")==="vehicleowner"){
+
+            $vehowner = new vehicle_Owner();
+            $vehicleowner=$vehowner->Vehicleowner_profile($req->session->get("user_id"));
+            $id = $req->session->get("user_id");
+            $nic = $vehicleowner[0]['Nic'];
+
+            if ($req->isPost()){
+                $vehicleowner =[new vehicle_Owner()];
+                $vehicleowner[0]->loadData($req->getBody());
+
+                if ($vehicleowner[0]->update($nic,['owner_Fname','owner_Lname', 'phone_No', 'owner_address', 'license_No'])){                 $req->session->setFlash('profileUpdate', 'Profile Updated Successfully!');
+                    $res->redirect('/vehicleOwner/Profile');
+                    return;
+                }else{
+                    echo '<pre>';
+                    var_dump("fail");
+                    echo '</pre>';
+                    exit();
+                }
+//                $req->setFlash('profileUpdateErr', 'There was some error in updating your profile!');
+                return $res->render("VehicleOwner/vehicleOwnerProfile","vehicleOwner-dashboard",['vehicleowner'=>$vehicleowner]);
+
+            }
+
+
+            return $res->render("VehicleOwner/vehicleOwnerProfile","vehicleOwner-dashboard",['vehicleowner'=>$vehicleowner]);
         }
     }
 
@@ -63,14 +91,11 @@ class VehicleOwnerController
              
             $vehicles = new VehicleController();
             $vehicle=[];
-            $query=$query=$req->query();
-            $vehicle1 = $vehicles->viewVehicleProfile($req,$res,$query);
-            $vehicle2=$vehicles->viewVehicleProfilelicense($req,$res,$query);
-            // $vehicle = $vehicles->viewVehicleProfile($req,$res,$query);
+            $vehicle = $vehicles->viewVehicleProfile($req,$res);
             // $ownerprofile = new owner();
             // $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
 //        print_r($vehicle);
-             return $res->render("/VehicleOwner/vehicleOwnerVehicleProfile","vehicleOwner-dashboard",['veh_info'=>$vehicle1,'veh_li'=>$vehicle2]);
+             return $res->render("/VehicleOwner/vehicleOwnerVehicleProfile","vehicleOwner-dashboard",['result'=>$vehicle]);
         }
         return $res->render("Home","home");
     }
@@ -89,6 +114,56 @@ class VehicleOwnerController
         return $res->render("Home","home");
     }
 
+    public function viewCustomerPendingRequests(Request $request, Response $response): string
+    {
+        $cusReq = viewCustomerReq::retrieveAll();
+
+        $params = [
+            "model" => $cusReq
+        ];
+        return $response->render("/VehicleOwner/vehicleOwnerPendingCustomerReq", "vehicleOwner-dashboard", $params);
+    }
+
+    public function viewCustomerAcceptedRequests(Request $request, Response $response): string
+    {
+        $cusReq = viewCustomerReq::retrieveAll();
+
+        $params = [
+            "model" => $cusReq
+        ];
+        return $response->render("/VehicleOwner/vehicleOwnerAcceptedReq", "vehicleOwner-dashboard", $params);
+    }
+
+    public function viewCustomerRejectedRequests(Request $request, Response $response): string
+    {
+        $cusReq = viewCustomerReq::retrieveAll();
+
+        $params = [
+            "model" => $cusReq
+        ];
+        return $response->render("/VehicleOwner/vehicleOwnerRejectedReq", "vehicleOwner-dashboard", $params);
+    }
+
+    public function acceptBooking(Request $request, Response $response): string
+    {
+        // Retrieve the booking ID from the request
+        $bookingId = $request->getBody()['booking_Id'];
+
+
+        // Update the booking status in the database
+        $booking = viewCustomerReq::findOne($bookingId);
+
+        $booking->setStatus(1);
+        $result = $booking->update($bookingId, ['status']);
+
+        // Return a JSON response indicating success or failure
+        if ($result) {
+            $response->redirect('/CustomerAcceptedRequest');
+            return json_encode(['status'=>true]);
+        } else {
+            return $response->withJson(['status' => 'error']);
+        }
+    }
 
 
 

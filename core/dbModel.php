@@ -2,9 +2,6 @@
 
 namespace app\core;
 
-use app\models\Customer;
-use app\models\vehicle_complaint_resolve_notification;
-
 abstract class dbModel extends Model
 {
     abstract public static function tableName(): string;
@@ -43,15 +40,15 @@ abstract class dbModel extends Model
                 $demo .= $attribute . '="' . $this->{$attribute} . '", ';
             }
         else :
-        foreach ($attributes as $attribute) {
-            if ($attribute == static::PrimaryKey()) {
-                continue;
+            foreach ($attributes as $attribute) {
+                if ($attribute == static::PrimaryKey()) {
+                    continue;
+                }
+                if (in_array($attribute, $Exclude)) {
+                    continue;
+                }
+                $demo .= $attribute . '="' . $this->{$attribute} . '", ';
             }
-            if (in_array($attribute, $Exclude)) {
-                continue;
-            }
-            $demo .= $attribute . '="' . $this->{$attribute} . '", ';
-        }
         endif;
         $demo=substr($demo,0,-2);
         $demo.=' WHERE '.static::PrimaryKey().'="'.$id.'"';
@@ -94,9 +91,6 @@ abstract class dbModel extends Model
         return $statement->fetchAll(\PDO::FETCH_CLASS, static::class);
 
     }
-
-
-
 
     public static function prepare($sql)
     {
