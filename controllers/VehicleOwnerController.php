@@ -43,7 +43,7 @@ class VehicleOwnerController extends Controller
             $vehowner = new vehicle_Owner();
             $vehicleowner=$vehowner->Vehicleowner_profile($req->session->get("user_id"));
             $id = $req->session->get("user_id");
-            $nic = $vehicleowner[0]['Owner_Nic'];
+            $nic = $vehicleowner[0]['Nic'];
 
             if ($req->isPost()){
                 $vehicleowner =[new vehicle_Owner()];

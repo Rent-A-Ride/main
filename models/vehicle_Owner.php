@@ -12,15 +12,18 @@ use app\core\Database;
 
 class vehicle_Owner extends dbModel
 {
-    protected string $Owner_Nic = '';
+    protected string $Nic;
     protected string $owner_Fname;
     protected string $owner_Lname;
     protected string $owner_area = '';
     protected string $owner_address;
     protected string $phone_No;
     protected string $gender = '';
-    protected string $email = '';
+    protected string $email;
     protected string $license_No ;
+    protected string $password;
+    protected string $profile_pic = '';
+
 
     // private \PDO $pdo;
     private array $body;
@@ -128,17 +131,17 @@ class vehicle_Owner extends dbModel
     /**
      * @return string
      */
-    public function getOwnerNic(): string
+    public function getNic(): string
     {
-        return $this->Owner_Nic;
+        return $this->Nic;
     }
 
     /**
-     * @param string $Owner_Nic
+     * @param string $Nic
      */
-    public function setOwnerNic(string $Owner_Nic): void
+    public function setNic(string $Nic): void
     {
-        $this->Owner_Nic = $Owner_Nic;
+        $this->Nic = $Nic;
     }
 
     /**
