@@ -272,4 +272,38 @@ class vehicle_Owner extends dbModel
         $this->body = $body;
     }
 
+    /**
+     * @return string
+     */
+    public function getLicenseNo(): string
+    {
+        return $this->license_No;
+    }
+
+    /**
+     * @param string $license_No
+     */
+    public function setLicenseNo(string $license_No): void
+    {
+        $this->license_No = $license_No;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProfilePic(): string
+    {
+        return $this->profile_pic;
+    }
+
+    /**
+     * @param string $profile_pic
+     */
+    public function setProfilePic(string $profile_pic): void
+    {
+        $this->profile_pic = $profile_pic;
+    }
+
+
+
 }

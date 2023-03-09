@@ -1,5 +1,7 @@
 <?php
 use app\core\Application;
+
+/* @var $vehicleowner \app\models\vehicle_Owner */
 ?>
 <h2 class="page-name">Profile</h2>
 
@@ -60,6 +62,10 @@ use app\core\Application;
                     <p><?php echo $vehicleowner[0]["owner_address"] ?></p>
                 </div>
                 <div class="data">
+                    <h6>Gender</h6>
+                    <p><?php echo $vehicleowner[0]['gender'] ?></p>
+                </div>
+                <div class="data">
                     <h6>License Number</h6>
                     <p><?php echo $vehicleowner[0]["license_No"] ?></p>
                 </div>
@@ -77,7 +83,7 @@ use app\core\Application;
         <span class="close" onclick="closeModal()">&times;</span>
         <form method="post" class="up-profile">
             <label for="nic">NIC:</label>
-            <input disabled value="<?= $vehicleowner[0]["Owner_Nic"] ?>" type="text" id="nic" name="Owner_Nic">
+            <input disabled value="<?= $vehicleowner[0]["Nic"] ?>" type="text" id="nic" name="Owner_Nic">
 
             <label for="fname">First Name:</label>
             <input value="<?= $vehicleowner[0]["owner_Fname"] ?>" type="text" id="fname" name="owner_Fname">

@@ -1,4 +1,5 @@
 // Get the button and the popup container
+
 // const acceptbutton = document.querySelectorAll('.accept-button');
 var accept = document.getElementById("accept");
 var reject = document.getElementById("reject")

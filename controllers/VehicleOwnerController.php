@@ -147,24 +147,22 @@ class VehicleOwnerController extends Controller
     public function acceptBooking(Request $request, Response $response): string
     {
         // Retrieve the booking ID from the request
-//        $bookingId = $request->getBody()['booking_Id'];
+        $bookingId = $request->getBody()['booking_Id'];
 
-//        // Update the booking status in the database
-//        $booking = viewCustomerReq::findOne($bookingId);
-//        $booking->setStatus(1);
-//        $result = $booking->update($bookingId, ['status']);
 
-        return $response->redirect('/CustomerAcceptedRequest');
+        // Update the booking status in the database
+        $booking = viewCustomerReq::findOne($bookingId);
 
-//        return json_encode(['status'=>true]);
-
+        $booking->setStatus(1);
+        $result = $booking->update($bookingId, ['status']);
 
         // Return a JSON response indicating success or failure
-//        if ($result) {
-//
-//        } else {
-//            return $response->withJson(['status' => 'error']);
-//        }
+        if ($result) {
+            $response->redirect('/CustomerAcceptedRequest');
+            return json_encode(['status'=>true]);
+        } else {
+            return $response->withJson(['status' => 'error']);
+        }
     }
 
 
