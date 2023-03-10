@@ -1,0 +1,73 @@
+/* Google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
+
+/* Navigation */
+@import url(customer/components/nav.css);
+@import url("components/navProfile.css");
+
+/*  Sidebar */
+@import url("components/sidebar.css");
+
+/* Customer Home */
+@import url(customer/cusHome/table.css);
+@import url(customer/cusHome/search.css);
+
+/* Customer Profile */
+@import url(customer/profile.css);
+
+/* Customer Vehicle */
+@import url(customer/cusVehicleInfo/vehicleCards.css);
+
+/* Customer Booking */
+@import url(customer/cusBooking/booking.css);
+@import url(customer/cusBooking/mindetails.css);
+
+/* Customer Booking Table */
+@import url(customer/cusBookingTable/thisStyle.css);
+
+/* Customer Settings */
+@import url(customer/cusSettings/settings.css);
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--body-color);
+}
+
+.banner-msg {
+    margin: 30px 50px;
+    padding: 15px;
+    width: 90%;
+    background-color: white;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.banner-msg h1{
+    font-size: medium;
+    font-weight: 600;
+}
+
+
+.bold {
+    font-weight: bold;
+}
+
+.yellow {
+    color: #FAB84C;
+}
+
+.main-title {
+    text-align: center;
+    margin: 5px 20px;
+}
+
+.sub-title {
+    margin-left: 50px ;
+}

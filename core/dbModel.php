@@ -31,6 +31,23 @@ abstract class dbModel extends Model
 
     }
 
+    public function saveAs($excludeAttributes = []): bool
+    {
+        $tableName = static::tableName();
+        $attributes = array_diff($this->attributes(), $excludeAttributes);
+        $params = array_map(fn($attr) => ":$attr", $attributes);
+
+        $statement = self::prepare("INSERT INTO $tableName (".implode(',',$attributes).") 
+        VALUES(".implode(',',$params).")");
+
+        foreach ($attributes as $attribute) {
+            $statement->bindValue(":$attribute", $this->{$attribute});
+        }
+
+        $statement->execute();
+        return true;
+    }
+
     public function update($id, $Include=[], $Exclude = []): bool
     {
         $tableName = static::tableName();
@@ -56,6 +73,11 @@ abstract class dbModel extends Model
         $demo=substr($demo,0,-2);
         $demo.=' WHERE '.static::PrimaryKey().'="'.$id.'"';
         $statement=self::prepare($demo);
+
+        foreach ($attributes as $attribute) {
+            $statement->bindValue(":$attribute", $this->{$attribute});
+        }
+
         $statement->execute();
         return true;
 
@@ -94,9 +116,6 @@ abstract class dbModel extends Model
         return $statement->fetchAll(\PDO::FETCH_CLASS, static::class);
 
     }
-
-
-
 
     public static function prepare($sql)
     {

@@ -19,20 +19,20 @@ class LoginForm extends Model
         ];
     }
 
-    public function cuslogin($email)
+    public function cuslogin()
     {
-        $customer = Customer::findOne(['email' => $email]);
+        $customer = Customer::findOne(['email' => $this->email]);
         
-        // if (!$customer) {
-        //     $this->addError('email', 'User does not exist');
-        //     return false;
-        // }
-        // if (!password_verify($this->password, $customer->password)) {
-        //     $this->addError('password', 'Password is incorrect');
-        //     return false;
-        // }
+         if (!$customer) {
+             $this->addError('email', 'User does not exist');
+             return false;
+         }
+         if (!password_verify($this->password, $customer->password)) {
+             $this->addError('password', 'Password is incorrect');
+             return false;
+         }
 
 
-        Application::$app->login($customer);
+        return Application::$app->login($customer);
     }
 }

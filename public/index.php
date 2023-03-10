@@ -8,6 +8,7 @@ use app\controllers\VehicleController;
 use app\controllers\VehicleOwnerController;
 use app\controllers\DriverController;
 use app\core\Application;
+use app\models\Customer;
 
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -16,6 +17,7 @@ $dotenv->load();
 
  
 $config = [
+    'customerClass'=>Customer::class,
     'db'=> [
         'dsn'=>$_ENV['DB_DSN'],
         'user'=>$_ENV['DB_USER'],
@@ -93,14 +95,19 @@ $app->router->get("/admin/vehicle/update", [OwnerController::class, "admin_updat
 $app->router->post("/admin/vehicle/update", [OwnerController::class, "admin_updateVehicle"]);
 
 $app->router->post("/admin/vehicle_ins/update", [OwnerController::class, "admin_updateins"]);
+
+
+
 //Hasantha
+$app->router->get('/Customer/login', [AuthController::class, 'cus_login']);
+$app->router->post('/Customer/login', [AuthController::class, 'cus_login']);
 
 $app->router->get("/selectUserType", [AuthController::class, "selectuser"]);
 
 $app->router->get("/Customer/Register", [AuthController::class, 'cusRegister']);
 $app->router->post("/Customer/Register", [AuthController::class, 'cusRegister']);
 
-$app->router->get("/customer", [CustomerController::class, 'home']);
+$app->router->get("/Customer/Home", [CustomerController::class, 'home']);
 
 
 

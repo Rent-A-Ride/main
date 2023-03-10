@@ -7,14 +7,13 @@ use app\core\Controller;
 use app\core\Request;
 use app\core\Response;
 use app\models\Customer;
+use app\models\LoginForm;
 use app\models\RegisterModel;
 use app\core\Session;
 use app\models\adminCustomer;
 use app\models\driver;
-use app\models\LoginForm;
 use app\models\owner;
 use app\models\user;
-use app\models\users;
 use app\models\vehicle_Owner;
 use app\models\vehicleowner;
 
@@ -22,7 +21,11 @@ class AuthController extends Controller
 {
     public function login_form(Request $req, Response $res)
     {
-       
+        // $params = [
+        //     'name' => "Rent A Ride"
+        // ];
+        // $this->setLayout('home');
+        // return $this->render('HomePage');
         return $res->render('login','main_1');
     }
 
@@ -73,17 +76,17 @@ class AuthController extends Controller
                     $driver=new driver($body);
                     $result3=$driver->driver_login($email);
                     if (is_array($result3)) {
-        
+
                         $req->session->set("authenticated",true);
                         $req->session->set("user_email",$result->email);
                         $req->session->set("user_role","customer");
                         $res->redirect('/customer');
-                       
+
                         // return $res->render("/adminCustomer/adminCustomer","adminCustomer-dashboard");
                 
                     }
                     else {
-                        
+
                         $req->session->set("user_id",$result->user_ID);
                         $req->session->set("authenticated",true);
                         $req->session->set("user_email",$result->email);
@@ -134,7 +137,7 @@ class AuthController extends Controller
     }
 
 //    Customer
-    public function cusRegister(Request $request,Response $response)
+    public function cus_register(Request $request,Response $response)
     {
         $customer = new Customer();
         if ($request->isPost()){
@@ -153,8 +156,8 @@ class AuthController extends Controller
                 'model' => $customer
             ]);
         }
-       
-        return $response->render('Customer/cus_Register','main', [
+//        $this->setLayout('main');
+        return $response->render('Customer/v_Register','cusAuth', [
             'model' => $customer
         ]);
     }
@@ -162,29 +165,55 @@ class AuthController extends Controller
     public function getDriverRegistration(Request $req, Response $res){
         // return $res->render("/driver/driver_registration","main_2");
         $customer = new Customer();
-        
+
         if ($req->isPost()){
 
             $customer->loadData($req->getBody());
-            
+
             if ($customer->validate() && $customer->save()){
-               
+
                     // ->session->setFlash('success', 'Registration Successfully!');
                     $req->session->setFlash('success', 'Registration Successfully!');
                     // Application::$app->response->redirect('/login');
                     $res->redirect("/login");
                     exit();
-    
+
             }
 
             return $res->render('/driver/driver_registration','main_2', [
                 'model' => $customer
             ]);
         }
-       
+
         return $res->render('/driver/driver_registration','main_2', [
             'model' => $customer
         ]);
+    }
+
+    public function cus_login(Request $request, Response $response)
+    {
+        $cuslogin = new LoginForm();
+        if ($request->isPost()){
+            $cuslogin->loadData($request->getBody());
+//            echo '<pre>';
+//            var_dump($cuslogin->cuslogin());
+//            echo '</pre>';
+//            exit();
+            if ($cuslogin->validate() && $cuslogin->cuslogin()) {
+                $response->redirect('/Customer/Home');
+                return;
+            }
+        }
+        $this->setLayout('auth');
+        return $this->render('Customer/v_login', [
+            'model' => $cuslogin
+        ]);
+    }
+
+    public function cus_logout(Request $request, Response $response)
+    {
+        Application::$app->logout();
+        $response->redirect('/');
     }
 
 
@@ -211,7 +240,7 @@ class AuthController extends Controller
                 'model' => $user,'model'=>$vehicleowner
             ]);
         }
-       
+
         return $res->render('/VehicleOwner/vehOwner_register','main_3', [
             'model' => $user, 'model'=>$vehicleowner
         ]);

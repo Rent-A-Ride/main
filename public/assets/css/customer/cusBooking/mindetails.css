@@ -1,0 +1,185 @@
+.book-cont {
+  padding: 10px;
+  margin: 20px 0 20px 40px !important;
+  width: 92%;
+  height: max-content;
+}
+
+.vehicle-card-minimize {
+    background-color: #ffffff;
+    border-radius: 10px;
+    text-align: center;
+    width: 100%;
+    padding: 15px 18px !important;
+
+  }
+
+  /*body.minimize {*/
+  /*  background-color: #ffffff;*/
+  /*  padding: 15px 18px !important;*/
+  /*  margin: 15px 30px !important;*/
+  /*}*/
+
+  .details-cont {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .vehicle-card-minimize img {
+    width: 40%;
+    align-items: flex-start;
+    border-radius: 15px;
+  }
+  
+  .vehicle-name {
+    font-size: 16px;
+    margin-top: 10px;
+    padding-bottom: 5px;
+    text-align: left;
+  }
+
+  .vehicle-name span {
+    color: #FAB84C;
+    font-weight: 600;
+  }
+
+  .details-cont {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    
+  }
+  
+  .vehicle-details {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 55%;
+    font-size: 12px;
+    margin-top: 10px;
+    padding-left: 10px;
+    
+  }
+  
+  .vehicle-features {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 10px;
+  }
+
+  .vehicle-features > span {
+    padding-left: 10px;
+  }
+
+  #gallery2 {
+    /* margin: 0 auto; */
+    width: 20%;
+    text-align: center;
+    display: table;
+  }
+
+ 
+
+  .thumbnails, .large-image {
+    display: table-cell;
+  }
+  
+  .thumbnails {
+    display: flex;
+    flex-wrap: wrap;
+ }
+
+ .thumbnails::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  .thumbnails img {
+    float: end;
+    width: 10%;
+    cursor: pointer;
+    margin-right: 10px;
+    width: 100px;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    border: 4px solid transparent;
+  }
+  
+  .large-image {
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+  
+  .large-image img {
+    max-width: 100%;
+    width: 600px;
+    height: inherit;
+    background-color: #cccccc;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+  .two-column-layout {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .left-column, .right-column {
+    width: 45%;
+    padding: 20px;
+  }
+
+  .left-column ul,li, .right-column ul,li {
+    list-style-type: none;
+    padding: 0;
+    text-align: justify;
+    text-justify: inter-word;
+  }
+
+  .book-btn:hover {
+    transform: scale(1.1);
+  }
+  
+
+  .set-date-loc {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    /* flex-wrap: wrap; */
+    width: 100%;
+    border-radius: 15px;
+    padding: 5px 12px;
+    margin-top: 10px;
+    background: #393939;
+    color: white;
+  }
+
+.set-date-loc-min {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  /* flex-wrap: wrap; */
+  width: 125%;
+  border-radius: 15px;
+  padding: 5px 12px;
+  margin-top: 10px;
+  background: #393939;
+  color: white;
+}
+
+.price-details-row {
+  display: flex;
+  justify-content: space-between;
+}

@@ -65,7 +65,7 @@ class Customer extends dbModel
             ]],
             'gender' => [self::RULE_REQUIRED],
             'address' => [self::RULE_REQUIRED],
-            'password' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 8], [self::RULE_MAX, 'max' => 64]],
+            'password' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 8], [self::RULE_MAX, 'max' => 64], self::RULE_PASSWORD],
             'passwordConfirm' => [self::RULE_REQUIRED, [self::RULE_MATCH, 'match' => 'password']],
 
         ];

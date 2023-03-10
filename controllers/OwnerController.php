@@ -14,7 +14,7 @@ use app\models\owner;
 use app\models\ren_insuarance;
 use app\models\ren_license;
 use app\models\veh_insurance;
-use app\models\vehicle;
+use app\models\cusVehicle;
 use app\models\vehicle_Owner;
 use app\models\vehiclecomplaint;
 use app\models\veh_license;
@@ -265,7 +265,7 @@ class OwnerController
 
     public function admin_vehicle_disable(Request $req, Response $res){
         if ($req->session->get("authenticated")&&$req->session->get("user_role")==="owner"){
-            $vehicle = new vehicle();
+            $vehicle = new cusVehicle();
             if ($req->isPost()){
                 $body=$req->getBody();
                 $veh_id=$body['veh_Id'];
@@ -317,7 +317,7 @@ class OwnerController
 
     public function admin_accept_vehicle(Request $req, Response $res){
         if ($req->session->get("authenticated")&&$req->session->get("user_role")==="owner"){
-            $vehicle = new vehicle();
+            $vehicle = new cusVehicle();
             if ($req->isPost()){
                 $body=$req->getBody();
                 $veh_id=$body['veh_Id'];
