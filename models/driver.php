@@ -6,13 +6,26 @@ use app\core\Application;
 use app\core\Request;
 use app\core\Response;
 use app\core\Database;
+use app\core\dbModel;
 
 
-
-class driver
+class driver extends dbModel
 {
     // private \PDO $pdo;
     private array $body;
+    public string $driver_ID;
+    public string $Nic;
+    public string $driver_Fname;
+    public string $driver_Lname;
+    public string $email;
+    public string $phoneNo;
+    public string $area;
+    public string $address;
+    public string $gender;
+    public string $admin_approved;
+    public string $password;
+    public string $profile_pic;
+
 
     public function __construct(array $registerBody=[])
     {
@@ -21,6 +34,26 @@ class driver
 
 
     }
+    public static function tableName(): string
+    {
+        return 'driver';
+    }
+
+    public static function primaryKey():string
+    {
+        return 'driver_ID';
+    }
+
+    public function rules(): array
+    {
+        return [];
+    }
+    public function attributes(): array
+    {
+        return ['Nic','driver_Fname','driver_Lname','email','phone_No','area','address','gender','admin_approved','password'];
+    }
+
+
 
     // public function login():array|object
     // {

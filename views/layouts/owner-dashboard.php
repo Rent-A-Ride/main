@@ -38,7 +38,10 @@
             <span class="tooltip">Search</span>
         </li> -->
 
-        <li class="<?php 
+        <li class="<?php
+
+        use app\core\Application;
+
         if($function=='Dashboard'){
             echo ('active');
         }
@@ -195,8 +198,8 @@
             <li class="list-item 2"><a href="#">Register</a></li>       -->
             <!-- <div class="vision"><p>Mobility Without Hassel</p> </div> -->
             <div class="profile-cont">
-                <span class="profile-name"><?php echo($profile_img[0]['first_Name']." ".$profile_img[0]['last_Name']) ?></span>
-                <div class="img-cont"><img  src="/assets/img/user_profile/<?php echo ($profile_img[0]['profile_img'])?>" class="profile-image"></div>
+                <span class="profile-name"><?= Application::$app->user->displayName(); ?></span>
+                <div class="img-cont"><img src="/assets/img/user_profile/<?= Application::$app->user->userprofile('profile_pic')?>" class="profile-image"></div>
             </div>
 
         </ul>

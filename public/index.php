@@ -8,6 +8,11 @@ use app\controllers\VehicleController;
 use app\controllers\VehicleOwnerController;
 use app\controllers\DriverController;
 use app\core\Application;
+use app\models\Customer;
+use app\models\driver;
+use app\models\owner;
+use app\models\vehicle;
+use app\models\vehicle_Owner;
 
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -16,6 +21,10 @@ $dotenv->load();
 
  
 $config = [
+    'customerClass'=>Customer::class,
+    'ownerClass'=>owner::class,
+    'vehicleOwnerClass'=> vehicle_Owner::class,
+    'driverClass'=> driver::class,
     'db'=> [
         'dsn'=>$_ENV['DB_DSN'],
         'user'=>$_ENV['DB_USER'],
@@ -31,7 +40,7 @@ $app->router->get('/contact', [SiteController::class, 'contact']);
 $app->router->post('/contact', [SiteController::class, 'handleContact']);
 
 
-$app->router->get('/login', [AuthController::class, 'login_form']);
+$app->router->get('/login', [AuthController::class, 'login']);
 $app->router->post('/login', [AuthController::class, 'login']);
 $app->router->get('/register', [AuthController::class, 'register']);
 $app->router->post('/register', [AuthController::class, 'register']);
@@ -93,12 +102,45 @@ $app->router->get("/admin/vehicle/update", [OwnerController::class, "admin_updat
 $app->router->post("/admin/vehicle/update", [OwnerController::class, "admin_updateVehicle"]);
 
 $app->router->post("/admin/vehicle_ins/update", [OwnerController::class, "admin_updateins"]);
+
+
+
 //Hasantha
+$app->router->get('/Customer/login', [AuthController::class, 'cus_login']);
+$app->router->post('/Customer/login', [AuthController::class, 'cus_login']);
 
 $app->router->get("/selectUserType", [AuthController::class, "selectuser"]);
 
 $app->router->get("/Customer/Register", [AuthController::class, 'cusRegister']);
 $app->router->post("/Customer/Register", [AuthController::class, 'cusRegister']);
+
+$app->router->get("/Customer/Home", [CustomerController::class, 'home']);
+$app->router->post("/Customer/Home", [CustomerController::class, 'home']);
+
+$app->router->get("/Customer/Profile", [CustomerController::class, 'profile']);
+$app->router->post("/Customer/Profile", [CustomerController::class, 'profile']);
+
+$app->router->post("/upload", [SiteController::class, 'uploadImage']);
+
+$app->router->get("/VehicleInfo", [CustomerController::class, 'vehicleInfo']);
+$app->router->post("/VehicleInfo", [CustomerController::class, 'vehicleInfo']);
+
+$app->router->get('/Customer/VehicleBooking', [CustomerController::class, 'VehicleBooking']);
+$app->router->post('/Customer/VehicleBooking', [CustomerController::class, 'VehicleBooking']);
+
+$app->router->get('/Customer/VehicleBookingTable', [CustomerController::class, 'vehicleBookingTable']);
+
+$app->router->get('/Customer/Settings', [CustomerController::class, 'customerSettings']);
+$app->router->post('/Customer/Settings', [CustomerController::class, 'customerSettings']);
+
+
+
+
+
+
+
+
+
 
 // view customer Pending requests
 $app->router->get("/CustomerPendingRequest", [VehicleOwnerController::class, 'viewCustomerPendingRequests']);

@@ -22,6 +22,7 @@ class vehicle_Owner extends dbModel
     protected string $email;
     protected string $license_No ;
     protected string $password;
+    public string $passwordConfirm = '';
     protected string $profile_pic = '';
 
 
@@ -120,12 +121,12 @@ class vehicle_Owner extends dbModel
     public function attributes(): array
     {
         //return the above created properties
-        return ['Owner_nic', 'owner_Fname', 'owner_Lname', 'owner_area', 'owner_address', 'phone_No', 'gender', 'email'];
+        return ['Nic', 'owner_Fname', 'owner_Lname', 'owner_area', 'owner_address', 'phone_No', 'gender', 'email', 'password', 'profile_pic'];
     }
 
     public static function primaryKey(): string
     {
-        return 'Owner_nic';
+        return 'vo_ID';
     }
 
     /**
