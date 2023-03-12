@@ -17,7 +17,7 @@ class owner extends dbModel
     public string $last_Name;
     public string $email;
     public string $Nic;
-    public string $profile_pic;
+    public string $profile_pic= '';
     public string $license_No;
     public string $phone_No;
     public string $Owner_area;
@@ -57,6 +57,16 @@ class owner extends dbModel
     public function save(): bool
     {
         return parent::save();
+    }
+
+    public function displayName(): string
+    {
+        return $this->first_Name.' '.$this->last_Name;
+    }
+
+    public function userProfile(string $data)
+    {
+        return $this->$data;
     }
 
     public function getuser_ID(){

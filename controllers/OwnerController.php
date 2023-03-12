@@ -30,7 +30,7 @@ class OwnerController extends Controller
     public function ownerFirstPage(Request $req, Response $res){
         if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="owner"){
             $ownerprofile = new owner();
-            $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user_id"));
+            $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
             $this->setLayout("owner-dashboard");
             return $this->render("/admin/owner",[],['profile_img'=>$owner_img, 'function'=>'Dashboard']);
         }

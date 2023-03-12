@@ -21,6 +21,9 @@ class Application
 //    Customer
     public string $layout = 'main';
     public string $customerClass;
+    public string $driverClass;
+    public string $vehicleOwnerClass;
+    public string $ownerClass;
     public ?Customer $customer;
     public ?driver $driver;
     public ?vehicleowner $vehicleowner;
@@ -61,6 +64,9 @@ class Application
     public function __construct($rootPath, array $config)
     {
         $this->customerClass = $config['customerClass'];
+        $this->driverClass = $config['driverClass'];
+        $this->vehicleOwnerClass = $config['vehicleOwnerClass'];
+        $this->ownerClass = $config['ownerClass'];
         self::$ROOT_DIR = $rootPath;
         self::$app = $this;
         $this->request = new Request();
@@ -76,6 +82,29 @@ class Application
             if ($primaryValue) {
                 $primaryKey = $this->customerClass::primaryKey();
                 $this->user = $this->customerClass::findOne([$primaryKey => $primaryValue ]);
+            } else {
+                $this->user = null;
+            }
+        }
+        elseif ($userType === 'vehicleowner'){
+            if ($primaryValue) {
+                $primaryKey = $this->vehicleOwnerClass::primaryKey();
+                $this->user = $this->vehicleOwnerClass::findOne([$primaryKey => $primaryValue ]);
+            } else {
+                $this->user = null;
+            }
+        }
+        elseif ($userType === 'driver'){
+            if ($primaryValue) {
+                $primaryKey = $this->driverClass::primaryKey();
+                $this->user = $this->driverClass::findOne([$primaryKey => $primaryValue ]);
+            } else {
+                $this->user = null;
+            }
+        }elseif ($userType === 'owner'){
+            if ($primaryValue) {
+                $primaryKey = $this->ownerClass::primaryKey();
+                $this->user = $this->ownerClass::findOne([$primaryKey => $primaryValue ]);
             } else {
                 $this->user = null;
             }
