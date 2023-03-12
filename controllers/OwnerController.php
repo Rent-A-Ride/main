@@ -38,12 +38,13 @@ class OwnerController extends Controller
     }
 
     public function ownerProfile(Request $req, Response $res){
+        
         if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="owner"){
-
-            $ownerprofile = new owner();
-            $ownerdetails  = $ownerprofile->owner_profile(Application::$app->session->get("user_id"));
             
-            $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user_id"));
+            $ownerprofile = new owner();
+            $ownerdetails  = $ownerprofile->owner_profile(Application::$app->session->get("user"));
+            
+            $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
             
             $this->setLayout("owner-dashboard");
             return $this->render("/admin/admin_profile",['owner_details'=>$ownerdetails],['profile_img'=>$owner_img, 'function'=>'Profile']);
@@ -58,7 +59,7 @@ class OwnerController extends Controller
             $vehicle=[];
             $vehicle = $vehicles->ownerGetVehicle($req,$res);
             $ownerprofile = new owner();
-            $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user_id"));
+            $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
 //        print_r($vehicle);
             $this->setLayout("owner-dashboard");
              return $this->render("/admin/admin-vehicle",['result'=>$vehicle],['profile_img'=>$owner_img, 'function'=>'Vehicle']);
@@ -75,7 +76,7 @@ class OwnerController extends Controller
             $vehicle2=$vehicles->viewVehicleProfilelicense($req,$res,$query);
             
             $ownerprofile = new owner();
-            $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user_id"));
+            $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
             $this->setLayout("owner-dashboard");
              return $this->render("/admin/ownerViewVehicleProfile",['veh_info'=>$vehicle1,'veh_li'=>$vehicle2],['profile_img'=>$owner_img, 'function'=>'Vehicle']);
         }
@@ -85,7 +86,7 @@ class OwnerController extends Controller
     public function ownerVehicleOwner(Request $req, Response $res){
         if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="owner"){    
             $ownerprofile = new owner();
-            $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user_id"));
+            $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
             $vehicleowner = new vehicle_Owner();
             $vehicleownerdetails = $vehicleowner->getVehicleowner();
             $this->setLayout("owner-dashboard");
@@ -97,7 +98,7 @@ class OwnerController extends Controller
     public function ownerDriver(Request $req, Response $res){
         if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="owner"){
             $ownerprofile = new owner();
-            $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user_id"));
+            $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
             $driver = new driver();
             $driverdetails = $driver->getDriver();  
             $this->setLayout("owner-dashboard"); 
@@ -112,7 +113,7 @@ class OwnerController extends Controller
             $Vehicleownerprofile = new VehicleOwnerController();
             $Vehicleownerdetails  = $Vehicleownerprofile->viewVehicleownerProfile($req,$res);
             $owner = new owner();
-            $owner_img  = $owner->owner_img(Application::$app->session->get("user_id"));
+            $owner_img  = $owner->owner_img(Application::$app->session->get("user"));
             
             $this->setLayout("owner-dashboard");
             return $res->render("/admin/adminViewVehicleOwnerProfile","owner-dashboard",['owner_details'=>$Vehicleownerdetails],['profile_img'=>$owner_img, 'function'=>'Vehicle Owner']);
@@ -124,10 +125,11 @@ class OwnerController extends Controller
     public function admin_Customer(Request $req, Response $res){
         if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="owner"){
             $ownerprofile = new owner();
-            $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
-            $customer = new CustomerController();
-            $customerdetails=$customer->ownerGetCustomer($req,$res);
-            return $res->render("/admin/admin_customer","owner-dashboard",['adminCustomer'=>$customerdetails],['profile_img'=>$owner_img, 'function'=>'Customer']);
+            $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
+            $customer = new adminCustomer();
+            $customerdetails=$customer->getcustomer($req,$res);
+            $this->setLayout("owner-dashboard");
+            return $this->render("/admin/admin_customer",['adminCustomer'=>$customerdetails],['profile_img'=>$owner_img, 'function'=>'Customer']);
         }
         return $res->render("Home","home");
     }
@@ -136,14 +138,14 @@ class OwnerController extends Controller
     public function admin_addVehicleOwner (Request $req, Response $res){
         if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="owner"){
             $ownerprofile = new owner();
-            $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
+            $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
             $notV_owner=new vehicle_Owner();
             $vehnotApproved=$notV_owner->getnotApprovedVehicleowner();
             
             
             
-             
-            return $res->render("/admin/adminadd_vehicleowner","owner-dashboard",['vehicleowner'=>$vehnotApproved],['profile_img'=>$owner_img, 'function'=>'Vehicle Owner']);
+            $this->setLayout("owner-dashboard"); 
+            return $this->render("/admin/adminadd_vehicleowner",['vehicleowner'=>$vehnotApproved],['profile_img'=>$owner_img, 'function'=>'Vehicle Owner']);
         }
         return $res->render("Home","home");
     }
@@ -154,11 +156,12 @@ class OwnerController extends Controller
             $Vehicleownerprofile = new DriverController();
             $Vehicleownerdetails  = $Vehicleownerprofile->viewDriverProfile($req,$res);
             $owner = new owner();
-            $owner_img  = $owner->owner_img($req->session->get("user_id"));
+            $owner_img  = $owner->owner_img(Application::$app->session->get("user"));
             
             // var_dump($Vehicleownerdetails);
             // die();
-            return $res->render("/admin/adminView_driverProfile","owner-dashboard",['owner_details'=>$Vehicleownerdetails],['profile_img'=>$owner_img, 'function'=>'Driver']);
+            $this->setLayout("owner-dashboard");
+            return $this->render("/admin/adminView_driverProfile",['owner_details'=>$Vehicleownerdetails],['profile_img'=>$owner_img, 'function'=>'Driver']);
         }
         return $res->render("Home","home");
 
@@ -170,9 +173,10 @@ class OwnerController extends Controller
             $vehicle=[];
             $vehicle = $vehicles->ownerGetVehicletoAdd($req,$res);
             $ownerprofile = new owner();
-            $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
+            $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
 //        print_r($vehicle);
-             return $res->render("/admin/admin_addNewVehicle","owner-dashboard",['result'=>$vehicle],['profile_img'=>$owner_img, 'function'=>'Vehicle']);
+            $this->setLayout("owner-dashboard");
+             return $this->render("/admin/admin_addNewVehicle",['result'=>$vehicle],['profile_img'=>$owner_img, 'function'=>'Vehicle']);
         }
         return $res->render("Home","home");
     }
@@ -183,9 +187,10 @@ class OwnerController extends Controller
             $vehicle=[];
             $vehicle = $vehicles->addVehicle($req,$res);
             $ownerprofile = new owner();
-            $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
+            $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
 //        print_r($vehicle);
-             return $res->render("/admin/admin_addNewVehicle","owner-dashboard",['result'=>$vehicle],['profile_img'=>$owner_img, 'function'=>'Vehicle']);
+            $this->setLayout("owner-dashboard");
+             return $this->render("/admin/admin_addNewVehicle",['result'=>$vehicle],['profile_img'=>$owner_img, 'function'=>'Vehicle']);
         }
         return $res->render("Home","home");
     }
@@ -197,8 +202,9 @@ class OwnerController extends Controller
             // var_dump($vehiclecomplaint);
             // die();
             $ownerprofile = new owner();
-            $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
-            return $res->render("/admin/admin_vehicleComplaint","owner-dashboard",['complaint'=>$vehiclecomplaint],['profile_img'=>$owner_img, 'function'=>'vehiclecomplaint']);
+            $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
+            $this->setLayout("owner-dashboard");
+            return $this->render("/admin/admin_vehicleComplaint",['complaint'=>$vehiclecomplaint],['profile_img'=>$owner_img, 'function'=>'vehiclecomplaint']);
         }
     }
 
@@ -207,8 +213,9 @@ class OwnerController extends Controller
             $drivercom= new drivercomplaint();
             $drivercomplaint=$drivercom->viewcomplaint();
             $ownerprofile = new owner();
-            $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
-            return $res->render("/admin/admin_driverComplaint","owner-dashboard",['complaint'=>$drivercomplaint],['profile_img'=>$owner_img, 'function'=>'drivercomplaint']);
+            $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
+            $this->setLayout("owner-dashboard");
+            return $this->render("/admin/admin_driverComplaint",['complaint'=>$drivercomplaint],['profile_img'=>$owner_img, 'function'=>'drivercomplaint']);
         }
     }
     
@@ -218,10 +225,11 @@ class OwnerController extends Controller
             // $license = new vehicle();
             // $licenseExp = $license->licenseExp();
             $ownerprofile = new owner();
-            $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
+            $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
             $vehicle = new veh_license();
             $veh_license=$vehicle->licenseExp();
-            return $res->render("/admin/admin_licenseExp","owner-dashboard",['complaint'=>$veh_license],['profile_img'=>$owner_img, 'function'=>'licenseexpiring']);
+            $this->setLayout("owner-dashboard");
+            return $this->render("/admin/admin_licenseExp",['complaint'=>$veh_license],['profile_img'=>$owner_img, 'function'=>'licenseexpiring']);
         }
     }
 
@@ -366,7 +374,7 @@ class OwnerController extends Controller
                 $reneve_license=$ren_license->licenseren((int)$query["id"]);
                 $reneve_ins=$ren_ins->insren((int)$query["id"]);
                 $ownerprofile = new owner();
-                $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
+                $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
                 return $res->render('/admin/vehicleUpdate',"owner-dashboard",['ren_lin'=>$reneve_license,'ren_ins'=>$reneve_ins],['profile_img'=>$owner_img,'function'=>'Vehicle']);
             }
             
