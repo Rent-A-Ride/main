@@ -6,13 +6,25 @@ use app\core\Application;
 use app\core\Request;
 use app\core\Response;
 use app\core\Database;
+use app\core\dbModel;
 
-
-
-class owner
+class owner extends dbModel
 {
     // private \PDO $pdo;
     private array $body;
+    public string $user_ID;
+    public string $first_Name;
+    public string $last_Name;
+    public string $email;
+    public string $Nic;
+    public string $profile_pic;
+    public string $license_No;
+    public string $phone_No;
+    public string $Owner_area;
+    public string $gender = '';
+    // public string $address;
+    // public string $password;
+    // public string $passwordConfirm = '';
 
     public function __construct(array $registerBody=[])
     {
@@ -20,6 +32,35 @@ class owner
         $this->body= $registerBody;
 
 
+    }
+
+    public static function tableName(): string
+    {
+        return 'owner';
+    }
+
+    public static function primaryKey():string
+    {
+        return 'user_ID';
+    }
+
+    public function rules(): array
+    {
+        return [];
+    }
+
+    public function attributes(): array
+    {
+        return ['user_ID','Owner_area','phone_No','Nic','email','first_Name','last_Name','profile_pic','license_No'];
+    }
+
+    public function save(): bool
+    {
+        return parent::save();
+    }
+
+    public function getuser_ID(){
+        return $this->user_ID;
     }
 
     // public function login():array|object

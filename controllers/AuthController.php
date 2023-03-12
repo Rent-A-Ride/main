@@ -19,15 +19,15 @@ use app\models\vehicleowner;
 
 class AuthController extends Controller
 {
-    public function login_form(Request $req, Response $res)
-    {
-        // $params = [
-        //     'name' => "Rent A Ride"
-        // ];
-        // $this->setLayout('home');
-        // return $this->render('HomePage');
-        return $res->render('login','main_1');
-    }
+    // public function login_form(Request $req, Response $res)
+    // {
+    //     // $params = [
+    //     //     'name' => "Rent A Ride"
+    //     // ];
+    //     // $this->setLayout('home');
+    //     // return $this->render('HomePage');
+    //     return $res->render('login','main_1');
+    // }
 
 //    public function register(Request $request)
 //    {
@@ -50,86 +50,50 @@ class AuthController extends Controller
 //        ]);
 //    }
 
-    public function login(Request $req, Response $res)
-    {
-        $body = $req->getBody();
-        $user = new user($body);
-        $result = $user->login();
-       
+    
 
-        if (is_array($result)){
-            return $res->render("login","main_1",['errors' => $result]);
+    public function login(Request $req, Response $res){
+        $login = new LoginForm();
 
-        }
-        else {
-            // $user_id=$result->user_ID;
-            $email = $result->email;
-            
-            $owner = new owner($body);
-            $result1=$owner->owner_login($email);
-            
-            if (is_array($result1)) {
 
-                $vehicle_owner=new vehicle_Owner($body);
-                $result2=$vehicle_owner->vehicle_Owner_login($email);
-                if (is_array($result2)) {
-                    $driver=new driver($body);
-                    $result3=$driver->driver_login($email);
-                    if (is_array($result3)) {
+        if($req->isPost()){
+            $body=$req->getBody();
+            // var_dump($body);
+            $login->loadData($body);
+            if($login->validate()){
+                $user = $login->login($body['user_type']);
 
-                        $req->session->set("authenticated",true);
-                        $req->session->set("user_email",$result->email);
-                        $req->session->set("user_role","customer");
-                        $res->redirect('/customer');
-
-                        // return $res->render("/adminCustomer/adminCustomer","adminCustomer-dashboard");
-                
+                if(!$user){
+                    $res->redirect('/login');
+                }
+                if($user === true){
+                    if($body['user_type']=='owner'){
+                        $res->redirect('/owner');
                     }
-                    else {
-
-                        $req->session->set("user_id",$result->user_ID);
-                        $req->session->set("authenticated",true);
-                        $req->session->set("user_email",$result->email);
-                        $req->session->set("user_role","driver");
-                        $res->redirect('../driver/driver_profile');
-                    
+                    else if($body['user_type']=='vehicleowner'){
+                        $res->redirect('/vehicleOwner/Profile');
+                    }
+                    else if($body['user_type']=='driver'){
+                        $res->redirect('/vehicleOwner/Profile');
+                    }
+                    else if ($body['user_type']=='customer'){
+                        return Application::Redirect('/Customer/Home');
+                    }
+                        
                 }
-                
-                }
-                else {
-                    $req->session->set("user_id",$result->user_ID);
-                    $req->session->set("authenticated",true);
-                    $req->session->set("user_email",$result->email);
-                    $req->session->set("user_role","vehicleowner");
-                    return $res->render("/VehicleOwner/vehicleOwnerProfile","vehicleOwner-dashboard");
-                    
-                }
-
-
-                
-            }
-            else {
-                $req->session->set("user_id",$result->user_ID);
-                $req->session->set("authenticated",true);
-                $req->session->set("user_email",$result->email);
-                $req->session->set("user_role","owner");
-                $ownerprofile = new owner();
-                $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
-                return $res->render("/admin/owner","owner-dashboard",[],['profile_img'=>$owner_img, 'function'=>'Dashboard']);
-                
             }
 
-            
         }
 
+        $this->setLayout('main_1');
+        return $this->render('login', [
+            'model' => $login
+        ]);
 
     }
     public function logout(Request $req, Response $res){
-        // if ($req->session->get("authenticated") && $req->session->get("user_role") ==="owner") {
-           $req->session->destroy();
-            return $res->redirect("/");
-        // }
-        // return $res->redirect("/");
+           Application::$app->logout();
+           return $res->redirect("/");
     }
 
     public function selectuser(Request $req, Response $res){
@@ -190,25 +154,25 @@ class AuthController extends Controller
         ]);
     }
 
-    public function cus_login(Request $request, Response $response)
-    {
-        $cuslogin = new LoginForm();
-        if ($request->isPost()){
-            $cuslogin->loadData($request->getBody());
-//            echo '<pre>';
-//            var_dump($cuslogin->cuslogin());
-//            echo '</pre>';
-//            exit();
-            if ($cuslogin->validate() && $cuslogin->cuslogin()) {
-                $response->redirect('/Customer/Home');
-                return;
-            }
-        }
-        $this->setLayout('auth');
-        return $this->render('Customer/v_login', [
-            'model' => $cuslogin
-        ]);
-    }
+//     public function cus_login(Request $request, Response $response)
+//     {
+//         $cuslogin = new LoginForm();
+//         if ($request->isPost()){
+//             $cuslogin->loadData($request->getBody());
+// //            echo '<pre>';
+// //            var_dump($cuslogin->cuslogin());
+// //            echo '</pre>';
+// //            exit();
+//             if ($cuslogin->validate() && $cuslogin->cuslogin()) {
+//                 $response->redirect('/Customer/Home');
+//                 return;
+//             }
+//         }
+//         $this->setLayout('auth');
+//         return $this->render('Customer/v_login', [
+//             'model' => $cuslogin
+//         ]);
+//     }
 
     public function cus_logout(Request $request, Response $response)
     {

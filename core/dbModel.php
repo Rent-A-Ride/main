@@ -4,6 +4,8 @@ namespace app\core;
 
 use app\models\Customer;
 use app\models\vehicle_complaint_resolve_notification;
+use app\models\owner;
+
 
 abstract class dbModel extends Model
 {
@@ -94,6 +96,7 @@ abstract class dbModel extends Model
         }
 
         $statement->execute();
+        
         return $statement->fetchObject(static::class);
     }
 

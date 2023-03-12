@@ -21,7 +21,7 @@ use app\core\Application; ?>
 
 
     <!-- JQUERY -->
-    <script src="/assets/javascript/jquery-3.6.3.min.js"></script>
+    <script src="/assets/javascript/component/jquery-3.6.3.min.js"></script>
 
 </head>
 <body>
@@ -41,42 +41,42 @@ use app\core\Application; ?>
         </li>
 
         <li>
-            <a href="/home">
+            <a href="/Customer/Home">
                 <i class='bx bx-home' ></i>
                 <span class="links_name">Home</span>
             </a>
             <span class="tooltip">Home</span>
         </li>
         <li>
-            <a href="/home">
+            <a href="/Customer/Home">
                 <i class='bx bx-car' ></i>
                 <span class="links_name">View Vehicles</span>
             </a>
             <span class="tooltip">view vehicles</span>
         </li>
         <li>
-            <a href="/profile">
+            <a href="/Customer/Profile">
                 <i class='bx bx-user-pin'></i>
                 <span class="links_name">Profile</span>
             </a>
             <span class="tooltip">Profile</span>
         </li>
         <li>
-            <a href="/VehicleBookingTable">
+            <a href="/Customer/VehicleBookingTable">
                 <i class='bx bx-id-card'></i>
                 <span class="links_name">Booking</span>
             </a>
             <span class="tooltip">Booking</span>
         </li>
         <li>
-            <a href="/Payment">
+            <a href="/Customer/Payment">
                 <i class='bx bx-wallet' ></i>
                 <span class="links_name">Payment</span>
             </a>
             <span class="tooltip">Payment</span>
         </li>
         <li>
-            <a href="/Settings">
+            <a href="/Customer/Settings">
                 <i class='bx bx-cog'></i>
                 <span class="links_name">Settings</span>
             </a>
@@ -104,8 +104,8 @@ use app\core\Application; ?>
             <!-- <li class="list-item 1"><a href="#">Sign in</a></li>
             <li class="list-item 2"><a href="#">Register</a></li>       -->
             <div class="profile-cont">
-                <span class="profile-name"><?= Application::$app->customer->displayName(); ?></span>
-                <div class="img-cont"><img src="<?= Application::$app->customer->userprofile('profile_pic')?>" class="profile-image"></div>
+                <span class="profile-name"><?= Application::$app->user->displayName(); ?></span>
+                <div class="img-cont"><img src="/assets/img/uploads/userProfile/<?= Application::$app->user->userprofile('profile_pic')?>" class="profile-image"></div>
             </div>
 
         </ul>

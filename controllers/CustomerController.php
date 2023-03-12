@@ -7,7 +7,6 @@ use app\core\Controller;
 use app\core\middlewares\AuthMiddleware;
 use app\core\Request;
 use app\core\Response;
-use app\models\CusProfile;
 use app\models\Customer;
 use app\models\VehBooking;
 use app\models\cusVehicle;
@@ -19,13 +18,12 @@ class CustomerController extends Controller
     public function __construct()
     {
         $this->customerMiddleware(new AuthMiddleware(['profile']));
-        $this->customerMiddleware(new AuthMiddleware(['home']));
         $this->customerMiddleware(new AuthMiddleware(['VehicleBooking']));
         $this->customerMiddleware(new AuthMiddleware(['vehicleInfo']));
         $this->customerMiddleware(new AuthMiddleware(['vehicleBookingTable']));
     }
 
-    public function home(Request $request, Response $response)
+    public function home(Request $request, Response $response): string
     {
         $vehicle = cusVehicle::retrieveAll();
         $params = [
@@ -39,7 +37,7 @@ class CustomerController extends Controller
     public function profile(Request $request, Response $response)
     {
 
-        $id=Application::$app->customer->cus_Id;
+        $id=Application::$app->user->cus_Id;
         $customer=Customer::findOne(['cus_Id'=>$id]);
 
         if ($request->isPost()){
@@ -50,15 +48,15 @@ class CustomerController extends Controller
                 return;
             }
             Application::$app->session->setFlash('profileUpdateErr', 'There was some error in updating your profile!');
-            $this->setLayout('cus');
-            return $this->render('Customer/profile',[
+            $this->setLayout('customer-dashboard');
+            return $this->render('Customer/v_customerProfile',[
                 'model'=>$customer,
             ]);
 
         }
 
-        $this->setLayout('cus');
-        return $this->render('Customer/profile',[
+        $this->setLayout('customer-dashboard');
+        return $this->render('Customer/v_customerProfile',[
             'model'=>$customer,
             'FirstName'=>$customer->firstname,
         ]);
@@ -72,12 +70,12 @@ class CustomerController extends Controller
             $vehBooking->loadData($request->getBody());
             if ($vehBooking->saveAs(['booking_Id','status'])){
                 Application::$app->session->setFlash('bookingSuccess', 'Booking Request send successfully!');
-                $response->redirect('/home');
+                $response->redirect('/Customer/VehicleBookingTable');
                 return;
             }
             Application::$app->session->setFlash('bookingErr', 'There was some error in booking your vehicle!');
-            $this->setLayout('cus');
-            return $this->render('Customer/cusBooking',[
+            $this->setLayout('customer-dashboard');
+            return $this->render('Customer/v_viewBookings',[
                 'model'=>$vehBooking,
             ]);
         }
@@ -85,8 +83,8 @@ class CustomerController extends Controller
         $params = [
             'model' => $vehBooking
         ];
-        $this->setLayout('cus');
-        return $this->render('Customer/cusBooking', $params);
+        $this->setLayout('customer-dashboard');
+        return $this->render('Customer/v_viewBookings', $params);
     }
 
     public function vehicleInfo(Request $request, Response $response)
@@ -95,26 +93,27 @@ class CustomerController extends Controller
         $vehInfo = VehInfo::findOne(['veh_Id' => $id]);
         $vehicle = cusVehicle::findOne(['veh_Id' => $id]);
         $vehBooking = new VehBooking();
-        $cus_Id = Application::$app->customer->cus_Id;
+        $cus_Id = Application::$app->user->cus_Id;
 
         if ($request->isPost()){
             $vehBooking->loadData($request->getBody());
             $vehBooking->setCusId($cus_Id);
             $vehBooking->setVoId($request->getBody()['veh_Id']);
-//            $ve);hBooking->setCusId(Application::$app->customer::primaryKey());
+//            $ve);hBooking->setCusId(Application::$app->user::primaryKey());
 //            $vehBooking->setVoId($vehicle->getVoId()
 
-            if ($vehBooking->saveAs(['booking_Id','status'])){
+            if($vehBooking->saveAs(['booking_Id','status'])){
                 Application::$app->session->setFlash('success', 'Booking Request send successfully!');
                 $response->redirect('/VehicleBookingTable');
-                return;
             }else{
                 Application::$app->session->setFlash('error', 'There was some error in booking your vehicle!');
-//                $this->setLayout('cus');
+                $response->redirect('/Customer/Home');
+                //                $this->setLayout('customer-dashboard');
 //                return $this->render('Customer/cusBooking',[
 //                    'model'=>$vehBooking,
 //                ]);
             }
+            return;
 
         }
         if($request->isGet()){
@@ -140,8 +139,8 @@ class CustomerController extends Controller
                     'end_date'=>$end_date,
                     'model' => $vehBooking
                 ];
-                $this->setLayout('cus');
-                return $this->render('Customer/cusBooking', $params);
+                $this->setLayout('customer-dashboard');
+                return $this->render('Customer/v_customerBooking', $params);
 
 
 
@@ -151,15 +150,15 @@ class CustomerController extends Controller
                     'vehicle' => $vehicle,
                     'vehBooking' => $vehBooking
                 ];
-                $this->setLayout('cus');
-                return $this->render('Customer/vehicleInfo', $params);
+                $this->setLayout('customer-dashboard');
+                return $this->render('Customer/v_vehicleInfo', $params);
             }
         }
     }
 
     public function vehicleBookingTable(Request $request, Response $response)
     {
-        $id=Application::$app->customer->cus_Id;
+        $id=Application::$app->user->cus_Id;
         $vehBooking = VehBooking::retrieveAll(['cus_Id' => $id]);
         $vehicle = cusVehicle::retrieveAll();
 
@@ -174,13 +173,13 @@ class CustomerController extends Controller
             'vehicleById' => $vehicleById
         ];
 
-        $this->setLayout('cus');
-        return $this->render('Customer/cusBookingTable', $params);
+        $this->setLayout('customer-dashboard');
+        return $this->render('Customer/v_viewBookings', $params);
     }
 
     public function customerSettings(Request $request, Response $response)
     {
-        $this->setLayout('cus');
-        return $this->render('Customer/cusSettings');
+        $this->setLayout('customer-dashboard');
+        return $this->render('Customer/v_customerSettings');
     }
 }

@@ -63,24 +63,27 @@ class Router
         return call_user_func($callback, $this->request, $this->response );
     }
 
-    public function renderView($view, $params = [])
+    public function renderView($view, $params = [],$layoutparams=[])
     {
-        $layoutContent = $this->layoutContent();
+        $layoutContent = $this->layoutContent($layoutparams);
         $viewContent = $this->renderOnlyView($view, $params);
         return str_replace('{{content}}', $viewContent, $layoutContent);
     }
 
-    public function renderContent($viewContent)
+    public function renderContent($viewContent,$layoutparams=[])
     {
-        $layoutContent = $this->layoutContent();
+        $layoutContent = $this->layoutContent($layoutparams);
         return str_replace('{{content}}', $viewContent, $layoutContent);
     }
 
-    protected function layoutContent()
+    protected function layoutContent($params)
     {
         $layout = Application::$app->layout;
         if (Application::$app->controller){
             $layout = Application::$app->controller->layout;
+        }
+        foreach ($params as $key => $value) {
+            $$key = $value;
         }
         ob_start();
         include_once Application::$ROOT_DIR."/views/layouts/$layout.php";

@@ -11,6 +11,7 @@ class Customer extends dbModel
     const STATUS_INACTIVE = 0;
     const STATUS_ACTIVE = 1;
     const STATUS_DELETED = 2;
+    public string $cus_Id;
     public string $nic = '';
     public string $firstname;
     public string $lastname;
@@ -84,5 +85,8 @@ class Customer extends dbModel
     public function userProfile(string $data)
     {
         return $this->$data;
+    }
+    public function getcus_Id(){
+        return $this->cus_Id;
     }
 }

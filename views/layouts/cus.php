@@ -105,8 +105,8 @@ use app\core\Application; ?>
             <!-- <li class="list-item 1"><a href="#">Sign in</a></li>
             <li class="list-item 2"><a href="#">Register</a></li>       -->
             <div class="profile-cont">
-                <span class="profile-name"><?= Application::$app->customer->displayName(); ?></span>
-                <div class="img-cont"><img src="<?= Application::$app->customer->userprofile('profile_pic')?>" class="profile-image"></div>
+                <span class="profile-name"><?= Application::$app->user->displayName(); ?></span>
+                <div class="img-cont"><img src="<?= Application::$app->user->userprofile('profile_pic')?>" class="profile-image"></div>
             </div>
 
         </ul>

@@ -25,7 +25,7 @@ use app\core\Application;
                 <input id="file" type="file" onchange="loadFile(event)"/>
 
 
-                <img src="<?= Application::$app->customer->userProfile('profile_pic')?>" id="output" width="150" />
+                <img src="/assets/img/uploads/userProfile/<?= Application::$app->user->userProfile('profile_pic')?>" id="output" width="150" />
             </div>
         </form>
 
@@ -41,24 +41,24 @@ use app\core\Application;
             <div class="info_data">
                 <div class="data">
                     <h6>NIC</h6>
-                    <p><?= Application::$app->customer->userprofile('nic')?></p>
+                    <p><?= Application::$app->user->userprofile('nic')?></p>
                 </div>
                 <div class="data">
                     <h6>First Name</h6>
-                    <p><?= Application::$app->customer->userprofile('firstname')?></p>
+                    <p><?= Application::$app->user->userprofile('firstname')?></p>
                 </div>
                 <div class="data">
                     <h6>Last Name</h6>
-                    <p><?= Application::$app->customer->userprofile('lastname')?></p>
+                    <p><?= Application::$app->user->userprofile('lastname')?></p>
                 </div>
 
                 <div class="data">
                     <h6>Email</h6>
-                    <p><?= Application::$app->customer->userprofile('email')?></p>
+                    <p><?= Application::$app->user->userprofile('email')?></p>
                 </div>
                 <div class="data">
                     <h6>Phone No</h6>
-                    <p><?= Application::$app->customer->userprofile('phoneno')?></p>
+                    <p><?= Application::$app->user->userprofile('phoneno')?></p>
                 </div>
                 <div class="data">
                     <h6>Address</h6>

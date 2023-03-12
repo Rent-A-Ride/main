@@ -2,12 +2,14 @@
 
 namespace app\controllers;
 
+use app\core\Application;
+use app\core\Controller;
 use app\core\Request;
 use app\core\Response;
 use app\models\owner;
 use app\models\vehicle_Owner;
 
-class VehicleOwnerController
+class VehicleOwnerController extends Controller
 {
 
     // public function VehicleOwnerProfile(Request $req, Response $res){
@@ -35,8 +37,10 @@ class VehicleOwnerController
     }
     public function vehownerViewProfile(Request $req,Response $res){
 
-        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="vehicleowner"){
-            return $res->render("VehicleOwner/vehicleOwnerProfile","vehicleOwner-dashboard");
+        if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="vehicleowner"){
+            $this->setLayout('vehicleOwner-dashboard');
+            return $this->render("VehicleOwner/vehicleOwnerProfile",[],[]);
+            // return $res->render("VehicleOwner/vehicleOwnerProfile","vehicleOwner-dashboard");
         }
     }
 

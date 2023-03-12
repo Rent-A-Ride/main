@@ -25,10 +25,10 @@ class Controller
         $this->layout = $layout;
 
     }
-    public function render($view, $params = [])
+    public function render($view, $params = [],$layoutparam = [])
     {
         // return $this->response->renderView($view, $params);
-        return Application::$app->response->renderView($view, $params);
+        return Application::$app->router->renderView($view, $params);
     }
 
     public function customerMiddleware(BaseMiddleware $middleware)

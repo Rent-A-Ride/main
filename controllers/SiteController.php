@@ -17,7 +17,7 @@ class SiteController extends Controller
     }
     public function contact(): string
     {
-        return $this->render('contact');
+        return $this->render('contact',"");
     }
     public function handleContact(Request $request): string
     {
@@ -28,17 +28,17 @@ class SiteController extends Controller
     public function uploadImage(Request  $request, Response $response)
     {
         $image=$_FILES['image'];
-        $Customer=Customer::findOne(['cus_Id'=>Application::$app->customer->cus_Id]);
-        $image['name']='profile'.Application::$app->customer->cus_Id.'.jpg';
+        $Customer=Customer::findOne(['cus_Id'=>Application::$app->user->cus_Id]);
+        $image['name']='profile'.Application::$app->user->cus_Id.'.jpg';
 
         if (!empty($image)){
             move_uploaded_file($image['tmp_name'],Application::$ROOT_DIR.'/public/assets/img/uploads/userProfile/'.$image['name']);
 
         }
-        $Customer->profile_pic='assets/img/uploads/userProfile/'.$image['name'];
-        $Customer->update(Application::$app->customer->cus_Id,['profile_pic']);
+        $Customer->profile_pic=$image['name'];
+        $Customer->update(Application::$app->user->cus_Id,['profile_pic']);
         Application::$app->session->setFlash('profileUpdate', 'Profile picture Updated Successfully!');
-        Application::$app->response->redirect('/profile');
+        Application::$app->response->redirect('/Customer/Profile');
 
 
         return json_encode(['status'=>true]);
