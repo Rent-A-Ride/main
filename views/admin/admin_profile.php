@@ -6,7 +6,7 @@
 
     <div class="profile_content">
         <div class="profile_img">
-            <img src="/assets/img/user_profile/<?php echo $owner_details[0]['profile_img']?>" alt="" class="profile_img_img">
+            <img src="/assets/img/user_profile/<?php echo $owner_details[0]['profile_pic']?>" alt="" class="profile_img_img">
         </div>
         <div class="profile_details">
             <div class="details_heading"> 
@@ -25,7 +25,7 @@
                 <p><?php echo(" ".$owner_details[0]['Owner_area'])  ?></p>
                 <p><?php echo(" ".$owner_details[0]['phone_No'])  ?></p>
                 <p><?php echo(" ".$owner_details[0]['Nic']) ?></p>
-                <p><?php echo(" ".$owner_details[0]['email'])  ?></p>
+                <p><?php echo(" ".$owner_details[0]['license_No'])  ?></p>
             </div>
 
         </div>

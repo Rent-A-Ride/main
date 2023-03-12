@@ -4,13 +4,14 @@ namespace app\core;
 
 class Request extends Controller
 {
-    public Session $session;
-
-    public function __construct()
-    {
-        $this->session = new Session();
-        Application::$app->session=$this->session;
-    }
+   public Session $session;
+//
+   public function __construct()
+   {
+//        $this->session = new Session();
+//        Application::$app->session=$this->session;
+    // $this->session = Application::$app->session;
+   }
 
     public function getPath()
     {
@@ -48,7 +49,7 @@ class Request extends Controller
         return $this->method() === 'post';
     }
 
-    public function getBody()
+    public function getBody(): array
     {
         $body = [];
         if ($this->method() === 'get'){

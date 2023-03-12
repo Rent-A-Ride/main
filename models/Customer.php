@@ -11,6 +11,7 @@ class Customer extends dbModel
     const STATUS_INACTIVE = 0;
     const STATUS_ACTIVE = 1;
     const STATUS_DELETED = 2;
+    public string $cus_Id;
     public string $nic = '';
     public string $firstname;
     public string $lastname;
@@ -65,7 +66,7 @@ class Customer extends dbModel
             ]],
             'gender' => [self::RULE_REQUIRED],
             'address' => [self::RULE_REQUIRED],
-            'password' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 8], [self::RULE_MAX, 'max' => 64]],
+            'password' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 8], [self::RULE_MAX, 'max' => 64], self::RULE_PASSWORD],
             'passwordConfirm' => [self::RULE_REQUIRED, [self::RULE_MATCH, 'match' => 'password']],
 
         ];
@@ -84,5 +85,8 @@ class Customer extends dbModel
     public function userProfile(string $data)
     {
         return $this->$data;
+    }
+    public function getcus_Id(){
+        return $this->cus_Id;
     }
 }

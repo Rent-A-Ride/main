@@ -38,18 +38,22 @@ class VehicleOwnerController extends Controller
     }
     public function vehownerViewProfile(Request $req,Response $res){
 
-        if ($req->session->get("authenticated") && $req->session->get("user_role")==="vehicleowner"){
 
-            $vehowner = new vehicle_Owner();
-            $vehicleowner=$vehowner->Vehicleowner_profile($req->session->get("user_id"));
-            $id = $req->session->get("user_id");
+            $vehowner = vehicle_Owner::findOne(['vo_ID' => Application::$app->session->get('user')]);
+            $id = Application::$app->session->get('user');
+            echo '<pre>';
+            var_dump($vehowner);
+            echo '</pre>';
+            exit();
+
             $nic = $vehicleowner[0]['Nic'];
 
             if ($req->isPost()){
                 $vehicleowner =[new vehicle_Owner()];
                 $vehicleowner[0]->loadData($req->getBody());
 
-                if ($vehicleowner[0]->update($nic,['owner_Fname','owner_Lname', 'phone_No', 'owner_address', 'license_No'])){                 $req->session->setFlash('profileUpdate', 'Profile Updated Successfully!');
+                if ($vehicleowner[0]->update($nic,['owner_Fname','owner_Lname', 'phone_No', 'owner_address', 'license_No'])){
+                    $req->session->setFlash('success', 'Profile Updated Successfully!');
                     $res->redirect('/vehicleOwner/Profile');
                     return;
                 }else{
@@ -65,7 +69,7 @@ class VehicleOwnerController extends Controller
 
 
             return $res->render("VehicleOwner/vehicleOwnerProfile","vehicleOwner-dashboard",['vehicleowner'=>$vehicleowner]);
-        }
+
     }
 
     public function getEditProfile(Request $req,Response $res){

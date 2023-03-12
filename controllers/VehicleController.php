@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\core\Controller;
 use app\core\Request;
 use app\core\Response;
+use app\models\cusVehicle;
 use app\models\vehicle;
 
 
@@ -52,27 +53,25 @@ class VehicleController extends Controller
 
 
     public function ownerGetVehicle(Request $req, Response $res){
-        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="owner"){
             $vehicleModel = new vehicle();
             $vehicles = $vehicleModel->getVehicle();
 //            print_r($vehicles);
             return $vehicles;
 //            return $res->render(view: "admin-vehicle",layout: "owner-dashboard",pageParams: ["vehicles"=>$vehicles]);
-        }
-        return $res->render("login","main");
+
+
     }
     
     public function vehicleownerGetVehicle(Request $req, Response $res){
         
-        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="vehicleowner"){
+
             $vehicleModel = new vehicle();
             $vehicles = $vehicleModel->vehicleOwnergetVehicle($req->session->get("user_id"));
             
 //            print_r($vehicles);
             return $vehicles;
 //            return $res->render(view: "admin-vehicle",layout: "owner-dashboard",pageParams: ["vehicles"=>$vehicles]);
-        }
-        return $res->render("login","main");
+
     }
 
     public function viewVehicleProfile(Request $req, Response $res,$query){
@@ -94,18 +93,17 @@ class VehicleController extends Controller
 
     }
     public function ownerGetVehicletoAdd(Request $req, Response $res){
-        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="owner"){
+
             $vehicleModel = new vehicle();
             $vehicles = $vehicleModel->getVehicletoAdd();
 //            print_r($vehicles);
             return $vehicles;
 //            return $res->render(view: "admin-vehicle",layout: "owner-dashboard",pageParams: ["vehicles"=>$vehicles]);
-        }
-        return $res->render("login","main");
+
     }
 
     public function addVehicle(Request $req, Response $res){
-        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="owner"){
+
             $query=$req->query();
             $vehicleModel = new vehicle();
 
@@ -116,8 +114,7 @@ class VehicleController extends Controller
 //            print_r($vehicles);
             return $vehicles;
 //            return $res->render(view: "admin-vehicle",layout: "owner-dashboard",pageParams: ["vehicles"=>$vehicles]);
-        }
-        return $res->render("login","main");
+
     }
 
 
