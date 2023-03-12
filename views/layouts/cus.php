@@ -17,7 +17,7 @@ use app\core\Application; ?>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="assets/css/customer/customer.css">
+    <link rel="stylesheet" href="assets/css/layout/customer.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/layout/cus_home/table.css">
 
@@ -105,8 +105,8 @@ use app\core\Application; ?>
             <!-- <li class="list-item 1"><a href="#">Sign in</a></li>
             <li class="list-item 2"><a href="#">Register</a></li>       -->
             <div class="profile-cont">
-                <span class="profile-name"><?= Application::$app->customer->displayName(); ?></span>
-                <div class="img-cont"><img src="<?= Application::$app->customer->userprofile('profile_pic')?>" class="profile-image"></div>
+                <span class="profile-name"><?= Application::$app->user->displayName(); ?></span>
+                <div class="img-cont"><img src="<?= Application::$app->user->userprofile('profile_pic')?>" class="profile-image"></div>
             </div>
 
         </ul>
@@ -121,6 +121,16 @@ use app\core\Application; ?>
             <?= Application::$app->session->getFlash('profileUpdate') ?>
         </div>
     <?php endif; ?>
+    <?php if (Application::$app->session->getFlash('success')):?>
+        <div class="flash-message success">
+            <?= Application::$app->session->getFlash('success') ?>
+        </div>
+    <?php endif; ?>
+    <?php if (Application::$app->session->getFlash('error')):?>
+        <div class="flash-message error">
+            <?= Application::$app->session->getFlash('error') ?>
+        </div>
+    <?php endif; ?>
 
     <div class="banner-msg">
         <h1>FAST AND EASY WAY TO <span class="bold yellow">RENT A VEHICLE</span></h1>
@@ -132,11 +142,11 @@ use app\core\Application; ?>
 
 
 </body>
-<script src="assets/javascript/index.js"></script>
-<!-- <script src="assets/javascript/component/sidebar.js"></script> -->
-<!-- <script src="assets/javascript/components/search.js"></script>
+<script src="assets/javascript/components/navbar.js"></script>
+<script src="assets/javascript/components/sidebar.js"></script>
+<script src="assets/javascript/components/search.js"></script>
 <script src="assets/javascript/components/details.js"></script>
 <script src="assets/javascript/components/booking.js"></script>
 <script src="assets/javascript/components/profile.js"></script>
-<script src="assets/javascript/components/date-validation.js"></script> -->
+<script src="assets/javascript/components/date-validation.js"></script>
 </html>

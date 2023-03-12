@@ -4,6 +4,7 @@
     $hasErrors = isset($errors) && !empty($errors);
     $isemailError = $hasErrors && isset($errors['email']);
     $isPasswordlError = $hasErrors && isset($errors['password']);
+    $isUserTypeError = $hasErrors && isset($errors['user_type']);
 
 
 
@@ -50,6 +51,21 @@
                             />
                             <label>Password</label>
                             <span class="form-error"> <?php echo $isPasswordlError? "{$errors['password']}" : ""?></span>
+                        </div>
+                        <div class="input-wrap">
+                            <select 
+                                name="user_type"
+                                class="input-field"
+
+                                >
+                            
+                                <option value="owner">Admin</option>
+                                <option value="vehicleowner">Vehicle Owner</option>
+                                <option value="driver">Driver</option>
+                                <option value="customer">Customer</option>
+                            </select>
+                            <label>User Role</label>
+                            <span class="form-error"> <?php echo $isUserTypeError? "{$errors['user_type']}" : ""?></span>
                         </div>  
 
                         <input type="submit" value="Sign In" class="sign-btn">

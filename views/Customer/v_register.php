@@ -1,9 +1,12 @@
 <?php
-/** @var $model \app\models\adminCustomer */
+/** @var $model Customer */
+
+use app\models\Customer;
+
 ?>
 
+<h1>Register</h1>
 
-<h1>Customer Register</h1>
 
 <main class="sign-up-mode">
     <div class="box">
@@ -22,6 +25,22 @@
                     </div>
 
                     <div class="actual-form">
+                        <div class="input-wrap">
+
+                            <input
+                                name="nic"
+                                type="text"
+                                minlength="10"
+                                maxlength="12"
+                                class="input-field<?= $model->hasError('firstname') ? ' invalid' : ''?>"
+                                autocomplete="off"
+                                value="<?= $model->thereIsError() ? $model->nic : ''?>"
+
+                            />
+                            <label>NIC</label>
+                            <span class="form-error"><?= $model->getFirstError('nic') ?></span>
+                        </div>
+
                         <div class="input-wrap">
 
                             <input
@@ -88,6 +107,21 @@
                             <span class="form-error"> <?= $model->getFirstError('gender') ?></span>
 
                         </div>
+
+                        <div class="input-wrap">
+                            <input
+                                name="address"
+                                type="text"
+                                class="input-field<?= $model->hasError('address') ? ' invalid' : ''?>"
+                                autocomplete="off"
+                                value=""
+
+                            />
+                            <label>Address</label>
+                            <span class="form-error"> <?= $model->getFirstError('address') ?></span>
+                        </div>
+
+
 
                         <div class="input-wrap">
                             <input

@@ -13,7 +13,7 @@ class vehicleowner extends dbModel
     const STATUS_ACTIVE = 1;
     const STATUS_DELETED = 2;
     public string $Owner_Nic;
-    public int $user_ID;
+    public int $vo_ID;
     public string $owner_Fname;
     public string $owner_Lname;
     public string $owner_area;
@@ -30,12 +30,12 @@ class vehicleowner extends dbModel
 
     public static function tableName(): string
     {
-        return 'users';
+        return 'vehicleowner';
     }
 
     public static function primaryKey():string
     {
-        return 'id';
+        return 'vo_ID';
     }
 
     public function save(): bool
@@ -72,7 +72,11 @@ class vehicleowner extends dbModel
 
     public function attributes(): array
     {
-        return ['Owner_Nic', 'user_ID', 'owner_Fname', 'owner_Lname', 'owner_area', 'owner_address', 'phone_No','email','gender','admin_approved'];
+        return ['Owner_Nic', 'vo_ID', 'owner_Fname', 'owner_Lname', 'owner_area', 'owner_address', 'phone_No','email','gender','admin_approved'];
+    }
+
+    public function getvo_ID(){
+        return $this->vo_ID;
     }
 
     public  function admindisablevehowner($vo_id){
