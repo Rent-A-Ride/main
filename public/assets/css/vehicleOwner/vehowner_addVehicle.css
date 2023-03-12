@@ -48,6 +48,7 @@
     min-height: 490px;
     background-color:#fff;
 
+
 }
 
 .container form .form{
@@ -84,6 +85,8 @@
     font-weight: 500;
     margin: 6px 0;
     color: #333;
+    background-color: #D9D9D9;
+    justify-content: center;
 }
 
 .container form .fields{
@@ -93,10 +96,11 @@
     flex-wrap: wrap;
 }
 
+
+
 form .feilds .input-field{
     display: flex;
-    width: calc(100% / 3 -15px);
-    background-color: crimson;
+    width: 100%;
     flex-direction: column;
 }
 
@@ -104,6 +108,9 @@ form .feilds .input-field{
     font-size: 12px;
     font-weight:  500;
     color: #2e2e2e;
+    width: 200%;
+    justify-content: center;
+
 }
 
 .input-field input, select{
@@ -112,12 +119,21 @@ form .feilds .input-field{
     font-weight: 400;
     color: #333;
     border-radius: 5px;
-    border: 1px solid #aaa;
-    padding: 0 15px;
-    height: 42px;
-    margin: 8px 0px;
-    margin-right: 10px;
+    /*border: 1px solid #aaa;*/
+    /*padding: 0 15px;*/
+    height: 35px;
+    /*margin: 8px 0px;*/
+    /*margin-right: 10px;*/
+    margin-top: 10px;
+    margin-left: 60px;
+    margin-right: 20px;
+    /*background-color: coral;*/
+    width: 50%;
 
+}
+
+.input-field-img{
+    width:100%;
 }
 
 .input-field input:is(:focus, :valid){
@@ -180,9 +196,12 @@ form .buttons button, .backbtn{
 .form .input-box {
     width: 100%;
     margin-top: 20px;
+
+
 }
 .input-box label {
     color: #333;
+
 }
 .form :where(.input-box input, .select-box) {
     position: relative;
@@ -195,6 +214,8 @@ form .buttons button, .backbtn{
     border: 1px solid #ddd;
     border-radius: 6px;
     padding: 0 15px;
+
+
 }
 .input-box input:focus {
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
@@ -255,3 +276,4 @@ form .buttons button, .backbtn{
         row-gap: 15px;
     }
 }
+

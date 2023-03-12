@@ -30,7 +30,11 @@ class Response
 
     protected function layoutContent()
     {
-        $layout = Application::$app->controller->layout;
+        $layout = Application::$app->layout;
+        if (Application::$app->controller){
+            $layout = Application::$app->controller->layout;
+        }
+//        $layout = Application::$app->controller->layout;
         ob_start();
         include_once Application::$ROOT_DIR."/views/layouts/$layout.php";
         return ob_get_clean();
@@ -52,7 +56,7 @@ class Response
         $viewContent = $this->renderOnlyView($view, $pageParams);
         return str_replace('{{content}}', $viewContent, $layoutContent);
     }
-    private function getLayout(string $layout = "main", array $params = []): string
+    private function getLayout(string $layout, array $params = []): string
     {
         foreach ($params as $key => $value) {
             $$key = $value;

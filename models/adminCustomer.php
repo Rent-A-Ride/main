@@ -6,10 +6,11 @@ use app\core\Application;
 use app\core\Request;
 use app\core\Response;
 use app\core\Database;
+use app\core\Model;
 
 
 
-class adminCustomer
+class adminCustomer 
 {
     private \PDO $pdo;
     private array $body;
@@ -56,29 +57,21 @@ class adminCustomer
         
     // }
 
-    public function driver_login($user_id)
-    {
-        $sql = "SELECT * FROM customer WHERE user_ID=:user_id";
-        $statement = Application::$app->db->pdo->prepare($sql);
-        $statement->bindValue(':user_id',$user_id);
-        $statement->execute();
-        $customer= $statement->fetchObject();
-        if(!$customer){
-            $errors['customer'] = 'Email does not have owner account';
-        }
-
-        if (empty($errors)){
-            return $customer;
-        }
-        else {
-            return $errors;
-        }
-    }
+    
 
     public function getcustomer(){
         
-        return Application::$app->db->pdo->query("SELECT * FROM customer INNER JOIN users ON customer.user_ID=users.user_ID INNER JOIN customerdoc ON customer.custmer_ID=customerdoc.customer_ID")->fetchAll(\PDO::FETCH_ASSOC);
+        return Application::$app->db->pdo->query("SELECT * FROM customer WHERE customer.status=1")->fetchAll(\PDO::FETCH_ASSOC);
 
+    }
+
+    public  function admindisablecustomer($cus_id){
+        $admin_approved=0;
+        var_dump($cus_id);
+        $query1="UPDATE customer SET status =:availability WHERE cus_Id=$cus_id";
+        $statement1= Application::$app->db->prepare($query1);
+        $statement1->bindValue(":availability",$admin_approved);
+        $statement1->execute();
     }
                 
 

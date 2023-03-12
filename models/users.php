@@ -20,14 +20,19 @@ class users extends dbModel
     public string $passwordConfirm;
     public int $status = self::STATUS_INACTIVE;
 
+    public const Owner = 'owner';
+    public const VEHICLEOWNER = 'vehicleowner';
+    public const DRIVER = 'driver';
+    public const CUSTOMER = 'customer';
 
 
-    public function tableName(): string
+
+    public static function tableName(): string
     {
         return 'users';
     }
 
-    public function primaryKey():string
+    public static function primaryKey():string
     {
         return 'id';
     }

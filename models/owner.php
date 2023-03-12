@@ -6,13 +6,25 @@ use app\core\Application;
 use app\core\Request;
 use app\core\Response;
 use app\core\Database;
+use app\core\dbModel;
 
-
-
-class owner
+class owner extends dbModel
 {
     // private \PDO $pdo;
     private array $body;
+    public string $user_ID;
+    public string $first_Name;
+    public string $last_Name;
+    public string $email;
+    public string $Nic;
+    public string $profile_pic= '';
+    public string $license_No;
+    public string $phone_No;
+    public string $Owner_area;
+    public string $gender = '';
+    // public string $address;
+    // public string $password;
+    // public string $passwordConfirm = '';
 
     public function __construct(array $registerBody=[])
     {
@@ -20,6 +32,45 @@ class owner
         $this->body= $registerBody;
 
 
+    }
+
+    public static function tableName(): string
+    {
+        return 'owner';
+    }
+
+    public static function primaryKey():string
+    {
+        return 'user_ID';
+    }
+
+    public function rules(): array
+    {
+        return [];
+    }
+
+    public function attributes(): array
+    {
+        return ['user_ID','Owner_area','phone_No','Nic','email','first_Name','last_Name','profile_pic','license_No'];
+    }
+
+    public function save(): bool
+    {
+        return parent::save();
+    }
+
+    public function displayName(): string
+    {
+        return $this->first_Name.' '.$this->last_Name;
+    }
+
+    public function userProfile(string $data)
+    {
+        return $this->$data;
+    }
+
+    public function getuser_ID(){
+        return $this->user_ID;
     }
 
     // public function login():array|object
@@ -56,11 +107,11 @@ class owner
         
     // }
 
-    public function owner_login($user_id)
+    public function owner_login($email)
     {
-        $sql = "SELECT * FROM owner WHERE user_ID=:user_id";
+        $sql = "SELECT * FROM owner WHERE email=:email";
         $statement = Application::$app->db->pdo->prepare($sql);
-        $statement->bindValue(':user_id',$user_id);
+        $statement->bindValue(':email',$email);
         $statement->execute();
         $owner= $statement->fetchObject();
         if(!$owner){
@@ -78,7 +129,8 @@ class owner
     }
 
     public function owner_profile($user_id){
-        return Application::$app->db->pdo->query("SELECT * FROM users INNER JOIN owner where owner.user_ID=$user_id AND users.user_ID=$user_id")->fetchAll(\PDO::FETCH_ASSOC);
+        
+        return Application::$app->db->pdo->query("SELECT * FROM  owner where owner.user_ID=$user_id")->fetchAll(\PDO::FETCH_ASSOC);
     }
     public function owner_img($user_id){
         return Application::$app->db->pdo->query("SELECT users.profile_img, owner.first_Name, owner.last_Name FROM users INNER JOIN owner WHERE users.user_ID=$user_id AND owner.user_ID=$user_id")->fetchAll(\PDO::FETCH_ASSOC);

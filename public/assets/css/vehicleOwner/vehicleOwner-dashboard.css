@@ -9,11 +9,14 @@
 
 @import url('../admin/admin-vehicle.css');
 
+@import url('vehicleOwnerViewCustomerReq.css');
+@import url('newVOProfile.css');
+
 
 
 /* @import url('vehowner_addVehicle.css'); */
 @import url('vehowner_addVehicle.css');
-@import "../admin/ownerViewVehicleProfile.css";
+/*@import "../admin/ownerViewVehicleProfile.css";*/
 
 /* importing admin_Vehicleowner */
 @import "../admin/admin_Vehicleowner.css";
@@ -23,9 +26,9 @@
 /* @import "../admin/admin_profile.css"; */
 
 /*@import "../admin/adminViewVehicleOwner.css";*/
-@import url("vehicleownerProfile.css");
+/*@import url("vehicleownerProfile.css");*/
 
-@import url("vehicleownerEditProfile.css");
+/*@import url("vehicleownerEditProfile.css");*/
 
 @import url("vehicleownerPayments.css");
 
@@ -38,6 +41,8 @@
 @import url("vehicleOwnerUpdateDocuments.css");
 
 @import url("popupbox/popupbox.css");
+
+@import url("popupbox/popup.css");
 
 
 

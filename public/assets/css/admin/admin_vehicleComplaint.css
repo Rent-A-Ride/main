@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;
+}
+.body{
+    widows: 100%;
+    position: relative;
+    display: flex;
+}
+
+#side .items li:nth-child(3) {
+    background-color: #3BB78F;
+    border-radius: 0 50px 50px 0;
+    width: 90%;
+}
+#rest{
+    background-color: #ffffff;
+    margin-top: 5%;
+    margin-left: 10%;
+    max-height: 100%;
+    width: 80%;
+    border-radius: 25px 0 0 0;
+    overflow-y: scroll;
+}
+.complaintlist-option .date-filter{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 20px;
+}
+.wislist-option .date-filter .from-to{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    background-color: #efefef;
+    height: 50px;
+    border-radius: 10px;
+}
+.date-filter .from-to h4{
+    margin-left: 10px;
+
+}
+.date-filter .from-to input{
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+    width: 250px;
+}
+.date-filter .from-to input:focus{
+    outline: none;
+}
+.wislist-option .filter-option{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 30px;
+}
+.wislist-option .filter-option .options{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 150px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+.complaintlist-table table thead{
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+}
+.complaintlist-table table{
+    border-collapse: collapse;
+    width: 90%;
+    margin: 30px auto 20px auto;
+}
+.complaintlist-table table td, .wishlist-table table th{
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+.complaintlist-table table th{
+    background-color: black;
+    color: #fff;
+}
+.complaintlist-table table tbody tr:nth-child(even){
+    background-color: #d9d9d9;
+}
+
+.complaintlist-table table tbody tr:nth-child(odd){
+    background-color: #efefef;
+}
+
+
+
+
+

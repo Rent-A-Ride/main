@@ -104,9 +104,9 @@ input {
     max-width: 380px;
     width: 100%;
     background-color: #f0f0f0;
-    margin: 10px 0;
+    margin: 10px ;
     height: 55px;
-    border-radius: .3rem;
+    border-radius: .10rem;
     display: grid;
     grid-template-columns: 15% 85%;
     padding: 0 0.4rem;

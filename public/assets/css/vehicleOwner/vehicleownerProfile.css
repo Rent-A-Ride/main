@@ -76,6 +76,7 @@
     align-items: center;
     min-height: 60vh;
     height: 100%;
+    list-style-type: none;
 }
 
 .page-name{
@@ -117,18 +118,17 @@
 }
 
 
-/*.user-data ul {*/
-/*    list-style-type: none;*/
-/* display: inline-block;
-width: 30%
+.user-data ul {
+list-style-type: none;
+display: inline-block;
 }
 
-.user-data ul li span{
+/*.user-data ul li span{*/
 
-    display: inline-block;
-    min-width: 50px;
-    margin: 6px 0;
-}
+/*    display: inline-block;*/
+/*    min-width: 50px;*/
+/*    margin: 6px 0;*/
+/*}*/
 
 
 

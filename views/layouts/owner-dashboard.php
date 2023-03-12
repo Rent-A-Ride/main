@@ -38,7 +38,10 @@
             <span class="tooltip">Search</span>
         </li> -->
 
-        <li class="<?php 
+        <li class="<?php
+
+        use app\core\Application;
+
         if($function=='Dashboard'){
             echo ('active');
         }
@@ -127,6 +130,39 @@
             <span class="tooltip">view Driver</span>
         </li>
         <li class="<?php 
+        if($function=='vehiclecomplaint'){
+            echo ('active');
+        }
+        ?>">
+            <a href="/admin/vehicleComplaint">
+                <i class="fa-sharp fa-regular fa-comment"></i>
+                <span class="links_name">Vehicle Complaint</span>
+            </a>
+            <span class="tooltip">Complaint Regarding Vehicles</span>
+        </li>
+        <li class="<?php 
+        if($function=='drivercomplaint'){
+            echo ('active');
+        }
+        ?>">
+            <a href="/admin/driverComplaint">
+                <i class="fa-light fa-address-book"></i>
+                <span class="links_name">Driver Complaint</span>
+            </a>
+            <span class="tooltip">Complaint Regarding Drivers</span>
+        </li>
+        <li class="<?php 
+        if($function=='licenseexpiring'){
+            echo ('active');
+        }
+        ?>">
+            <a href="/admin/license_Exp">
+                <i class="fa-regular fa-calendar-xmark"></i>
+                <span class="links_name">License Expiering</span>
+            </a>
+            <span class="tooltip">License Expiering</span>
+        </li>
+        <li class="<?php 
         if($function=='Payment'){
             echo ('active');
         }
@@ -137,6 +173,7 @@
             </a>
             <span class="tooltip">Payment</span>
         </li>
+        
 
         <li class="profile">
             <a href="/logout" class="logout">
@@ -161,8 +198,8 @@
             <li class="list-item 2"><a href="#">Register</a></li>       -->
             <!-- <div class="vision"><p>Mobility Without Hassel</p> </div> -->
             <div class="profile-cont">
-                <span class="profile-name"><?php echo($profile_img[0]['first_Name']." ".$profile_img[0]['last_Name']) ?></span>
-                <div class="img-cont"><img  src="/assets/img/user_profile/<?php echo ($profile_img[0]['profile_img'])?>" class="profile-image"></div>
+                <span class="profile-name"><?= Application::$app->user->displayName(); ?></span>
+                <div class="img-cont"><img src="/assets/img/user_profile/<?= Application::$app->user->userprofile('profile_pic')?>" class="profile-image"></div>
             </div>
 
         </ul>
@@ -186,8 +223,15 @@
 
 
 </body>
-<script src="/assets/javascript/component/navbar.js"></script>
+<!-- <script src="/assets/javascript/component/navbar.js"></script>
 <script src="/assets/javascript/component/sidebar.js"></script>
 <script src="/assets/javascript/component/search.js"></script>
-<script src="/assets/javascript/adminOverview.js"></script>
+<script src="/assets/javascript/admin/adminOverview.js"></script>
+<script src="/assets/javascript/admin/details.js"></script>
+<script src="/assets/javascript/utils/index.js"></script>
+<script src="/assets/javascript/component/Modal.js"></script>
+<script src="/assets/javascript/admin/vehicle_complaint.js"></script> -->
+<script type="module" src="/assets/javascript/index.js"></script>
+
+
 </html>

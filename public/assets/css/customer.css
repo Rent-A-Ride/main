@@ -1,0 +1,147 @@
+/* Google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
+
+/* Navigation */
+@import url(customer/components/nav.css);
+@import url("components/navProfile.css");
+
+/*  Sidebar */
+@import url("components/sidebar.css");
+
+/* Customer Home */
+@import url(customer/cusHome/table.css);
+@import url(customer/cusHome/search.css);
+
+/* Customer Profile */
+@import url(customer/profile.css);
+
+
+/* Customer Vehicle */
+@import url(customer/cusVehicleInfo/vehicleCards.css);
+
+/* Customer Booking */
+@import url(customer/cusBooking/booking.css);
+@import url(customer/cusBooking/mindetails.css);
+
+/* Customer Booking Table */
+@import url(customer/cusBookingTable/thisStyle.css);
+
+/* Customer Settings */
+@import url(customer/cusSettings/settings.css);
+
+/* Errors */
+@import url(registerForm.css);
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--body-color);
+}
+
+.banner-msg {
+    margin: 30px 50px;
+    padding: 15px;
+    width: 90%;
+    background-color: white;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.banner-msg h1{
+    font-size: medium;
+    font-weight: 600;
+}
+
+
+.bold {
+    font-weight: bold;
+}
+
+.yellow {
+    color: #FAB84C;
+}
+
+.main-title {
+    text-align: center;
+    margin: 5px 20px;
+}
+
+.sub-title {
+    margin-left: 50px ;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.separator::before,
+.separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #000;
+}
+
+.separator:not(:empty)::before {
+    margin-right: .25em;
+}
+
+.separator:not(:empty)::after {
+    margin-left: .25em;
+}
+
+
+.info-cont {
+    width: 100%;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.info-box {
+    background-color: white;
+    width: 920px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+}
+
+.info {
+    display: flex;
+    flex-direction: row;
+
+    padding: 10px;
+    margin: 5px 20px;
+}
+
+.info .info-logo {
+    margin: 5px;
+    margin-right: 15px;
+}
+
+.fav-cards {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.fav1{
+    width: 50%;
+    height: 250px;
+    background-color: #2d2d2d;
+}
+
+.fav2{
+    width: 50%;
+    height: 250px;
+    background-color: #444444;
+}
