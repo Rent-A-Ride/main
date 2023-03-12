@@ -91,8 +91,9 @@ select{
     border-radius: 50%;
 }
 .admin_vehicleOwnerView{
-    background: linear-gradient(300deg,#FAB84C,goldenrod);
-
+    /* background: linear-gradient(300deg,#FAB84C,goldenrod); */
+    text-align: center;
+    /* padding: 1px; */
     color: black;
     padding-right: 10px;
     border-radius: 1rem;
@@ -127,6 +128,7 @@ select{
     margin-left: 2%;
     width: 25%;
     text-align: center;
+    color: #FAB84C;
 }
 .adminvehicleOwner_location_1{
     background: whitesmoke;
@@ -136,6 +138,7 @@ select{
     margin-left: 2%;
     width: 25%;
     text-align: center;
+    color: #FAB84C;
 }
 .adminvehicleOwner_Novehicles{
     /* background: red; */
@@ -166,10 +169,7 @@ select{
     display: flex;
     text-align: center;
 }
-.admin_vehicleOwnerView{
-    text-align: center;
-    padding: 1px;
-}
+
 
 .Vehicleownerdetails:hover{
     transform: scale(1.02);

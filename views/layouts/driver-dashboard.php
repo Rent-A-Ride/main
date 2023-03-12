@@ -1,6 +1,6 @@
 <?php
 
-?>
+ ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,126 +8,161 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assests/css/admin-dashboard.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-    <title>Rent-A-Ride</title>
+    <title>Rent A Ride</title>
+
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/assets/css/driver/driver-dashboard.css">
+    
+
+    <!-- JQUERY -->
+    <script src="assets/javascript/jquery-3.6.3.min.js"></script>
+
 </head>
 <body>
 
-<section id="side-bar">
-    <div class="logo">
-        <img src="/assests/img/logo.png" alt="" class="logo-image">
+<!-- sidebar -->
+
+<div class="sidebar">
+    <div class="logo-details">
+        <div class="logo_name">Rent A Ride</div>
+        <i class='bx bx-menu' id="btn" ></i>
     </div>
-
-
-    <ul class="side-bar-menu top">
-        <li class="active">
-            <a href="">
-            <img src="/assests/img/profile.png" class="pic">
-                <span>Profile</span>
-            </a>
-
-        </li>
-        <li >
-            <a href="#">
-                <i class="fa-solid fa-users-line "></i>
-            
-                <span>Requests</span>
-            </a>
-
-        </li>
-        <!-- <li >
-            <a href="admin-vehicle">
-            <img src="/assests/img/driver.png" class="pic">
-                <span>Drivers</span>
-            </a>
-
-        </li> -->
-        <li>
-            <a href="#">
-
-                <img src="/assests/img/g.jpg" class="pic">
-                <span>Payments</span>
-
-            </a>
-
-        </li>
-        <li>
-            <a href="viewVehicleowner">
-                <i class="fa-regular fa-star"></i>
-                <span>Reviews</span>
-            </a>
-
-        </li>
+    <ul class="side-list">
         <!-- <li>
-            <a href="viewownerDriver">
-                <img src="/assests/img/driver.png" class="pic">
-                <span>Driver</span>
-            </a>
-
-        </li>
-        <li>
-            <a href="#">
-                <img src="/assests/img/g.jpg" class="pic">
-                <span>Payment</span>
-            </a>
-
+            <i class='bx bx-search' ></i>
+            <input type="text" placeholder="Search...">
+            <span class="tooltip">Search</span>
         </li> -->
 
-    </ul>
-    <ul class="side-bar-menu bottum1">
-
-
-        <li id="bottum1">
-            <a href="#">
-                <img src="/assests/img/settings.jpg" class="pic">
-                <span>Settings</span>
+        <!-- <li>
+            <a href="/home">
+                <i class='bx bx-home' ></i>
+                <span class="links_name">Home</span>
             </a>
-
+            <span class="tooltip">Home</span>
+        </li> -->
+        <!-- <li>
+            <a href="#">
+                <i class='bx bx-car' ></i>
+                <span class="links_name">View Vehicles</span>
+            </a>
+            <span class="tooltip">view vehicles</span>
+        </li> -->
+        <li>
+            <a href="/driver/driver_profile">
+                <i class='bx bx-user-pin'></i>
+                <span class="links_name">Profile</span>
+            </a>
+            <span class="tooltip">Profile</span>
         </li>
         <li>
-            <a href="/logout" class="logout">
-                <img src="/assests/img/logout.png" class="pic">
-                <span>Logout</span>
+            <a href="/driver/availability">
+                <i class='bx bx-calendar'></i>
+                <span class="links_name">Availability</span>
             </a>
+            <span class="tooltip">Availability</span>
+        </li>
+        <li>
+            <a href="/driver/requests">
+                <i class='bx bxs-user-plus' ></i>
+                <span class="links_name">Request</span>
+            </a>
+            <span class="tooltip">Request</span>
+        </li>
+        <li>
+            <a href="/driver/review">
+                <i class='bx bx-star' ></i>
+                <span class="links_name">Reviews</span>
+            </a>
+            <span class="tooltip">Reviews</span>
+        </li>
+        <li>
+            <a href="/driver/payments">
+                <i class='bx bx-wallet' ></i>
+                <span class="links_name">Finance</span>
+            </a>
+            <span class="tooltip">Finance</span>
+        </li>
 
+        <li class="/logout">
+            <a href="/logout" class="logout">
+                <i class='bx bx-log-out' ></i>
+                <span class="links_name">log out</span>
+            </a>
         </li>
 
     </ul>
-</section>
-
-<section id="content">
-    <div class="admin-nav">
-        <nav>
-            <img src="/assests/img/menu.png" alt="" class="pic1 bx">
-            <a href="#" class="nav-link">Mobility without Hassle</a>
-            <!-- <form action="">
-                    <div class="form-input">
-                        <input type="search">
-                        <img src="./search.png" alt="" class="pic">
-                    </div>
-            </form> -->
-            <a href="#" class="notification">
-                <img src="/assests/img/notification.png" alt="" class="pic3">
-                <span class="num">8</span>
-            </a>
-
-            <a href="#">
-                <img src="/assests/img/my pic.jpeg" alt="" class="profile">
-
-            </a>
-            <p class="name">Mr.Kalana Weranga</p>
+</div>
 
 
-        </nav>
-    </div>
+<div class="home-section">
+    <!-- nav bar -->
+    <nav class="navbar">
+        <div class="container-icon">
+            <a href=""><img class="logo" src="/assets/img/logo.png" alt="Rent a Ride Logo"></a>
+        </div>
+        <ul class="nav-list" id="nav-list">
+            <!-- <li class="list-item 1"><a href="#">Sign in</a></li>
+            <li class="list-item 2"><a href="#">Register</a></li>       -->
+            <div class="vision"><p>Mobility Without Hassel</p> </div>
+            <div class="profile-cont">
+                <span class="profile-name">Kalana</span>
+                <div class="img-cont"><img src="img/profile.png" class="profile-image"></div>
+            </div>
 
+        </ul>
+        <div id="toggle-btn" class="menu-container" onclick="myFunction(this)">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+    </nav>
 
-    <div class="admin_dashboardrest">
+    <div class="dashboardRest">
         {{content}}
     </div>
-</section>
 
-<script src="/assests/javascript/admin-dashboard.js"></script>
+    
+
+</div>
+
+
 </body>
+<script src="/assets/javascript/component/navbar.js"></script>
+<script src="/assets/javascript/component/sidebar.js"></script>
+<script src="/assets/javascript/component/search.js"></script>
+<script>
+//     document.getElementById("edit-button").addEventListener("click", function(){
+//     document.getElementById("profile-photo").style.display = "block";
+//   });
+
+        const modal = document.getElementById("profileModal");
+
+        // Get the button that opens the modal
+        const btn = document.getElementById("button28");
+
+        // Get the <span> element that closes the modal
+        const span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal
+        function openModal() {
+            console.log(modal)
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+</script>
 </html>

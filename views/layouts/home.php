@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/assets/css/home/homeNav.css">
     <link rel="stylesheet" href="/assets/css/home/homeSearch.css">
     <link rel="stylesheet" href="/assets/css/home/homeStyle.css">
+    <link rel="stylesheet" href="/assets/css/home/homeTable.css">
     <title>Rent-A-Ride</title>
 </head>
 <body>

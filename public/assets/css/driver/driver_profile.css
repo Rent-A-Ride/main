@@ -1,0 +1,274 @@
+/* @import url('https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css');
+
+/* COMPONENTS */
+/* @import url('components/topnavbar_styles.css');
+@import url('components/form_style2.css');
+@import url('components/sidebar.css');
+@import url('addnewveh.css');  */
+
+
+/* FONTS */
+/* @font-face{
+    font-family: Poppins-Regular;
+    src: url(fonts/Poppins-Regular.ttf);
+} */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+
+.profile-container{
+    /* padding-top: 100px; */
+    /* width: 75%;
+    height:auto; */
+    /* height: calc(100vh - 100px); */
+    /* margin-top: 50px; */
+    display: flex;
+    flex-direction: column;
+    display: inline-block;
+    /* padding-bottom: 20px; */
+}
+
+.profile-head-topic{
+    padding:10px 50px 10px 50px;
+    background: rgb(197, 196, 196);
+    color: white;
+}
+
+.profile-details{
+    width: 100%;
+    height: 100%;
+    padding: 50px 50px;
+    display: flex;
+    background-color: #ffffff;
+    justify-content:space-around;
+    font-size: 15px;
+}
+
+.driver-img{
+    display: flex;
+    flex-direction: column;
+}
+
+.driver-pic img{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: solid;
+    border-width: 2px;
+    border-color: rgb(141, 145, 144);
+}
+
+#profile-photo {
+    display: none;
+}
+
+.edit-pic{
+    text-align: center;
+}
+
+.driver-list {
+    margin-top: 20px;
+    display: flex;
+  }
+
+.driver-list label {
+    display: inline-block;
+    width: 150px;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+
+  .no-outline:focus {
+    outline: none;
+  }
+
+.driver-list input[type="text"] {
+    width: 300px;
+    padding: 5px;
+    background-color: #f7f7f7;
+    color: #333;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style:hidden;
+    background-color: #ffffff;
+  }
+
+.review{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* .review img{
+    width: 25%;
+    height: auto;
+} */
+
+
+
+.star-rating {
+    display: flex;
+    background-color:lightgray;
+    border: solid;
+    padding: 5px;
+    border-color: darkgray;
+    border-radius: 5px;
+  }
+
+  .star-rating img{
+    width: 20px;
+    height: 20px;
+    color: #ffc107;
+  }
+  .submit-btn {
+    width: 150px;
+    background-color: #FAB84C;
+    border: none;
+    outline: none;
+    height: 49px;
+    border-radius: .3rem;
+    /* display: block; */
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: 0.5s;
+  }
+  
+  .submit-btn.transparent:hover {
+    background-color: white;
+    color: #e2d14d;
+  }
+  
+  .ssubmit-btn:hover {
+    background-color: #e2d14d;
+  }
+  
+  
+  .submit-btn.transparent {
+    margin: 0;
+    background: none;
+    border: 2px solid #fff;
+    width: 130px;
+    height: 41px;
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+
+  /* Pop up modal */
+
+  .profileModal {
+    display: none; /* Hide the modal by default */
+    position: fixed; /* Position the modal */
+    z-index: 1; /* Set the z-index */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Add a dark background with transparency */
+}
+
+/* Style the modal content */
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto; /* 10% from the top and centered */
+    padding: 25px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-width: 800px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Style the close button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Style form labels */
+.up-profile label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.up-profile {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 15px;
+    justify-content: space-between;
+    align-item: center;
+}
+
+/* Style the submit button */
+.up-profile input[type="submit"] {
+    width: 50%;
+    background-color: #FAB84C;
+    margin-top: 15px;
+    margin-right: 14px;
+    grid-column: 2;
+    justify-self: end;
+    color: #fff;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.up-profile input[type="submit"]:hover {
+    background-color: #FCB86F;
+}
+
+/* Style the labels */
+.up-profile label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Style the input fields */
+.up-profile input[type="text"],
+.up-profile input[type="email"],
+.up-profile input[type="tel"],
+.up-profile textarea {
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+}
+
+
+/* Style the textarea */
+.up-profile textarea {
+    resize: vertical;
+    min-height: 100px;
+    max-height: 100px;
+    width: 95% !important;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .up-profile {
+        grid-template-columns: 1fr;
+    }
+}

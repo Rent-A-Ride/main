@@ -1,5 +1,5 @@
 <?php
-
+use app\core\Application;
 ?>
 
 <!DOCTYPE html>
@@ -8,125 +8,140 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/css/admin/admin-dashboard.css">
+    <title>Rent A Ride</title>
+
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-    <title>Rent-A-Ride</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/assets/css/vehicleOwner/vehicleOwner-dashboard.css">
+
+
+    <!-- JQUERY -->
+    <script src="assets/javascript/jquery-3.6.3.min.js"></script>
+
+    <!-- ajax -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+
 </head>
 <body>
 
-<section id="side-bar">
-    <div class="logo">
-        <img src="/assets/img/logo.png" alt="" class="logo-image">
+<!-- sidebar -->
+
+<div class="sidebar">
+    <div class="logo-details">
+        <div class="logo_name">Rent A Ride</div>
+        <i class='bx bx-menu' id="btn" ></i>
     </div>
+    <ul class="side-list">
+        <!-- <li>
+            <i class='bx bx-search' ></i>
+            <input type="text" placeholder="Search...">
+            <span class="tooltip">Search</span>
+        </li> -->
 
-
-    <ul class="side-bar-menu top">
-        <li class="active">
-            <a href="">
-            <img src="/assets/img/vehicleOwner_img/profile.png" class="pic">
-                <span>Profile</span>
+        <!-- <li>
+            <a href="/home">
+                <i class='bx bx-home' ></i>
+                <span class="links_name">Home</span>
             </a>
-
+            <span class="tooltip">Home</span>
+        </li> -->
+        <!-- <li>
+            <a href="#">
+                <i class='bx bx-car' ></i>
+                <span class="links_name">View Vehicles</span>
+            </a>
+            <span class="tooltip">view vehicles</span>
+        </li> -->
+        <li>
+            <a href="/vehicleOwner/Profile">
+                <i class='bx bx-user-pin'></i>
+                <span class="links_name">Profile</span>
+            </a>
+            <span class="tooltip">Profile</span>
         </li>
-        <li >
+        <li>
             <a href="/vehicleowner_vehicle">
-            <img src="/assets/img/vehicleOwner_img/d.jpg" class="pic">
-                <span>Vehicles</span>
+                <i class='bx bx-car' ></i>
+                <span class="links_name">Vehicles</span>
             </a>
-
-        </li>
-        <li >
-            <a href="admin-vehicle">
-            <img src="/assets/img/vehicleOwner_img/driver.png" class="pic">
-                <span>Drivers</span>
-            </a>
-
+            <span class="tooltip">Vehicles</span>
         </li>
         <li>
-            <a href="#">
-
-                <img src="/assets/img/vehicleOwner_img/g.jpg" class="pic">
-                <span>Payments</span>
-
+            <a href="/CustomerPendingRequest">
+                <i class="fa-regular fa-address-card"></i>
+                <span class="links_name">Requests</span>
             </a>
-
-        </li>
-        <!-- <li>
-            <a href="viewVehicleowner">
-                <img src="/assests/img/e.jpg" class="pic">
-                <span>Settings</span>
-            </a>
-
-        </li> -->
-        <!-- <li>
-            <a href="viewownerDriver">
-                <img src="/assests/img/driver.png" class="pic">
-                <span>Driver</span>
-            </a>
-
+            <span class="tooltip">Requests</span>
         </li>
         <li>
-            <a href="#">
-                <img src="/assests/img/g.jpg" class="pic">
-                <span>Payment</span>
+            <a href="/vehicleOwner/Payments">
+                <i class='bx bx-wallet' ></i>
+                <span class="links_name">Payment</span>
             </a>
-
-        </li> -->
-
-    </ul>
-    <ul class="side-bar-menu bottum1">
-
-
-        <li id="bottum1">
-            <a href="#">
-                <img src="/assets/img/vehicleOwner_img/settings.jpg" class="pic">
-                <span>Settings</span>
-            </a>
-
+            <span class="tooltip">Payment</span>
         </li>
-        <li>
+
+        <li class="/logout">
             <a href="/logout" class="logout">
-                <img src="/assets/img/vehicleOwner_img/logout.png" class="pic">
-                <span>Logout</span>
+                <i class='bx bx-log-out' ></i>
+                <span class="links_name">log out</span>
             </a>
-
         </li>
 
     </ul>
-</section>
-
-<section id="content">
-    <div class="admin-nav">
-        <nav>
-            <img src="/assets/img/vehicleOwner_img/menu.png" alt="" class="pic1 bx">
-            <a href="#" class="nav-link">Mobility without Hassle</a>
-            <!-- <form action="">
-                    <div class="form-input">
-                        <input type="search">
-                        <img src="./search.png" alt="" class="pic">
-                    </div>
-            </form> -->
-            <a href="#" class="notification">
-                <img src="/assets/img/vehicleOwner_img/notification.png" alt="" class="pic3">
-                <span class="num">8</span>
-            </a>
-
-            <a href="#">
-                <img src="/assets/img/my pic.jpeg" alt="" class="profile">
-
-            </a>
-            <p class="name">Mr.Kalana Weranga</p>
+</div>
 
 
-        </nav>
-    </div>
+<div class="home-section">
+    <!-- nav bar -->
+    <nav class="navbar">
+        <div class="container-icon">
+            <a href=""><img class="logo" src="/assets/img/logo.png" alt="Rent a Ride Logo"></a>
+        </div>
+        <ul class="nav-list" id="nav-list">
+            <!-- <li class="list-item 1"><a href="#">Sign in</a></li>
+            <li class="list-item 2"><a href="#">Register</a></li>       -->
+            <div class="vision"><p>Mobility Without Hassel</p> </div>
+            <div class="profile-cont">
+                <span class="profile-name">Buddhi Yapa</span>
+                <div class="img-cont"><img src="img/profile.png" class="profile-image"></div>
+            </div>
 
+        </ul>
+        <div id="toggle-btn" class="menu-container" onclick="myFunction(this)">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+    </nav>
+<!--    --><?php //if (Application::$app->session->getFlash('profileUpdate')):?>
+<!--        <div class="flash-message success">-->
+<!--            --><?php //= Application::$app->session->getFlash('profileUpdate') ?>
+<!--        </div>-->
+<!--    --><?php //endif; ?>
 
-    <div class="admin_dashboardrest">
+    <div class="dashboardRest">
         {{content}}
     </div>
-</section>
 
-<script src="/assets/javascript/admin-dashboard.js"></script>
+
+
+</div>
+
+
 </body>
+<script src="/assets/javascript/component/navbar.js"></script>
+<script src="/assets/javascript/component/sidebar.js"></script>
+<script src="/assets/javascript/component/search.js"></script>
+<script src="/assets/javascript/vehicleOwner/popup.js"></script>
+<script src="/assets/javascript/adminaddVehicle.js"></script>
+<script src="/assets/javascript/vehicleOwner/dateValidation/datevalidation.js"></script>
+<script src="/assets/javascript/vehicleOwner/components/popup.js"></script>
+<script src="/assets/javascript/vehicleOwner/components/CustomerReq.js"></script>
+<script src="/assets/javascript/vehicleOwner/profile.js"></script>
 </html>

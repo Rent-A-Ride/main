@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
+
+
+@import url('../components/nav.css');
+
+@import url('../components/sidebar.css');
+
+@import url('../components/style.css');
+
+@import url('driver_profile.css');
+
+@import url('driver_requests.css');
+
+@import url('driver_reviews.css');
+
+@import url('driver_editProfile.css');
+
+@import url('driver_payments.css');

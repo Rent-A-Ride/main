@@ -1,0 +1,264 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+/* *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins" , sans-serif;
+    
+} */
+
+.name{
+    margin-top: 10px;
+    text-align: center;
+
+}
+
+.pay-body{
+    margin-left: 40px;
+
+}
+
+.pay-details{
+    display: flex;
+    justify-content: space-between;
+    width: 97%;
+    align-items: center;
+}
+
+.earnings{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    height: 10vh;
+
+
+}
+
+.totalearnings{
+
+    background-color: rgb(15, 15, 15);
+    color: #fff;
+    border: none;
+
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    margin: 4px 0px 4px 100px;
+    border-radius: 4px 0px 0px 4px;
+
+
+
+}
+
+.tot-ear-name{
+    color: #fff;
+
+}
+
+.totalearningsvalue{
+    background-color: #fff;
+    border: none;
+    color: rgb(15, 15, 15);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 4px;
+    margin: 4px 0px 4px 0px;
+    border-radius: 0px 4px 4px 0px;
+
+
+}
+
+.holds{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+
+}
+
+.onhold{
+    background-color: rgb(15, 15, 15);
+    color: #fff;
+    border: none;
+
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 0px 4px 0px;
+    border-radius: 4px 0px 0px 4px;
+}
+
+.onholdvalue{
+
+    background-color: #fff;
+    border: none;
+    color: rgb(15, 15, 15);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 60px 4px 0px;
+    border-radius: 0px 4px 4px 0px;
+
+
+}
+.on-hold-name{
+    color: #fff;
+}
+
+.journey-box-name{
+    text-align: left;
+    padding: 5px;
+}
+
+
+.completed-journeys{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 55vh;
+}
+
+
+.journeys {
+
+
+    background-color: #f6f5f5;
+    /* padding: 20px; */
+    width: 90%;
+    height: 300px;
+    /* margin: 30px 0; */
+    margin-top: 1px;
+    margin-bottom: 5px;
+    margin-right: 100px;
+    margin-left: 100px;
+    border-radius: 15px;
+
+
+}
+
+.PAY-BUTTONS{
+    margin-right:40px;
+}
+
+.report-button{
+    background-color: #FAB84C;
+    border: none;
+    color: rgb(9, 9, 9);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    margin: 4px 60px 4px 0px;
+    cursor: pointer;
+    border-radius: 4px;
+    float: right;
+}
+
+
+.veh-rates{
+    background-color: #090909;
+    border: none;
+    color: rgb(251, 250, 250);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    float: right;
+}
+
+
+
+/* vehicle cards */
+.main{
+
+    margin: 2%;
+}
+
+.card{
+
+    margin-top: 10px;
+    width: 200px;
+    height: 200px;
+    display: inline-block;
+    /* box-shadow: 2px 2px 20px #f3bb21; */
+    border-radius: 5px;
+    /* margin: 0px 5px 0px 3px; */
+    margin-top: 1px;
+    margin-bottom: 5px;
+    margin-right: 50px;
+    margin-left: 30px;
+    background-color:rgba(9, 9, 9, 0.93);
+    justify-content: space-evenly;
+}
+
+.image img{
+    width: 200px;
+    height: 100px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    margin-top: 0px;
+
+
+
+}
+
+.title{
+
+    text-align: center;
+    /*padding: 5px;*/
+    background-color: #121212;
+    height: 20px;
+    align-items: center;
+
+}
+.plate-no{
+    color: white;
+    font-size: large;
+}
+h1{
+    font-size: 20px;
+}
+
+.des{
+    padding: 3px;
+    text-align: center;
+    height:90px;
+
+    padding-top: 10px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: #d9d9d9;
+}
+/* button{
+  margin-top: 1px;
+  margin-bottom: 10px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid black;
+  border-radius: 5px;
+  padding:10px;
+}
+button:hover{
+  background-color: black;
+  color: white;
+  transition: .5s;
+  cursor: pointer;
+} */
+

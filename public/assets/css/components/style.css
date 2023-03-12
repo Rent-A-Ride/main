@@ -1,0 +1,129 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--body-color);
+}
+
+.banner-msg {
+    margin: 50px;
+    padding: 15px;
+    width: 90%;
+    background-color: white;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.banner-msg h1{
+    font-size: medium;
+    font-weight: 600;
+}
+
+
+.bold {
+    font-weight: bold;
+}
+
+.yellow {
+    color: #FAB84C;
+}
+
+
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .separator::before,
+  .separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #000;
+  }
+  
+  .separator:not(:empty)::before {
+    margin-right: .25em;
+  }
+  
+  .separator:not(:empty)::after {
+    margin-left: .25em;
+  }
+
+
+.info-cont {
+    width: 100%;
+    margin: 10px;
+    display: flex;
+    justify-content: center;    
+}
+
+.info-box {
+    background-color: white;
+    width: 920px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around; 
+    
+}
+
+.info { 
+  display: flex;
+  flex-direction: row;
+    
+    padding: 10px;
+    margin: 5px 20px;
+}
+
+.info .info-logo {    
+    margin: 5px;
+    margin-right: 15px;
+}
+
+.fav-cards {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.fav1{
+    width: 50%;
+    height: 250px;
+    background-color: #2d2d2d;
+}
+
+.fav2{
+  width: 50%;
+  height: 250px;
+  background-color: #444444;
+}
+
+.dashboardRest{
+    /* overflow-y: scroll; */
+    /* z-index: -1; */
+    width: 100%;
+    min-height: 100vh;
+    /* background: lightgray; */
+    padding-top: 100px;
+    background-color:lightgrey;
+    align-items: center;
+    text-align: center;
+}
+
+.active{
+    background: #FAB84C;
+    position: relative;
+    z-index: 100;
+    border-radius: 1rem;
+}
+
+.active a{
+    color: #3C91E6;
+}

@@ -70,27 +70,28 @@
                 
             </div> 
         </div>
-    <?php if ($customer){
-                foreach ($customer as $row){ ?>
+    <?php if ($adminCustomer){
+                
+                foreach ($adminCustomer as $row){ ?>
          <div class="Driverdetails">
             <div class="admindriver_img">
-                <img class="adminDriver_img" src="/assets/img/user_profile/<?php echo $row['profile_img']?>" alt="" >
+                <img class="adminDriver_img" src="/assets/img/user_profile/<?php echo $row['profile_pic']?>" alt="" >
             </div>
             <div class="admindriver_name">
-                <?php echo ($row["cus_Fname"]." ".$row["cus_Lname"]); ?>
+                <?php echo ($row["firstname"]." ".$row["lastname"]); ?>
             </div>
             <div class="admindriver_location">
-                <?php echo ($row["cus_email"]); ?>
+                <?php echo ($row["email"]); ?>
             </div>
             <div class="admindriver_Novehicles">
-                <?php echo ($row["cus_Type"]); ?>
+                <?php echo ($row["type"]); ?>
             </div>
             <div class="admindriver_btn">
                 <div>
                     <button class="admin_driverView"><i class="fa-regular fa-eye"></i>view</button>
                 </div>
                 <div>
-                    <button class="admin_driverView"><i class="fa-solid fa-trash-can"></i>Delete</button>
+                    <button class="admin_driverView disable_customer" data-cusid='<?php echo($row['cus_Id'])?>' data-cusname='<?php echo ($row["firstname"]." ".$row["lastname"]); ?>'><i class="fa-solid fa-trash-can"></i>Delete</button>
                 </div>
                 
             </div> 

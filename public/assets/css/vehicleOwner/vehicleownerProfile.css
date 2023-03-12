@@ -1,0 +1,138 @@
+/*body{*/
+/*    margin: 0;*/
+/*    background: #D9D9D9;*/
+/*;*/
+/*}*/
+
+.gallery{
+    display:flex;
+    justify-content: space-between;
+    width: 800px;
+    align-items: center;
+}
+
+.content{
+    width: 100px;
+    height: 100px;
+    background-color: #f2f2f2;
+    font-size: small;
+    overflow: hidden;
+    text-align: left;
+    padding: 10px;
+    border-left: 10px solid #FAB84C;
+    border-radius: 15px;
+    align-items: center;
+
+
+}
+
+.content img{
+    width: 80px;
+    opacity: 40%;
+    position: relative;
+
+}
+
+.pro-moto{
+    transform: translate(+40%, -58%);
+}
+
+.pro-cal {
+    transform: translate(+70%,-5%);
+    scale: 85%;
+}
+
+
+.pro-pay {
+    /* transform: translate(-70%,-5%); */
+    scale: 65%;
+    transform: translate(+40%,10%) rotate(90deg) ;
+}
+
+.pro-review {
+    transform: translate(+50%,-5%);
+    scale: 85%;
+}
+
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900');
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    /* background:  #D9D9D9; */
+;
+;
+
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    height: 100%;
+    list-style-type: none;
+}
+
+.page-name{
+    text-align: center;
+    /* background:  #D9D9D9; */
+
+
+}
+
+
+.profile-b {
+    text-align: center;
+
+    background-color:#f7f5f5;
+
+    padding: 20px;
+    width: 800px;
+    height: 300px;
+    border-radius: 15px;
+    margin-bottom: 50px;
+}
+
+
+
+.edit-pro-button{
+    background-color: #FAB84C;
+    border: none;
+    color: rgb(9, 9, 9);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+
+    margin-top: 220px;
+    /* margin: 4px 2px; */
+    cursor: pointer;
+    border-radius: 4px;
+    float: right;
+}
+
+
+.user-data ul {
+list-style-type: none;
+display: inline-block;
+}
+
+/*.user-data ul li span{*/
+
+/*    display: inline-block;*/
+/*    min-width: 50px;*/
+/*    margin: 6px 0;*/
+/*}*/
+
+
+
+
+
+
+

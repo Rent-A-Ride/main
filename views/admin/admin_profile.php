@@ -23,8 +23,8 @@
                 <p> <?php echo(" ".$owner_details[0]['first_Name']." ".$owner_details[0]['last_Name']) ?></p>
                 <p><?php echo(" ".$owner_details[0]['email'])  ?></p>
                 <p><?php echo(" ".$owner_details[0]['Owner_area'])  ?></p>
-                <p><?php echo(" ".$owner_details[0]['Phone_No'])  ?></p>
-                <p><?php echo(" ".$owner_details[0]['NIC']) ?></p>
+                <p><?php echo(" ".$owner_details[0]['phone_No'])  ?></p>
+                <p><?php echo(" ".$owner_details[0]['Nic']) ?></p>
                 <p><?php echo(" ".$owner_details[0]['email'])  ?></p>
             </div>
 

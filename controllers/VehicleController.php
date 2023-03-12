@@ -2,18 +2,20 @@
 
 namespace app\controllers;
 
+use app\core\Controller;
 use app\core\Request;
 use app\core\Response;
+use app\models\cusVehicle;
 use app\models\vehicle;
 
 
-class VehicleController
+class VehicleController extends Controller
 {
 
     public function add_VehiclePage(Request $req, Response $res){
-        if($req->session->get("authenticated") && $req->session->get("user_role") === "owner") {
+        if($req->session->get("authenticated") && $req->session->get("user_role") === "vehicleowner") {
 
-               return $res->render("/admin/admin-addVehicle","owner-dashboard");
+               return $res->render("/VehicleOwner/vehowner-addVehicle","vehicleOwner-dashboard");
         }
 
             return $res->render("login","main");
@@ -21,12 +23,12 @@ class VehicleController
 
     }
 
-    public function owneraddVehicle(Request $req, Response $res){
+    public function vehowneraddVehicle(Request $req, Response $res){
 
-        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="owner") {
-            $body = $req->body();
+        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="vehicleowner") {
+            $body = $req->getBody();
             $vehicle = new vehicle($body);
-
+            // var_dump($vehicle);
 
 //            print_r($_FILES['vehicle_image']);die;
             $img_name = $_FILES['vehicle_image']['name'];
@@ -34,15 +36,15 @@ class VehicleController
             $tmp_name = $_FILES['vehicle_image']['tmp_name'];
             $img_error = $_FILES['vehicle_image']['error'];
 
-            $result = $vehicle->addVehicle($img_error,$img_name,$tmp_name);
+            $result = $vehicle->addVehicle($img_error,$img_name,$tmp_name,$req->session->get("user_id"));
 
 
             if (is_array($result)) {
-                return $res->render("/admin/admin-addVehicle", "owner-dashboard", ['errors' => $result]);
+                return $res->render("/VehicleOwner/vehowner-addVehicle", "vehicleOwner-dashboard", ['errors' => $result]);
             }
             $vehicleModel = new vehicle();
-            $vehicles = $vehicleModel->getVehicle();
-            return $res->render("/admin/admin-vehicle", "owner-dashboard", ['result' => $vehicles]);
+            $vehicles = $vehicleModel->vehicleOwnergetVehicle($req->session->get("user_id"));
+            return $res->render("/VehicleOwner/vehicleOwnerDriverAssign", "vehicleOwner-dashboard", ['result' => $vehicles]);
 
         }
         return $res->render("login","main");
@@ -51,39 +53,69 @@ class VehicleController
 
 
     public function ownerGetVehicle(Request $req, Response $res){
-        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="owner"){
             $vehicleModel = new vehicle();
             $vehicles = $vehicleModel->getVehicle();
 //            print_r($vehicles);
             return $vehicles;
 //            return $res->render(view: "admin-vehicle",layout: "owner-dashboard",pageParams: ["vehicles"=>$vehicles]);
-        }
-        return $res->render("login","main");
+
+
     }
     
     public function vehicleownerGetVehicle(Request $req, Response $res){
         
-        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="vehicleowner"){
+
             $vehicleModel = new vehicle();
             $vehicles = $vehicleModel->vehicleOwnergetVehicle($req->session->get("user_id"));
             
 //            print_r($vehicles);
             return $vehicles;
 //            return $res->render(view: "admin-vehicle",layout: "owner-dashboard",pageParams: ["vehicles"=>$vehicles]);
-        }
-        return $res->render("login","main");
+
     }
 
-    public function viewVehicleProfile(Request $req, Response $res){
+    public function viewVehicleProfile(Request $req, Response $res,$query){
             
-            $query=$req->query(); 
+             
             $vehicleModel=new vehicle();
             $vehicles=$vehicleModel->getVehiclebyId((int)$query["id"]);
             return $vehicles;
 
 
     }
+    public function viewVehicleProfilelicense(Request $req, Response $res,$query){
+            
+        
+        $vehicleModel=new vehicle();
+        $vehicles=$vehicleModel->getVehiclelicensebyId((int)$query["id"]);
+        return $vehicles;
 
+
+    }
+    public function ownerGetVehicletoAdd(Request $req, Response $res){
+
+            $vehicleModel = new vehicle();
+            $vehicles = $vehicleModel->getVehicletoAdd();
+//            print_r($vehicles);
+            return $vehicles;
+//            return $res->render(view: "admin-vehicle",layout: "owner-dashboard",pageParams: ["vehicles"=>$vehicles]);
+
+    }
+
+    public function addVehicle(Request $req, Response $res){
+
+            $query=$req->query();
+            $vehicleModel = new vehicle();
+
+            $vehicleModel->getVehicletoAdd((int)$query["id"]);
+            $vehicleModel->adminacceptVehiclelicense((int)$query["id"]);
+            $vehicleModel->adminacceptVehicleinsuarance((int)$query["id"]);
+            $vehicles = $vehicleModel->getVehicletoAdd();
+//            print_r($vehicles);
+            return $vehicles;
+//            return $res->render(view: "admin-vehicle",layout: "owner-dashboard",pageParams: ["vehicles"=>$vehicles]);
+
+    }
 
 
 
