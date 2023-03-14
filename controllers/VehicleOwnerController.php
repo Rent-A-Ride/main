@@ -41,10 +41,7 @@ class VehicleOwnerController extends Controller
 
             $vehowner = vehicle_Owner::findOne(['vo_ID' => Application::$app->session->get('user')]);
             $id = Application::$app->session->get('user');
-            echo '<pre>';
-            var_dump($vehowner);
-            echo '</pre>';
-            exit();
+
 
             $nic = $vehicleowner[0]['Nic'];
 

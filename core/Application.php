@@ -157,7 +157,11 @@ class Application
     public function logout()
     {
         $this->user = null;
+
         $this->session->remove('user');
+        $this->session->remove('user_role');
+        $this->session->remove('authenticated');
+        session_regenerate_id(true);
     }
 
 
