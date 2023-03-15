@@ -106,10 +106,10 @@ use app\core\Application;
         <ul class="nav-list" id="nav-list">
             <!-- <li class="list-item 1"><a href="#">Sign in</a></li>
             <li class="list-item 2"><a href="#">Register</a></li>       -->
-            <div class="vision"><p>Mobility Without Hassel</p> </div>
+            <!-- <div class="vision"><p>Mobility Without Hassel</p> </div> -->
             <div class="profile-cont">
                 <span class="profile-name">Buddhi Yapa</span>
-                <div class="img-cont"><img src="img/profile.png" class="profile-image"></div>
+                <div class="img-cont"><img src="" class="profile-image"></div>
             </div>
 
         </ul>

@@ -19,14 +19,16 @@ class VehicleOwnerController extends Controller
     // }
 
     public function VehicleOwnerVehicle(Request $req, Response $res){
-        $vehicles = new VehicleController();
-        $vehicle=[];
-        $vehicle = $vehicles->vehicleownerGetVehicle($req,$res);
+        if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="vehicleowner"){
+            $vehicles = new VehicleController();
+            $vehicle=[];
+            $vehicle = $vehicles->vehicleownerGetVehicle($req,$res);
         
 //        print_r($vehicle);
          return $res->render("/VehicleOwner/vehicleOwner_vehicle","vehicleOwner-dashboard",['result'=>$vehicle]);
+        }
     }
-
+    //this function for owner
     public function viewVehicleownerProfile(Request $req, Response $res){
             
         $query=$req->query(); 
@@ -39,14 +41,10 @@ class VehicleOwnerController extends Controller
     public function vehownerViewProfile(Request $req,Response $res){
 
 
-            $vehowner = vehicle_Owner::findOne(['vo_ID' => Application::$app->session->get('user')]);
-            $id = Application::$app->session->get('user');
-            echo '<pre>';
-            var_dump($vehowner);
-            echo '</pre>';
-            exit();
-
-            $nic = $vehicleowner[0]['Nic'];
+        $vehowner = new vehicle_Owner();
+        $vehicleowner=$vehowner->Vehicleowner_profile(Application::$app->session->get("user"));
+        $id = Application::$app->session->get("user_id");
+        $nic = $vehicleowner[0]['Nic'];
 
             if ($req->isPost()){
                 $vehicleowner =[new vehicle_Owner()];
@@ -91,11 +89,11 @@ class VehicleOwnerController extends Controller
     }
 
     public function vehownerVehicleProfile(Request $req, Response $res){
-        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="vehicleowner"){ 
-             
+        if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="vehicleowner"){ 
+            $query=$req->query();
             $vehicles = new VehicleController();
             $vehicle=[];
-            $vehicle = $vehicles->viewVehicleProfile($req,$res);
+            $vehicle = $vehicles->viewVehicleProfile($req,$res,$query);
             // $ownerprofile = new owner();
             // $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
 //        print_r($vehicle);
