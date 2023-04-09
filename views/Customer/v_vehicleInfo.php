@@ -14,14 +14,14 @@ use app\models\VehInfo;
         <div id="gallery">
             <div class="row">
                 <div class="large-image">
-                    <img src="<?= $vehicle->getFrontView() ?>">
+                    <img src="/assets/img/vehicle/<?= $vehicle->getFrontView() ?>">
                 </div>
             </div>
             <div class="row">
                 <div class="thumbnails">
-                    <img src="<?= $vehicle->getFrontView() ?>" data-large="<?= $vehicle->getFrontView() ?>">
-                    <img src="<?= $vehicle->getSideView() ?>" data-large="<?= $vehicle->getSideView() ?>">
-                    <img src="<?= $vehicle->getBackView() ?>" data-large="<?= $vehicle->getBackView() ?>">
+                    <img src="/assets/img/vehicle/<?= $vehicle->getFrontView() ?>" data-large="/assets/img/vehicle/<?= $vehicle->getFrontView() ?>">
+                    <img src="/assets/img/vehicle/<?= $vehicle->getSideView() ?>" data-large="/assets/img/vehicle/<?= $vehicle->getSideView() ?>">
+                    <img src="/assets/img/vehicle/<?= $vehicle->getBackView() ?>" data-large="/assets/img/vehicle/<?= $vehicle->getBackView() ?>">
                 </div>
             </div>
 

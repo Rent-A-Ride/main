@@ -28,9 +28,9 @@ class Application
     public string $ownerClass;
     public ?Customer $customer;
     public ?driver $driver;
-    public ?vehicleowner $vehicleowner;
+    public ?vehicle_Owner $vehicleowner;
     public ?owner $owner;
-    public ?dbModel $user;
+    public ?dbModel $user = null;
 
     
 
@@ -91,7 +91,7 @@ class Application
         elseif ($userType === 'vehicleowner'){
             if ($primaryValue) {
                 $primaryKey = $this->vehicleOwnerClass::primaryKey();
-                $this->user = $this->vehicleOwnerClass::findOne([$primaryKey => $primaryValue ]);
+                $this->user = $this->vehicleOwnerClass::findOne([$primaryKey => $primaryValue]);
             } else {
                 $this->user = null;
             }
@@ -99,14 +99,14 @@ class Application
         elseif ($userType === 'driver'){
             if ($primaryValue) {
                 $primaryKey = $this->driverClass::primaryKey();
-                $this->user = $this->driverClass::findOne([$primaryKey => $primaryValue ]);
+                $this->user = $this->driverClass::findOne([$primaryKey => $primaryValue]);
             } else {
                 $this->user = null;
             }
         }elseif ($userType === 'owner'){
             if ($primaryValue) {
                 $primaryKey = $this->ownerClass::primaryKey();
-                $this->user = $this->ownerClass::findOne([$primaryKey => $primaryValue ]);
+                $this->user = $this->ownerClass::findOne([$primaryKey => $primaryValue]);
             } else {
                 $this->user = null;
             }

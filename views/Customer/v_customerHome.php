@@ -46,7 +46,7 @@
                 ?>
                 <div class="table-row <?=$row->getVehType()?>">
 
-                    <div class="table-data"><img src="<?= $row->getFrontView()?>" width="56px"></div>
+                    <div class="table-data"><img src="/assets/img/vehicle/<?= $row->getFrontView()?>" width="56px"></div>
                     <div class="table-data"><?= $row->getVehBrand().' '.$row->getVehModel() ?></div>
                     <div class="table-data">
                         <span class="fa fa-star checked"></span>
