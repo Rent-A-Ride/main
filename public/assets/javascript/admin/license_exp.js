@@ -5,9 +5,11 @@ const driverComplaintResolveButtons = document.querySelectorAll(".license_exp")
 
 driverComplaintResolveButtons.forEach(function (btn) {
     btn.addEventListener("click", function () {
-        const voID=btn.dataset.voID;
+        const voID=btn.dataset.vo;
         const veh_Id=btn.dataset.veh_Id;
+        const type = btn.dataset.type;
         // const driverid=btn.dataset.driverid;
+        console.log(voID);
 
         const tableRow=btn.parentElement.parentElement;
         const veh_No=tableRow.querySelector('td:nth-child(2)');
@@ -30,7 +32,8 @@ driverComplaintResolveButtons.forEach(function (btn) {
             owner,
             ownermail,
             exp,
-            no_date
+            no_date,
+            type
             
         };
 
@@ -78,6 +81,10 @@ driverComplaintResolveButtons.forEach(function (btn) {
                                 <textarea  rows="4" cols="50" name="message">
                                     
                                 </textarea>     
+                        </div>
+                        <div class='form-item'>
+                                <label for='type'>No of Date/Expired:</label>
+                                <input type='text' name='type' id='type' placeholder='' required  value='${complaint.type}' readonly>      
                         </div>
                         
                         

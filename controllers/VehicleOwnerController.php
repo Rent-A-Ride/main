@@ -6,6 +6,7 @@ use app\core\Application;
 use app\core\Controller;
 use app\core\Request;
 use app\core\Response;
+use app\models\license_expire_notification;
 use app\models\owner;
 use app\models\vehicle_Owner;
 use app\models\viewCustomerReq;
@@ -165,6 +166,18 @@ class VehicleOwnerController extends Controller
         } else {
             return $response->withJson(['status' => 'error']);
         }
+    }
+
+    public function expier_notification(Request $req,Response $res)
+    {
+        if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="vehicleowner"){
+           
+            $exp_not=new license_expire_notification();
+            $exp=$exp_not->retreivedetails(Application::$app->session->get("user"));
+            $this->setLayout("vehicleOwner-dashboard");
+            return $this->render("/VehicleOwner/vehicleOwner_notification",['model'=>$exp]);
+        }
+
     }
 
 

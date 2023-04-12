@@ -76,17 +76,17 @@
 
                 </div>
 
+               
                 <div class="form-input-addvehicleowner"><a href="/admin/vehicle/add_vehicle" class="add-vehicleowner"><i class="fa-solid fa-plus"></i>ADD NEW</a></div>
-        
             </div>
 
             </header>
         </div>
 
         <div class="toggle-btns">
-
-            <i class="fa-solid fa-list-ul btns" ></i>
-            <i class="fa-solid fa-table-cells-large btns"></i>
+            <div class="form-input-addvehicleowner"><a href="/admin/vehicle/disable_vehicle" class="add-vehicleowner"></i>ENABLE VEHICLE</a></div>
+            <!-- <i class="fa-solid fa-list-ul btns" ></i>
+            <i class="fa-solid fa-table-cells-large btns"></i> -->
         </div>
 
         <div class="project-container">
@@ -103,7 +103,7 @@
                        ?>
                         <div class="project">
                                 <div class="veh_type">
-                                    <h2><?php echo $row["veh_model"] ?></h2>
+                                    <h2 style="color:#FAB84C ;"><?php echo $row["veh_model"] ?></h2>
 
                                 </div>
                                 <div>
@@ -123,8 +123,8 @@
                                             <div class="vehicle-fee">
                                                 <?php  echo "RS:"?>
                                                 <?php echo $row["price"] ?>
-                                                <!-- <?php echo "(Per day)" ?> -->
                                             </div>
+                                            <?php echo "(Per/Day)" ?>
                                             <div>
                                                 <i class="fa-regular fa-user"></i><?php echo $row["seatsCount"]?>
                                                 <i class="fa-solid fa-sliders"></i><?php echo $row["transmission"]?>
