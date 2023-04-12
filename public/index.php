@@ -103,6 +103,8 @@ $app->router->post("/admin/vehicle/update", [OwnerController::class, "admin_upda
 
 $app->router->post("/admin/vehicle_ins/update", [OwnerController::class, "admin_updateins"]);
 
+$app->router->get("/admin/vehicle/disable_vehicle", [OwnerController::class, "admin_disableVehicle"]);
+$app->router->post("/admin/vehicle/disable_vehicle", [OwnerController::class, "admin_disableVehicle"]);
 
 
 //Hasantha
@@ -197,6 +199,10 @@ $app->router->get("/vehicleOwner/viewVehicleProfile", [VehicleOwnerController::c
 $app->router->get("/vehicleOwner/UpdateVehicle", [VehicleOwnerController::class, 'vehownerUpdateVehicle']);
 
 $app->router->post("/vehicleOwner/acceptBooking", [VehicleOwnerController::class, 'acceptBooking']);
+
+$app->router->get("/Customer/ExpieringNotification", [VehicleOwnerController::class, 'expier_notification']);
+
+
 
 
 

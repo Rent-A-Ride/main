@@ -102,7 +102,7 @@ use \app\controllers\VehicleController;
                    ?>
                     <div class="project">
                             <div class="veh_type">
-                                <h2><?php echo $row["veh_model"] ?></h2>
+                                <h2 style="color:#FAB84C ;"><?php echo $row["veh_model"] ?></h2>
 
                             </div>
                             <div>
@@ -122,8 +122,9 @@ use \app\controllers\VehicleController;
                                         <div class="vehicle-fee">
                                             <?php  echo "RS:"?>
                                             <?php echo $row["price"] ?>
-                                            <!-- <?php echo "(Per day)" ?> -->
+                                            
                                         </div>
+                                        <?php echo "(Per/Day)" ?>
                                         <div>
                                             <i class="fa-regular fa-user"></i><?php echo $row["seatsCount"]?>
                                             <i class="fa-solid fa-sliders"></i><?php echo $row["transmission"]?>

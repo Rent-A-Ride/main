@@ -79,6 +79,13 @@ use app\core\Application;
             <span class="tooltip">Requests</span>
         </li>
         <li>
+            <a href="/Customer/ExpieringNotification">
+                <i class="fa-regular fa-bell"></i>
+                <span class="links_name">Notification</span>
+            </a>
+            <span class="tooltip">Notification</span>
+        </li>
+        <li>
             <a href="/vehicleOwner/Payments">
                 <i class='bx bx-wallet' ></i>
                 <span class="links_name">Payment</span>

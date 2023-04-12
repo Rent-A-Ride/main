@@ -228,8 +228,11 @@ class OwnerController extends Controller
             $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
             $vehicle = new veh_license();
             $veh_license=$vehicle->licenseExp();
+            $veh_ins = new veh_insurance();
+            $vehicle_ins = $veh_ins->insExp();
+
             $this->setLayout("owner-dashboard");
-            return $this->render("/admin/admin_licenseExp",['complaint'=>$veh_license],['profile_img'=>$owner_img, 'function'=>'licenseexpiring']);
+            return $this->render("/admin/admin_licenseExp",['complaint'=>$veh_license,'veh_ins'=>$vehicle_ins],['profile_img'=>$owner_img, 'function'=>'licenseexpiring']);
         }
     }
 
@@ -393,6 +396,33 @@ class OwnerController extends Controller
 
         }
     }
+
+    public function   admin_disableVehicle(Request $req, Response $res){
+
+        if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="owner"){
+            $vehicle = new vehicle();
+            if ($req->isPost()){
+                $body=$req->getBody();
+                $veh_id=$body['veh_Id'];
+                $vehicle->adminenableVehicle(intval($veh_id));
+                $res->redirect('/admin/vehicle/disable_vehicle');
+                
+            }
+            else{
+                $disableVehicle = $vehicle->admin_enableVehicle();
+                $ownerprofile = new owner();
+                $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
+
+                $this->setLayout("owner-dashboard");
+                return $this->render("/admin/admin_enableVehicle",['result'=>$disableVehicle],['profile_img'=>$owner_img, 'function'=>'Vehicle']);
+
+            }
+            
+        }
+
+    }
+
+  
     
 
 

@@ -19,6 +19,7 @@ class license_expire_notification extends dbModel
     protected string $exp_date;
     protected string $no_of_date;
     protected string $message;
+    protected string $type;
     private array $body;
     
     public function rules(): array
@@ -33,7 +34,7 @@ class license_expire_notification extends dbModel
 
     public function attributes(): array
     {
-       return ['vo_ID','veh_Id','plate_No','owner','owner_email','exp_date','no_of_date','message'];
+       return ['vo_ID','veh_Id','plate_No','owner','owner_email','exp_date','no_of_date','message','type'];
     }
 
     public static function primaryKey(): string
@@ -177,6 +178,23 @@ class license_expire_notification extends dbModel
         return $this->message;
     }
 
+    
+    /**
+     * @param string $veh_model
+     */
+    public function settype(string $type): void
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return string
+     */
+    public function gettype(): string
+    {
+        return $this->type;
+    }
+
     /**
      * @param string $veh_type
      */
@@ -197,6 +215,11 @@ class license_expire_notification extends dbModel
         $this->body= $registerBody;
 
 
+    }
+
+    public function retreivedetails($user_id){
+        
+        return Application::$app->db->pdo->query("SELECT * FROM license_expire_notification Where vo_ID=$user_id")->fetchAll(\PDO::FETCH_ASSOC);
     }
 
 
