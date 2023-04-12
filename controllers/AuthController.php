@@ -71,10 +71,10 @@ class AuthController extends Controller
                         $res->redirect('/owner');
                     }
                     else if($body['user_type']=='vehicleowner'){
-                        $res->redirect('/vehicleOwner/Profile');
+                        Application::Redirect('/vehicleOwner/Profile');
                     }
                     else if($body['user_type']=='driver'){
-                        $res->redirect('/driver/Profile');
+                        $res->redirect('/driver/driver_profile');
                     }
                     else if ($body['user_type']=='customer'){
                         return Application::Redirect('/Customer/Home');

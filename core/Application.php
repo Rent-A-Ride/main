@@ -28,7 +28,7 @@ class Application
     public string $ownerClass;
     public ?Customer $customer;
     public ?driver $driver;
-    public ?vehicleowner $vehicleowner;
+    public ?vehicle_Owner $vehicleowner;
     public ?owner $owner;
     public ?dbModel $user;
 

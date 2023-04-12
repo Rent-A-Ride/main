@@ -496,6 +496,14 @@ class vehicle extends dbModel
         $statement1->bindValue(":availability",$availability);
         $statement1->execute();
     }
+    public function adminenableVehicle($vehicle_id){
+        $availability=1;
+        // var_dump($vehicle_id);
+        $query1="UPDATE vehicle SET availability =:availability WHERE veh_Id=$vehicle_id";
+        $statement1= Application::$app->db->prepare($query1);
+        $statement1->bindValue(":availability",$availability);
+        $statement1->execute();
+    }
 
     public  function adminaccept_vehicle($vehicle_id){
         $availability=1;
@@ -503,6 +511,12 @@ class vehicle extends dbModel
         $statement1= Application::$app->db->prepare($query1);
         $statement1->bindValue(":availability",$availability);
         $statement1->execute();
+    }
+
+
+    public function admin_enableVehicle(){
+        return Application::$app->db->pdo->query("SELECT * FROM vehicle INNER JOIN vehicle_info ON vehicle.veh_Id=vehicle_info.veh_Id AND vehicle.admin_approved=1 AND vehicle.availability=0 ORDER BY vehicle.veh_Id DESC")->fetchAll(\PDO::FETCH_ASSOC);
+
     }
 
 
