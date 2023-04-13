@@ -4,22 +4,8 @@
 
 
 
-<section class="home-section">
-    <!-- nav bar -->
-    <nav class="navbar">
-    <div class="container-icon">
-        <a href=""><img class="logo" src="/assets/img/home_img/logo.png" alt="Rent a Ride Logo"></a>
-    </div>
-    <ul class="nav-list" id="nav-list">
-        <li class="list-item 1"><a href="/login">Sign in</a></li>
-        <li class="list-item 2"><a href="/selectUserType">Register</a></li>      
-    </ul>
-    <div id="toggle-btn" class="menu-container" onclick="myFunction(this)">
-        <div class="bar1"></div>
-        <div class="bar2"></div>
-        <div class="bar3"></div>
-    </div>
-    </nav>
+
+
     <!-- multi search -->
 <div class="search">
     <form role="search" id="form">
@@ -187,12 +173,6 @@
     <h4>Rent A Ride</h4>
     <p>Mobility without Hassel</p>
 </div> -->
-</section>
-
-
-
-
-    
 
 <script src="sidebar.js"></script>  
 

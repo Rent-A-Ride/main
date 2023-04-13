@@ -41,6 +41,14 @@ class Application
         return !self::$app->user;
     }
 
+    public static function whoIsThis(): string
+    {
+        if(self::$app->user){
+            return self::$app->user->tableName();
+        }
+        return "Guest";
+    }
+
     public static function Redirect($path): void
     {
         Application::$app->response->redirect($path);
