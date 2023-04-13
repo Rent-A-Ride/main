@@ -219,15 +219,15 @@ class AuthController extends Controller
             if (preg_match('/^([0-9]{9}[x|X|v|V]|[0-9]{12})$/', $nic)) {
                 if (strlen($nic) === 10) {
                     if ($nic[2] < 5) {
-                        return "M";
+                        return "male";
                     } else {
-                        return "F";
+                        return "female";
                     }
                 } else {
                     if ($nic[4] < 5):
-                        return "M";
+                        return "male";
                     else:
-                        return "F";
+                        return "female";
                     endif;
                 }
             }
