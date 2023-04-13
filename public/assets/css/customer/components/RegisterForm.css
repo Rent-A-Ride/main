@@ -255,7 +255,7 @@ main .carousel {
     width: 55%;
     left: 45%;
     top: 0;
-    background-color: #ffe0d2;
+    background-color: #ffdda1;
     border-radius: 2rem;
     display: grid;
     grid-template-rows: auto 1fr;
