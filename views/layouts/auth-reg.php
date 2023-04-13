@@ -15,7 +15,7 @@
 
     <link rel="stylesheet" href="/assets/css/main.css">
     <!-- Nav CSS -->
-    <link rel="stylesheet" href="/assets/css/login.css">
+    <link rel="stylesheet" href="/assets/css/customer/components/RegisterForm.css">
 
 </head>
 <body>
@@ -38,6 +38,32 @@
 
     {{content}}
 
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>Rent-A-Ride is a leading provider of vehicle rental services, offering a wide selection of cars, scooters, motorcycles, and vans to customers across the country. </p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: askrenaride@gmail.com</p>
+                <p>Phone: 0716894655</p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Made with &#10084; by CS Group 24.   Rent-A-Ride &copy; All right reserved</p>
+        </div>
+    </footer>
+
 </body>
+<script src="/assets/javascript/customer/components/RegisterForm.js"></script>
 
 </html>

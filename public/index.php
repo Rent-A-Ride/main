@@ -111,8 +111,8 @@ $app->router->post('/Customer/login', [AuthController::class, 'cus_login']);
 
 $app->router->get("/selectUserType", [AuthController::class, "selectuser"]);
 
-$app->router->get("/Customer/Register", [AuthController::class, 'cusRegister']);
-$app->router->post("/Customer/Register", [AuthController::class, 'cusRegister']);
+$app->router->get("/Customer/Register", [AuthController::class, 'cus_register']);
+$app->router->post("/Customer/Register", [AuthController::class, 'cus_register']);
 
 $app->router->get("/Customer/Home", [CustomerController::class, 'home']);
 $app->router->post("/Customer/Home", [CustomerController::class, 'home']);

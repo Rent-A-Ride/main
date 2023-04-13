@@ -61,7 +61,6 @@ class Session
             if ($flashMessages['remove']) {
                 unset($flashMessages[$key]);
             }
-
         }
         $_SESSION[self::FLASH_KEY] = $flashMessages;
     }
