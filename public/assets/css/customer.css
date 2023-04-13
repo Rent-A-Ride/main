@@ -5,6 +5,9 @@
 @import url(customer/components/nav.css);
 @import url("components/navProfile.css");
 
+/*notification*/
+@import url(customer/components/notification.css);
+
 /*  Sidebar */
 @import url("components/sidebar.css");
 

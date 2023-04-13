@@ -103,7 +103,7 @@ use app\core\Application; ?>
         <ul class="nav-list" id="nav-list">
             <div class="notification-cont">
                 <div class="notification-icon">
-                    <i class='bx bx-bell'></i></i>
+                    <i class='bx bxs-bell'></i>
                     <span class="notification-count">5</span>
                 </div>
 
@@ -120,6 +120,7 @@ use app\core\Application; ?>
                         <li><a href="#">New product release</a></li>
                     </ul>
                 </div>
+
 
             </div>
             <!-- <li class="list-item 1"><a href="#">Sign in</a></li>
@@ -162,8 +163,23 @@ use app\core\Application; ?>
 
 
 </body>
-<script src="/assets/javascript/components/navbar.js"></script>
-<script src="/assets/javascript/components/sidebar.js"></script>
+<script>
+    let notificationIcon = document.querySelector('.notification-icon');
+    let notificationPanel = document.querySelector('.notification-panel');
+    let closeBtn8 = document.querySelector('.close-btn');
+
+    notificationIcon.addEventListener('click', () => {
+        notificationPanel.classList.toggle('active');
+    });
+
+    closeBtn8.addEventListener('click', () => {
+        notificationPanel.classList.remove('active');
+    });
+</script>
+
+<script src="/assets/javascript/component/navbar.js"></script>
+<script src="/assets/javascript/customer/components/notifications.js"></script>
+<script src="/assets/javascript/component/sidebar.js"></script>
 <script src="/assets/javascript/customer/components/search.js"></script>
 <script src="/assets/javascript/customer/components/details.js"></script>
 <script src="/assets/javascript/customer/components/booking.js"></script>

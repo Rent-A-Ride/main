@@ -1,3 +1,7 @@
+.notification-cont{
+    margin: 20px;
+}
+
 .notification-icon {
     position: relative;
     display: flex;
@@ -30,7 +34,7 @@
     border-radius: 4px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    transform: translateY(-10px);
+    transform: translateY(10px);
     opacity: 0;
     transition: all 0.3s ease-in-out;
 }
@@ -59,6 +63,32 @@
     font-size: 24px;
     cursor: pointer;
 }
+
+.close-btn:hover {
+    color: red;
+}
+
+.notification-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.notification-list li {
+    padding: 10px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.notification-list li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+}
+
+.notification-list li a:hover {
+    color: red;
+}
+
 
 .close-btn:hover {
     color: red;

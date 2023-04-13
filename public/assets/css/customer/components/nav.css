@@ -36,6 +36,7 @@ body {
     padding-top: 10px;
     padding-right: 20px;
     display: flex;
+    /*align-items: center;*/
     justify-content: right;
     transition: 0.8s;
 }
@@ -89,6 +90,7 @@ body {
 .change .bar3 {
     transform: translate(0, -5px) rotate(45deg);
 }
+
 
 @media all and (max-width: 480px) {
     .navbar {
