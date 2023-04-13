@@ -175,7 +175,7 @@ use app\models\Customer;
                         <div class="text-group">
                             <h2>Why buy when you can rent?</h2>
                             <h2>Experience the freedom of the road</h2>
-                            <h2>Rent a Ride: Mobility without Hassel</h2>
+                            <h2>Rent a Ride: Mobility without Hassle</h2>
                         </div>
                     </div>
 
