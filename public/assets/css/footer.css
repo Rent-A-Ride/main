@@ -9,6 +9,7 @@ footer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+
     max-width: 1200px;
     margin: 0 auto;
     padding: 10px 20px;
@@ -16,6 +17,7 @@ footer {
 
 .footer-section {
     width: 30%;
+
 }
 
 .footer-section h3 {
@@ -27,17 +29,30 @@ footer {
 }
 
 .footer-section ul {
+    text-decoration: none;
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.footer-section a {
-    color: #fff;
+.footer-section li {
+    margin-bottom: 10px;
 }
+
+.footer-section a {
+
+    color: #fff;
+    text-decoration: none;
+}
+
+
 
 .footer-bottom {
     background-color: #222;
     padding: 10px 20px;
     text-align: center;
+}
+
+.footer-section a:hover{
+    color: #f1c40f;
 }

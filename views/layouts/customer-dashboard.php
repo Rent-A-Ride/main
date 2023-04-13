@@ -101,6 +101,27 @@ use app\core\Application; ?>
             <a href=""><img class="logo" src="/assets/img/logo.png" alt="Rent a Ride Logo"></a>
         </div>
         <ul class="nav-list" id="nav-list">
+            <div class="notification-cont">
+                <div class="notification-icon">
+                    <i class='bx bx-bell'></i></i>
+                    <span class="notification-count">5</span>
+                </div>
+
+                <div class="notification-panel">
+                    <div class="notification-header">
+                        <h3>Notifications</h3>
+                        <button class="close-btn">&times;</button>
+                    </div>
+                    <ul class="notification-list">
+                        <li><a href="#">New message from John</a></li>
+                        <li><a href="#">You have 3 new emails</a></li>
+                        <li><a href="#">Today's weather forecast</a></li>
+                        <li><a href="#">Upcoming event reminder</a></li>
+                        <li><a href="#">New product release</a></li>
+                    </ul>
+                </div>
+
+            </div>
             <!-- <li class="list-item 1"><a href="#">Sign in</a></li>
             <li class="list-item 2"><a href="#">Register</a></li>       -->
             <div class="profile-cont">

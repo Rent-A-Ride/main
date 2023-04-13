@@ -38,6 +38,8 @@
 
     {{content}}
 
+<!--    Footer -->
+
     <footer>
         <div class="footer-container">
             <div class="footer-section">
@@ -45,16 +47,16 @@
                 <p>Rent-A-Ride is a leading provider of vehicle rental services, offering a wide selection of cars, scooters, motorcycles, and vans to customers across the country. </p>
             </div>
             <div class="footer-section">
-                <h3>Contact Us</h3>
-                <p>Email: askrenaride@gmail.com</p>
-                <p>Phone: 0716894655</p>
+                <h3> Contact Us</h3>
+                <p><i class='bx bx-at'></i> Email: askrenaride@gmail.com</p>
+                <p><i class='bx bx-phone-call' ></i> Phone: 0716894655</p>
             </div>
             <div class="footer-section">
                 <h3>Follow Us</h3>
                 <ul>
-                    <li><a href="#">Facebook</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#"><i class='bx bxl-facebook'></i> /rentAride</a></li>
+                    <li><a href="#"><i class='bx bxl-twitter'></i> @rentaride</a></li>
+                    <li><a href="#"><i class='bx bxl-instagram' ></i> @rentAride</a></li>
                 </ul>
             </div>
         </div>
