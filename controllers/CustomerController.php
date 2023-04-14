@@ -179,6 +179,15 @@ class CustomerController extends Controller
 
     public function customerSettings(Request $request, Response $response)
     {
+        if (Application::isGuest()) {
+            Application::$app->session->setFlash('error', 'You are not logged in!');
+            $response->redirect('/login');
+            exit;
+        }elseif (Application::whoIsThis() ==! 'customer'){
+            Application::$app->session->setFlash('error', 'You are not logged in as a customer!');
+            $response->redirect('/login');
+            exit;
+        }
         $this->setLayout('customer-dashboard');
         return $this->render('Customer/v_customerSettings');
     }
