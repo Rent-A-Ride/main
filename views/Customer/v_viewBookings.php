@@ -41,7 +41,7 @@ use app\models\cusVehicle;
                 </td>
                 <td><strong> <?= 'Rs. '.$row->getRentalPrice().'.00' ?></strong></td>
                 <td><span class="status pending">Pending</span></td>
-                <td><button class="cancel-btn"><i class='bx bx-trash'></i> Cancel</button></td>
+                <td><button id="cancelBookingBtn" class="cancel-btn" data-booking-id="<?= $row->getBookingId();?>"><i class='bx bx-trash'></i> Cancel</button></td>
             </tr>
             <tr class="child" style="display: none;">
                 <td colspan="5" class="child-td">
@@ -99,6 +99,46 @@ use app\models\cusVehicle;
 <br>
 <p style="text-align: center; color: #3B3B3B">--- No data to shown ---</p>
 
+
+
+<!--Cancel Booking Popup with reason-->
+<div id="cancelModal" class="cancelModal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Reason for Cancellation</h2>
+        <form method="post" id="booking-cancel-form">
+            <input type="hidden" name="bookingId" id="bookingId">
+            <div class="radio-group">
+                <label class="radio">
+                    <input type="radio" name="reason" value="change_of_plans">
+                    <span class="radio-label">Change of my mind</span>
+                </label>
+                <label class="radio">
+                    <input type="radio" name="reason" value="vehicle_issue">
+                    <span class="radio-label">Cancel my trip</span>
+                </label>
+                <label class="radio">
+                    <input type="radio" name="reason" value="personal_emergency">
+                    <span class="radio-label">Found another deal</span>
+                </label>
+                <label class="radio">
+                    <input type="radio" name="reason" value="other">
+                    <span class="radio-label">Other</span>
+                </label>
+            </div>
+            <div class="form-group">
+                <label for="comments">Additional comments (optional):</label>
+                <textarea cols="6" id="comments" name="comments"></textarea>
+            </div>
+            <div class="form-group">
+                <button class="submit" type="submit">Submit</button>
+                <input type="submit" class="submit">
+            </div>
+        </form>
+    </div>
+</div>
+
+
 <script>
     const table = document.getElementById("myTable");
     const rows = table.getElementsByTagName("tr");
@@ -117,3 +157,5 @@ use app\models\cusVehicle;
         });
     }
 </script>
+
+<script src="/assets/javascript/customer/components/cancelModal.js"></script>

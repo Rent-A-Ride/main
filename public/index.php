@@ -140,6 +140,8 @@ $app->router->get('/Customer/VehicleBookingTable', [CustomerController::class, '
 $app->router->get('/Customer/Settings', [CustomerController::class, 'customerSettings']);
 $app->router->post('/Customer/Settings', [CustomerController::class, 'customerSettings']);
 
+$app->router->post("/cancelBooking", [CustomerController::class, 'cancelBooking']);
+
 
 
 

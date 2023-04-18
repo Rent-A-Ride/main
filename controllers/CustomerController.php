@@ -268,4 +268,15 @@ class CustomerController extends Controller
             'customer'=>$customer,
         ]);
     }
+
+    public function cancelBooking(Request $request, Response $response)
+    {
+        $bookingId = $request->getBody()['bookingId'];
+        $vehBooking = VehBooking::findOne(['booking_Id' => $bookingId]);
+        $vehBooking->setStatus(0);it add *
+
+
+
+        return json_encode(['status' => true]);
+    }
 }
