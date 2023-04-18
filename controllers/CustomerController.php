@@ -179,6 +179,7 @@ class CustomerController extends Controller
 
     public function customerSettings(Request $request, Response $response)
     {
+        $customer = new Customer();
         if (Application::isGuest()) {
             Application::$app->session->setFlash('error', 'You are not logged in!');
             $response->redirect('/login');
@@ -188,7 +189,83 @@ class CustomerController extends Controller
             $response->redirect('/login');
             exit;
         }
+
+        $id=Application::$app->user->cus_Id;
+
+        //Change the password
+        if ($request->isPost()){
+            $customer=Customer::findOne(['cus_Id'=>$id]);
+            $customer->loadData($request->getBody());
+            $mode=$request->getBody()['mode'] ?? '';
+
+
+
+            if ($mode==='change-password'){
+
+                $currentPassword=$request->getBody()['current-password'];
+                $newPassword=$request->getBody()['new-password'];
+                $confirmPassword=$request->getBody()['confirm-password'];
+
+                //check if old password is match, if nor add error
+                if (!password_verify( $currentPassword,$customer->getPassword())){
+                    $customer->addError('change-password','Current password is incorrect!');
+                    $this->setLayout('customer-dashboard');
+                    return $this->render('Customer/v_customerSettings',[
+                        'customer'=>$customer,
+                    ]);
+                }
+                //check if new password and confirm password are match, if not add error
+                if ($newPassword!==$confirmPassword){
+                    $customer->addError('change-password','Passwords are not match!');
+                    $this->setLayout('customer-dashboard');
+                    return $this->render('Customer/v_customerSettings',[
+                        'customer'=>$customer,
+                    ]);
+                }
+
+                //check if new password is same as old password, if so add error
+                if (password_verify($newPassword,$customer->getPassword())){
+                    $customer->addError('change-password','New password is same as old password!');
+                    $this->setLayout('customer-dashboard');
+                    return $this->render('Customer/v_customerSettings',[
+                        'customer'=>$customer,
+                    ]);
+                }
+
+                $customer->setPassword($newPassword);
+
+                //check if new password is validate
+                if (!$customer->validateWith(['password'])){
+                    $this->setLayout('customer-dashboard');
+                    return $this->render('Customer/v_customerSettings',[
+                        'customer'=>$customer,
+                    ]);
+                }
+
+                //if all the above conditions are passed, update the password
+
+
+
+
+                if ($customer->validateWith(['password']) && $customer->update($id,['password'])){
+                    Application::$app->session->setFlash('success', 'Password Updated Successfully!');
+                    $response->redirect('/Customer/Settings');
+                    return;
+                }
+
+
+                Application::$app->session->setFlash('error', 'There was some error in updating your password!');
+                $this->setLayout('customer-dashboard');
+                return $this->render('Customer/v_customerSettings',[
+                    'customer'=>$customer,
+                ]);
+            }
+        }
+
+
         $this->setLayout('customer-dashboard');
-        return $this->render('Customer/v_customerSettings');
+        return $this->render('Customer/v_customerSettings',[
+            'customer'=>$customer,
+        ]);
     }
 }
