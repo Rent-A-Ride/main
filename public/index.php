@@ -29,6 +29,13 @@ $config = [
         'dsn'=>$_ENV['DB_DSN'],
         'user'=>$_ENV['DB_USER'],
         'password'=>$_ENV['DB_PASSWORD'],
+    ],
+    'email'=>[
+        'host'=>$_ENV['EMAIL_HOST'],
+        'port'=>$_ENV['EMAIL_PORT'],
+        'username'=>$_ENV['EMAIL_USERNAME'],
+        'password'=>$_ENV['EMAIL_PASSWORD'],
+        'encryption'=>$_ENV['EMAIL_ENCRYPTION'],
     ]
 ];
 
@@ -132,6 +139,8 @@ $app->router->get('/Customer/VehicleBookingTable', [CustomerController::class, '
 
 $app->router->get('/Customer/Settings', [CustomerController::class, 'customerSettings']);
 $app->router->post('/Customer/Settings', [CustomerController::class, 'customerSettings']);
+
+$app->router->post("/cancelBooking", [CustomerController::class, 'cancelBooking']);
 
 
 
