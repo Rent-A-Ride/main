@@ -79,7 +79,7 @@ abstract class Model
 
     public function addError(string $attribute, string $message)
     {
-
+        $message = $this->errorMessages()[$rule] ?? '';
         $this->errors[$attribute][] = $message;
     }
 

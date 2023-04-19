@@ -17,6 +17,7 @@ use app\models\user;
 use app\models\users;
 use app\models\vehicle_Owner;
 use app\models\vehicleowner;
+use app\models\vehicleOwnerRegister;
 
 class AuthController extends Controller
 {
@@ -26,26 +27,41 @@ class AuthController extends Controller
         return $res->render('login','main_1');
     }
 
-//    public function register(Request $request)
-//    {
-//        $registerModel = new RegisterModel();
-//        if ($request->isPost()){
-//
-//            $registerModel->loadData($request->getBody());
-//
-//            if ($registerModel->validate() && $registerModel->register()){
-//                return 'Success';
-//            }
-//
-//            return $this->render('register', [
-//                'model' => $registerModel
-//            ]);
-//        }
-//        $this->setLayout('auth');
-//        return $this->render('register', [
-//            'model' => $registerModel
-//        ]);
-//    }
+    public function VO_register(Request $request, Response $response)
+    {
+        $vehicleOwnerRegister = new vehicleowner();
+
+        if ($request->isPost())
+        {
+            $vehicleOwnerRegister->loadData($request->getBody());
+//            echo '<pre>';
+//            var_dump($vehicleOwnerRegister);
+//            echo '</pre>';
+//            exit();
+
+            if ($vehicleOwnerRegister->validate() && $vehicleOwnerRegister->save())
+            {
+                var_dump("Success");
+                return 'Success';
+
+            }
+            echo '<pre>';
+            var_dump($vehicleOwnerRegister->errors);
+            echo '</pre>';
+            exit();
+
+            $this->setLayout('authVO');
+            return $this->render('VehicleOwner/vehicleOwnerRegistration', [
+                'model' => new vehicleOwnerRegister()
+            ]);
+        }
+
+            $this->setLayout('authVO');
+            return $this->render('VehicleOwner/vehicleOwnerRegistration', [
+                'model' => new vehicleOwnerRegister()
+            ]);
+    }
+
 
     public function login(Request $req, Response $res)
     {

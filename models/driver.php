@@ -3,16 +3,49 @@
 namespace app\models;
 
 use app\core\Application;
+use app\core\dbModel;
 use app\core\Request;
 use app\core\Response;
 use app\core\Database;
 
 
 
-class driver
+class driver extends dbModel
 {
+
+    const STATUS_INACTIVE = 0;
+    const STATUS_ACTIVE = 1;
+    const STATUS_DELETED = 2;
     // private \PDO $pdo;
     private array $body;
+
+    private string $driver_ID;
+    private string $driver_Fname;
+    private string $driver_Lname;
+    private string $area = '';
+    private string $driver_address;
+    private string $phoneNo = '';
+    private string $gender = '';
+    private string $email;
+    private string $license_No ;
+    private string $password;
+    private int $status = self::STATUS_INACTIVE;
+
+    /**
+     * @return int
+     */
+    public function getStatus(): int
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param int $status
+     */
+    public function setStatus(int $status): void
+    {
+        $this->status = $status;
+    }
 
     public function __construct(array $registerBody=[])
     {
@@ -129,6 +162,202 @@ class driver
     public function getPayments($user_id){
         return Application::$app->db->pdo->query("SELECT * FROM drivers_invoice INNER JOIN users WHERE drivers_invoice.user_ID=$user_id AND users.user_ID=$user_id ORDER BY invoice_no DESC")->fetchAll(\PDO::FETCH_ASSOC);
     }
-    
 
+    /**
+     * @return array
+     */
+    public function getBody(): array
+    {
+        return $this->body;
+    }
+
+    /**
+     * @param array $body
+     */
+    public function setBody(array $body): void
+    {
+        $this->body = $body;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDriverId(): string
+    {
+        return $this->driver_ID;
+    }
+
+    /**
+     * @param string $driver_id
+     */
+    public function setDriverId(string $driver_id): void
+    {
+        $this->driver_id = $driver_id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDriverFname(): string
+    {
+        return $this->driver_Fname;
+    }
+
+    /**
+     * @param string $driver_Fname
+     */
+    public function setDriverFname(string $driver_Fname): void
+    {
+        $this->driver_Fname = $driver_Fname;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDriverLname(): string
+    {
+        return $this->driver_Lname;
+    }
+
+    /**
+     * @param string $driver_Lname
+     */
+    public function setDriverLname(string $driver_Lname): void
+    {
+        $this->driver_Lname = $driver_Lname;
+    }
+
+    /**
+     * @return string
+     */
+    public function getArea(): string
+    {
+        return $this->area;
+    }
+
+    /**
+     * @param string $area
+     */
+    public function setArea(string $area): void
+    {
+        $this->area = $area;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDriverAddress(): string
+    {
+        return $this->driver_address;
+    }
+
+    /**
+     * @param string $driver_address
+     */
+    public function setDriverAddress(string $driver_address): void
+    {
+        $this->driver_address = $driver_address;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhoneNo(): string
+    {
+        return $this->phoneNo;
+    }
+
+    /**
+     * @param string $phoneNo
+     */
+    public function setPhoneNo(string $phoneNo): void
+    {
+        $this->phoneNo = $phoneNo;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGender(): string
+    {
+        return $this->gender;
+    }
+
+    /**
+     * @param string $gender
+     */
+    public function setGender(string $gender): void
+    {
+        $this->gender = $gender;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLicenseNo(): string
+    {
+        return $this->license_No;
+    }
+
+    /**
+     * @param string $license_No
+     */
+    public function setLicenseNo(string $license_No): void
+    {
+        $this->license_No = $license_No;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param string $password
+     */
+    public function setPassword(string $password): void
+    {
+        $this->password = $password;
+    }
+
+
+    public function rules(): array
+    {
+        return  [];
+    }
+
+    public static function tableName(): string
+    {
+        return 'driver';
+    }
+
+    public function attributes(): array
+    {
+        // return the all the values created up there
+        return ['driver_ID','driver_Fname','driver_Lname','driver_area','driver_address','phone_No','gender','email','license_No','password', 'status'];
+    }
+
+    public static function primaryKey(): string
+    {
+        return 'driver_ID';
+    }
 }

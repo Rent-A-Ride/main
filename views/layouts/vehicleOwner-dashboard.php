@@ -144,4 +144,5 @@ use app\core\Application;
 <script src="/assets/javascript/vehicleOwner/components/popup.js"></script>
 <script src="/assets/javascript/vehicleOwner/components/CustomerReq.js"></script>
 <script src="/assets/javascript/vehicleOwner/profile.js"></script>
+<script src="/assets/javascript/vehicleOwner/AddNewVehicle.js"></script>
 </html>

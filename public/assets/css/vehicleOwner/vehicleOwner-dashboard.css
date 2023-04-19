@@ -14,6 +14,7 @@
 
 
 
+
 /* @import url('vehowner_addVehicle.css'); */
 @import url('vehowner_addVehicle.css');
 /*@import "../admin/ownerViewVehicleProfile.css";*/
@@ -43,6 +44,8 @@
 @import url("popupbox/popupbox.css");
 
 @import url("popupbox/popup.css");
+
+@import url("vehicleOwnerAddNewVehicle.css");
 
 
 

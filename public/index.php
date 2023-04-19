@@ -102,6 +102,7 @@ $app->router->post("/Customer/Register", [AuthController::class, 'cusRegister'])
 
 // view customer Pending requests
 $app->router->get("/CustomerPendingRequest", [VehicleOwnerController::class, 'viewCustomerPendingRequests']);
+$app->router->post("/CustomerPendingRequest", [VehicleOwnerController::class, 'viewCustomerPendingRequests']);
 
 // view customer Accepted requests
 $app->router->get("/CustomerAcceptedRequest", [VehicleOwnerController::class, 'viewCustomerAcceptedRequests']);
@@ -140,8 +141,8 @@ $app->router->post("/Driver/Register", [AuthController::class, 'getDriverRegistr
 $app->router->get("/vehicleOwner/Profile", [VehicleOwnerController::class, 'vehownerViewProfile']);
 $app->router->post("/vehicleOwner/Profile", [VehicleOwnerController::class, 'vehownerViewProfile']);
 
-$app->router->get("/vehicleOwner/Register", [AuthController::class, 'vehOwnerRegistration']);
-$app->router->post("/vehicleOwner/Register", [AuthController::class, 'vehOwnerRegistration']);
+//$app->router->get("/vehicleOwner/Register", [AuthController::class, 'vehOwnerRegistration']);
+//$app->router->post("/vehicleOwner/Register", [AuthController::class, 'vehOwnerRegistration']);
 
 
 $app->router->get("/vehicleOwner/editProfile", [VehicleOwnerController::class, 'getEditProfile']);
@@ -156,7 +157,12 @@ $app->router->get("/vehicleOwner/UpdateVehicle", [VehicleOwnerController::class,
 
 $app->router->post("/vehicleOwner/acceptBooking", [VehicleOwnerController::class, 'acceptBooking']);
 
+//Vehicle Owner Registration
+$app->router->get("/vehicleOwner/Register", [AuthController::class, 'VO_register']);
+$app->router->post("/vehicleOwner/Register", [AuthController::class, 'VO_register']);
 
-
-
+//vehicle owner add new vehicle
+$app->router->get("/vehicleOwner/addNewVehicle", [VehicleOwnerController::class, 'addNewVehicle']);
 $app->run();
+
+
