@@ -79,6 +79,13 @@ use app\core\Application;
             <span class="tooltip">Requests</span>
         </li>
         <li>
+            <a href="/Customer/ExpieringNotification">
+                <i class="fa-regular fa-bell"></i>
+                <span class="links_name">Notification</span>
+            </a>
+            <span class="tooltip">Notification</span>
+        </li>
+        <li>
             <a href="/vehicleOwner/Payments">
                 <i class='bx bx-wallet' ></i>
                 <span class="links_name">Payment</span>
@@ -106,10 +113,10 @@ use app\core\Application;
         <ul class="nav-list" id="nav-list">
             <!-- <li class="list-item 1"><a href="#">Sign in</a></li>
             <li class="list-item 2"><a href="#">Register</a></li>       -->
-            <div class="vision"><p>Mobility Without Hassel</p> </div>
+            <!-- <div class="vision"><p>Mobility Without Hassel</p> </div> -->
             <div class="profile-cont">
                 <span class="profile-name">Buddhi Yapa</span>
-                <div class="img-cont"><img src="img/profile.png" class="profile-image"></div>
+                <div class="img-cont"><img src="" class="profile-image"></div>
             </div>
 
         </ul>

@@ -3,10 +3,10 @@
 namespace app\models;
 
 use app\core\Application;
-use app\core\dbModel;
 use app\core\Request;
 use app\core\Response;
 use app\core\Database;
+use app\core\dbModel;
 
 
 
@@ -18,34 +18,19 @@ class driver extends dbModel
     const STATUS_DELETED = 2;
     // private \PDO $pdo;
     private array $body;
+    public string $driver_ID;
+    public string $Nic;
+    public string $driver_Fname;
+    public string $driver_Lname;
+    public string $email;
+    public string $phoneNo;
+    public string $area;
+    public string $address;
+    public string $gender;
+    public string $admin_approved;
+    public string $password;
+    public string $profile_pic;
 
-    private string $driver_ID;
-    private string $driver_Fname;
-    private string $driver_Lname;
-    private string $area = '';
-    private string $driver_address;
-    private string $phoneNo = '';
-    private string $gender = '';
-    private string $email;
-    private string $license_No ;
-    private string $password;
-    private int $status = self::STATUS_INACTIVE;
-
-    /**
-     * @return int
-     */
-    public function getStatus(): int
-    {
-        return $this->status;
-    }
-
-    /**
-     * @param int $status
-     */
-    public function setStatus(int $status): void
-    {
-        $this->status = $status;
-    }
 
     public function __construct(array $registerBody=[])
     {
@@ -54,6 +39,26 @@ class driver extends dbModel
 
 
     }
+    public static function tableName(): string
+    {
+        return 'driver';
+    }
+
+    public static function primaryKey():string
+    {
+        return 'driver_ID';
+    }
+
+    public function rules(): array
+    {
+        return [];
+    }
+    public function attributes(): array
+    {
+        return ['Nic','driver_Fname','driver_Lname','email','phone_No','area','address','gender','admin_approved','password'];
+    }
+
+
 
     // public function login():array|object
     // {
@@ -340,24 +345,4 @@ class driver extends dbModel
     }
 
 
-    public function rules(): array
-    {
-        return  [];
-    }
-
-    public static function tableName(): string
-    {
-        return 'driver';
-    }
-
-    public function attributes(): array
-    {
-        // return the all the values created up there
-        return ['driver_ID','driver_Fname','driver_Lname','driver_area','driver_address','phone_No','gender','email','license_No','password', 'status'];
-    }
-
-    public static function primaryKey(): string
-    {
-        return 'driver_ID';
-    }
 }

@@ -225,10 +225,10 @@ th, td {
     border-bottom: 2px solid grey;
 }
 
-/.topnav a:focus {/
-/*    background-color: #fcba50c4;*/
-/*    border-bottom: 2px solid rgb(49, 48, 48);*/
-/}/
+/*.topnav a:focus {*/
+/*  background-color: #fcba50c4;*/
+/*border-bottom: 2px solid rgb(49, 48, 48);*/
+/*}*/
 
 .topnav a.active {
     background-color: #04AA6D;

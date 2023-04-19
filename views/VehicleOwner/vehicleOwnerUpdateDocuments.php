@@ -31,8 +31,8 @@
 
                 <!--  DATE VALIDATION ~ CSS PART TO BE ADDED-->
 
-                From Date : <input id="TxtFrom">
-                To Date : <input id="TxtTo">
+                From Date : <input id="TxtFrom" name="">
+                To Date : <input id="TxtTo" name->
                 <script>
 
                     $(function() {
@@ -65,7 +65,7 @@
                 </script>
 
                 <div>
-                    <button type="submit" class="btn" onclick="location.href='/vehicleowner_vehicle'">Submit</button>
+                    <button type="submit" class="btn">Submit</button>
                 </div>
 
             </form>

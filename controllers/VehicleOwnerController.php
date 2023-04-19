@@ -9,7 +9,9 @@ use app\core\Response;
 use app\models\Customer;
 use app\models\driver;
 use app\models\driver_requests;
+use app\models\license_expire_notification;
 use app\models\owner;
+use app\models\ren_ecotest;
 use app\models\vehicle;
 use app\models\vehicle_Owner;
 use app\models\viewCustomerReq;
@@ -23,14 +25,16 @@ class VehicleOwnerController extends Controller
     // }
 
     public function VehicleOwnerVehicle(Request $req, Response $res){
-        $vehicles = new VehicleController();
-        $vehicle=[];
-        $vehicle = $vehicles->vehicleownerGetVehicle($req,$res);
+        if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="vehicleowner"){
+            $vehicles = new VehicleController();
+            $vehicle=[];
+            $vehicle = $vehicles->vehicleownerGetVehicle($req,$res);
         
 //        print_r($vehicle);
          return $res->render("/VehicleOwner/vehicleOwner_vehicle","vehicleOwner-dashboard",['result'=>$vehicle]);
+        }
     }
-
+    //this function for owner
     public function viewVehicleownerProfile(Request $req, Response $res){
             
         $query=$req->query(); 
@@ -42,41 +46,42 @@ class VehicleOwnerController extends Controller
     }
     public function vehownerViewProfile(Request $req,Response $res){
 
-        if ($req->session->get("authenticated") && $req->session->get("user_role")==="vehicleowner"){
 
             $vehowner = new vehicle_Owner();
-            $vehicleowner=$vehowner->Vehicleowner_profile($req->session->get("user_id"));
-            $id = $req->session->get("user_id");
+            $vehicleowner = $vehowner->Vehicleowner_profile(Application::$app->session->get("user"));
+            $id = Application::$app->session->get("user_id");
             $nic = $vehicleowner[0]['Nic'];
 
-            if ($req->isPost()){
-                $vehicleowner =[new vehicle_Owner()];
+            if ($req->isPost()) {
+                $vehicleowner = [new vehicle_Owner()];
                 $vehicleowner[0]->loadData($req->getBody());
 
-                if ($vehicleowner[0]->update($nic,['owner_Fname','owner_Lname', 'phone_No', 'owner_address', 'license_No'])){                 $req->session->setFlash('profileUpdate', 'Profile Updated Successfully!');
+                if ($vehicleowner[0]->update($nic, ['owner_Fname', 'owner_Lname', 'phone_No', 'owner_address', 'license_No'])) {
+                    $req->session->setFlash('success', 'Profile Updated Successfully!');
                     $res->redirect('/vehicleOwner/Profile');
                     return;
-                }else{
+                } else {
                     echo '<pre>';
                     var_dump("fail");
                     echo '</pre>';
                     exit();
                 }
 //                $req->setFlash('profileUpdateErr', 'There was some error in updating your profile!');
-                return $res->render("VehicleOwner/vehicleOwnerProfile","vehicleOwner-dashboard",['vehicleowner'=>$vehicleowner]);
+                return $res->render("VehicleOwner/vehicleOwnerProfile", "vehicleOwner-dashboard", ['vehicleowner' => $vehicleowner]);
 
             }
 
 
-            return $res->render("VehicleOwner/vehicleOwnerProfile","vehicleOwner-dashboard",['vehicleowner'=>$vehicleowner]);
-        }
+            return $res->render("VehicleOwner/vehicleOwnerProfile", "vehicleOwner-dashboard", ['vehicleowner' => $vehicleowner]);
+
     }
 
-    public function getEditProfile(Request $req,Response $res){
-        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="vehicleowner"){
-            return $res->render("/VehicleOwner/vehicleOwnerEditProfile","vehicleOwner-dashboard");
-        }
-    }
+//    public function getEditProfile(Request $req,Response $res)
+//{
+//    if ($req->session->get("user_role") === "vehicleowner") {
+//        return $res->render("/VehicleOwner/vehicleOwnerEditProfile", "vehicleOwner-dashboard");
+//    }
+//}
 
     public function getPayments(Request $req,Response $res){
         if ($req->session->get("authenticated")&&$req->session->get("user_role")==="vehicleowner"){
@@ -105,15 +110,17 @@ class VehicleOwnerController extends Controller
     }
 
     public function vehownerUpdateVehicle(Request $req, Response $res){
-        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="vehicleowner"){ 
-             
-            // $vehicles = new VehicleController();
-            // $vehicle=[];
-            // $vehicle = $vehicles->viewVehicleProfile($req,$res);
-            // $ownerprofile = new owner();
-            // $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
-//        print_r($vehicle);
+        if (Application::$app->session->get("user_role")==="vehicleowner"){
              return $res->render("/VehicleOwner/vehicleOwnerUpdateDocuments","vehicleOwner-dashboard");
+
+             if ($req->isPost()) {
+                 $veh_ecotest = new ren_ecotest();
+
+                    $veh_ecotest->setVehId($req->getBody()['veh_Id']);
+                    $veh_ecotest->setScanCopy($req->getBody()['ren_Date']);
+                    $veh_ecotest->setRenExpireDate($req->getBody()['ren_Expire_Date']);
+
+             }
         }
         return $res->render("Home","home");
     }
@@ -277,6 +284,18 @@ class VehicleOwnerController extends Controller
     public function addNewVehicle(Request $request, Response $response)
     {
         return $response->render("/VehicleOwner/vehicleOwnerAddNewVehicle", "vehicleOwner-dashboard");
+    }
+
+    public function expier_notification(Request $req,Response $res)
+    {
+        if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="vehicleowner"){
+
+            $exp_not=new license_expire_notification();
+            $exp=$exp_not->retreivedetails(Application::$app->session->get("user"));
+            $this->setLayout("vehicleOwner-dashboard");
+            return $this->render("/VehicleOwner/vehicleOwner_notification",['model'=>$exp]);
+        }
+
     }
 
 

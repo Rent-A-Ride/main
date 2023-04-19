@@ -17,7 +17,7 @@
 
                         <div>
                             <label for="vehicle">NIC:</label>
-                            <input type="text" id="vehicle" name="vehicle" value="<?php echo $driver[0]["Driver_Nic"] ?>" readonly>
+                            <input type="text" id="vehicle" name="vehicle" value="<?php echo $driver[0]["Nic"] ?>" readonly>
                         </div>
 
                         <div>
@@ -27,18 +27,18 @@
 
                         <div>
                             <label for="phone">Area:</label>
-                            <input type="text" id="phone" name="phone" value="<?php echo $driver[0]["driver_area"] ?>" readonly>
+                            <input type="text" id="phone" name="phone" value="<?php echo $driver[0]["area"] ?>" readonly>
                         </div>
                         
                         <div>
                             <label for="address">Address:</label>
-                            <input type="text" id="address" name="address" value="<?php echo $driver[0]["driver_address"] ?>" readonly>
+                            <input type="text" id="address" name="address" value="<?php echo $driver[0]["address"] ?>" readonly>
                         </div>
 
-                        <div>
+                        <!-- <div>
                             <label for="license">License Number:</label>
                             <input type="text" id="license" name="license" value="<?php echo $driver[0]["license_No"] ?>" readonly>
-                        </div>
+                        </div> -->
 
                         
                 </form>
@@ -88,7 +88,7 @@
         <span class="close" onclick="closeModal()">&times;</span>
         <form class="up-profile" id="edit-profile-form" action="profile_controller.php?action=edit_profile" method="post">
             <label for="nic">NIC:</label>
-            <input disabled value="<?php echo $driver[0]["Driver_Nic"] ?>" type="text" id="nic" name="nic">
+            <input disabled value="<?php echo $driver[0]["Nic"] ?>" type="text" id="nic" name="nic">
 
             <label for="fname">First Name:</label>
             <input value="<?php echo $driver[0]["driver_Fname"] ?>" type="text" id="fname" name="firstname">
@@ -99,11 +99,11 @@
             <label for="email">Email:</label>
             <input disabled value="<?php echo $driver[0]["email"] ?>" type="email" id="email" name="email">
 
-            <label for="phone">Phone Number:</label>
-            <input value="<?php echo $driver[0]["phone_No"] ?>" type="tel" id="phone" name="phone">
+            <!-- <label for="phone">Phone Number:</label>
+            <input value="<?php echo $driver[0]["phone_No"] ?>" type="tel" id="phone" name="phone"> -->
 
             <label for="address">Address:</label>
-            <textarea id="address" name="address"><?php echo $driver[0]["driver_address"] ?></textarea>
+            <textarea id="address" name="address"><?php echo $driver[0]["address"] ?></textarea>
 
             <input type="submit" value="Save Changes">
         </form>

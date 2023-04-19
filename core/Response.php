@@ -56,7 +56,7 @@ class Response
         $viewContent = $this->renderOnlyView($view, $pageParams);
         return str_replace('{{content}}', $viewContent, $layoutContent);
     }
-    private function getLayout(string $layout = "main", array $params = []): string
+    private function getLayout(string $layout, array $params = []): string
     {
         foreach ($params as $key => $value) {
             $$key = $value;
