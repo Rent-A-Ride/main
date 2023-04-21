@@ -42,16 +42,12 @@ form.addEventListener("submit", (event) => {
     })
         .then(response => response.json())
         .then(response => {
-            if (response.ok) {
+            if (response.status) {
                 alert("Booking cancelled successfully");
                 // reload the page
                 location.reload();
             }
-        })
-    // Get all form data
-    for (var pair of formData.entries()) {
-        console.log(pair[0]+ ', ' + pair[1]);
-    }
-    console.log();
+        });
+    location.reload();
 });
 

@@ -120,6 +120,32 @@ abstract class dbModel extends Model
 
     }
 
+    public function delete(): bool
+    {
+        $tableName = static::tableName();
+        $primaryKey = static::primaryKey();
+
+        $statement = self::prepare("DELETE FROM $tableName WHERE $primaryKey = :id");
+        $statement->bindValue(':id', $this->{$primaryKey});
+
+        $statement->execute();
+
+        return true;
+    }
+
+     public function deleteOne($id): bool
+     {
+         $tableName = static::tableName();
+         $primaryKey = static::primaryKey();
+
+         $statement = self::prepare("DELETE FROM $tableName WHERE $primaryKey = :id");
+         $statement->bindValue(':id', $id);
+
+         $statement->execute();
+         return true;
+     }
+
+
     public static function prepare($sql)
     {
         return Application::$app->db->pdo->prepare($sql);

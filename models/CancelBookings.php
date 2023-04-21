@@ -6,7 +6,6 @@ use app\core\dbModel;
 
 class CancelBookings extends dbModel
 {
-    protected Int $Id;
     protected Int $booking_Id;
     protected Int $cus_Id;
     protected String $reason;
@@ -26,7 +25,7 @@ class CancelBookings extends dbModel
     public function attributes(): array
     {
         // TODO: Implement attributes() method.
-        return ['Id','booking_Id','cus_Id','reason','comment'];
+        return ['booking_Id','cus_Id','reason','comment'];
     }
 
     public static function primaryKey(): string
@@ -34,21 +33,7 @@ class CancelBookings extends dbModel
         return 'Id';
     }
 
-    /**
-     * @return Int
-     */
-    public function getId(): int
-    {
-        return $this->Id;
-    }
 
-    /**
-     * @param Int $Id
-     */
-    public function setId(int $Id): void
-    {
-        $this->Id = $Id;
-    }
 
     /**
      * @return Int
