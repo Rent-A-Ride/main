@@ -128,9 +128,19 @@ use app\core\Application; ?>
             <div class="profile-cont">
                 <span class="profile-name"><?= Application::$app->user->displayName(); ?></span>
                 <div class="img-cont"><img src="/assets/img/uploads/userProfile/<?= Application::$app->user->userprofile('profile_pic')?>" class="profile-image"></div>
+
+                <div class="profile-menu" style="display: none;">
+                    <a href="/Customer/Profile">My Profile</a>
+                    <a href="/Customer/Settings">Settings</a>
+                    <a href="/logout">Logout</a>
+                </div>
+
             </div>
 
+
+
         </ul>
+
         <div id="toggle-btn" class="menu-container" onclick="myFunction(this)">
             <div class="bar1"></div>
             <div class="bar2"></div>

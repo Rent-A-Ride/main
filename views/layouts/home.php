@@ -42,6 +42,13 @@ use app\core\Application;
                     <span class="profile-name"><?= Application::$app->user->displayName(); ?></span>
                     </a>
                     <div class="img-cont"><img src="/assets/img/uploads/userProfile/<?= Application::$app->user->userprofile('profile_pic')?>" class="profile-image"></div>
+
+                    <div class="profile-menu" style="display: none;">
+                        <a href="/Customer/Profile">My Profile</a>
+                        <a href="/Customer/Settings">Settings</a>
+                        <a href="/logout">Logout</a>
+                    </div>
+
                 </div>
                 <li class="logout "><a href="/logout"><i class='bx bx-log-in-circle bx-sm'></i></a></li>
             <?php endif; ?>
@@ -87,4 +94,6 @@ use app\core\Application;
 
 
 </body>
+
+<script src="/assets/js/components/navbar.js"></script>
 </html>
