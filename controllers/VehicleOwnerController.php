@@ -111,16 +111,54 @@ class VehicleOwnerController extends Controller
 
     public function vehownerUpdateVehicle(Request $req, Response $res){
         if (Application::$app->session->get("user_role")==="vehicleowner"){
-             return $res->render("/VehicleOwner/vehicleOwnerUpdateDocuments","vehicleOwner-dashboard");
+            $veh_ecotest = new ren_ecotest();
+            $id = $req->getBody()['id']??'';
+            $vehicle = vehicle::findOne(['veh_Id' => $id]);
+            $params = [
+                'vehicle' => $vehicle
+            ];
+
+
 
              if ($req->isPost()) {
-                 $veh_ecotest = new ren_ecotest();
+                 $veh_Id = $req->getBody()['veh_Id'];
 
-                    $veh_ecotest->setVehId($req->getBody()['veh_Id']);
-                    $veh_ecotest->setScanCopy($req->getBody()['ren_Date']);
-                    $veh_ecotest->setRenExpireDate($req->getBody()['ren_Expire_Date']);
+                 // Handle the scan copy upload
+                 if (isset($_FILES['scan_copy'])) {
+                     $file = $_FILES['scan_copy'];
+                     $file['name'] = 'vehEco'.$veh_Id;
+                     $filename = $file['name'];
+                     $tmp_name = $file['tmp_name'];
+                     $path = Application::$ROOT_DIR.'/public/assets/img/uploads/renewal/eco' . $filename;
+
+                     if (!empty($file)){
+                         move_uploaded_file($tmp_name, $path);
+                         $veh_ecotest->setScanCopy($filename);
+                     } else {
+                         $veh_ecotest->setScanCopy("dull.jpg");
+                     }
+
+                 }
+
+                    $veh_ecotest->setVehId($veh_Id);
+                    $veh_ecotest->setExDate($req->getBody()['ex_date']);
+
+
+
+                 if ($veh_ecotest->save()) {
+//                     $req->session->setFlash('success', 'Vehicle Updated Successfully!');
+                     $res->redirect('/vehicleowner_vehicle');
+                     return;
+                 } else {
+                     echo '<pre>';
+                     var_dump("fail");
+                     echo '</pre>';
+                     exit();
+                 }
 
              }
+
+            return $res->render("/VehicleOwner/vehicleOwnerUpdateDocuments","vehicleOwner-dashboard", $params);
         }
         return $res->render("Home","home");
     }
@@ -206,7 +244,7 @@ class VehicleOwnerController extends Controller
                 'vehicle' => $getVehicleById,
                 'driver' => $driver
             ];
-            return $response->render("/VehicleOwner/vehicleOwnerPendingCustomerReq", "vehicleOwner-dashboard", $params);
+            return $this->render("/VehicleOwner/vehicleOwnerPendingCustomerReq", "vehicleOwner-dashboard", $params);
         }
 
 
@@ -217,7 +255,7 @@ class VehicleOwnerController extends Controller
             'vehicle' => $getVehicleById,
             'driver' => $driver
         ];
-        return $response->render("/VehicleOwner/vehicleOwnerPendingCustomerReq", "vehicleOwner-dashboard", $params);
+        return $this->render("/VehicleOwner/vehicleOwnerPendingCustomerReq", "vehicleOwner-dashboard", $params);
 
 
     }

@@ -8,7 +8,7 @@ class ren_ecotest extends dbModel
 {
 
     protected string $veh_Id;
-    protected string $scan_copy;
+    protected string $scan_copy = '';
     protected string $ex_date;
 
     public function rules(): array

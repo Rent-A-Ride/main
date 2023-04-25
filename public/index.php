@@ -198,6 +198,7 @@ $app->router->get("/vehicleOwner/completeAddNewVehicle", [VehicleOwnerController
 $app->router->get("/vehicleOwner/viewVehicleProfile", [VehicleOwnerController::class, 'vehownerVehicleProfile']);
 
 $app->router->get("/vehicleOwner/UpdateVehicle", [VehicleOwnerController::class, 'vehownerUpdateVehicle']);
+$app->router->post("/vehicleOwner/UpdateVehicle", [VehicleOwnerController::class, 'vehownerUpdateVehicle']);
 
 $app->router->post("/vehicleOwner/acceptBooking", [VehicleOwnerController::class, 'acceptBooking']);
 

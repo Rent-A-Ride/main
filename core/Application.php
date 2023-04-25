@@ -121,7 +121,12 @@ class Application
             echo $this->router->resolve();
         }catch (\Exception $e) {
 
-            $this->response->setStatusCode($e->getCode());
+
+            if (is_int($e->getCode())) {
+                $this->response->setStatusCode($e->getCode());
+            } else {
+                $this->response->setStatusCode(500);
+            }
             echo $this->router->renderView('_error', [
                 'exception' => $e
             ]);
