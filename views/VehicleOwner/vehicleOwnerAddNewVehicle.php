@@ -145,21 +145,21 @@
                         <h3>License Details</h3>
                         <div class="form-group input_wrap">
                             <label for="license-no">License Number:</label>
-                            <input type="text" id="license-no" name="license-no" class="input">
+                            <input type="text" id="license-no" name="license_No" class="input">
                         </div>
 
 
                         <div class="form-group input_wrap">
                             <label for="valid-from">Valid From:</label>
-                            <input type="date" id="valid-from" name="valid-from" class="input">
+                            <input type="date" id="valid-from" name="lic_from_date" class="input">
                         </div>
                         <div class="form-group input_wrap">
                             <label for="valid-to">Valid To:</label>
-                            <input type="date" id="valid-to" name="valid-to" class="input">
+                            <input type="date" id="valid-to" name="lic_ex_date" class="input">
                         </div>
                         <div class="form-group input_wrap">
                             <label for="license-scan">Scanned Copy:</label>
-                            <input type="file" id="license-scan" name="license-scan" class="input">
+                            <input type="file" accept="image/png,image/jpeg" id="license-scan" name="lic_scan_copy" class="input">
                         </div>
                     </div>
 
@@ -167,34 +167,34 @@
                         <h3>Insurance Details</h3>
                         <div class="form-group input_wrap">
                             <label for="insurance-no">Insurance Number:</label>
-                            <input type="text" id="insurance-no" name="insurance-no" class="input">
+                            <input type="text" id="insurance-no" name="ins_No" class="input">
                         </div>
                         <div class="form-group input_wrap">
                             <label for="insurance-valid-from">Valid From:</label>
-                            <input type="date" id="insurance-valid-from" name="insurance-valid-from" class="input">
+                            <input type="date" id="insurance-valid-from" name="ins_from_date" class="input">
                         </div>
                         <div class="form-group input_wrap">
                             <label for="insurance-valid-to">Valid To:</label>
-                            <input type="date" id="insurance-valid-to" name="insurance-valid-to" class="input">
+                            <input type="date" id="insurance-valid-to" name="ins_ex_date" class="input">
                         </div>
                         <div class="form-group input_wrap">
                             <label for="insurance-company">Insurance Company:</label>
-                            <input type="text" id="insurance-company" name="insurance-company" class="input">
+                            <input type="text" id="insurance-company" name="insure_com" class="input">
                         </div>
                         <div class="form-group input_wrap">
                             <label for="insurance-type">Insurance Type:</label>
-                            <input type="text" id="insurance-type" name="insurance-type" class="input">
+                            <input type="text" id="insurance-type" name="insure_type" class="input">
                         </div>
                         <div class="form-group input_wrap">
                             <label for="insurance-scan">Scanned Copy:</label>
-                            <input type="file" id="insurance-scan" name="insurance-scan" class="input">
+                            <input type="file" id="insurance-scan" name="ins_scan_copy" class="input">
                         </div>
                     </div>
                     <div class="column">
                         <h3>Eco Test Details</h3>
                         <div class="form-group input_wrap">
                             <label for="eco-test-scan">Scanned Copy:</label>
-                            <input type="file" id="eco-test-scan" name="eco-test-scan" class="input">
+                            <input type="file" id="eco-test-scan" name="eco_scan_copy" class="input">
                         </div>
                     </div>
                 </div>
@@ -210,7 +210,7 @@
         </div>
         <div class="common_btns form_3_btns" style="display: none;">
             <button type="button" class="btn_back"><span class="icon"><ion-icon name="arrow-back-sharp"></ion-icon></span>Back</button>
-            <button type="button" class="btn_done">Done</button>
+            <button type="submit" class="btn_done">Done</button>
         </div>
     </div>
     </form>

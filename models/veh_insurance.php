@@ -12,9 +12,9 @@ class veh_insurance extends dbModel
 {
     protected string $veh_Id;
     protected string $ins_No;
-    protected string $from_date;
-    protected string $ex_date;
-    protected string $scan_copy;
+    protected string $ins_from_date;
+    protected string $ins_ex_date;
+    protected string $ins_scan_copy;
     protected string $ins_com;
     protected string $ins_type;
     // protected string $admin_approved;

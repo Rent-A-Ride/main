@@ -12,8 +12,12 @@ use app\models\driver_requests;
 use app\models\license_expire_notification;
 use app\models\owner;
 use app\models\ren_ecotest;
+use app\models\veh_ecotest;
+use app\models\veh_insurance;
+use app\models\veh_license;
 use app\models\vehicle;
 use app\models\vehicle_Owner;
+use app\models\VehInfo;
 use app\models\viewCustomerReq;
 
 class VehicleOwnerController extends Controller
@@ -321,6 +325,45 @@ class VehicleOwnerController extends Controller
 
     public function addNewVehicle(Request $request, Response $response)
     {
+        $vehicle = new vehicle();
+        $vehinfo = new VehInfo();
+        $vehLicense = new veh_license();
+        $vehInsurance = new veh_insurance();
+        $vehEcoTest = new veh_ecotest();
+
+
+        if ($request->isPost()){
+
+            $vehicle->loadData($request->getBody());
+            $vehinfo->loadData($request->getBody());
+            $vehLicense->loadData($request->getBody());
+            $vehInsurance->loadData($request->getBody());
+            $vehEcoTest->loadData($request->getBody());
+
+            $vehOwnerId = Application::$app->session->get("user");
+
+            $vehicle->setVehId($vehOwnerId);
+            $vehinfo->setVehId($vehOwnerId);
+            $vehLicense->setVehId($vehOwnerId);
+            $vehInsurance->setVehId($vehOwnerId);
+            $vehEcoTest->setVehId($vehOwnerId);
+
+            if (($vehicle->validate() && $vehicle->save()) && ($vehinfo->validate() && $vehinfo->save()) && ($vehLicense->validate() && $vehLicense->save()) && ($vehInsurance->validate() && $vehInsurance->save()) && ($vehEcoTest->validate() && $vehEcoTest->save())){
+//                Application::$app->session->setFlash('success', 'Vehicle Added Successfully!');
+                return $response->redirect('/vehicleOwnerAddNewVehicle');
+            }
+
+
+
+            echo '<pre>';
+            var_dump($vehicle);
+            echo '</pre>';
+            exit();
+
+            return $response->render("/VehicleOwner/vehicleOwnerAddNewVehicle", "vehicleOwner-dashboard");
+
+
+        }
         return $response->render("/VehicleOwner/vehicleOwnerAddNewVehicle", "vehicleOwner-dashboard");
     }
 

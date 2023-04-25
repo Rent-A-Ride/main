@@ -12,10 +12,10 @@ class veh_license extends dbModel
 {
     protected string $veh_Id;
     protected string $license_No;
-    protected string $from_date;
-    protected string $ex_date;
-    protected string $owner;
-    protected string $scan_copy;
+    protected string $lic_from_date;
+    protected string $lic_ex_date;
+    protected string $lic_owner;
+    protected string $lic_scan_copy;
     protected string $admin_approved;
     
     private array $body;
