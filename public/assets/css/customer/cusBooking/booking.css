@@ -188,6 +188,16 @@ booking-section {
     -moz-appearance: none;
 }
 
+.input-field-booking {
+    width: min-content;
+    color: rgba(0, 0, 0, 0.717);
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+}
+
 @media (min-width: 768px) {
     .paymentMethod {
         width: auto;

@@ -82,7 +82,7 @@ use app\models\VehInfo;
 
             <div class="set-loc">
                 <label for="set-loc">Pick-up Location</label>
-                <select id="location" name="location">
+                <select id="location" name="location" required>
                     <option value="" disabled selected hidden>location</option>
                     <option value="Galle">Galle</option>
                     <option value="Negombo">Negombo</option>
@@ -92,11 +92,11 @@ use app\models\VehInfo;
             </div>
             <div class="date-input">
                 <label for="start-date">Start Date</label>
-                <input type="date" id="start-date" name="startDate" oninput="setToDateLimits()">
+                <input class="input-field-booking" type="date" id="start-date" name="startDate" oninput="setToDateLimits()">
             </div>
             <div class="date-input">
                 <label for="end-date">End Date</label>
-                <input type="date" id="end-date" name="endDate" oninput="setToDateLimits()" >
+                <input class="input-field-booking" type="date" id="end-date" name="endDate" oninput="setToDateLimits()" >
             </div>
 
 

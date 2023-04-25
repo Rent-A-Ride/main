@@ -183,3 +183,7 @@
   display: flex;
   justify-content: space-between;
 }
+
+.booking-section{
+  margin: 10px 0;
+}
