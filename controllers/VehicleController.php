@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\core\Application;
 use app\core\Controller;
 use app\core\Request;
 use app\core\Response;
@@ -66,7 +67,7 @@ class VehicleController extends Controller
         
 
             $vehicleModel = new vehicle();
-            $vehicles = $vehicleModel->vehicleOwnergetVehicle($req->session->get("user_id"));
+            $vehicles = $vehicleModel->vehicleOwnergetVehicle(Application::$app->session->get("user"));
             
 //            print_r($vehicles);
             return $vehicles;

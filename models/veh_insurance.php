@@ -174,6 +174,12 @@ class veh_insurance extends dbModel
         $statement1->execute();
     }
 
+
+    public function insExp(){
+        return Application::$app->db->pdo->query("SELECT * FROM veh_insuarance INNER JOIN vehicle ON vehicle.veh_Id=veh_insuarance.veh_Id INNER JOIN vehicleowner ON vehicle.vo_Id=vehicleowner.vo_ID AND vehicle.admin_approved=1")->fetchAll(\PDO::FETCH_ASSOC);
+
+    }
+
     
 
 
