@@ -18,7 +18,7 @@ class Customer extends dbModel
     public string $email;
     public string $phoneno;
     public string $gender = '';
-    public string $address;
+    public string $address = '';
     public string $password;
     public string $passwordConfirm = '';
     public string $profile_pic='';
@@ -88,6 +88,182 @@ class Customer extends dbModel
     }
     public function getcus_Id(){
         return $this->cus_Id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNic(): string
+    {
+        return $this->nic;
+    }
+
+    /**
+     * @param string $nic
+     */
+    public function setNic(string $nic): void
+    {
+        $this->nic = $nic;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFirstname(): string
+    {
+        return $this->firstname;
+    }
+
+    /**
+     * @param string $firstname
+     */
+    public function setFirstname(string $firstname): void
+    {
+        $this->firstname = $firstname;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastname(): string
+    {
+        return $this->lastname;
+    }
+
+    /**
+     * @param string $lastname
+     */
+    public function setLastname(string $lastname): void
+    {
+        $this->lastname = $lastname;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhoneno(): string
+    {
+        return $this->phoneno;
+    }
+
+    /**
+     * @param string $phoneno
+     */
+    public function setPhoneno(string $phoneno): void
+    {
+        $this->phoneno = $phoneno;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGender(): string
+    {
+        return $this->gender;
+    }
+
+    /**
+     * @param string $gender
+     */
+    public function setGender(string $gender): void
+    {
+        $this->gender = $gender;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddress(): string
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param string $address
+     */
+    public function setAddress(string $address): void
+    {
+        $this->address = $address;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param string $password
+     */
+    public function setPassword(string $password): void
+    {
+        $this->password = $password;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPasswordConfirm(): string
+    {
+        return $this->passwordConfirm;
+    }
+
+    /**
+     * @param string $passwordConfirm
+     */
+    public function setPasswordConfirm(string $passwordConfirm): void
+    {
+        $this->passwordConfirm = $passwordConfirm;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProfilePic(): string
+    {
+        return $this->profile_pic;
+    }
+
+    /**
+     * @param string $profile_pic
+     */
+    public function setProfilePic(string $profile_pic): void
+    {
+        $this->profile_pic = $profile_pic;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatus(): int
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param int $status
+     */
+    public function setStatus(int $status): void
+    {
+        $this->status = $status;
     }
 
 

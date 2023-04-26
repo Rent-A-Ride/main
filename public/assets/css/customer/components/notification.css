@@ -1,0 +1,116 @@
+.notification-cont{
+    margin: 20px;
+}
+
+.notification-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.notification-icon i {
+    font-size: 24px;
+}
+
+.notification-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    padding: 2px 4px;
+    border-radius: 50%;
+}
+
+.notification-panel {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    width: 300px;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transform: translateY(10px);
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.notification-panel.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.notification-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f8f8f8;
+}
+
+.notification-header h3 {
+    font-size: 18px;
+    margin: 0;
+}
+
+.close-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: red;
+}
+
+.notification-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.notification-list li {
+    padding: 10px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.notification-list li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+}
+
+.notification-list li a:hover {
+    color: red;
+}
+
+
+.close-btn:hover {
+    color: red;
+}
+
+.notification-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.notification-list li {
+    padding: 10px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.notification-list li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+}
+
+.notification-list li a:hover {
+    color: red;
+}

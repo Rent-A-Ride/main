@@ -15,7 +15,7 @@
 
     <link rel="stylesheet" href="/assets/css/main.css">
     <!-- Nav CSS -->
-    <link rel="stylesheet" href="/assets/css/login.css">
+    <link rel="stylesheet" href="/assets/css/customer/components/RegisterForm.css">
 
 </head>
 <body>
@@ -66,5 +66,6 @@
     </footer>
 
 </body>
+<script src="/assets/javascript/customer/components/RegisterForm.js"></script>
 
 </html>

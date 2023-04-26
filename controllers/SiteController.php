@@ -13,7 +13,6 @@ class SiteController extends Controller
     public function home(Request $req,Response $res)
     {
         return $res->render('Home','home');
-        
     }
     public function contact(): string
     {
@@ -33,7 +32,6 @@ class SiteController extends Controller
 
         if (!empty($image)){
             move_uploaded_file($image['tmp_name'],Application::$ROOT_DIR.'/public/assets/img/uploads/userProfile/'.$image['name']);
-
         }
         $Customer->profile_pic=$image['name'];
         $Customer->update(Application::$app->user->cus_Id,['profile_pic']);

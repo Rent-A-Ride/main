@@ -5,48 +5,108 @@
 .settings-container {
     background-color: rgba(255, 255, 255, 0.6);
     max-width: 500px;
-    margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    margin: 0 auto 20px;
 }
 
-.settings-container form {
-    display: flex;
-    flex-direction: column;
+.form-container {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
 }
 
-.settings-container label {
-    margin-top: 10px;
+.form-group {
+    margin-bottom: 10px;
 }
 
-.settings-container input[type="password"] {
-    width: 100%;
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-group input {
+    display: block;
+    width: 95%;
     padding: 10px;
-    margin: 5px 0;
+    border: 2px solid #ddd;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    font-size: 16px;
+    font-family: inherit;
+    color: #333;
 }
 
-.settings-container button[type="submit"] {
+.form-group input:focus {
+    outline: none;
+    border-color: #fab84c;
+}
+
+.form-error2 {
+    display: block;
+    margin-top: 0px;
+    color: red;
+    font-size: 14px;
+}
+
+.btn {
+    display: inline-block;
+    width: 95%;
+    margin: 10px 0;
     padding: 10px 20px;
-    margin-top: 10px;
     background-color: #fab84c;
-    color: #fff;
     border: none;
     border-radius: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.hr {
-    margin-top: 50px;
-    margin-bottom: 50px;
-    border: 0;
-    height: 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+.btn:hover {
+    background-color: rgba(0, 0, 0, 0.75);
 }
 
-button[type="submit"]:hover {
-    background-color: #fab84c;
-}
+
+/*.settings-container form {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*}*/
+
+/*.settings-container label {*/
+/*    margin-top: 10px;*/
+/*}*/
+
+/*.settings-container input[type="password"] {*/
+/*    width: 100%;*/
+/*    padding: 10px;*/
+/*    margin: 5px 0;*/
+/*    border-radius: 5px;*/
+/*    border: 1px solid #ccc;*/
+/*}*/
+
+/*.settings-container button[type="submit"] {*/
+/*    padding: 10px 20px;*/
+/*    margin-top: 10px;*/
+/*    background-color: #fab84c;*/
+/*    color: #fff;*/
+/*    border: none;*/
+/*    border-radius: 5px;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.hr {*/
+/*    margin-top: 50px;*/
+/*    margin-bottom: 50px;*/
+/*    border: 0;*/
+/*    height: 0;*/
+/*    border-top: 1px solid rgba(0, 0, 0, 0.1);*/
+/*    border-bottom: 1px solid rgba(255, 255, 255, 0.3);*/
+/*}*/
+
+/*button[type="submit"]:hover {*/
+/*    background-color: #fab84c;*/
+/*}*/

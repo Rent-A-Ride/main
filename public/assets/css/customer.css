@@ -5,6 +5,13 @@
 @import url(customer/components/nav.css);
 @import url("components/navProfile.css");
 
+
+/*Flash messages*/
+@import url(components/flashMessages.css);
+
+/*notification*/
+@import url(customer/components/notification.css);
+
 /*  Sidebar */
 @import url("components/sidebar.css");
 
