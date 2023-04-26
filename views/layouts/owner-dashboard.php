@@ -167,7 +167,7 @@
             echo ('active');
         }
         ?>">
-            <a href="#">
+            <a href="/admin/managepayment">
                 <i class='bx bx-wallet' ></i>
                 <span class="links_name">Payment</span>
             </a>
@@ -232,6 +232,7 @@
 <script src="/assets/javascript/component/Modal.js"></script>
 <script src="/assets/javascript/admin/vehicle_complaint.js"></script> -->
 <script type="module" src="/assets/javascript/index.js"></script>
+<script type="module" src="/assets/javascript/admin/profile.js"></script>
 
 
 </html>

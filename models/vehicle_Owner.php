@@ -306,5 +306,10 @@ class vehicle_Owner extends dbModel
     }
 
 
+    public function veh(){
+        return Application::$app->db->pdo->query("SELECT * FROM vehicleowner")->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+
 
 }

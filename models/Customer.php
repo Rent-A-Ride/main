@@ -89,4 +89,6 @@ class Customer extends dbModel
     public function getcus_Id(){
         return $this->cus_Id;
     }
+
+
 }

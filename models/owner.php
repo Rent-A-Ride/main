@@ -135,6 +135,21 @@ class owner extends dbModel
     public function owner_img($user_id){
         return Application::$app->db->pdo->query("SELECT users.profile_img, owner.first_Name, owner.last_Name FROM users INNER JOIN owner WHERE users.user_ID=$user_id AND owner.user_ID=$user_id")->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    public function update_profile($body,$user_id){
+        $user_id=(int)$user_id;
+        
+        $query1="UPDATE `owner` SET first_Name=:firstname, last_Name=:lastname, phone_No=:phoneno, Owner_area=:addres, license_No=:license_No  WHERE user_ID=$user_id";
+        $statement1= Application::$app->db->prepare($query1);
+        $statement1->bindValue(":firstname",$body['firstname']);
+        $statement1->bindValue(":lastname",$body['lastname']);
+        $statement1->bindValue(":phoneno",$body['phoneno']);
+        $statement1->bindValue(":addres",$body['address']);
+        $statement1->bindValue(":license_No",$body['license_No']);
+        
+        
+        $statement1->execute();
+    }
     
 
 

@@ -67,6 +67,7 @@ $app->router->get("/viewownerDriver", [OwnerController::class, "ownerDriver"]);
 $app->router->get("/vehicleowner_vehicle", [VehicleOwnerController::class, "VehicleOwnerVehicle"]);
 
 $app->router->get("/ownerProfile", [OwnerController::class, "ownerProfile"]);
+$app->router->post("/ownerProfile", [OwnerController::class, "ownerProfile"]);
 
 $app->router->get("/adminViewVehicleOwner", [OwnerController::class, "ViewVehicleOwnerProfile"]);
 
@@ -105,6 +106,11 @@ $app->router->post("/admin/vehicle_ins/update", [OwnerController::class, "admin_
 
 $app->router->get("/admin/vehicle/disable_vehicle", [OwnerController::class, "admin_disableVehicle"]);
 $app->router->post("/admin/vehicle/disable_vehicle", [OwnerController::class, "admin_disableVehicle"]);
+
+$app->router->get("/admin/managepayment", [OwnerController::class, "manage_vehownerPayment"]);
+$app->router->post("/admin/managepayment", [OwnerController::class, "manage_vehownerPayment"]);
+
+$app->router->get("/admin/managedriverpayment", [OwnerController::class, "manage_driverPayment"]);
 
 
 //Hasantha

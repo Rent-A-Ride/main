@@ -73,6 +73,11 @@ class adminCustomer
         $statement1->bindValue(":availability",$admin_approved);
         $statement1->execute();
     }
+
+
+    public function getCustomer_count(){
+        return Application::$app->db->pdo->query("SELECT COUNT(driver_ID) As driver_count FROM driver")->fetchAll(\PDO::FETCH_ASSOC);
+    }
                 
 
     

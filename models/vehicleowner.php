@@ -96,4 +96,9 @@ class vehicleowner extends dbModel
         $statement1->bindValue(":availability",$availability);
         $statement1->execute();
     }
+
+
+    public function getVeh_oCount(){
+        return Application::$app->db->pdo->query("SELECT COUNT(vo_ID) As veho_count FROM vehicleowner")->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }
