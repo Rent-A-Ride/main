@@ -68,6 +68,46 @@ shadow.addEventListener("click", function(){
     modal_wrapper.classList.remove("active");
 })
 
+//range slider
+
+const rangeSlider = document.getElementById("range-slider");
+const rangeValue = document.getElementById("range-value");
+const vehicleType = document.getElementById("vehicle-type");
+
+vehicleType.addEventListener("input", () => {
+  let min, max;
+  switch(vehicleType.value.toLowerCase()) {
+    case "car":
+      min = 1000;
+      max = 5000;
+      break;
+    case "van":
+      min = 2000;
+      max = 6000;
+      break;
+    case "bike":
+      min = 400;
+      max = 1000;
+      break;
+    case "scooter":
+      min = 500;
+      max = 1500;
+      break;
+    default:
+      min = 0;
+      max = 100;
+      break;
+  }
+  rangeSlider.min = min;
+  rangeSlider.max = max;
+  rangeSlider.value = min;
+  rangeValue.textContent = `Value: Rs. ${min}`; // set initial value
+});
+
+rangeSlider.addEventListener("input", () => {
+  rangeValue.textContent = `Value: Rs. ${rangeSlider.value}`;
+});
+
 
 
 

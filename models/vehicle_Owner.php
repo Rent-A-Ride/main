@@ -12,6 +12,7 @@ use app\core\Database;
 
 class vehicle_Owner extends dbModel
 {
+    protected string $vo_ID = '';
     protected string $Nic;
     protected string $owner_Fname;
     protected string $owner_Lname;
@@ -91,6 +92,24 @@ class vehicle_Owner extends dbModel
                 
 
     }
+
+    /**
+     * @return string
+     */
+    public function getVoID(): string
+    {
+        return $this->vo_ID;
+    }
+
+    /**
+     * @param string $vo_ID
+     */
+    public function setVoID(string $vo_ID): void
+    {
+        $this->vo_ID = $vo_ID;
+    }
+
+
 
     public function getVehicleowner(){
         return Application::$app->db->pdo->query("SELECT * FROM vehicleowner WHERE vehicleowner.admin_approved=1 ")->fetchAll(\PDO::FETCH_ASSOC);

@@ -325,6 +325,7 @@ class VehicleOwnerController extends Controller
 
     public function addNewVehicle(Request $request, Response $response)
     {
+        $siteController = new SiteController();
         $vehicle = new vehicle();
         $vehinfo = new VehInfo();
         $vehLicense = new veh_license();
@@ -334,24 +335,58 @@ class VehicleOwnerController extends Controller
 
         if ($request->isPost()){
 
+
+
             $vehicle->loadData($request->getBody());
             $vehinfo->loadData($request->getBody());
             $vehLicense->loadData($request->getBody());
             $vehInsurance->loadData($request->getBody());
             $vehEcoTest->loadData($request->getBody());
 
-            $vehOwnerId = Application::$app->session->get("user");
 
-            $vehicle->setVehId($vehOwnerId);
-            $vehinfo->setVehId($vehOwnerId);
-            $vehLicense->setVehId($vehOwnerId);
-            $vehInsurance->setVehId($vehOwnerId);
-            $vehEcoTest->setVehId($vehOwnerId);
 
-            if (($vehicle->validate() && $vehicle->save()) && ($vehinfo->validate() && $vehinfo->save()) && ($vehLicense->validate() && $vehLicense->save()) && ($vehInsurance->validate() && $vehInsurance->save()) && ($vehEcoTest->validate() && $vehEcoTest->save())){
-//                Application::$app->session->setFlash('success', 'Vehicle Added Successfully!');
-                return $response->redirect('/vehicleOwnerAddNewVehicle');
+//            $vehOwnerId = Application::$app->user->getVoID();
+
+            if(isset($_FILES['file'])) {
+                // Upload each image
+                $imagePaths = array();
+                $files = $_FILES['file'];
+                $count = count($files['name']);
+                for($i = 0; $i < $count; $i++) {
+                    $inputName = "image_" . $i;
+                    $uploadFolder = Application::$ROOT_DIR.'/public/assets/img/uploads/userProfile/';
+                    $imagePath = $siteController->uploadDocument($inputName, $uploadFolder);
+                    if($imagePath !== false) {
+                        // Image uploaded successfully
+                        $imagePaths[] = $imagePath;
+                    } else {
+                        // Error uploading image
+                        echo "Error uploading image.";
+                    }
+                }
+
+                // Process uploaded images here
+                echo '<pre>';
+                var_dump($imagePaths);
+                echo '</pre>';
+                exit();
             }
+//            $vehId = uniqid()
+
+            if ($vehicle->validate() && $vehicle->save()){
+
+                $vehinfo->setVehId($vehicle->getVehId());
+                $vehLicense->setVehId($vehicle->getVehId());
+                $vehInsurance->setVehId($vehicle->getVehId());
+                $vehEcoTest->setVehId($vehicle->getVehId());
+
+                if (($vehinfo->validate() && $vehinfo->save()) && ($vehLicense->validate() && $vehLicense->save()) && ($vehInsurance->validate() && $vehInsurance->save()) && ($vehEcoTest->validate() && $vehEcoTest->save())){
+//                Application::$app->session->setFlash('success', 'Vehicle Added Successfully!');
+                    return $response->redirect('/vehicleOwnerAddNewVehicle');
+                }
+            }
+
+
 
 
 

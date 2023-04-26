@@ -283,3 +283,19 @@ input[type="date"],
 input[type="file"] {
     flex-basis: 60%;
 }
+
+/*range slider*/
+.range-slider {
+    width: 50%;
+    margin: 50px auto;
+}
+
+#range-slider {
+    width: 100%;
+}
+
+#range-value {
+    display: block;
+    margin-top: 10px;
+}
+

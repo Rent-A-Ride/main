@@ -76,7 +76,7 @@ use \app\controllers\VehicleController;
 
             </div>
 
-            <div class="form-input-addvehicleowner"><a href="/vehicleOwner/add-vehicle" class="add-vehicleowner"><i class="fa-solid fa-plus"></i>ADD NEW</a></div>
+            <div class="form-input-addvehicleowner"><a href="/vehicleOwner/addNewVehicle" class="add-vehicleowner"><i class="fa-solid fa-plus"></i>ADD NEW</a></div>
     
         </div>
 

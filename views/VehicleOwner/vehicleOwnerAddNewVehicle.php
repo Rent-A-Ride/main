@@ -1,6 +1,6 @@
 <?php
 ?>
-
+<h1>Add New Vehicle</h1>
 <div class="wrapper-addveh">
     <form method="post">
     <div class="header">
@@ -28,14 +28,18 @@
 
                 <div class="form_container">
 
+
+
                     <div class="input_wrap">
+
+
                         <label for="vehicle_type">Type</label>
 
-                        <select class = "select-item" name = "veh_type">
-                            <option class="item" value = "car" >Car</option>
-                            <option class="item" value = "van">Van</option>
-                            <option class="item" value = "scooter" >Scooter</option>
-                            <option class="item" value = "bike">Bike</option>
+                        <select id="vehicle-type" class = "select-item" name = "veh_type">
+                            <option class="item" value ="car">Car</option>
+                            <option class="item" value ="van">Van</option>
+                            <option class="item" value ="scooter" >Scooter</option>
+                            <option class="item" value ="bike">Bike</option>
 
                         </select>
 
@@ -59,8 +63,9 @@
                     </div>
 
                     <div class="input_wrap">
-                        <label for="user_name">Price<label>
-                                <input type="text" name="price" class="input" id="price">
+                        <label for="range-slider">Price:</label>
+                        <input id="range-slider" type="range" step="50" name="price">
+                        <span id="range-value"></span>
                     </div>
 
                     <div class="input_wrap">
@@ -223,4 +228,7 @@
         <p>You have successfully completed the process.</p>
     </div>
 </div>
+
+
+
 
