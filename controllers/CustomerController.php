@@ -182,11 +182,13 @@ class CustomerController extends Controller
     {
         $id=Application::$app->user->cus_Id;
         $customer = new Customer();
+        $customer=Customer::findOne(['cus_Id'=>$id]);
         $this->thisIsCustomer($response);
 
         //Change the password
         if ($request->isPost()){
             $customer=Customer::findOne(['cus_Id'=>$id]);
+
             $customer->loadData($request->getBody());
             $mode=$request->getBody()['mode'] ?? '';
 

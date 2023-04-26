@@ -14,6 +14,7 @@ use app\models\Customer;
     <!--    Change Password -->
     <form method="post" class="form-container">
         <input name="mode" value="change-password" hidden>
+        <input type="email" name="email" value="<?= $customer->getEmail();?>" hidden>
 
         <div class="form-group">
             <label for="current-password">Current Password:</label>

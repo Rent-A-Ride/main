@@ -9,7 +9,7 @@
     <div class="location-select">
         <select id="location" name="location">
             <option value="" disabled selected hidden>location</option>
-            <option value="Galle">Galle</option>
+            <option value="Galcd pule">Galle</option>
             <option value="Negombo">Negombo</option>
             <option value="Mathale">Mathale</option>
             <option value="Kandy">Kandy</option>
