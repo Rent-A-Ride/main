@@ -29,6 +29,13 @@ $config = [
         'dsn'=>$_ENV['DB_DSN'],
         'user'=>$_ENV['DB_USER'],
         'password'=>$_ENV['DB_PASSWORD'],
+    ],
+    'email'=>[
+        'host'=>$_ENV['EMAIL_HOST'],
+        'port'=>$_ENV['EMAIL_PORT'],
+        'username'=>$_ENV['EMAIL_USERNAME'],
+        'password'=>$_ENV['EMAIL_PASSWORD'],
+        'encryption'=>$_ENV['EMAIL_ENCRYPTION'],
     ]
 ];
 
@@ -113,8 +120,8 @@ $app->router->post('/Customer/login', [AuthController::class, 'cus_login']);
 
 $app->router->get("/selectUserType", [AuthController::class, "selectuser"]);
 
-$app->router->get("/Customer/Register", [AuthController::class, 'cusRegister']);
-$app->router->post("/Customer/Register", [AuthController::class, 'cusRegister']);
+$app->router->get("/Customer/Register", [AuthController::class, 'cus_register']);
+$app->router->post("/Customer/Register", [AuthController::class, 'cus_register']);
 
 $app->router->get("/Customer/Home", [CustomerController::class, 'home']);
 $app->router->post("/Customer/Home", [CustomerController::class, 'home']);
@@ -134,6 +141,8 @@ $app->router->get('/Customer/VehicleBookingTable', [CustomerController::class, '
 
 $app->router->get('/Customer/Settings', [CustomerController::class, 'customerSettings']);
 $app->router->post('/Customer/Settings', [CustomerController::class, 'customerSettings']);
+
+$app->router->post("/cancelBooking", [CustomerController::class, 'cancelBooking']);
 
 
 

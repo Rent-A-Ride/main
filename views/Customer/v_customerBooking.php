@@ -16,7 +16,7 @@ use app\models\cusVehicle;
                 <div id="gallery2">
                     <div class="row">
                         <div class="large-image small">
-                            <img class="small" src="<?= $vehicle->getFrontView() ?>>">
+                            <img class="small" src="/assets/img/vehicle/<?= $vehicle->getFrontView() ?>">
                         </div>
                     </div>
                 </div>
@@ -82,6 +82,25 @@ use app\models\cusVehicle;
 
 
 
+
+
+        </div>
+        <div class="booking-section">
+            <section id="self-drive" class="sub-section">
+                <h4>Self Drive</h4>
+                <div class="space-evenly">
+                    <p>Do you planning to ride on your own!</p>
+                    <label class="switch">
+                        <input name="driverReq" id="checkbo" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </section>
+
+            <section class="add-license" id="self-drive-terms" style="display:block;">
+
+                <p>This is a tetxt</p>
+            </section>
 
 
         </div>

@@ -108,6 +108,8 @@ class AuthController extends Controller
 
             $customer->loadData($request->getBody());
 
+            $customer->setGender($this->setGenderFromNIC($customer->getNic()));
+
             if ($customer->validate() && $customer->save()){
                 // ->session->setFlash('success', 'Registration Successfully!');
                 $request->session->setFlash('success', 'Registration Successfully!');
@@ -116,12 +118,12 @@ class AuthController extends Controller
                 exit();
             }
 
-            return $response->render('Customer/cus_Register','main', [
+            return $response->render('Customer/v_Register','auth-reg', [
                 'model' => $customer
             ]);
         }
 //        $this->setLayout('main');
-        return $response->render('Customer/v_Register','cusAuth', [
+        return $response->render('Customer/v_Register','auth-reg', [
             'model' => $customer
         ]);
     }
@@ -208,5 +210,27 @@ class AuthController extends Controller
         return $res->render('/VehicleOwner/vehOwner_register','main_3', [
             'model' => $user, 'model'=>$vehicleowner
         ]);
+    }
+
+    public function setGenderFromNIC($NIC)
+    {
+        $nic=trim($NIC);
+        if (!empty($nic)) {
+            if (preg_match('/^([0-9]{9}[x|X|v|V]|[0-9]{12})$/', $nic)) {
+                if (strlen($nic) === 10) {
+                    if ($nic[2] < 5) {
+                        return "male";
+                    } else {
+                        return "female";
+                    }
+                } else {
+                    if ($nic[4] < 5):
+                        return "male";
+                    else:
+                        return "female";
+                    endif;
+                }
+            }
+        }
     }
 }
