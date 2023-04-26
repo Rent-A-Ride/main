@@ -66,6 +66,20 @@
 
                         <div class="input-wrap">
                             <input
+                                name="NIC"
+                                type="text"
+                                minlength="10"
+                                class="input-field<?= $model->hasError('nic') ? ' invalid' : ''?>"
+                                autocomplete="off"
+                                value="<?= $model->thereIsError() ? $model->nic : ''?>"
+
+                            />
+                            <label>NIC</label>
+                            <span class="form-error"> <?= $model->getFirstError('nic') ?></span>
+                        </div>
+
+                        <div class="input-wrap">
+                            <input
                                 name="phoneno"
                                 type="Phone"
                                 minlength="4"
@@ -79,6 +93,32 @@
                         </div>
 
                         <div class="input-wrap">
+                            <input
+                                name="address"
+                                type="text"
+                                class="input-field<?= $model->hasError('address') ? ' invalid' : ''?>"
+                                autocomplete="off"
+                                value="<?= $model->thereIsError() ? $model->address : ''?>"
+
+                            />
+                            <label>Address</label>
+                            <span class="form-error"> <?= $model->getFirstError('lastname') ?></span>
+                        </div>
+
+                        <div class="input-wrap">
+                            <input
+                                name="Area"
+                                type="text"
+                                class="input-field<?= $model->hasError('area') ? ' invalid' : ''?>"
+                                autocomplete="off"
+                                value="<?= $model->thereIsError() ? $model->area: ''?>"
+
+                            />
+                            <label>Area</label>
+                            <span class="form-error"> <?= $model->getFirstError('lastname') ?></span>
+                        </div>
+
+                        <div class="input-wrap">
                             <select class="input-field" name="gender">
                                 <option class="input-field label" value="" disabled selected>Select your gender</option>
                                 <option class="input-field" value="male">Male</option>
@@ -87,6 +127,19 @@
                             </select>
                             <span class="form-error"> <?= $model->getFirstError('gender') ?></span>
 
+                        </div>
+
+                        <div class="input-wrap">
+                            <input
+                                name="licenceNumber"
+                                type="text"
+                                class="input-field<?= $model->hasError('licenceNumber') ? ' invalid' : ''?>"
+                                autocomplete="off"
+                                value="<?= $model->thereIsError() ? $model->licenceNumber : ''?>"
+
+                            />
+                            <label>Licence Number</label>
+                            <span class="form-error"> <?= $model->getFirstError('licenceNumber') ?></span>
                         </div>
 
                         <div class="input-wrap">

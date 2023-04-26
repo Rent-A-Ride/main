@@ -139,7 +139,12 @@ $app->router->get("/customer", [CustomerController::class, 'home']);
 //Tharundya
 
 $app->router->get("/driver/driver_profile", [DriverController::class, 'driverViewProfile']);
-$app->router->get("/driver/editprofile", [DriverController::class, 'driverEditProfile']);
+// $app->router->get("/driver/editprofile", [DriverController::class, 'driverEditProfile']);
+
+$app->router->post("/drivers/update", [DriverController::class, 'updateDriverDetails']);
+
+
+$app->router->get("/driver/availability", [DriverController::class, 'driverAvailability']);
 
 $app->router->get("/driver/review", [DriverController::class, 'driverViewReview']);
 

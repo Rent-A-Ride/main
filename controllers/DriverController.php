@@ -22,6 +22,18 @@ class DriverController extends Controller
        
     }
 
+    public function driverAvailability(Request $req, Response $res){
+        if($req->session->get('authenticated')==true && $req->session->get('user_role')=="driver")
+        {   
+            // $driverModel=new driver();
+
+            // $driver_reviews=$driverModel->getReviews($req->session->get('user_id'));            
+           return $res->render("/driver/driver_availability","driver-dashboard");
+        }
+        return $res->redirect("/");
+       
+    }
+
 
     public function driverViewProfile(Request $req, Response $res){
         
@@ -41,6 +53,7 @@ class DriverController extends Controller
                 $Reviews['Average']=floor($Reviews['Average']) + 0.5;
             }
 
+
             return $res->render("/driver/driver_profile","driver-dashboard", ['driver'=>$driver_profile,'reviews'=>$Reviews['Average']]);
 
             
@@ -48,6 +61,26 @@ class DriverController extends Controller
         return $res->redirect("/");
     }
 
+
+    public function updateDriverDetails(request $req, Response $res){
+        if($req->session->get('authenticated')==true && $req->session->get('user_role')=="driver")
+        {
+        
+        $body = $req->getBody();
+        $drievr_id = $req->session->get('user_id');
+        $driverModel = new driver($body);
+        $result = $driverModel->updateDriver($drievr_id);
+        if($result) {
+            $res->redirect("/driver/driver_profile");
+        } else {
+            return $result;
+        }
+   
+     }
+     else{
+        $res->redirect("/");
+    }
+    }
 
     
 

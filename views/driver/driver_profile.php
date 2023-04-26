@@ -86,7 +86,7 @@
 <div id="profileModal" class="profileModal">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
-        <form class="up-profile" id="edit-profile-form" action="profile_controller.php?action=edit_profile" method="post">
+        <form class="up-profile" id="edit-profile-form" action="/drivers/update" method="post">
             <label for="nic">NIC:</label>
             <input disabled value="<?php echo $driver[0]["Driver_Nic"] ?>" type="text" id="nic" name="nic">
 

@@ -161,11 +161,11 @@ class AuthController extends Controller
 
     public function getDriverRegistration(Request $req, Response $res){
         // return $res->render("/driver/driver_registration","main_2");
-        $customer = new Customer();
+        $driver = new driver();
         
         if ($req->isPost()){
 
-            $customer->loadData($req->getBody());
+            $driver->loadData($req->getBody());
             
             if ($customer->validate() && $customer->save()){
                

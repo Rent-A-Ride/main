@@ -14,8 +14,16 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/driver/driver-dashboard.css">
-    
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
 
     <!-- JQUERY -->
     <script src="assets/javascript/jquery-3.6.3.min.js"></script>
@@ -134,6 +142,7 @@
 <script src="/assets/javascript/component/navbar.js"></script>
 <script src="/assets/javascript/component/sidebar.js"></script>
 <script src="/assets/javascript/component/search.js"></script>
+<script src="/assets/javascript/driver/driver_availability.js"></script>
 <script>
 //     document.getElementById("edit-button").addEventListener("click", function(){
 //     document.getElementById("profile-photo").style.display = "block";

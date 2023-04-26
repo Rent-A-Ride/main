@@ -32,34 +32,9 @@
                     <td><?php echo $row["period"] ?></td>
                     <td><?php echo $row["Amount"] ?></td>
                     <td>
-                      <div class="invoice-item">
-                          <div class="invoice-item-header">
-                            Invoice #1
-                            <div class="invoice-item-dropdown-icon" onclick="toggleDetails(event)">
-                              &#x25BC;
-                            </div>
-                          </div>
-                          <div class="invoice-item-details">
-                            <p>Customer Name: John Doe</p>
-                            <p>Invoice Date: 01/01/2022</p>
-                            <p>Amount: $100.00</p>
-                          </div>
-                      </div>
-
-
-                      <script>
-                          function toggleDetails(event) {
-                          const details = event.target.parentNode.nextElementSibling;
-                          if (details.style.display === 'none') {
-                              details.style.display = 'block';
-                              event.target.innerHTML = '&#x25B2;';
-                          } else {
-                              details.style.display = 'none';
-                              event.target.innerHTML = '&#x25BC;';
-                          }
-                          }
-
-                      </script>
+                    
+                      <button class="submit-btn" onclick="openModal()" >View</button>
+                      
 
                     </td>
 
