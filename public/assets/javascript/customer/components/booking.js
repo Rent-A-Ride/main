@@ -118,7 +118,19 @@ document.getElementById("end-date").addEventListener("change", calculatePrice);
 document.getElementById("checkbox1").addEventListener("change",calculatePrice);
 
 
-// access hasDriver const in the calculatePrice function, outside the function
+// show/hide license input fields
+const checkbox = document.getElementById('checkSelf');
+const licenseFields = document.getElementById('self-drive-terms');
+checkbox.addEventListener('change', function() {
+  if (this.checked) {
+    licenseFields.style.display = 'block';
+    licenseFields.classList.add("yes");
+  } else {
+    licenseFields.style.display = 'none';
+    licenseFields.classList.remove("yes");
+  }
+});
+
 
 
 

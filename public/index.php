@@ -2,6 +2,7 @@
 
 use app\controllers\AuthController;
 use app\controllers\CustomerController;
+use app\controllers\notificationController;
 use app\controllers\SiteController;
 use app\controllers\OwnerController;
 use app\controllers\VehicleController;
@@ -113,6 +114,8 @@ $app->router->post("/admin/vehicle_ins/update", [OwnerController::class, "admin_
 
 
 //Hasantha
+$app->router->post('/notifications', [notificationController::class, 'notification']);
+
 $app->router->get('/Customer/login', [AuthController::class, 'cus_login']);
 $app->router->post('/Customer/login', [AuthController::class, 'cus_login']);
 
