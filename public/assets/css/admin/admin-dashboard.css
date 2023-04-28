@@ -33,6 +33,8 @@
 
 @import url("./admin_v.css");
 
+@import url("../components/calender.css");
+
 .profile-cont {
     display: inline-flex;
     align-items: center;

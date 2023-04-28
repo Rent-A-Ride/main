@@ -39,7 +39,7 @@
     
     <div class="date-select">
 
-        <button onclick="location.href='/adminadd_vowner'" class="book-button1"><i class="fa-solid fa-plus"></i></button>
+        <button onclick="location.href='/admin/add-driver'" class="book-button1"><i class="fa-solid fa-plus"></i></button>
         
     </div>
     
@@ -90,3 +90,4 @@
         </div>
     </div>
 </div>
+<!-- <script src="/assets/javascript/admin/component/search.js"></script> -->

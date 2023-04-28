@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\core\Application;
 use app\core\dbModel;
 use app\core\Model;
 
@@ -264,6 +265,23 @@ class Customer extends dbModel
     public function setStatus(int $status): void
     {
         $this->status = $status;
+    }
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    public function getCustomer_count(){
+        return Application::$app->db->pdo->query("SELECT COUNT(cus_Id) As customer_count FROM customer")->fetchAll(\PDO::FETCH_ASSOC);
     }
 
 

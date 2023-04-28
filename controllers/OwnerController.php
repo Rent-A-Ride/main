@@ -36,18 +36,15 @@ class OwnerController extends Controller
             $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
             $vehicle = new vehicle();
             $vehicle_count=$vehicle->getvehicleCount();
-            var_dump($vehicle_count);
             $vowner=new vehicleowner();
             $vowner_count=$vowner->getVeh_oCount();
-            var_dump($vowner_count);
             $driver=new driver();
             $driver_count=$driver->getdriverCount();
-            var_dump($driver_count);
             $customer= new Customer();
-            
+            $customer_count=$customer->getCustomer_count();
             // die();
             $this->setLayout("owner-dashboard");
-            return $this->render("/admin/owner",[],['profile_img'=>$owner_img, 'function'=>'Dashboard']);
+            return $this->render("/admin/owner",['vehicle_count'=>$vehicle_count,'vowner_count'=>$vowner_count,'driver_count'=>$driver_count,'customer_count'=>$customer_count],['profile_img'=>$owner_img, 'function'=>'Dashboard']);
         }
         return $res->render("HomePage","home");
     }
@@ -234,7 +231,7 @@ class OwnerController extends Controller
             $ownerprofile = new owner();
             $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
             $this->setLayout("owner-dashboard");
-            return $this->render("/admin/admin_vehicleComplaint",['complaint'=>$vehiclecomplaint],['profile_img'=>$owner_img, 'function'=>'vehiclecomplaint']);
+            return $this->render("/admin/admin_vehicleComplaint",['complaint'=>$vehiclecomplaint],['profile_img'=>$owner_img, 'function'=>'complaint']);
         }
     }
 
@@ -245,7 +242,7 @@ class OwnerController extends Controller
             $ownerprofile = new owner();
             $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
             $this->setLayout("owner-dashboard");
-            return $this->render("/admin/admin_driverComplaint",['complaint'=>$drivercomplaint],['profile_img'=>$owner_img, 'function'=>'drivercomplaint']);
+            return $this->render("/admin/admin_driverComplaint",['complaint'=>$drivercomplaint],['profile_img'=>$owner_img, 'function'=>'complaint']);
         }
     }
     
@@ -489,6 +486,27 @@ class OwnerController extends Controller
             $this->setLayout("owner-dashboard");
             return $this->render("/admin/manageDriverPayment",['drivers'=>$drivers, 'rent'=>$payment,'rent2'=>$allpayment],['profile_img'=>$owner_img, 'function'=>'Payment']);
         }    
+    }
+
+    public function add_driver(Request $req, Response $res){
+        if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="owner"){
+
+
+            if ($req->isPost()) {
+                // $body=$req->getBody();
+                // $vo_id=(int)$body['vo_Id'];
+                // $booking = new vehicleownerpayment();
+                // $booking->confirm_payment($vo_id);
+                // $res->redirect("/admin/managepayment");
+            }
+            $ownerprofile = new owner();
+            $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
+            $driver = new driver();
+            $driverdetails = $driver->getDriver(); 
+            $this->setLayout("owner-dashboard");
+            return $this->render("/admin/adminadd_driver",['driver'=>$driverdetails],['profile_img'=>$owner_img, 'function'=>'Driver']);
+        }
+
     }
 
   
