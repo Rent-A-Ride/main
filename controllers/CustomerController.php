@@ -9,6 +9,7 @@ use app\core\Request;
 use app\core\Response;
 use app\models\CancelBookings;
 use app\models\Customer;
+use app\models\veh_Reviews;
 use app\models\VehBooking;
 use app\models\cusVehicle;
 use app\models\VehInfo;
@@ -27,8 +28,24 @@ class CustomerController extends Controller
     public function home(Request $request, Response $response): string
     {
         $vehicle = cusVehicle::retrieveAll();
+
+//        // get the vehicle ratings by vehicle id
+        $ratingsById = [];
+        $count = 0.0;
+//
+        foreach ($vehicle as $veh) {
+            $ratingsById[$veh->getVehId()] = veh_Reviews::findOne(['veh_Id' => $veh->getVehId()]);
+        }
+
+        foreach ($ratingsById as $rating) {
+            if (!empty($rating)) {
+                $count += $rating->getRating();
+            }
+        }
+
         $params = [
-            'model' => $vehicle
+            'model' => $vehicle,
+            'ratings' => $ratingsById,
         ];
 
         $this->setLayout('customer-dashboard');

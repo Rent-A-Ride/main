@@ -230,4 +230,5 @@ use app\core\Application; ?>
 <script src="/assets/javascript/customer/components/booking.js"></script>
 <script src="/assets/javascript/customer/components/profile.js"></script>
 <script src="/assets/javascript/customer/components/date-validation.js"></script>
+<script src="/assets/javascript/customer/components/ratings.js"></script>
 </html>

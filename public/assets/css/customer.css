@@ -18,6 +18,7 @@
 /* Customer Home */
 @import url(customer/cusHome/table.css);
 @import url(customer/cusHome/search.css);
+@import url(customer/cusHome/ratings.css);
 
 /* Customer Profile */
 @import url(customer/profile.css);

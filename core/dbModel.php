@@ -145,6 +145,26 @@ abstract class dbModel extends Model
          return true;
      }
 
+    public static function sumColumn($column, $where = [])
+    {
+        $tableName = static::tableName();
+        $statement = '';
+
+        if (empty($where)) {
+            $statement = self::prepare("SELECT SUM($column) FROM $tableName");
+        } else {
+            $attributes = array_keys($where);
+            $sql = implode("AND ", array_map(fn($attr) => "$attr = :$attr", $attributes));
+            $statement = self::prepare("SELECT SUM($column) FROM $tableName WHERE $sql");
+            foreach ($where as $key => $item) {
+                $statement->bindValue(":$key", $item);
+            }
+        }
+
+        $statement->execute();
+        return $statement->fetchColumn();
+    }
+
 
     public static function prepare($sql)
     {
