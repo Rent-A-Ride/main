@@ -7,6 +7,7 @@ use app\core\Controller;
 use app\core\middlewares\AuthMiddleware;
 use app\core\Request;
 use app\core\Response;
+use app\models\CancelBookings;
 use app\models\Customer;
 use app\models\VehBooking;
 use app\models\cusVehicle;
@@ -179,7 +180,132 @@ class CustomerController extends Controller
 
     public function customerSettings(Request $request, Response $response)
     {
+        $id=Application::$app->user->cus_Id;
+        $customer = new Customer();
+        $customer=Customer::findOne(['cus_Id'=>$id]);
+        $this->thisIsCustomer($response);
+
+        //Change the password
+        if ($request->isPost()){
+            $customer=Customer::findOne(['cus_Id'=>$id]);
+
+            $customer->loadData($request->getBody());
+            $mode=$request->getBody()['mode'] ?? '';
+
+
+
+            if ($mode==='change-password'){
+
+                $currentPassword=$request->getBody()['current-password'];
+                $newPassword=$request->getBody()['new-password'];
+                $confirmPassword=$request->getBody()['confirm-password'];
+
+                //check if old password is match, if nor add error
+                if (!password_verify( $currentPassword,$customer->getPassword())){
+                    $customer->addError('change-password','Current password is incorrect!');
+                    $this->setLayout('customer-dashboard');
+                    return $this->render('Customer/v_customerSettings',[
+                        'customer'=>$customer,
+                    ]);
+                }
+                //check if new password and confirm password are match, if not add error
+                if ($newPassword!==$confirmPassword){
+                    $customer->addError('change-password','Passwords are not match!');
+                    $this->setLayout('customer-dashboard');
+                    return $this->render('Customer/v_customerSettings',[
+                        'customer'=>$customer,
+                    ]);
+                }
+
+                //check if new password is same as old password, if so add error
+                if (password_verify($newPassword,$customer->getPassword())){
+                    $customer->addError('change-password','New password is same as old password!');
+                    $this->setLayout('customer-dashboard');
+                    return $this->render('Customer/v_customerSettings',[
+                        'customer'=>$customer,
+                    ]);
+                }
+
+                $customer->setPassword($newPassword);
+
+                //check if new password is validate
+                if (!$customer->validateWith(['password'])){
+                    $this->setLayout('customer-dashboard');
+                    return $this->render('Customer/v_customerSettings',[
+                        'customer'=>$customer,
+                    ]);
+                }
+
+                //if all the above conditions are passed, update the password
+
+
+
+
+                if ($customer->validateWith(['password']) && $customer->update($id,['password'])){
+                    Application::$app->session->setFlash('success', 'Password Updated Successfully!');
+                    $response->redirect('/Customer/Settings');
+                    return;
+                }
+
+
+                Application::$app->session->setFlash('error', 'There was some error in updating your password!');
+                $this->setLayout('customer-dashboard');
+                return $this->render('Customer/v_customerSettings',[
+                    'customer'=>$customer,
+                ]);
+            }
+        }
+
+
         $this->setLayout('customer-dashboard');
-        return $this->render('Customer/v_customerSettings');
+        return $this->render('Customer/v_customerSettings',[
+            'customer'=>$customer,
+        ]);
+    }
+
+    public function cancelBooking(Request $request, Response $response)
+    {
+        $cus_Id = $this->thisIsCustomer($response);
+
+        $bookingId = $request->getBody()['bookingId'];
+        $vehBooking = VehBooking::findOne(['booking_Id' => $bookingId]);
+
+        $cancellation = new CancelBookings();
+        $cancellation->setBookingId($bookingId);
+        $cancellation->setCusId($cus_Id);
+        $cancellation->setReason($request->getBody()['reason']);
+        $cancellation->setComment($request->getBody()['comment']);
+
+        if ($cancellation->save()) {
+            $vehBooking->deleteOne($bookingId);
+            Application::$app->session->setFlash('success', 'Booking cancellation completed!');
+            Application::$app->response->redirect('/Customer/VehicleBookingTable');
+
+            return json_encode([
+                'success' => true,
+                'message' => 'Booking cancellation completed!'
+            ]);
+        }
+        return $response->redirect('/Customer/VehicleBookingTable');
+    }
+
+    /**
+     * @param Response $response
+     * @return void
+     */
+    public function thisIsCustomer(Response $response)
+    {
+        if (Application::isGuest()) {
+            Application::$app->session->setFlash('error', 'You are not logged in!');
+            $response->redirect('/login');
+            exit;
+        } elseif (Application::whoIsThis() == !'customer') {
+            Application::$app->session->setFlash('error', 'You are not logged in as a customer!');
+            $response->redirect('/login');
+            exit;
+        }
+
+        $cus_Id = Application::$app->user->cus_Id;
+        return $cus_Id;
     }
 }

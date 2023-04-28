@@ -29,6 +29,12 @@
 
 @import url("./components/table.css");
 
+@import url("./components/search.css");
+
+@import url("./admin_v.css");
+
+@import url("../components/calender.css");
+
 .profile-cont {
     display: inline-flex;
     align-items: center;

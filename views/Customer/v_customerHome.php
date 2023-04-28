@@ -9,7 +9,7 @@
     <div class="location-select">
         <select id="location" name="location">
             <option value="" disabled selected hidden>location</option>
-            <option value="Galle">Galle</option>
+            <option value="Galcd pule">Galle</option>
             <option value="Negombo">Negombo</option>
             <option value="Mathale">Mathale</option>
             <option value="Kandy">Kandy</option>
@@ -46,7 +46,7 @@
                 ?>
                 <div class="table-row <?=$row->getVehType()?>">
 
-                    <div class="table-data"><img src="<?= $row->getFrontView()?>" width="56px"></div>
+                    <div class="table-data"><img src="/assets/img/vehicle/<?= $row->getFrontView()?>" width="56px"></div>
                     <div class="table-data"><?= $row->getVehBrand().' '.$row->getVehModel() ?></div>
                     <div class="table-data">
                         <span class="fa fa-star checked"></span>

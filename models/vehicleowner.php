@@ -86,6 +86,10 @@ class vehicleowner extends dbModel
         $statement1= Application::$app->db->prepare($query1);
         $statement1->bindValue(":availability",$availability);
         $statement1->execute();
+        $query2="UPDATE vehicle SET `availability` =:availability WHERE vo_ID=$vo_id";
+        $statement2= Application::$app->db->prepare($query2);
+        $statement2->bindValue(":availability",$availability);
+        $statement2->execute();
     }
 
     public  function adminacceptvehowner($vo_id){
@@ -95,5 +99,10 @@ class vehicleowner extends dbModel
         $statement1= Application::$app->db->prepare($query1);
         $statement1->bindValue(":availability",$availability);
         $statement1->execute();
+    }
+
+
+    public function getVeh_oCount(){
+        return Application::$app->db->pdo->query("SELECT COUNT(vo_ID) As veho_count FROM vehicleowner")->fetchAll(\PDO::FETCH_ASSOC);
     }
 }

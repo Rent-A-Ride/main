@@ -42,10 +42,11 @@ class VehicleOwnerController extends Controller
     public function vehownerViewProfile(Request $req,Response $res){
 
 
-        $vehowner = new vehicle_Owner();
-        $vehicleowner=$vehowner->Vehicleowner_profile(Application::$app->session->get("user"));
-        $id = Application::$app->session->get("user_id");
-        $nic = $vehicleowner[0]['Nic'];
+            $vehowner = vehicle_Owner::findOne(['vo_ID' => Application::$app->session->get('user')]);
+            $id = Application::$app->session->get('user');
+
+
+            $nic = $vehowner->getNic();
 
             if ($req->isPost()){
                 $vehicleowner =[new vehicle_Owner()];

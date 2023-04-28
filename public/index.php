@@ -29,7 +29,14 @@ $config = [
         'dsn'=>$_ENV['DB_DSN'],
         'user'=>$_ENV['DB_USER'],
         'password'=>$_ENV['DB_PASSWORD'],
-    ]
+    ],
+    // 'email'=>[
+    //     'host'=>$_ENV['EMAIL_HOST'],
+    //     'port'=>$_ENV['EMAIL_PORT'],
+    //     'username'=>$_ENV['EMAIL_USERNAME'],
+    //     'password'=>$_ENV['EMAIL_PASSWORD'],
+    //     'encryption'=>$_ENV['EMAIL_ENCRYPTION'],
+    // ]
 ];
 
 $app = new Application(dirname(__DIR__),$config);
@@ -67,6 +74,7 @@ $app->router->get("/viewownerDriver", [OwnerController::class, "ownerDriver"]);
 $app->router->get("/vehicleowner_vehicle", [VehicleOwnerController::class, "VehicleOwnerVehicle"]);
 
 $app->router->get("/ownerProfile", [OwnerController::class, "ownerProfile"]);
+$app->router->post("/ownerProfile", [OwnerController::class, "ownerProfile"]);
 
 $app->router->get("/adminViewVehicleOwner", [OwnerController::class, "ViewVehicleOwnerProfile"]);
 
@@ -106,6 +114,12 @@ $app->router->post("/admin/vehicle_ins/update", [OwnerController::class, "admin_
 $app->router->get("/admin/vehicle/disable_vehicle", [OwnerController::class, "admin_disableVehicle"]);
 $app->router->post("/admin/vehicle/disable_vehicle", [OwnerController::class, "admin_disableVehicle"]);
 
+$app->router->get("/admin/managepayment", [OwnerController::class, "manage_vehownerPayment"]);
+$app->router->post("/admin/managepayment", [OwnerController::class, "manage_vehownerPayment"]);
+
+$app->router->get("/admin/managedriverpayment", [OwnerController::class, "manage_driverPayment"]);
+
+$app->router->get("/admin/add-driver", [OwnerController::class, "add_driver"]);
 
 //Hasantha
 $app->router->get('/Customer/login', [AuthController::class, 'cus_login']);
@@ -113,8 +127,8 @@ $app->router->post('/Customer/login', [AuthController::class, 'cus_login']);
 
 $app->router->get("/selectUserType", [AuthController::class, "selectuser"]);
 
-$app->router->get("/Customer/Register", [AuthController::class, 'cusRegister']);
-$app->router->post("/Customer/Register", [AuthController::class, 'cusRegister']);
+$app->router->get("/Customer/Register", [AuthController::class, 'cus_register']);
+$app->router->post("/Customer/Register", [AuthController::class, 'cus_register']);
 
 $app->router->get("/Customer/Home", [CustomerController::class, 'home']);
 $app->router->post("/Customer/Home", [CustomerController::class, 'home']);
@@ -134,6 +148,8 @@ $app->router->get('/Customer/VehicleBookingTable', [CustomerController::class, '
 
 $app->router->get('/Customer/Settings', [CustomerController::class, 'customerSettings']);
 $app->router->post('/Customer/Settings', [CustomerController::class, 'customerSettings']);
+
+$app->router->post("/cancelBooking", [CustomerController::class, 'cancelBooking']);
 
 
 
