@@ -13,6 +13,7 @@ use app\core\Application; ?>
     <!-- Font Awesome Icon Library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
@@ -69,6 +70,13 @@ use app\core\Application; ?>
                 <span class="links_name">Booking</span>
             </a>
             <span class="tooltip">Booking</span>
+        </li>
+        <li>
+            <a href="/Customer/notification">
+                <i class="fa-regular fa-bell"></i>
+                <span class="links_name">Notification</span>
+            </a>
+            <span class="tooltip">Notification</span>
         </li>
         <li>
             <a href="/Customer/Payment">
