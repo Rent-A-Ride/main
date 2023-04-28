@@ -239,7 +239,7 @@ use app\models\cusVehicle;
                 <textarea cols="6" id="comments" name="comment"></textarea>
             </div>
             <div class="form-group">
-                <button class="submit" type="submit">Submit</button>
+<!--                <button class="submit" type="submit">Submit</button>-->
                 <input type="submit" class="submit">
             </div>
         </form>

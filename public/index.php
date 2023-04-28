@@ -2,6 +2,7 @@
 
 use app\controllers\AuthController;
 use app\controllers\CustomerController;
+use app\controllers\notificationController;
 use app\controllers\SiteController;
 use app\controllers\OwnerController;
 use app\controllers\VehicleController;
@@ -122,6 +123,8 @@ $app->router->get("/admin/managedriverpayment", [OwnerController::class, "manage
 $app->router->get("/admin/add-driver", [OwnerController::class, "add_driver"]);
 
 //Hasantha
+$app->router->post('/notifications', [notificationController::class, 'notification']);
+
 $app->router->get('/Customer/login', [AuthController::class, 'cus_login']);
 $app->router->post('/Customer/login', [AuthController::class, 'cus_login']);
 

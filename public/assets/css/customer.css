@@ -18,6 +18,7 @@
 /* Customer Home */
 @import url(customer/cusHome/table.css);
 @import url(customer/cusHome/search.css);
+@import url(customer/cusHome/ratings.css);
 
 /* Customer Profile */
 @import url(customer/profile.css);
@@ -151,4 +152,36 @@ body {
     width: 50%;
     height: 250px;
     background-color: #444444;
+}
+
+/* Define the animations */
+@keyframes slide-in {
+    from {
+        transform: translateX(-40%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes pop-up {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Apply the animation to the h1 and span elements */
+#animation-1 {
+    animation: slide-in 2s ease-in-out ;
+}
+
+#animation-1 span {
+    animation: pop-up 4s ease-out 4s infinite;
 }
