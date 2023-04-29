@@ -2,7 +2,7 @@
 ?>
 <h1>Add New Vehicle</h1>
 <div class="wrapper-addveh">
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
     <div class="header">
         <ul style="list-style-type: none">
             <li class="active form_1_progessbar">
@@ -36,9 +36,10 @@
                         <label for="vehicle_type">Type</label>
 
                         <select id="vehicle-type" class = "select-item" name = "veh_type">
-                            <option class="item" value ="car">Car</option>
+                            <option selected disabled class="item" value ="">--SELECT YOUR VEHICLE TYPE--</option>
+                            <option  class="item" value ="car">Car</option>
                             <option class="item" value ="van">Van</option>
-                            <option class="item" value ="scooter" >Scooter</option>
+                            <option class="item" value ="scooter">Scooter</option>
                             <option class="item" value ="bike">Bike</option>
 
                         </select>
@@ -63,24 +64,24 @@
                     </div>
 
                     <div class="input_wrap">
-                        <label for="range-slider">Price:</label>
+                        <label for="range-slider">Vehicle Rent Price Rate:</label>
                         <input id="range-slider" type="range" step="50" name="price">
                         <span id="range-value"></span>
                     </div>
 
                     <div class="input_wrap">
-                        <label for="user_name">Front View<label>
-                                <input type="file" name="front_view" class="input" id="front_view">
+                        <label for="user_name">Front View</label>
+                        <input type="file" name="front_view" class="input" id="front_view" max="1000000">
                     </div>
 
                     <div class="input_wrap">
-                        <label for="user_name">Back View<label>
-                                <input type="file" name="back_view" class="input" id="back_view">
+                        <label for="user_name">Back View</label>
+                        <input type="file" name="back_view" class="input" id="back_view" max="1000000">
                     </div>
 
                     <div class="input_wrap">
-                        <label for="user_name">Side View<label>
-                                <input type="file" name="side_view" class="input" id="side_view">
+                        <label for="user_name">Side View</label>
+                        <input type="file" name="side_view" class="input" id="side_view" max="1000000">
                     </div>
 
 
@@ -94,16 +95,16 @@
                 <div class="form_container">
                     <div class="input_wrap">
                         <label for="user_name">Year</label>
-                        <input type="text" name="User Name" class="input" id="user_name">
+                        <input type="text" name="year" class="input">
                     </div>
                     <div class="input_wrap">
                         <label for="first_name">Capacity</label>
-                        <input type="text" name="First Name" class="input" id="first_name">
+                        <input type="text" name="capacity" class="input">
                     </div>
                     <div class="input_wrap">
                         <label for="last_name">Transmission</label>
 
-                        <select class = "select-item" name = "dropdown_transmitiontype">
+                        <select class = "select-item" name = "transmission">
                             <option class="item" value = "Auto" >Auto</option>
                             <option class="item" value = "Manual">Manual</option>
 
@@ -113,7 +114,7 @@
                     <div class="input_wrap">
                         <label for="last_name">Fuel Type</label>
 
-                        <select class ="select-item" name = "dropdown_transmitiontype">
+                        <select class ="select-item" name = "fuel_type">
                             <option value = "Petrol" >Petrol</option>
                             <option value = "Diesel">Diesel</option>
 
@@ -121,21 +122,21 @@
 
                     </div>
                     <div class="input_wrap">
-                        <label for="first_name">Color</label>
-                        <input type="text" name="First Name" class="input" id="first_name">
+                        <label for="vehColor">Color</label>
+                        <input type="text" name="vehColor" class="input">
                     </div>
                     <div class="input_wrap">
-                        <label for="first_name">No of Seats</label>
-                        <input type="text" name="First Name" class="input" id="first_name">
+                        <label for="seatsCount">No of Seats</label>
+                        <input type="text" name="seatsCount" class="input">
                     </div>
                     <div class="input_wrap">
-                        <label for="first_name">Average Fuel Consumption</label>
-                        <input type="text" name="First Name" class="input" id="first_name">
+                        <label for="avgfuel">Average Fuel Consumption</label>
+                        <input type="text" name="avgfuel" class="input" id="first_name">
                     </div>
                     <div class="input_wrap">
-                        <label for="first_name">Description</label>
+                        <label for="Description">Description</label>
                         <!-- 						<input type="text" name="First Name" class="input" id="first_name"> -->
-                        <textarea class ="input" style="resize: none;" maxlength="100"></textarea>
+                        <textarea name="Description" class ="input" style="resize: none;" maxlength="100"></textarea>
                     </div>
 
                 </div>

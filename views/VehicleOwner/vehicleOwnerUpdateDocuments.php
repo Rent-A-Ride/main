@@ -5,7 +5,7 @@ use app\models\vehicle;
 
 ?>
 
-<h2 class="renew-page-name">Update Vehicle Documents</h2>
+<h2 class="renew-page-name">Renew Vehicle Documents</h2>
 
 <div class="doc-update-container">
 

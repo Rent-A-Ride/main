@@ -75,12 +75,12 @@ i {
 
 
 .project-container .project{
-    background: red;
+    background: white;
     padding: 2rem;
     border-radius: 0.5rem;
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
     margin-bottom: 2rem;
-    height: 150px;
+    height: 200px;
 
 
 }

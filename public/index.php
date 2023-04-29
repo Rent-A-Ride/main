@@ -214,6 +214,11 @@ $app->router->get("/Customer/ExpieringNotification", [VehicleOwnerController::cl
 //vehicle owner add new vehicle
 $app->router->get("/vehicleOwner/addNewVehicle", [VehicleOwnerController::class, 'addNewVehicle']);
 $app->router->post("/vehicleOwner/addNewVehicle", [VehicleOwnerController::class, 'addNewVehicle']);
-$app->run();
 
+//vehicle owner booking calendar
+$app->router->get("/vehicleOwner/bookingCalendar", [VehicleOwnerController::class, 'bookingCalendar']);
+
+
+
+$app->run();
 

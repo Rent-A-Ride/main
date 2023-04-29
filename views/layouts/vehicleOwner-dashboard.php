@@ -93,6 +93,23 @@ use app\core\Application;
             <span class="tooltip">Payment</span>
         </li>
 
+        <li>
+            <a href="/vehicleOwner/bookingCalendar">
+                <i class='bx bx-calendar'></i>
+                <span class="links_name">Calendar</span>
+            </a>
+            <span class="tooltip">Calendar</span>
+        </li>
+
+        <li>
+            <a href="/vehicleOwner/Bookings">
+                <i class='bx bx-book-content' ></i>
+                <span class="links_name">Bookings</span>
+            </a>
+            <span class="tooltip">Bookings</span>
+        </li>
+
+
         <li class="/logout">
             <a href="/logout" class="logout">
                 <i class='bx bx-log-out' ></i>
@@ -152,4 +169,5 @@ use app\core\Application;
 <script src="/assets/javascript/vehicleOwner/components/CustomerReq.js"></script>
 <script src="/assets/javascript/vehicleOwner/profile.js"></script>
 <script src="/assets/javascript/vehicleOwner/AddNewVehicle.js"></script>
+<script src="/assets/javascript/vehicleOwner/BookingCalendar.js"></script>  <!-- calendar -->
 </html>

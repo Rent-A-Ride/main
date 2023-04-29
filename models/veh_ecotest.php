@@ -13,6 +13,24 @@ class veh_ecotest extends dbModel
     protected string $veh_Id;
     protected string $eco_scan_copy;
 
+    /**
+     * @return string
+     */
+    public function getEcoScanCopy(): string
+    {
+        return $this->eco_scan_copy;
+    }
+
+    /**
+     * @param string $eco_scan_copy
+     */
+    public function setEcoScanCopy(string $eco_scan_copy): void
+    {
+        $this->eco_scan_copy = $eco_scan_copy;
+    }
+
+
+
 
 
     public function rules(): array

@@ -2,16 +2,18 @@
 .VehicleownerSearch{
     margin-left: 5%;
     margin-top: 2%;
-    width: 300px ;
-    height:40px;
+    width: 600px ;
+    height:400px;
     border-radius: 1rem 0 0 1rem;
     border: solid;
+    background-color: white;
 }
 
 .VehicleownerSearchbtn{
     width: 100px ;
     height:40px; 
     border-radius: 0 1rem 1rem 0;
+    background-color: white;
 }
 
 .ownervehicleownerdsearchform{
@@ -38,9 +40,6 @@
    
     
 
-}
-select{
-    border: solid;
 }
 
 .form-input-add a{

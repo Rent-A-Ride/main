@@ -15,9 +15,9 @@ class veh_insurance extends dbModel
     protected string $ins_from_date;
     protected string $ins_ex_date;
     protected string $ins_scan_copy;
-    protected string $ins_com;
-    protected string $ins_type;
-    // protected string $admin_approved;
+    protected string $insure_com;
+
+    protected string $insure_type;
     
     private array $body;
 
@@ -30,12 +30,12 @@ class veh_insurance extends dbModel
 
     public static function tableName(): string
     {
-        return 'veh_license';
+        return 'veh_insuarance';
     }
 
     public function attributes(): array
     {
-       return ['veh_Id','ins_No','from_date','ex_date','scan_copy','ins_com','ins_type'];
+       return ['veh_Id','ins_No','ins_from_date','ins_ex_date','ins_scan_copy','insure_com','insure_type'];
     }
 
     public static function primaryKey(): string
@@ -62,99 +62,103 @@ class veh_insurance extends dbModel
     /**
      * @return string
      */
-    public function getins_No(): string
+    public function getInsNo(): string
     {
         return $this->ins_No;
     }
 
     /**
-     * @param string $plate_No
+     * @param string $ins_No
      */
-    public function setins_No(string $license_No): void
+    public function setInsNo(string $ins_No): void
     {
-        $this->ins_No = $license_No;
+        $this->ins_No = $ins_No;
     }
 
     /**
      * @return string
      */
-    public function getfrom_date(): string
+    public function getInsFromDate(): string
     {
-        return $this->from_date;
+        return $this->ins_from_date;
     }
 
     /**
-     * @param string $veh_brand
+     * @param string $ins_from_date
      */
-    public function setfrom_date(string $from_date): void
+    public function setInsFromDate(string $ins_from_date): void
     {
-        $this->from_date = $from_date;
-    }
-
-    /**
-     * @return string
-     */
-    public function getex_date(): string
-    {
-        return $this->ex_date;
-    }
-
-    /**
-     * @param string $veh_model
-     */
-    public function setex_date(string $ex_date): void
-    {
-        $this->ex_date = $ex_date;
+        $this->ins_from_date = $ins_from_date;
     }
 
     /**
      * @return string
      */
-    public function getinsure_com(): string
+    public function getInsExDate(): string
     {
-        return $this->ins_com;
+        return $this->ins_ex_date;
     }
 
     /**
-     * @param string $veh_type
+     * @param string $ins_ex_date
      */
-    public function setinsure_com(string $insure_com): void
+    public function setInsExDate(string $ins_ex_date): void
     {
-        $this->ins_com = $insure_com;
-    }
-
-    public function getinsure_type(): string
-    {
-        return $this->ins_type;
+        $this->ins_ex_date = $ins_ex_date;
     }
 
     /**
-     * @param string $veh_type
+     * @return string
      */
-    public function setinsure_type(string $insure_type): void
+    public function getInsScanCopy(): string
     {
-        $this->ins_type = $insure_type;
-    }
-
-    public function getscan_copy(): string
-    {
-        return $this->scan_copy;
+        return $this->ins_scan_copy;
     }
 
     /**
-     * @param string $veh_type
+     * @param string $ins_scan_copy
      */
-    public function setscan_copy(string $scan_copy): void
+    public function setInsScanCopy(string $ins_scan_copy): void
     {
-        $this->scan_copy = $scan_copy;
+        $this->ins_scan_copy = $ins_scan_copy;
     }
 
-    
+    /**
+     * @return string
+     */
+    public function getInsureCom(): string
+    {
+        return $this->insure_com;
+    }
+
+    /**
+     * @param string $insure_com
+     */
+    public function setInsureCom(string $insure_com): void
+    {
+        $this->insure_com = $insure_com;
+    }
+
+    /**
+     * @return string
+     */
+    public function getInsureType(): string
+    {
+        return $this->insure_type;
+    }
+
+    /**
+     * @param string $insure_type
+     */
+    public function setInsureType(string $insure_type): void
+    {
+        $this->insure_type = $insure_type;
+    }
 
 
     public function __construct(array $registerBody=[])
     {
-       
+
         $this->body= $registerBody;
 
 

@@ -29,13 +29,16 @@ class VehicleOwnerController extends Controller
     // }
 
     public function VehicleOwnerVehicle(Request $req, Response $res){
-        if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="vehicleowner"){
-            $vehicles = new VehicleController();
-            $vehicle=[];
-            $vehicle = $vehicles->vehicleownerGetVehicle($req,$res);
+        if (Application::$app->session->get("user_role")==="vehicleowner"){
+            $voId = Application::$app->user->getVoID();
+            $vehicles = vehicle::retrieveAll(['vo_ID'=>$voId]);
+
+            $param = [
+                'vehicles'=>$vehicles
+            ];
         
 //        print_r($vehicle);
-         return $res->render("/VehicleOwner/vehicleOwner_vehicle","vehicleOwner-dashboard",['result'=>$vehicle]);
+         return $res->render("/VehicleOwner/vehicleOwner_vehicle","vehicleOwner-dashboard",$param);
         }
     }
     //this function for owner
@@ -116,6 +119,8 @@ class VehicleOwnerController extends Controller
     public function vehownerUpdateVehicle(Request $req, Response $res){
         if (Application::$app->session->get("user_role")==="vehicleowner"){
             $veh_ecotest = new ren_ecotest();
+            $veh_insurance = new veh_insurance();
+            $veh_license = new veh_license();
             $id = $req->getBody()['id']??'';
             $vehicle = vehicle::findOne(['veh_Id' => $id]);
             $params = [
@@ -130,10 +135,11 @@ class VehicleOwnerController extends Controller
                  // Handle the scan copy upload
                  if (isset($_FILES['scan_copy'])) {
                      $file = $_FILES['scan_copy'];
-                     $file['name'] = 'vehEco'.$veh_Id;
+                     $file['name'] = 'vehEco'.$veh_Id.'.'.$file['type'];
+                     $file['name'] = 'vehIns'.$veh_Id.'.'.$file['type'];
                      $filename = $file['name'];
                      $tmp_name = $file['tmp_name'];
-                     $path = Application::$ROOT_DIR.'/public/assets/img/uploads/renewal/eco' . $filename;
+                     $path = Application::$ROOT_DIR.'/public/assets/img/uploads/renewal/eco/' . $filename;
 
                      if (!empty($file)){
                          move_uploaded_file($tmp_name, $path);
@@ -166,6 +172,7 @@ class VehicleOwnerController extends Controller
         }
         return $res->render("Home","home");
     }
+
 
     public function viewCustomerPendingRequests(Request $request, Response $response): string
     {
@@ -325,17 +332,19 @@ class VehicleOwnerController extends Controller
 
     public function addNewVehicle(Request $request, Response $response)
     {
-        $siteController = new SiteController();
+
         $vehicle = new vehicle();
         $vehinfo = new VehInfo();
         $vehLicense = new veh_license();
         $vehInsurance = new veh_insurance();
         $vehEcoTest = new veh_ecotest();
 
+        $vo_Id = Application::$app->user->getVoID();
+
 
         if ($request->isPost()){
 
-
+            $vehID = uniqid('veh', true);
 
             $vehicle->loadData($request->getBody());
             $vehinfo->loadData($request->getBody());
@@ -343,46 +352,108 @@ class VehicleOwnerController extends Controller
             $vehInsurance->loadData($request->getBody());
             $vehEcoTest->loadData($request->getBody());
 
+            $vehicle->setAvailability(1);
+            $vehicle->setVoId($vo_Id);
 
 
-//            $vehOwnerId = Application::$app->user->getVoID();
 
-            if(isset($_FILES['file'])) {
-                // Upload each image
-                $imagePaths = array();
-                $files = $_FILES['file'];
-                $count = count($files['name']);
-                for($i = 0; $i < $count; $i++) {
-                    $inputName = "image_" . $i;
-                    $uploadFolder = Application::$ROOT_DIR.'/public/assets/img/uploads/userProfile/';
-                    $imagePath = $siteController->uploadDocument($inputName, $uploadFolder);
-                    if($imagePath !== false) {
-                        // Image uploaded successfully
-                        $imagePaths[] = $imagePath;
-                    } else {
-                        // Error uploading image
-                        echo "Error uploading image.";
+
+            if(isset($_FILES)) {
+                if (isset($_FILES['front_view'])){
+                    $file = $_FILES['front_view'];
+                    $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+                    $file['name'] = $vehID.'front'.'.'.$extension;
+                    $filename = $file['name'];
+                    $tmp_name = $file['tmp_name'];
+                    $path = Application::$ROOT_DIR.'/public/assets/img/uploads/vehicle/' . $filename;
+
+                    if (!empty($file)){
+                        move_uploaded_file($tmp_name, $path);
+                        $vehicle->setFrontView($filename);
                     }
                 }
+                if (isset($_FILES['back_view']['tmp_name'])){
+                    $file = $_FILES['back_view'];
+                    $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+                    $file['name'] = $vehID.'back'.'.'.$extension;
+                    $filename = $file['name'];
+                    $tmp_name = $file['tmp_name'];
+                    $path = Application::$ROOT_DIR.'/public/assets/img/uploads/vehicle/' . $filename;
 
-                // Process uploaded images here
-                echo '<pre>';
-                var_dump($imagePaths);
-                echo '</pre>';
-                exit();
+                    if (!empty($file)){
+                        move_uploaded_file($tmp_name, $path);
+                        $vehicle->setBackView($filename);
+                    }
+                }
+                if (isset($_FILES['side_view']['tmp_name'])){
+                    $file = $_FILES['side_view'];
+                    $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+                    $file['name'] = $vehID.'side'.'.'.$extension;
+                    $filename = $file['name'];
+                    $tmp_name = $file['tmp_name'];
+                    $path = Application::$ROOT_DIR.'/public/assets/img/uploads/vehicle/' . $filename;
+
+                    if (!empty($file)){
+                        move_uploaded_file($tmp_name, $path);
+                        $vehicle->setSideView($filename);
+                    }
+                }
+                if (isset($_FILES['lic_scan_copy']['tmp_name'])){
+                    $file = $_FILES['lic_scan_copy'];
+                    $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+                    $file['name'] = $vehID.'lic'.'.'.$extension;
+                    $filename = $file['name'];
+                    $tmp_name = $file['tmp_name'];
+                    $path = Application::$ROOT_DIR.'/public/assets/img/uploads/vehicle/Documents/lic/' . $filename;
+
+                    if (!empty($file)){
+                        move_uploaded_file($tmp_name, $path);
+                        $vehLicense->setLicScanCopy($filename);
+                    }
+                }
+                if (isset($_FILES['ins_scan_copy']['tmp_name'])){
+                    $file = $_FILES['ins_scan_copy'];
+                    $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+                    $file['name'] = $vehID.'ins'.'.'.$extension;
+                    $filename = $file['name'];
+                    $tmp_name = $file['tmp_name'];
+                    $path = Application::$ROOT_DIR.'/public/assets/img/uploads/vehicle/Documents/ins/' . $filename;
+
+                    if (!empty($file)){
+                        move_uploaded_file($tmp_name, $path);
+                        $vehInsurance->setInsScanCopy($filename);
+                    }
+                }
+                if (isset($_FILES['eco_scan_copy']['tmp_name'])){
+                    $file = $_FILES['eco_scan_copy'];
+                    $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+                    $file['name'] = $vehID.'eco'.'.'.$extension;
+                    $filename = $file['name'];
+                    $tmp_name = $file['tmp_name'];
+                    $path = Application::$ROOT_DIR.'/public/assets/img/uploads/vehicle/Documents/eco/' . $filename;
+
+                    if (!empty($file)){
+                        move_uploaded_file($tmp_name, $path);
+                        $vehEcoTest->setEcoScanCopy($filename);
+                    }
+                }
             }
-//            $vehId = uniqid()
+//            $vehId = uniqid();
 
-            if ($vehicle->validate() && $vehicle->save()){
+            if ($vehicle->validate() && $vehicle->saveAs(['veh_Id'])){
+                // find the newly saved vehicle with plat number
+                $veh = vehicle::findOne(['plate_no' => $vehicle->getPlateNo()]);
 
-                $vehinfo->setVehId($vehicle->getVehId());
-                $vehLicense->setVehId($vehicle->getVehId());
-                $vehInsurance->setVehId($vehicle->getVehId());
-                $vehEcoTest->setVehId($vehicle->getVehId());
+
+                $vehinfo->setVehId($veh->getVehId());
+                $vehLicense->setVehId($veh->getVehId());
+                $vehInsurance->setVehId($veh->getVehId());
+                $vehLicense->setLicOwner($veh->getVoId());
+                $vehEcoTest->setVehId($veh->getVehId());
 
                 if (($vehinfo->validate() && $vehinfo->save()) && ($vehLicense->validate() && $vehLicense->save()) && ($vehInsurance->validate() && $vehInsurance->save()) && ($vehEcoTest->validate() && $vehEcoTest->save())){
 //                Application::$app->session->setFlash('success', 'Vehicle Added Successfully!');
-                    return $response->redirect('/vehicleOwnerAddNewVehicle');
+                    return $response->redirect('/vehicleOwner/addNewVehicle');
                 }
             }
 
@@ -413,6 +484,13 @@ class VehicleOwnerController extends Controller
         }
 
     }
+//vehicle owner booking calendar
+    public function bookingCalendar(Request $request,Response $response)
+    {
+        $this->setLayout("vehicleOwner-dashboard");
+        return $this->render("/VehicleOwner/vehicleOwnerBookingCalendar");
+    }
+
 
 
 
