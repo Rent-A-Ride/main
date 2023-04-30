@@ -63,3 +63,6 @@
         </div>
     </section>
 </div>
+
+<script src="../../public/assets/javascript/admin/update_vehicleins.js"></script>
+<script src="../../public/assets/javascript/admin/update_vehiclelin.js"></script>

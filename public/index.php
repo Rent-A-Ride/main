@@ -121,6 +121,9 @@ $app->router->get("/admin/managedriverpayment", [OwnerController::class, "manage
 
 $app->router->get("/admin/add-driver", [OwnerController::class, "add_driver"]);
 
+$app->router->get("/admin/manageCustomerPayment", [OwnerController::class, "manage_customer_Payment"]);
+$app->router->post("/admin/manageCustomerPayment", [OwnerController::class, "manage_customer_Payment"]);
+
 //Hasantha
 $app->router->get('/Customer/login', [AuthController::class, 'cus_login']);
 $app->router->post('/Customer/login', [AuthController::class, 'cus_login']);

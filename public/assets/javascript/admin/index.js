@@ -19,8 +19,9 @@ import "./accept_vehicleowner.js"
 import "./enable vehicle.js"
 import "./payment_confirm.js"
 import "./table.js"
-import "./update_vehiclelin.js"
-import "./update_vehicleins.js"
+import "./inform_payment.js"
+// import "./update_vehiclelin.js"
+// import "./update_vehicleins.js"
 
 
 // import "./enable vehicle.js"

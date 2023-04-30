@@ -461,7 +461,7 @@ class vehicle extends dbModel
     }
     //function for admin add vehicle after confirm informaion  
     public  function adminacceptVehicle($vehicle_id){
-        // var_dump($vehicle_id);
+        
         $admin_approved=1;
         $query1="UPDATE vehicle SET admin_approved =:admin_approved WHERE veh_Id=$vehicle_id";
 
@@ -472,8 +472,7 @@ class vehicle extends dbModel
 
     public  function adminacceptVehiclelicense($vehicle_id){
         $admin_approved=1;
-        // var_dump($vehicle_id);
-        $query1="UPDATE vehicle_license SET admin_approved =:admin_approved WHERE vehicle_Id=$vehicle_id";
+        $query1="UPDATE veh_license SET admin_approved =:admin_approved WHERE veh_Id=$vehicle_id";
         $statement1= Application::$app->db->prepare($query1);
         $statement1->bindValue(":admin_approved",$admin_approved);
         $statement1->execute();
@@ -481,8 +480,7 @@ class vehicle extends dbModel
 
     public  function adminacceptVehicleinsuarance($vehicle_id){
         $admin_approved=1;
-        // var_dump($vehicle_id);
-        $query1="UPDATE vehicle_insuarance SET admin_approved =:admin_approved WHERE vehicle_Id=$vehicle_id";
+        $query1="UPDATE veh_insuarance SET admin_approved =:admin_approved WHERE veh_Id=$vehicle_id";
         $statement1= Application::$app->db->prepare($query1);
         $statement1->bindValue(":admin_approved",$admin_approved);
         $statement1->execute();

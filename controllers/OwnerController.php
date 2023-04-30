@@ -7,7 +7,9 @@ use app\core\Controller;
 use app\core\Request;
 use app\core\Response;
 use app\models\adminCustomer;
+use app\models\cus_notification;
 use app\models\Customer;
+use app\models\customer_payment;
 use app\models\driver;
 use app\models\driver_complaint_resolve_notification;
 use app\models\drivercomplaint;
@@ -209,15 +211,16 @@ class OwnerController extends Controller
     }
 
     public function adminacceptedVehicle(Request $req, Response $res){
-        if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="owner"){    
+        if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="owner"){   
             $vehicles = new VehicleController();
             $vehicle=[];
             $vehicle = $vehicles->addVehicle($req,$res);
             $ownerprofile = new owner();
             $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
 //        print_r($vehicle);
-            $this->setLayout("owner-dashboard");
-             return $this->render("/admin/admin_addNewVehicle",['result'=>$vehicle],['profile_img'=>$owner_img, 'function'=>'Vehicle']);
+            // $this->setLayout("owner-dashboard");
+            //  return $this->render("/admin/admin_addNewVehicle",['result'=>$vehicle],['profile_img'=>$owner_img, 'function'=>'Vehicle']);
+            $res->redirect('/admin/vehicle/add_vehicle');
         }
         return $res->render("Home","home");
     }
@@ -507,6 +510,32 @@ class OwnerController extends Controller
             return $this->render("/admin/adminadd_driver",['driver'=>$driverdetails],['profile_img'=>$owner_img, 'function'=>'Driver']);
         }
 
+    }
+
+
+    public function manage_customer_Payment(Request $req, Response $res){
+        if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="owner"){
+           
+
+            if ($req->isPost()){
+                $body=$req->getBody();
+                $notification = new cus_notification();
+                $notification->insertmsg($body);
+                $res->redirect('/admin/manageCustomerPayment');
+
+            }
+            else{
+                $ownerprofile = new owner();
+                $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
+                $cus_payment=new customer_payment();
+                $payment=$cus_payment->manageCustomerPayment();
+                // var_dump($payment);
+                // exit;
+                $this->setLayout("owner-dashboard");
+                return $this->render("/admin/manage_cusPayment",['payment'=>$payment],['profile_img'=>$owner_img, 'function'=>'Payment']);
+            }
+            
+        }
     }
 
   
