@@ -62,7 +62,7 @@ class CustomerController extends Controller
             $customer->loadData($request->getBody());
             if ($customer->validateWith(['firstname','lastname','address']) && $customer->update($id,['firstname','lastname', 'phoneno', 'address'])){
                 Application::$app->session->setFlash('profileUpdate', 'Profile Updated Successfully!');
-                $response->redirect('/profile');
+                $response->redirect('/Customer/Profile');
                 return;
             }
             Application::$app->session->setFlash('profileUpdateErr', 'There was some error in updating your profile!');

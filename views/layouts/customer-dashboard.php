@@ -73,10 +73,10 @@ use app\core\Application; ?>
         </li>
         <li>
             <a href="/Customer/notification">
-                <i class="fa-regular fa-bell"></i>
-                <span class="links_name">Notification</span>
+                <i class='bx bx-support'></i>
+                <span class="links_name">Complaints</span>
             </a>
-            <span class="tooltip">Notification</span>
+            <span class="tooltip">Complaints</span>
         </li>
         <li>
             <a href="/Customer/Payment">
