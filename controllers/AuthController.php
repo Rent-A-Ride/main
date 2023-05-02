@@ -44,8 +44,9 @@ class AuthController extends Controller
 
             if ($vehicleOwnerRegister->validate() && $vehicleOwnerRegister->save())
             {
-                var_dump("Success");
-                return 'Success';
+                Application::$app->session->setFlash('success', 'Registration Successfully!');
+                $response->redirect("/login");
+                exit();
 
             }
             echo '<pre>';
@@ -87,7 +88,7 @@ class AuthController extends Controller
                         $res->redirect('/owner');
                     }
                     else if($body['user_type']=='vehicleowner'){
-                        Application::Redirect('/vehicleOwner/Profile');
+                        Application::Redirect('/vehicleowner/vehicles');
                     }
                     else if($body['user_type']=='driver'){
                         $res->redirect('/driver/driver_profile');

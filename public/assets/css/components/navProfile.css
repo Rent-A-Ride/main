@@ -1,0 +1,29 @@
+.profile-cont {
+    display: inline-flex;
+    align-items: center;
+}
+
+.img-cont {
+    padding: 0 20px;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #FAB84C;
+    border-radius: 50%;
+}
+
+.profile-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: #2f2f2f;
+    background-color: #f6d59f;
+    border: 1px solid #FAB84C;
+    border-radius: 8px;
+    height: fit-content;
+    padding: 1px 4px;
+    margin-left: 10px;
+}

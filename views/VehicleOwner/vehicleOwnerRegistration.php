@@ -27,7 +27,6 @@
                                     class="input-field<?= $model->hasError('NIC') ? ' invalid' : ''?>"
                                     autocomplete="off"
                                     value="<?= $model->thereIsError() ? $model->NIC: ''?>"
-
                             />
                             <label>NIC</label>
                             <span class="form-error"><?= $model->getFirstError('NIC') ?></span>

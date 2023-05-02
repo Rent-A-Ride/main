@@ -18,7 +18,11 @@
 
 
 /* calendar css*/
-@import url('vehicleOwnerBookingCalendar.css');
+@import url('vo_BookingCalendar.css');
+
+
+ /*vehicle info profile css*/
+@import url('vehicleOwnerViewVehicleProfile.css');
 
 
 

@@ -65,7 +65,7 @@ use app\models\vehicle;
                     <div class="table-data"><?= $vehicle->getVehBrand()." ".$vehicle->getVehModel()?></div>
 
                     <div class="table-data">Rs <?= $vehicle->getPrice()?></div>
-                    <div class="table-data"><button onclick="location.href='/VehicleInfo'" class="view-button"><i class='bx bx-show bx-sm'></i> View</button></div>
+                    <div class="table-data"><button onclick="location.href='/vehicleOwner/viewVehicleProfile'" class="view-button"><i class='bx bx-show bx-sm'></i> View</button></div>
 
 
                     <div class="table-data"><button onclick="location.href='/vehicleOwner/UpdateVehicle?id=<?= $vehicle->getVehId()?>'" class="update-doc-button"><i class='bx bx-edit bx-sm'></i> Renew</button></div>

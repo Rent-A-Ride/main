@@ -1,3 +1,7 @@
+<?php
+    use app\core\Application;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +13,9 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- Nav CSS -->
-    <link rel="stylesheet" href="<?php echo \app\core\Application::$ROOT_DIR?>/public/assets/css/main.css">
+    <link rel="stylesheet" href="<?php
+
+    echo \app\core\Application::$ROOT_DIR?>/public/assets/css/main.css">
 
     <title>Rent A Ride</title>
 
@@ -18,6 +24,16 @@
 
 </head>
 <body>
+    <?php if (Application::$app->session->getFlash('success')):?>
+        <div class="flash-message success">
+            <?= Application::$app->session->getFlash('success') ?>
+        </div>
+    <?php endif; ?>
+    <?php if (Application::$app->session->getFlash('error')):?>
+        <div class="flash-message error">
+            <?= Application::$app->session->getFlash('error') ?>
+        </div>
+    <?php endif; ?>
 
     {{content}}
 

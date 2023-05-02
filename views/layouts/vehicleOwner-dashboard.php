@@ -65,7 +65,7 @@ use app\core\Application;
             <span class="tooltip">Profile</span>
         </li>
         <li>
-            <a href="/vehicleowner_vehicle">
+            <a href="/vehicleowner/vehicles">
                 <i class='bx bx-car' ></i>
                 <span class="links_name">Vehicles</span>
             </a>

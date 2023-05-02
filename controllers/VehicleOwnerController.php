@@ -102,25 +102,25 @@ class VehicleOwnerController extends Controller
         }
     }
 
-    public function vehownerVehicleProfile(Request $req, Response $res){
-        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="vehicleowner"){ 
-             
-            $vehicles = new VehicleController();
-            $vehicle=[];
-            $vehicle = $vehicles->viewVehicleProfile($req,$res);
-            // $ownerprofile = new owner();
-            // $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
-//        print_r($vehicle);
-             return $res->render("/VehicleOwner/vehicleOwnerVehicleProfile","vehicleOwner-dashboard",['result'=>$vehicle]);
-        }
-        return $res->render("Home","home");
-    }
+//    public function vehownerVehicleProfile(Request $req, Response $res){
+//        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="vehicleowner"){
+//
+//            $vehicles = new VehicleController();
+//            $vehicle=[];
+//            $vehicle = $vehicles->viewVehicleProfile($req,$res);
+//            // $ownerprofile = new owner();
+//            // $owner_img  = $ownerprofile->owner_img($req->session->get("user_id"));
+////        print_r($vehicle);
+//             return $res->render("/VehicleOwner/vehicleOwnerVehicleProfile","vehicleOwner-dashboard",['result'=>$vehicle]);
+//        }
+//        return $res->render("Home","home");
+//    }
 
     public function vehownerUpdateVehicle(Request $req, Response $res){
         if (Application::$app->session->get("user_role")==="vehicleowner"){
             $veh_ecotest = new ren_ecotest();
-            $veh_insurance = new veh_insurance();
-            $veh_license = new veh_license();
+//            $veh_insurance = new veh_insurance();
+//            $veh_license = new veh_license();
             $id = $req->getBody()['id']??'';
             $vehicle = vehicle::findOne(['veh_Id' => $id]);
             $params = [
@@ -136,7 +136,7 @@ class VehicleOwnerController extends Controller
                  if (isset($_FILES['scan_copy'])) {
                      $file = $_FILES['scan_copy'];
                      $file['name'] = 'vehEco'.$veh_Id.'.'.$file['type'];
-                     $file['name'] = 'vehIns'.$veh_Id.'.'.$file['type'];
+//                     $file['name'] = 'vehIns'.$veh_Id.'.'.$file['type'];
                      $filename = $file['name'];
                      $tmp_name = $file['tmp_name'];
                      $path = Application::$ROOT_DIR.'/public/assets/img/uploads/renewal/eco/' . $filename;
@@ -488,9 +488,16 @@ class VehicleOwnerController extends Controller
     public function bookingCalendar(Request $request,Response $response)
     {
         $this->setLayout("vehicleOwner-dashboard");
-        return $this->render("/VehicleOwner/vehicleOwnerBookingCalendar");
+        return $this->render("/VehicleOwner/vo_bookingCalendar");
     }
 
+//    !!!!!!!!!!!!
+//vehicle owner view vehicle profile to be completed
+    public function viewVehicleProfile(Request $request,Response $response)
+    {
+        $this->setLayout("vehicleOwner-dashboard");
+        return $this->render("/VehicleOwner/vehicleOwnerViewVehicleProfile");
+    }
 
 
 

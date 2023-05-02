@@ -64,7 +64,7 @@ $app->router->get("/viewVehicleowner", [OwnerController::class, "ownerVehicleOwn
 $app->router->get("/viewownerDriver", [OwnerController::class, "ownerDriver"]);
 
 
-$app->router->get("/vehicleowner_vehicle", [VehicleOwnerController::class, "VehicleOwnerVehicle"]);
+$app->router->get("/vehicleowner/vehicles", [VehicleOwnerController::class, "VehicleOwnerVehicle"]);
 
 $app->router->get("/ownerProfile", [OwnerController::class, "ownerProfile"]);
 
@@ -180,7 +180,7 @@ $app->router->get("/Driver/Register", [AuthController::class, 'getDriverRegistra
 $app->router->post("/Driver/Register", [AuthController::class, 'getDriverRegistration']);
 
 
-
+//Buddhi -VO
 
 $app->router->get("/vehicleOwner/Profile", [VehicleOwnerController::class, 'vehownerViewProfile']);
 $app->router->post("/vehicleOwner/Profile", [VehicleOwnerController::class, 'vehownerViewProfile']);
@@ -195,7 +195,7 @@ $app->router->get("/vehicleOwner/Payments", [VehicleOwnerController::class, 'get
 
 $app->router->get("/vehicleOwner/completeAddNewVehicle", [VehicleOwnerController::class, 'completeAddNewVehicle']);
 
-$app->router->get("/vehicleOwner/viewVehicleProfile", [VehicleOwnerController::class, 'vehownerVehicleProfile']);
+//$app->router->get("/vehicleOwner/viewVehicleProfile", [VehicleOwnerController::class, 'vehownerVehicleProfile']);
 
 $app->router->get("/vehicleOwner/UpdateVehicle", [VehicleOwnerController::class, 'vehownerUpdateVehicle']);
 $app->router->post("/vehicleOwner/UpdateVehicle", [VehicleOwnerController::class, 'vehownerUpdateVehicle']);
@@ -207,10 +207,6 @@ $app->router->get("/vehicleOwner/Register", [AuthController::class, 'VO_register
 $app->router->post("/vehicleOwner/Register", [AuthController::class, 'VO_register']);
 $app->router->get("/Customer/ExpieringNotification", [VehicleOwnerController::class, 'expier_notification']);
 
-
-
-
-
 //vehicle owner add new vehicle
 $app->router->get("/vehicleOwner/addNewVehicle", [VehicleOwnerController::class, 'addNewVehicle']);
 $app->router->post("/vehicleOwner/addNewVehicle", [VehicleOwnerController::class, 'addNewVehicle']);
@@ -219,6 +215,8 @@ $app->router->post("/vehicleOwner/addNewVehicle", [VehicleOwnerController::class
 $app->router->get("/vehicleOwner/bookingCalendar", [VehicleOwnerController::class, 'bookingCalendar']);
 
 
+//vehicle owner view vehicle profile
+$app->router->get("/vehicleOwner/viewVehicleProfile", [VehicleOwnerController::class, 'vehownerVehicleProfile']);
 
 $app->run();
 
