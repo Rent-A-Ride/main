@@ -7,7 +7,7 @@
 
 @import url('../components/style.css');
 
-@import url('../admin/admin-vehicle.css');
+/*@import url('../admin/admin-vehicle.css');*/
 
 @import url('vehicleOwnerViewCustomerReq.css');
 @import url('newVOProfile.css');
@@ -58,6 +58,9 @@
 @import url("popupbox/popup.css");
 
 @import url("vehicleOwnerAddNewVehicle.css");
+
+/* Schedule Booking search*/
+@import url('Schedule Bookings/scheduleTable.css');
 
 
 

@@ -15,6 +15,7 @@ use app\models\ren_ecotest;
 use app\models\veh_ecotest;
 use app\models\veh_insurance;
 use app\models\veh_license;
+use app\models\VehBooking;
 use app\models\vehicle;
 use app\models\vehicle_Owner;
 use app\models\VehInfo;
@@ -487,6 +488,16 @@ class VehicleOwnerController extends Controller
 //vehicle owner booking calendar
     public function bookingCalendar(Request $request,Response $response)
     {
+        if ($request->isGet()){
+            if (isset($request->getBody()['search-date'])) {
+                $date = $request->getBody()['search-date'];
+                $booking = VehBooking::findBetweenDates($date);
+
+                return json_encode($booking);
+            }
+
+        }
+
         $this->setLayout("vehicleOwner-dashboard");
         return $this->render("/VehicleOwner/vo_bookingCalendar");
     }

@@ -213,6 +213,7 @@ $app->router->post("/vehicleOwner/addNewVehicle", [VehicleOwnerController::class
 
 //vehicle owner booking calendar
 $app->router->get("/vehicleOwner/bookingCalendar", [VehicleOwnerController::class, 'bookingCalendar']);
+$app->router->post("/vehicleOwner/bookingCalendar", [VehicleOwnerController::class, 'bookingCalendar']);
 
 
 //vehicle owner view vehicle profile
