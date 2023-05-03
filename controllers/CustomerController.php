@@ -12,7 +12,10 @@ use app\models\Customer;
 use app\models\veh_Reviews;
 use app\models\VehBooking;
 use app\models\cusVehicle;
+use app\models\vehicle;
+use app\models\vehicle_Owner;
 use app\models\VehInfo;
+use app\models\vehOwner_complaints;
 
 class CustomerController extends Controller
 {
@@ -304,6 +307,118 @@ class CustomerController extends Controller
             ]);
         }
         return $response->redirect('/Customer/VehicleBookingTable');
+    }
+
+    public function customerPayment(Request $request, Response $response)
+    {
+        $this->setLayout('customer-dashboard');
+        return $this->render('Customer/v_customerPay');
+    }
+
+    public function customerComplaint(Request $request, Response $response)
+    {
+        $cusId = Application::$app->user->cus_Id;
+
+        $bookings = VehBooking::retrieveAll(['cus_Id' => $cusId]);
+
+        $vehOwners = [];
+
+        foreach ($bookings as $booking) {
+            $vehOwners[$booking->getVoId()] = vehicle_Owner::findOne(['vo_Id' => $booking->getVoId()]);
+        }
+
+        $vehOwners = array_filter($vehOwners, function($value) {
+            return !is_bool($value);
+        });
+
+        $vehicles = [];
+
+        foreach ($bookings as $booking) {
+            $vehicles[$booking->getVehId()] = vehicle::findOne(['veh_Id' => $booking->getVehId()]);
+        }
+
+        $vehicles = array_filter($vehicles, function($value) {
+            return !is_bool($value);
+        });
+
+
+
+//        $drivers = [];
+//        foreach ($bookings as $booking) {
+//            if ($booking->getDriverId() != null){
+//                $drivers[$booking->getDriverId()] = Driver::findOne(['driver_Id' => $booking->getDriverId()]);
+//            }
+//
+//        }
+
+
+
+//        echo '<pre>';
+//        var_dump($vehicles);
+//        echo '</pre>';
+//        exit();
+
+
+        if ($request->isPost()){
+            if ($request->getBody()["complaint-about"] === 'vehicle-owner') {
+                $complaint = new vehOwner_complaints();
+                $complaint->setCid(uniqid(true));
+                $complaint->setCusId($cusId);
+                $complaint->loadData($request->getBody());
+                $complaint->setComplaint(trim($request->getBody()['complaint']));
+
+                if (isset($_FILES['images'])) {
+                    $fileCount = count($_FILES['images']['name']);
+                    $uploadDir = Application::$ROOT_DIR.'/public/assets/img/uploads/customer-complaints/';
+
+                    for ($i = 0; $i < $fileCount; $i++) {
+                        $fileName = uniqid() . '-' . $_FILES['images']['name'][$i];
+                        $uploadFile = $uploadDir . $fileName;
+
+                        if (move_uploaded_file($_FILES['images']['tmp_name'][$i], $uploadFile)) {
+                            if ($i === 0) {
+                                $complaint->setImage1($fileName);
+                            } else if ($i === 1) {
+                                $complaint->setImage2($fileName);
+                            } else if ($i === 2) {
+                                $complaint->setImage3($fileName);
+                            }
+                        } else {
+                            die('File was not uploaded.');
+                        }
+                    }
+                }
+
+                echo '<pre>';
+                var_dump($complaint);
+                echo '</pre>';
+                exit();
+
+
+
+                if ($complaint->save()) {
+                    Application::$app->session->setFlash('success', 'Complaint sent successfully!');
+                    $response->redirect('/Customer/Complaints');
+                    return;
+                }
+            }
+        }
+
+//        if ($request->isGet()){
+//            echo '<pre>';
+//            var_dump($request->getBody());
+//            echo '</pre>';
+//            exit();
+//        }
+
+        $params = [
+            'bookings' => $bookings,
+            'vehOwners' => $vehOwners,
+            'vehicles' => $vehicles
+        ];
+
+        $this->setLayout('customer-dashboard');
+        return $this->render('Customer/v_customerComplaints', $params);
     }
 
     /**

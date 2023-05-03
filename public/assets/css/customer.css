@@ -34,8 +34,14 @@
 /* Customer Booking Table */
 @import url(customer/cusBookingTable/thisStyle.css);
 
+/* Customer Payment */
+@import url(customer/customerPay/backButtons.css);
+
 /* Customer Settings */
 @import url(customer/cusSettings/settings.css);
+
+/* Customer Complaints */
+@import url(customer/cusComplaints/cusComplaints.css);
 
 /* Errors */
 @import url(registerForm.css);
