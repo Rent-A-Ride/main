@@ -48,6 +48,11 @@
     width: 60px;
     height: 34px;
   }
+
+.center {
+    display: flex;
+    justify-content: center;
+}
   
   .switch input {
     opacity: 0;
@@ -78,16 +83,25 @@
     -webkit-transition: .4s;
     transition: .4s;
   }
+
+label.switch input[type="checkbox"]:checked + span {
+    background-color: #ec9844;
+}
+
+
+.slider.round.yes {
+      background-color: #bebebe;
+  }
   
-  input:checked + .slider {
+  .booking-section input:checked + .booking-section.slider {
     background-color: #ffc66bd9;
   }
   
-  input:focus + .slider {
+  .booking-section input:focus + .booking-section.slider {
     box-shadow: 0 0 1px #a58045;
   }
   
-  input:checked + .slider:before {
+  .booking-section input:checked + .slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
@@ -101,7 +115,7 @@
     border-radius: 50%;
   }
 
-  select, input {
+  .switch select, .switch input {
     width: 65%;
     padding: 4px 12px;
     margin: 6px 2px;
@@ -186,6 +200,16 @@
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
+}
+
+.input-field-booking {
+    width: min-content;
+    color: rgba(0, 0, 0, 0.717);
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 8px;
 }
 
 @media (min-width: 768px) {

@@ -1,3 +1,5 @@
+@import "cancelModal.css";
+
 /* Table */
 .table-wrapper {
   max-width: 100%;
@@ -179,6 +181,7 @@
   background: transparent;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .booking-info {
@@ -220,12 +223,13 @@
 }
 
 .driver-image {
+  width: 100px;
   flex: 0 0 30%;
   margin-right: 20px;
 }
 
 .driver-image img {
-  max-width: 100%;
+  max-width: 75px;
   height: auto;
   border-radius: 50%;
 }

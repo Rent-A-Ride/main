@@ -36,6 +36,7 @@ body {
     padding-top: 10px;
     padding-right: 20px;
     display: flex;
+    /*align-items: center;*/
     justify-content: right;
     transition: 0.8s;
 }

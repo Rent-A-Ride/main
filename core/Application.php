@@ -30,7 +30,7 @@ class Application
     public ?driver $driver;
     public ?vehicle_Owner $vehicleowner;
     public ?owner $owner;
-    public ?dbModel $user;
+    public ?dbModel $user = null;
 
     
 
@@ -39,6 +39,14 @@ class Application
     public static function isGuest(): bool
     {
         return !self::$app->user;
+    }
+
+    public static function whoIsThis(): string
+    {
+        if(self::$app->user){
+            return self::$app->user->tableName();
+        }
+        return "Guest";
     }
 
     public static function Redirect($path): void
@@ -99,14 +107,14 @@ class Application
         elseif ($userType === 'driver'){
             if ($primaryValue) {
                 $primaryKey = $this->driverClass::primaryKey();
-                $this->user = $this->driverClass::findOne([$primaryKey => $primaryValue ]);
+                $this->user = $this->driverClass::findOne([$primaryKey => $primaryValue]);
             } else {
                 $this->user = null;
             }
         }elseif ($userType === 'owner'){
             if ($primaryValue) {
                 $primaryKey = $this->ownerClass::primaryKey();
-                $this->user = $this->ownerClass::findOne([$primaryKey => $primaryValue ]);
+                $this->user = $this->ownerClass::findOne([$primaryKey => $primaryValue]);
             } else {
                 $this->user = null;
             }
@@ -121,11 +129,8 @@ class Application
             echo $this->router->resolve();
         }catch (\Exception $e) {
 
-
-            if (is_int($e->getCode())) {
+            if (is_int($e->getCode())){
                 $this->response->setStatusCode($e->getCode());
-            } else {
-                $this->response->setStatusCode(500);
             }
             echo $this->router->renderView('_error', [
                 'exception' => $e
@@ -162,7 +167,11 @@ class Application
     public function logout()
     {
         $this->user = null;
+
         $this->session->remove('user');
+        $this->session->remove('user_role');
+        $this->session->remove('authenticated');
+        session_regenerate_id(true);
     }
 
 

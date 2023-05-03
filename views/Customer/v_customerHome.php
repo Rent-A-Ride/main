@@ -1,5 +1,9 @@
 <?php
 /*  @var $row \app\models\cusVehicle*/
+/* @var $ratings veh_Reviews */
+
+use app\models\veh_Reviews;
+
 ?>
 
 <!-- SEARCH -->
@@ -43,17 +47,45 @@
         <div class="table-content" >
             <?php
             foreach ($model as $row):
+
                 ?>
                 <div class="table-row <?=$row->getVehType()?>">
 
-                    <div class="table-data"><img src="<?= $row->getFrontView()?>" width="56px"></div>
+                    <div class="table-data"><img src="/assets/img/vehicle/<?= $row->getFrontView()?>" width="56px"></div>
                     <div class="table-data"><?= $row->getVehBrand().' '.$row->getVehModel() ?></div>
                     <div class="table-data">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
+                        <form class="rating-widget" data-rating="<?= $row->getTotalRatings($row->getVehId())?>">
+                            <input disabled type="checkbox" class="star-input" id="1" />
+                            <label class="star-input-label" for="1">
+                                1
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star orange"></i>
+                            </label>
+                            <input disabled type="checkbox" class="star-input" id="2" />
+                            <label class="star-input-label" for="2">
+                                2
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star orange"></i>
+                            </label>
+                            <input disabled type="checkbox" class="star-input" id="3" />
+                            <label class="star-input-label" for="3">
+                                3
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star orange"></i>
+                            </label>
+                            <input disabled type="checkbox" class="star-input" id="4" />
+                            <label class="star-input-label" for="4">
+                                4
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star orange"></i>
+                            </label>
+                            <input disabled type="checkbox" class="star-input" id="5" />
+                            <label class="star-input-label" for="5">
+                                5
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star orange"></i>
+                            </label>
+                        </form>
                     </div>
                     <div class="table-data"><?= $row->getVehLocation()?></div>
                     <div class="table-data">Rs <?= $row->getPrice().'.00' ?></div>

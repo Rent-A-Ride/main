@@ -129,6 +129,52 @@ abstract class dbModel extends Model
         return $statement->fetchAll(\PDO::FETCH_CLASS, static::class);
     }
 
+    public function delete(): bool
+    {
+        $tableName = static::tableName();
+        $primaryKey = static::primaryKey();
+
+        $statement = self::prepare("DELETE FROM $tableName WHERE $primaryKey = :id");
+        $statement->bindValue(':id', $this->{$primaryKey});
+
+        $statement->execute();
+
+        return true;
+    }
+
+     public function deleteOne($id): bool
+     {
+         $tableName = static::tableName();
+         $primaryKey = static::primaryKey();
+
+         $statement = self::prepare("DELETE FROM $tableName WHERE $primaryKey = :id");
+         $statement->bindValue(':id', $id);
+
+         $statement->execute();
+         return true;
+     }
+
+    public static function sumColumn($column, $where = [])
+    {
+        $tableName = static::tableName();
+        $statement = '';
+
+        if (empty($where)) {
+            $statement = self::prepare("SELECT SUM($column) FROM $tableName");
+        } else {
+            $attributes = array_keys($where);
+            $sql = implode("AND ", array_map(fn($attr) => "$attr = :$attr", $attributes));
+            $statement = self::prepare("SELECT SUM($column) FROM $tableName WHERE $sql");
+            foreach ($where as $key => $item) {
+                $statement->bindValue(":$key", $item);
+            }
+        }
+
+        $statement->execute();
+        return $statement->fetchColumn();
+    }
+
+
     public static function prepare($sql)
     {
         return Application::$app->db->pdo->prepare($sql);

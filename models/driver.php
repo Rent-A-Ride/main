@@ -9,7 +9,6 @@ use app\core\Database;
 use app\core\dbModel;
 
 
-
 class driver extends dbModel
 {
 
@@ -344,5 +343,9 @@ class driver extends dbModel
         $this->password = $password;
     }
 
+    public function getdriverCount(){
+        return Application::$app->db->pdo->query("SELECT COUNT(driver_ID) As driver_count FROM driver")->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    
 
 }

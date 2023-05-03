@@ -23,6 +23,8 @@ use app\core\Application; ?>
 
     <!-- JQUERY -->
     <script src="/assets/javascript/component/jquery-3.6.3.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 </head>
 <body>
@@ -109,14 +111,47 @@ use app\core\Application; ?>
             <a href=""><img class="logo" src="/assets/img/logo.png" alt="Rent a Ride Logo"></a>
         </div>
         <ul class="nav-list" id="nav-list">
+            <div class="notification-cont">
+                <div class="notification-icon">
+                    <i class='bx bxs-bell'></i>
+                    <span class="notification-count">0</span>
+                </div>
+
+                <div class="notification-panel">
+                    <div class="notification-header">
+                        <h3>Notifications</h3>
+                        <button class="close-btn">&times;</button>
+                    </div>
+
+                    <ul class="notification-list">
+<!--                        <li><a href="#">New message from John</a></li>-->
+<!--                        <li><a href="#">You have 3 new emails</a></li>-->
+<!--                        <li><a href="#">Today's weather forecast</a></li>-->
+<!--                        <li><a href="#">Upcoming event reminder</a></li>-->
+<!--                        <li><a href="#">New product release</a></li>-->
+                    </ul>
+                </div>
+
+
+            </div>
             <!-- <li class="list-item 1"><a href="#">Sign in</a></li>
             <li class="list-item 2"><a href="#">Register</a></li>       -->
             <div class="profile-cont">
                 <span class="profile-name"><?= Application::$app->user->displayName(); ?></span>
                 <div class="img-cont"><img src="/assets/img/uploads/userProfile/<?= Application::$app->user->userprofile('profile_pic')?>" class="profile-image"></div>
+
+                <div class="profile-menu" style="display: none;">
+                    <a href="/Customer/Profile">My Profile</a>
+                    <a href="/Customer/Settings">Settings</a>
+                    <a href="/logout">Logout</a>
+                </div>
+
             </div>
 
+
+
         </ul>
+
         <div id="toggle-btn" class="menu-container" onclick="myFunction(this)">
             <div class="bar1"></div>
             <div class="bar2"></div>
@@ -140,7 +175,7 @@ use app\core\Application; ?>
     <?php endif; ?>
 
     <div class="banner-msg">
-        <h1>FAST AND EASY WAY TO <span class="bold yellow">RENT A VEHICLE</span></h1>
+        <h1 id="animation-1">FAST AND EASY WAY TO <span class="bold yellow">RENT A VEHICLE</span></h1>
     </div>
 
     {{content}}
@@ -149,11 +184,59 @@ use app\core\Application; ?>
 
 
 </body>
-<script src="/assets/javascript/components/navbar.js"></script>
-<script src="/assets/javascript/components/sidebar.js"></script>
+<script>
+    let notificationIcon = document.querySelector('.notification-icon');
+    let notificationPanel = document.querySelector('.notification-panel');
+    let closeBtn8 = document.querySelector('.close-btn');
+
+    notificationIcon.addEventListener('click', () => {
+        notificationPanel.classList.toggle('active');
+    });
+
+    closeBtn8.addEventListener('click', () => {
+        notificationPanel.classList.remove('active');
+    });
+
+
+    // Function to get notifications using Ajax
+    function getNotifications() {
+        $.ajax({
+            url: '/notifications',
+            method: 'POST',
+            dataType: 'json',
+            success: function(response) {
+                $('.notification-list').empty(); // Clear existing notifications
+
+                // Loop through notifications and add them to the UI
+                $.each(response, function(index, notification) {
+                    const notificationElement = $('<li><a href="#">' + notification.message + '</a></li>');
+                    $('.notification-list').append(notificationElement);
+                });
+            },
+            error: function(xhr, status, error) {
+                console.log('Error getting notifications: ' + error);
+            }
+        });
+    }
+
+    // Call getNotifications() function on page load
+    $(document).ready(function() {
+        getNotifications();
+    });
+
+    // Call getNotifications() function every 10 seconds
+    setInterval(function() {
+        getNotifications();
+    }, 10000);
+</script>
+
+<script src="/assets/javascript/component/navbar.js"></script>
+<script src="/assets/javascript/customer/components/notifications.js"></script>
+<script src="/assets/javascript/component/sidebar.js"></script>
 <script src="/assets/javascript/customer/components/search.js"></script>
 <script src="/assets/javascript/customer/components/details.js"></script>
 <script src="/assets/javascript/customer/components/booking.js"></script>
 <script src="/assets/javascript/customer/components/profile.js"></script>
 <script src="/assets/javascript/customer/components/date-validation.js"></script>
+<script src="/assets/javascript/customer/components/ratings.js"></script>
 </html>

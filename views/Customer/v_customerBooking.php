@@ -16,7 +16,7 @@ use app\models\cusVehicle;
                 <div id="gallery2">
                     <div class="row">
                         <div class="large-image small">
-                            <img class="small" src="<?= $vehicle->getFrontView() ?>>">
+                            <img class="small" src="/assets/img/vehicle/<?= $vehicle->getFrontView() ?>">
                         </div>
                     </div>
                 </div>
@@ -85,6 +85,57 @@ use app\models\cusVehicle;
 
 
         </div>
+        <div class="booking-section">
+            <section id="self-drive" class="sub-section">
+                <h4>Self Drive</h4>
+                <div class="space-evenly">
+                    <p>Do you want to self-drive?</p>
+                    <label class="switch">
+                        <input name="selfDriveReq" id="checkSelf" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </section>
+
+            <section class="add-driver" id="self-drive-terms" style="display: none">
+                <h4>Self Drive Terms</h4>
+                <div class="center">
+                    <div class="form-group">
+                        <label for="licenseNumber">Enter your driving license number:</label>
+                        <input type="text" name="licenseNumber" id="licenseNumber" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="expireDate">Enter the expiration date:</label>
+                        <input type="date" name="expireDate" id="expireDate" class="form-control">
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#self-drive-modal">
+                    View Self Drive Terms
+                </button>
+            </section>
+        </div>
+
+        <!-- Modal -->
+<!--        <div class="modal fade" id="self-drive-modal" tabindex="-1" role="dialog" aria-labelledby="self-drive-modal-label" aria-hidden="true">-->
+<!--            <div class="modal-dialog modal-dialog-centered" role="document">-->
+<!--                <div class="modal-content">-->
+<!--                    <div class="modal-header">-->
+<!--                        <h5 class="modal-title" id="self-drive-modal-label">Self Drive Terms and Conditions</h5>-->
+<!--                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                            <span aria-hidden="true">&times;</span>-->
+<!--                        </button>-->
+<!--                    </div>-->
+<!--                    <div class="modal-body">-->
+<!--                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in libero euismod, aliquet dolor eu, mattis est. Nullam dictum, dolor sed maximus tempus, purus mi gravida massa, et finibus ipsum risus vel nulla. Duis id ligula purus. Nam ut nibh vel enim tincidunt malesuada. Donec in risus ut tellus malesuada lacinia. Praesent vehicula laoreet vestibulum. Ut porttitor libero ac eros dignissim, eu sollicitudin velit molestie. Ut a ipsum justo. Nam ac massa sapien. Ut hendrerit, nisi eu molestie volutpat, orci metus aliquam sapien, nec euismod arcu elit et dui.</p>-->
+<!--                    </div>-->
+<!--                    <div class="modal-footer">-->
+<!--                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
 
         <div class="booking-section">
             <section id="need-driver" class="sub-section">

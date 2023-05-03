@@ -242,5 +242,23 @@ class cusVehicle extends dbModel
         $this->side_view = $side_view;
     }
 
+    public function getTotalRatings($veh_Id)
+    {
+        $reviews = veh_Reviews::retrieveAll(['veh_Id' => $veh_Id]);
+
+//        echo '<pre>';
+//        var_dump($reviews);
+//        echo '</pre>';
+//        exit();
+        $totalRatings = 0.0;
+
+        foreach ($reviews as $review) {
+            if (!empty($review)){
+                $totalRatings += $review->getRating();
+            }
+        }
+        return $totalRatings;
+    }
+
 
 }

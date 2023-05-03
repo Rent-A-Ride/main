@@ -20,8 +20,10 @@
         <div class="admin_overView-card admin_overView-card_1 ">
             <canvas id="myChart" ></canvas>
         </div>
-        <div class="admin_overView-card"></div>
+        <div class="admin_overView-card">
+            
+        </div>
         <!-- <div class="admin_overView-card"></div> -->
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-    <script src="assets/javascript/adminOverview.js"></script>
+    <script src="/assets/javascript/adminOverview.js"></script>

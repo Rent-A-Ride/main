@@ -1,4 +1,8 @@
 <?php
+/** @var $customer Customer */
+
+use app\models\Customer;
+
 ?>
 <h1 class="page-title"><i class='bx bxs-cog' ></i> Settings</h1>
 <hr>
@@ -8,17 +12,30 @@
     <h2>Change Password</h2>
 
     <!--    Change Password -->
-    <form>
-        <label for="current-password">Current Password:</label>
-        <input type="password" id="current-password" name="current-password" required>
+    <form method="post" class="form-container">
+        <input name="mode" value="change-password" hidden>
+        <input type="email" name="email" value="<?= $customer->getEmail();?>" hidden>
 
-        <label for="new-password">New Password:</label>
-        <input type="password" id="new-password" name="new-password" required>
+        <div class="form-group">
+            <label for="current-password">Current Password:</label>
+            <input type="password" id="current-password" name="current-password" required>
+        </div>
 
-        <label for="confirm-password">Confirm Password:</label>
-        <input type="password" id="confirm-password" name="confirm-password" required>
+        <div class="form-group">
+            <label for="new-password">New Password:</label>
+            <input type="password" id="new-password" name="new-password" required>
+            <span class="form-error2"><?= $customer->getFirstError('password')?></span>
+        </div>
 
-        <button type="submit">Change Password</button>
+        <div class="form-group">
+            <label for="confirm-password">Confirm Password:</label>
+            <input type="password" id="confirm-password" name="confirm-password" required>
+        </div>
+
+        <span class="form-error2"><?= $customer->getFirstError('change-password')?></span>
+
+        <button type="submit" class="btn btn-primary">Change Password</button>
+
     </form>
 </div>
 
