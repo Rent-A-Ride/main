@@ -16,6 +16,7 @@ use app\models\owner;
 use app\models\user;
 use app\models\vehicle_Owner;
 use app\models\vehicleowner;
+use app\models\vehicleOwnerRegister;
 
 class AuthController extends Controller
 {
@@ -29,26 +30,42 @@ class AuthController extends Controller
     //     return $res->render('login','main_1');
     // }
 
-//    public function register(Request $request)
-//    {
-//        $registerModel = new RegisterModel();
-//        if ($request->isPost()){
-//
-//            $registerModel->loadData($request->getBody());
-//
-//            if ($registerModel->validate() && $registerModel->register()){
-//                return 'Success';
-//            }
-//
-//            return $this->render('register', [
-//                'model' => $registerModel
-//            ]);
-//        }
-//        $this->setLayout('auth');
-//        return $this->render('register', [
-//            'model' => $registerModel
-//        ]);
-//    }
+    public function VO_register(Request $request, Response $response)
+    {
+        $vehicleOwnerRegister = new vehicleowner();
+
+        if ($request->isPost())
+        {
+            $vehicleOwnerRegister->loadData($request->getBody());
+//            echo '<pre>';
+//            var_dump($vehicleOwnerRegister);
+//            echo '</pre>';
+//            exit();
+
+            if ($vehicleOwnerRegister->validate() && $vehicleOwnerRegister->save())
+            {
+                Application::$app->session->setFlash('success', 'Registration Successfully!');
+                $response->redirect("/login");
+                exit();
+
+            }
+            echo '<pre>';
+            var_dump($vehicleOwnerRegister->errors);
+            echo '</pre>';
+            exit();
+
+            $this->setLayout('authVO');
+            return $this->render('VehicleOwner/vehicleOwnerRegistration', [
+                'model' => new vehicleOwnerRegister()
+            ]);
+        }
+
+            $this->setLayout('authVO');
+            return $this->render('VehicleOwner/vehicleOwnerRegistration', [
+                'model' => new vehicleOwnerRegister()
+            ]);
+    }
+
 
 
 
@@ -71,7 +88,7 @@ class AuthController extends Controller
                         $res->redirect('/owner');
                     }
                     else if($body['user_type']=='vehicleowner'){
-                        Application::Redirect('/vehicleOwner/Profile');
+                        Application::Redirect('/vehicleowner/vehicles');
                     }
                     else if($body['user_type']=='driver'){
                         $res->redirect('/driver/driver_profile');

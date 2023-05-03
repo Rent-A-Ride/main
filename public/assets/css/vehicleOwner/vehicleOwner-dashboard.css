@@ -7,14 +7,27 @@
 
 @import url('../components/style.css');
 
-@import url('../admin/admin-vehicle.css');
+/*@import url('../admin/admin-vehicle.css');*/
 
 @import url('vehicleOwnerViewCustomerReq.css');
 @import url('newVOProfile.css');
 
+/*vehicle dashboard*/
+@import url('vehicles/vehicleTable.css');
+@import url('vehicles/vehicleSearch.css');
 
 
-/* @import url('vehowner_addVehicle.css'); */
+/* calendar css*/
+@import url('vo_BookingCalendar.css');
+
+
+ /*vehicle info profile css*/
+@import url('vehicleOwnerViewVehicleProfile.css');
+
+
+
+
+ /*@import url('vehowner_addVehicle.css');*/
 @import url('vehowner_addVehicle.css');
 /*@import "../admin/ownerViewVehicleProfile.css";*/
 
@@ -43,6 +56,11 @@
 @import url("popupbox/popupbox.css");
 
 @import url("popupbox/popup.css");
+
+@import url("vehicleOwnerAddNewVehicle.css");
+
+/* Schedule Booking search*/
+@import url('Schedule Bookings/scheduleTable.css');
 
 
 

@@ -13,7 +13,7 @@ use app\models\veh_Reviews;
     <div class="location-select">
         <select id="location" name="location">
             <option value="" disabled selected hidden>location</option>
-            <option value="Galcd pule">Galle</option>
+            <option value="Galle">Galle</option>
             <option value="Negombo">Negombo</option>
             <option value="Mathale">Mathale</option>
             <option value="Kandy">Kandy</option>
@@ -95,6 +95,51 @@ use app\models\veh_Reviews;
             <?php
             endforeach;
             ?>
+            <!--            <div class="table-row scooter">-->
+            <!--                <div class="table-data"><img src="assets/img/cusHome/table/scooter.jpg" width="56px"></div>-->
+            <!--                <div class="table-data">Wego</div>-->
+            <!--                <div class="table-data">-->
+            <!--                    <span class="fa fa-star checked"></span>-->
+            <!--                    <span class="fa fa-star checked"></span>-->
+            <!--                    <span class="fa fa-star checked"></span>-->
+            <!--                    <span class="fa fa-star checked"></span>-->
+            <!--                    <span class="fa fa-star"></span>-->
+            <!--                </div>-->
+            <!--                <div class="table-data">Negombo</div>-->
+            <!--                <div class="table-data">Rs 4500.00</div>-->
+            <!--                <div class="table-data"><button onclick="location.href='/VehicleInfo'" class="view-button"><i class='bx bx-show'></i> View</button></div>-->
+            <!--                <div class="table-data"><button onclick="location.href='/VehicleBooking'" class="book-button"><i class='bx bx-book-add'></i> Book</button></div>-->
+            <!--            </div>-->
+            <!--            <div class="table-row scooter">-->
+            <!--                <div class="table-data"><img src="assets/img/cusHome/table/scooter1.jpg" width="56px"></div>-->
+            <!--                <div class="table-data">Scooty pep</div>-->
+            <!--                <div class="table-data">-->
+            <!--                    <span class="fa fa-star checked"></span>-->
+            <!--                    <span class="fa fa-star checked"></span>-->
+            <!--                    <span class="fa fa-star "></span>-->
+            <!--                    <span class="fa fa-star"></span>-->
+            <!--                    <span class="fa fa-star"></span>-->
+            <!--                </div>-->
+            <!--                <div class="table-data">Mathale</div>-->
+            <!--                <div class="table-data">Rs 5500.00</div>-->
+            <!--                <div class="table-data"><button onclick="location.href='/VehicleInfo'" class="view-button"><i class='bx bx-show'></i> View</button></div>-->
+            <!--                <div class="table-data"><button onclick="location.href='/VehicleBooking'" class="book-button" onclick="location.href='/VehicleBooking'"><i class='bx bx-book-add'></i> Book</button></div>-->
+            <!--            </div>-->
+            <!--            <div class="table-row cars">-->
+            <!--                <div class="table-data"><img src="assets/img/cusHome/table/scooter2.jpg" width="56px"></div>-->
+            <!--                <div class="table-data">Toyota Prius</div>-->
+            <!--                <div class="table-data">-->
+            <!--                    <span class="fa fa-star checked"></span>-->
+            <!--                    <span class="fa fa-star checked"></span>-->
+            <!--                    <span class="fa fa-star "></span>-->
+            <!--                    <span class="fa fa-star"></span>-->
+            <!--                    <span class="fa fa-star"></span>-->
+            <!--                </div>-->
+            <!--                <div class="table-data">Kandy</div>-->
+            <!--                <div class="table-data">Rs 25000.00</div>-->
+            <!--                <div class="table-data"><button onclick="location.href='/VehicleInfo'" class="view-button"><i class='bx bx-show'></i> View</button></div>-->
+            <!--                <div class="table-data"><button onclick="location.href='/VehicleBooking'" class="book-button"><i class='bx bx-book-add'></i> Book</button></div>-->
+            <!--            </div>-->
         </div>
     </div>
 </div>

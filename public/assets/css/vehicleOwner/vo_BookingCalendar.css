@@ -1,0 +1,72 @@
+.date-search-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    align_items: center;
+}
+.date-search {
+    width: 50%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.date-label {
+    font-size: 22px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.date-input-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+.date-input-container input[type="date"] {
+    width: 70%;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 10px 15px;
+    margin-right: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.date-input-container button[type="submit"] {
+    cursor: pointer;
+    text-align: center;
+    background-color: #f3bb21;
+    border: none;
+    border-radius: 50%;
+    padding:10px 12px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.date-input-container button[type="submit"]:hover {
+    background-color: #1abc9c;
+}
+
+@media (max-width: 768px) {
+    .date-search {
+        padding: 10px;
+    }
+
+    .date-input-container input[type="date"] {
+        width: 60%;
+    }
+
+    .date-input-container button[type="submit"] {
+        padding: 10px 15px;
+    }
+}

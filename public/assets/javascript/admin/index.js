@@ -17,10 +17,16 @@ import "./driver_disable.js"
 import "./accept_vehicle.js"
 import "./accept_vehicleowner.js"
 import "./enable vehicle.js"
+<<<<<<< HEAD
+import "./table.js"
+import "./update_vehiclelin.js"
+import "./update_vehicleins.js"
+=======
 import "./payment_confirm.js"
 import "./table.js"
 import "./update_vehiclelin.js"
 import "./update_vehicleins.js"
 
 
+>>>>>>> a3b4b81b7c9a1d231e73039103cc514f02c2c7fc
 // import "./enable vehicle.js"

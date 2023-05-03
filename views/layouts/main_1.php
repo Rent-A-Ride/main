@@ -1,3 +1,7 @@
+<?php
+    use app\core\Application;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,9 +13,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- Nav CSS -->
-    <link rel="stylesheet" href="<?php use app\core\Application;
-
-    echo \app\core\Application::$ROOT_DIR?>/public/assets/css/main.css">
+    <link rel="stylesheet" href="<?php echo \app\core\Application::$ROOT_DIR?>/public/assets/css/main.css">
 
     <title>Rent A Ride</title>
 
