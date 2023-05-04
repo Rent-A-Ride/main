@@ -163,6 +163,17 @@
             </a>
             <span class="tooltip">Payment</span>
         </li>
+        <li class="<?php 
+        if($function=='Settings'){
+            echo ('active');
+        }
+        ?>">
+            <a href="/admin/Settings">
+                <i class="fa-solid fa-gear"></i>
+                <span class="links_name">Settings</span>
+            </a>
+            <span class="tooltip">Settings</span>
+        </li>
         
 
         <li class="profile">
@@ -192,7 +203,7 @@
                 <div class="img-cont"><img src="/assets/img/user_profile/<?= Application::$app->user->userprofile('profile_pic')?>" class="profile-image"></div>
                 <div class="profile-menu" style="display: none;">
                     <a href="/ownerProfile">My Profile</a>
-                    <a href="/Customer/Settings">Settings</a>
+                    <a href="/admin/Settings">Settings</a>
                     <a href="/logout">Logout</a>
                 </div>
             </div>
@@ -204,7 +215,11 @@
             <div class="bar3"></div>
         </div>
     </nav>
-   
+    <?php if (Application::$app->session->getFlash('profileUpdate')):?>
+        <div class="flash-message success">
+            <?= Application::$app->session->getFlash('profileUpdate') ?>
+        </div>
+    <?php endif; ?>
 
     <!-- <div class="banner-msg">
         <h1>FAST AND EASY WAY TO <span class="bold yellow">RENT A VEHICLE</span></h1>

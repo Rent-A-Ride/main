@@ -71,7 +71,7 @@ margin-top: 19px;
 .days li.inactive{
 color: #aaa;
 }
-.days li.active{
+.days li.active1{
 color: #fff;
 }
 .days li::before{
@@ -85,9 +85,9 @@ z-index: -1;
 border-radius: 50%;
 transform: translate(-50%, -50%);
 }
-.days li.active::before{
+.days li.active1::before{
 background: #44585e;
 }
-.days li:not(.active):hover::before{
+.days li:not(.active1):hover::before{
 background: #f2f2f2;
 }

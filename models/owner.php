@@ -150,6 +150,61 @@ class owner extends dbModel
         
         $statement1->execute();
     }
+
+    public function update_password($body){
+        $errors=$this->validate_password($body);
+        if (empty($errors)) {
+            $new_password=password_hash($body['new_password'], PASSWORD_DEFAULT);
+            $email=$body['email'];
+            
+            $query1="UPDATE `owner` SET `password`=:passcode WHERE email=:email";
+            $statement1= Application::$app->db->prepare($query1);
+            $statement1->bindValue(":passcode",$new_password);
+            $statement1->bindValue(":email",$email);
+            $statement1->execute();
+            return true;
+        }
+        else {
+            return $errors;
+        }
+
+    }
+
+    public function validate_password($body)
+    {
+        $errors=[];
+        $current_password=$body['current_password'];
+        $new_password=$body['new_password'];
+        if (strlen($body['current_password'])==0) {
+           $errors['current_password']="Please Enter Current Password";
+        }
+        if (strlen($body['new_password'])==0) {
+            $errors['new_password']="Please Enter New Password";
+        }
+        if (strlen($body['confirm_password'])==0) {
+            $errors['confirm_password']="Please Enter Confirm Password";
+        }
+        $recent_password=Application::$app->db->pdo->query("SELECT * FROM  owner")->fetchAll(\PDO::FETCH_ASSOC);
+        $recent_password=$recent_password[0]['password'];
+        if (!password_verify($body['current_password'], $recent_password)) {
+            $errors['current_password']="Please Enter Correct Recent Password";
+        }
+        if ($body['new_password']!=$body['confirm_password']) {
+            $errors['confirm_password']="New password miss match with confirm password";
+        }
+        $pattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/';
+        if (!preg_match($pattern, $new_password)) {
+            $errors['new_password']="Your password must be exists minimum 1 uppercase letter 1 lowercase letter and special character";
+        }
+        if (strlen($body['new_password'])<8) {
+            $errors['new_password']="Your password length must be grater than 8";
+        }
+        if (strlen($body['new_password'])>64) {
+            $errors['new_password']="Your password length must be lesser than 64";
+        }
+        return $errors;
+         
+    }
     
 
 
