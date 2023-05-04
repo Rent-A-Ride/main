@@ -19,8 +19,9 @@
     <link rel="stylesheet" href="/assets/css/admin/admin-dashboard.css">
 
     <!-- JQUERY -->
-    <script src="assets/javascript/jquery-3.6.3.min.js"></script>
+    <script src="/assets/javascript/component/jquery-3.6.3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
 </head>
 <body>
 
@@ -130,26 +131,15 @@
             <span class="tooltip">view Driver</span>
         </li>
         <li class="<?php 
-        if($function=='vehiclecomplaint'){
+        if($function=='complaint'){
             echo ('active');
         }
         ?>">
             <a href="/admin/vehicleComplaint">
                 <i class="fa-sharp fa-regular fa-comment"></i>
-                <span class="links_name">Vehicle Complaint</span>
+                <span class="links_name">Complaint</span>
             </a>
-            <span class="tooltip">Complaint Regarding Vehicles</span>
-        </li>
-        <li class="<?php 
-        if($function=='drivercomplaint'){
-            echo ('active');
-        }
-        ?>">
-            <a href="/admin/driverComplaint">
-                <i class="fa-light fa-address-book"></i>
-                <span class="links_name">Driver Complaint</span>
-            </a>
-            <span class="tooltip">Complaint Regarding Drivers</span>
+            <span class="tooltip">Complaint</span>
         </li>
         <li class="<?php 
         if($function=='licenseexpiring'){
@@ -167,7 +157,7 @@
             echo ('active');
         }
         ?>">
-            <a href="#">
+            <a href="/admin/managepayment">
                 <i class='bx bx-wallet' ></i>
                 <span class="links_name">Payment</span>
             </a>
@@ -200,6 +190,11 @@
             <div class="profile-cont">
                 <span class="profile-name"><?= Application::$app->user->displayName(); ?></span>
                 <div class="img-cont"><img src="/assets/img/user_profile/<?= Application::$app->user->userprofile('profile_pic')?>" class="profile-image"></div>
+                <div class="profile-menu" style="display: none;">
+                    <a href="/ownerProfile">My Profile</a>
+                    <a href="/Customer/Settings">Settings</a>
+                    <a href="/logout">Logout</a>
+                </div>
             </div>
 
         </ul>
@@ -232,6 +227,7 @@
 <script src="/assets/javascript/component/Modal.js"></script>
 <script src="/assets/javascript/admin/vehicle_complaint.js"></script> -->
 <script type="module" src="/assets/javascript/index.js"></script>
+<script type="module" src="/assets/javascript/admin/profile.js"></script>
 
 
 </html>

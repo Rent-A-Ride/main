@@ -2,7 +2,7 @@ import {Modal} from "../component/Modal.js";
 import {htmlToElement} from "../utils/index.js"
 const vehiclelinscanCopyButton = document.querySelector(".vehiclelin_scan_copy");
 
-// console.log(vehiclelinscanCopyButton);
+console.log(vehiclelinscanCopyButton);
 vehiclelinscanCopyButton.addEventListener("click", function () {
        
         const veh_id=vehiclelinscanCopyButton.dataset.vehid;

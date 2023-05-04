@@ -162,6 +162,10 @@ class driver extends dbModel
     public function getPayments($user_id){
         return Application::$app->db->pdo->query("SELECT * FROM drivers_invoice INNER JOIN users WHERE drivers_invoice.user_ID=$user_id AND users.user_ID=$user_id ORDER BY invoice_no DESC")->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    public function getdriverCount(){
+        return Application::$app->db->pdo->query("SELECT COUNT(driver_ID) As driver_count FROM driver")->fetchAll(\PDO::FETCH_ASSOC);
+    }
     
 
 }

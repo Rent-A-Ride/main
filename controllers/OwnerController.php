@@ -17,12 +17,15 @@ use app\models\ren_insuarance;
 use app\models\ren_license;
 use app\models\veh_insurance;
 use app\models\cusVehicle;
+use app\models\driverpayment;
 use app\models\vehicle_Owner;
 use app\models\vehiclecomplaint;
 use app\models\veh_license;
+use app\models\VehBooking;
 use app\models\vehicle;
 use app\models\vehicle_complaint_resolve_notification;
 use app\models\vehicleowner;
+use app\models\vehicleownerpayment;
 
 class OwnerController extends Controller
 {
@@ -31,8 +34,17 @@ class OwnerController extends Controller
         if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="owner"){
             $ownerprofile = new owner();
             $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
+            $vehicle = new vehicle();
+            $vehicle_count=$vehicle->getvehicleCount();
+            $vowner=new vehicleowner();
+            $vowner_count=$vowner->getVeh_oCount();
+            $driver=new driver();
+            $driver_count=$driver->getdriverCount();
+            $customer= new Customer();
+            $customer_count=$customer->getCustomer_count();
+            // die();
             $this->setLayout("owner-dashboard");
-            return $this->render("/admin/owner",[],['profile_img'=>$owner_img, 'function'=>'Dashboard']);
+            return $this->render("/admin/owner",['vehicle_count'=>$vehicle_count,'vowner_count'=>$vowner_count,'driver_count'=>$driver_count,'customer_count'=>$customer_count],['profile_img'=>$owner_img, 'function'=>'Dashboard']);
         }
         return $res->render("HomePage","home");
     }
@@ -41,15 +53,30 @@ class OwnerController extends Controller
         
         if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="owner"){
             
-            $ownerprofile = new owner();
-            $ownerdetails  = $ownerprofile->owner_profile(Application::$app->session->get("user"));
+            if ($req->isPost()){
+                $body=$req->getBody();
+                $ownerprofile = new owner();
+                $ownerprofile->update_profile($body,Application::$app->session->get("user"));
+                $res->redirect("/ownerProfile");
+
+
+
+            }
+            else{
+                $ownerprofile = new owner();
+                $ownerdetails  = $ownerprofile->owner_profile(Application::$app->session->get("user"));
             
-            $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
+                $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
             
-            $this->setLayout("owner-dashboard");
-            return $this->render("/admin/admin_profile",['owner_details'=>$ownerdetails],['profile_img'=>$owner_img, 'function'=>'Profile']);
+                $this->setLayout("owner-dashboard");
+                return $this->render("/admin/admin_profile",['owner_details'=>$ownerdetails],['profile_img'=>$owner_img, 'function'=>'Profile']);
+            }
+            
         }
-        return $res->render("HomePage","home");
+        else{
+            return $res->render("HomePage","home");
+        }
+        
 
     }
 
@@ -116,7 +143,7 @@ class OwnerController extends Controller
             $owner_img  = $owner->owner_img(Application::$app->session->get("user"));
             
             $this->setLayout("owner-dashboard");
-            return $res->render("/admin/adminViewVehicleOwnerProfile","owner-dashboard",['owner_details'=>$Vehicleownerdetails],['profile_img'=>$owner_img, 'function'=>'Vehicle Owner']);
+            return $res->render("/admin/adminViewVehicleOwnerProfile","owner-dashboard",['vehicleowner'=>$Vehicleownerdetails],['profile_img'=>$owner_img, 'function'=>'Vehicle Owner']);
         }
         return $res->render("Home","home");
 
@@ -204,7 +231,7 @@ class OwnerController extends Controller
             $ownerprofile = new owner();
             $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
             $this->setLayout("owner-dashboard");
-            return $this->render("/admin/admin_vehicleComplaint",['complaint'=>$vehiclecomplaint],['profile_img'=>$owner_img, 'function'=>'vehiclecomplaint']);
+            return $this->render("/admin/admin_vehicleComplaint",['complaint'=>$vehiclecomplaint],['profile_img'=>$owner_img, 'function'=>'complaint']);
         }
     }
 
@@ -215,7 +242,7 @@ class OwnerController extends Controller
             $ownerprofile = new owner();
             $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
             $this->setLayout("owner-dashboard");
-            return $this->render("/admin/admin_driverComplaint",['complaint'=>$drivercomplaint],['profile_img'=>$owner_img, 'function'=>'drivercomplaint']);
+            return $this->render("/admin/admin_driverComplaint",['complaint'=>$drivercomplaint],['profile_img'=>$owner_img, 'function'=>'complaint']);
         }
     }
     
@@ -418,6 +445,66 @@ class OwnerController extends Controller
 
             }
             
+        }
+
+    }
+
+    public function manage_vehownerPayment(Request $req, Response $res){
+        if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="owner"){
+
+            if ($req->isPost()) {
+                $body=$req->getBody();
+                $vo_id=(int)$body['vo_Id'];
+                $booking = new vehicleownerpayment();
+                $booking->confirm_payment($vo_id);
+                $res->redirect("/admin/managepayment");
+            }
+            else {
+                $ownerprofile = new owner();
+                $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
+                $vehicleowner = new vehicle_Owner();
+                $vehicleowners= $vehicleowner->veh();
+                $booking = new vehicleownerpayment();
+                $payment = $booking->getpayment_currentMonth();
+                $allpayment=$booking->getpayment();
+                $this->setLayout("owner-dashboard");
+                return $this->render("/admin/manage_payment",['vehicleowners'=>$vehicleowners, 'rent'=>$payment,'rent2'=>$allpayment],['profile_img'=>$owner_img, 'function'=>'Payment']);
+            }
+            
+        }    
+    }
+
+    public function manage_driverPayment(Request $req, Response $res){
+        if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="owner"){
+            $ownerprofile = new owner();
+            $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
+            $driver = new driver();
+            $drivers= $driver->getDriver();
+            $booking = new driverpayment();
+            $payment = $booking->getpayment_currentMonth();
+            $allpayment=$booking->getpayment();
+            $this->setLayout("owner-dashboard");
+            return $this->render("/admin/manageDriverPayment",['drivers'=>$drivers, 'rent'=>$payment,'rent2'=>$allpayment],['profile_img'=>$owner_img, 'function'=>'Payment']);
+        }    
+    }
+
+    public function add_driver(Request $req, Response $res){
+        if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="owner"){
+
+
+            if ($req->isPost()) {
+                // $body=$req->getBody();
+                // $vo_id=(int)$body['vo_Id'];
+                // $booking = new vehicleownerpayment();
+                // $booking->confirm_payment($vo_id);
+                // $res->redirect("/admin/managepayment");
+            }
+            $ownerprofile = new owner();
+            $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
+            $driver = new driver();
+            $driverdetails = $driver->getDriver(); 
+            $this->setLayout("owner-dashboard");
+            return $this->render("/admin/adminadd_driver",['driver'=>$driverdetails],['profile_img'=>$owner_img, 'function'=>'Driver']);
         }
 
     }
