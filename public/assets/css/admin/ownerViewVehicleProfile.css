@@ -81,6 +81,23 @@
     color: #FAB84C;
     margin-left: 10px;
 } */
+.review-availability-container{
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.review-container{
+  margin-top: 20px;
+  width: 50%;
+  border-radius:10px ;
+  background-color: #FAB84C;
+  padding: 10px;
+  
+}
+
+
 
 .minimize {
     height: 50% !important;

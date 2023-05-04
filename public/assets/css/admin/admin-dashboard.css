@@ -35,6 +35,8 @@
 
 @import url("../components/calender.css");
 
+@import url("./admin_settings.css");
+
 .profile-cont {
     display: inline-flex;
     align-items: center;

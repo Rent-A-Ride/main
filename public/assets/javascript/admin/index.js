@@ -2,7 +2,8 @@
 // import "./profile.js"
 import "./component/search.js"
 import "./adminOverview.js"
-// import "../component/calender.js"
+import "./adminoverviewx.js"
+
 import "./adminaddVehicle.js"
 // import "./admin-dashboard.js"
 import "./vehicle_complaint.js"
@@ -22,6 +23,7 @@ import "./table.js"
 import "./inform_payment.js"
 // import "./update_vehiclelin.js"
 // import "./update_vehicleins.js"
+// import "../component/calender.js"
 
 
 // import "./enable vehicle.js"

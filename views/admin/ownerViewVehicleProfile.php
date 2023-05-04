@@ -87,12 +87,112 @@
         </div>
 
     </div>
+    <div class="review-availability-container">
+        <div class="availability-calender-container review-availability-container-child">
+            <div class="cal">
+                <div class="header">
+                    <p class="current-date"></p>
+                    <div class="icons">
+                    <span id="prev" class="material-icons-sharp"><i class="fa-solid fa-chevron-left"></i></span>
+                    <span id="next" class="material-icons-sharp"><i class="fa-solid fa-chevron-right"></i></span>
+                    </div>
+                </div>
+                <div class="calendar">
+                    <ul class="weeks">
+                    <li>Sun</li>
+                    <li>Mon</li>
+                    <li>Tue</li>
+                    <li>Wed</li>
+                    <li>Thu</li>
+                    <li>Fri</li>
+                    <li>Sat</li>
+                    </ul>
+                    <ul class="days">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="review-container review-availability-container-child">
+            <div id="table" class="table">
+                <div class="table-header">
+                    <div class="header__item"><a id="wins" class="filter__link filter__link--number" href="#">No</a></div>
+                    <div class="header__item"><a id="losses" class="filter__link filter__link--number" href="#">Reviews</a></div>
+                    <div class="header__item"><a id="total" class="filter__link filter__link--number" href="#">Rates</a></div>
+                </div>
+                <div class="table-content" >
+                    <?php
+                    foreach ($reviews as $row):
+                        ?>
+                        <div class="table-row">
+                             
+                            <div class="table-data"><?= $row['booking_id']?></div>
+                            <div class="table-data"><?= $row['comment']?></div>
+                            <div class="table-data"><?= $row['rates']?></div>
+                        </div>
+                    <?php
+                    endforeach;
+                    ?>
+            
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 
 
     
 
 
 </div>
+<script>
+    const daysTag = document.querySelector(".days"),
+currentDate = document.querySelector(".current-date"),
+adjecentIcons = document.querySelectorAll(".icons span");
+
+let date = new Date(),
+year = date.getFullYear(),
+month = date.getMonth();
+
+const months = ["January", "February", "March", "April", "May", "June", "July","August", "September", "October", "November", "December"];
+
+const generateCalendar = () => {
+    var firstDayofMonth = new Date(year, month, 1).getDay();
+    var lastDateofMonth = new Date(year, month + 1, 0).getDate();
+    var lastDayofMonth = new Date(year, month, lastDateofMonth).getDay();
+    var lastDateofLastMonth = new Date(year, month, 0).getDate(); 
+    let liTag = "";
+    for (let i = firstDayofMonth; i > 0; i--) { 
+        liTag += `<li class="inactive">${lastDateofLastMonth - i + 1}</li>`;
+    }
+    for (let i = 1; i <= lastDateofMonth; i++) {
+        let isToday = i === date.getDate() && month === new Date().getMonth() && year === new Date().getFullYear() ? "active1" : "";
+        liTag += `<li class="${isToday}">${i}</li>`;
+    }
+    for (let i = lastDayofMonth; i < 6; i++) { 
+        liTag += `<li class="inactive">${i - lastDayofMonth + 1}</li>`
+    }
+    currentDate.innerText = `${months[month]} ${year}`; 
+    daysTag.innerHTML = liTag;
+}
+
+generateCalendar();
+
+adjecentIcons.forEach(icon => { 
+    icon.addEventListener("click", () => { 
+        month = icon.id === "prev" ? month - 1 : month + 1;
+        if(month < 0 || month > 11) {
+            date = new Date(year, month);
+            year = date.getFullYear(); 
+            month = date.getMonth(); 
+        } else {
+            date = new Date(); 
+        }
+        generateCalendar(); 
+    });
+});
+</script>
 
 
 

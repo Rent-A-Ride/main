@@ -20,6 +20,7 @@ use app\models\ren_license;
 use app\models\veh_insurance;
 use app\models\cusVehicle;
 use app\models\driverpayment;
+use app\models\MonthlyRevenue;
 use app\models\vehicle_Owner;
 use app\models\vehiclecomplaint;
 use app\models\veh_license;
@@ -28,6 +29,8 @@ use app\models\vehicle;
 use app\models\vehicle_complaint_resolve_notification;
 use app\models\vehicleowner;
 use app\models\vehicleownerpayment;
+use app\models\vehiclereview;
+
 
 class OwnerController extends Controller
 {
@@ -44,11 +47,30 @@ class OwnerController extends Controller
             $driver_count=$driver->getdriverCount();
             $customer= new Customer();
             $customer_count=$customer->getCustomer_count();
-            // die();
+           
+            
             $this->setLayout("owner-dashboard");
             return $this->render("/admin/owner",['vehicle_count'=>$vehicle_count,'vowner_count'=>$vowner_count,'driver_count'=>$driver_count,'customer_count'=>$customer_count],['profile_img'=>$owner_img, 'function'=>'Dashboard']);
         }
         return $res->render("HomePage","home");
+    }
+
+    public function test1(){
+        $vehicle = new vehicle();
+        $data=$vehicle->getvehicleCountForVehType();
+        $result= json_encode($data);
+        echo($result);
+        // print_r($result);
+    }
+
+    public function test2(){
+        $monthlFee=new MonthlyRevenue();
+        $data1=$monthlFee->getMonthlyRevenue();
+        // var_dump($data1);
+        // exit;
+        $result1= json_encode($data1);
+        echo($result1);
+        // print_r($result);
     }
 
     public function ownerProfile(Request $req, Response $res){
@@ -59,6 +81,7 @@ class OwnerController extends Controller
                 $body=$req->getBody();
                 $ownerprofile = new owner();
                 $ownerprofile->update_profile($body,Application::$app->session->get("user"));
+                // Application::$app->session->setFlash('profileUpdate', 'Profile Updated Successfully!');
                 $res->redirect("/ownerProfile");
 
 
@@ -103,11 +126,12 @@ class OwnerController extends Controller
             $query=$query=$req->query();
             $vehicle1 = $vehicles->viewVehicleProfile($req,$res,$query);
             $vehicle2=$vehicles->viewVehicleProfilelicense($req,$res,$query);
-            
+            $review=new vehiclereview();
+            $reviews=$review->getReviews((int)$query["id"]);
             $ownerprofile = new owner();
             $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
             $this->setLayout("owner-dashboard");
-             return $this->render("/admin/ownerViewVehicleProfile",['veh_info'=>$vehicle1,'veh_li'=>$vehicle2],['profile_img'=>$owner_img, 'function'=>'Vehicle']);
+             return $this->render("/admin/ownerViewVehicleProfile",['veh_info'=>$vehicle1,'veh_li'=>$vehicle2,'reviews'=>$reviews],['profile_img'=>$owner_img, 'function'=>'Vehicle']);
         }
         return $res->render("Home","home");
     }
@@ -538,15 +562,38 @@ class OwnerController extends Controller
         }
     }
 
-  
-    
+    public function setting(Request $req, Response $res){
+        if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="owner"){
+            if ($req->isPost()){
+                $body=$req->getBody();
+                
+                $owner= new owner();
+                $errors=$owner->update_password($body);
+                
+                if ($errors==true) {
+                    
+                    $res->redirect('/admin/Settings');
+                }
+                else {
+                    $ownerprofile = new owner();
+                    $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
+                    $owner= $ownerprofile->owner_profile(Application::$app->session->get("user"));
+                    $this->setLayout("owner-dashboard");
+                    return $this->render("/admin/admin_settings",['owner'=>$owner,'errors'=>$errors],['profile_img'=>$owner_img, 'function'=>'Setting']);
+                     
+                }
 
+            }
+            else{
 
-    
-
-
-//    public function ownerLogout(){
-//
-//    }
+                $ownerprofile = new owner();
+                $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
+                $owner= $ownerprofile->owner_profile(Application::$app->session->get("user"));
+               $this->setLayout("owner-dashboard");
+                return $this->render("/admin/admin_settings",['owner'=>$owner],['profile_img'=>$owner_img, 'function'=>'Setting']);
+            
+            }
+        }
+    }
 
 }
