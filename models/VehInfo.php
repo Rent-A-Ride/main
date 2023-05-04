@@ -20,6 +20,24 @@ class VehInfo extends dbModel
     /**
      * @return string
      */
+    public function getVehId(): string
+    {
+        return $this->veh_Id;
+    }
+
+    /**
+     * @param string $veh_Id
+     */
+    public function setVehId(string $veh_Id): void
+    {
+        $this->veh_Id = $veh_Id;
+    }
+
+
+
+    /**
+     * @return string
+     */
     public function getYear(): string
     {
         return $this->year;
@@ -158,7 +176,7 @@ class VehInfo extends dbModel
 
     public function attributes(): array
     {
-        return ['veh_Id','year','capacity','transmission','fuel_type','Description','vehColor','seatCount','avgfuel'];
+        return ['veh_Id','year','capacity','transmission','fuel_type','Description','vehColor','seatsCount','avgfuel'];
     }
 
     public static function primaryKey(): string

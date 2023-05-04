@@ -190,7 +190,7 @@ input {
     width: 100%;
     box-shadow: 0 0 5px rgba(0,0,0, .10);
     margin: auto;
-    height: 400px;
+    height: max-content;
     border-radius: 4px;
     padding: 2rem;
     position: relative;

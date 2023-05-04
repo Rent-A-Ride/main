@@ -12,6 +12,7 @@ use app\core\Database;
 
 class vehicle_Owner extends dbModel
 {
+    protected string $vo_ID = '';
     protected string $Nic;
     protected string $owner_Fname;
     protected string $owner_Lname;
@@ -23,7 +24,7 @@ class vehicle_Owner extends dbModel
     protected string $license_No ;
     protected string $password;
     public string $passwordConfirm = '';
-    protected string $profile_pic = '';
+    protected ?string $profile_pic = '';
 
 
     // private \PDO $pdo;
@@ -37,39 +38,7 @@ class vehicle_Owner extends dbModel
 
     }
 
-    // public function login():array|object
-    // {
-    //     $errors = [];
-    //     $owner = null;
 
-    //     if (!filter_var($this->body['email'],FILTER_VALIDATE_EMAIL))
-    //     {
-    //         $errors['email'] = 'Email must be a valid email address';
-    //     }
-    //     else {
-    //         $sql = "SELECT * FROM users WHERE email=:email";
-    //         $statement = $this->pdo->prepare($sql);
-    //         $statement->bindValue(':email',$this->body["email"]);
-
-    //         $statement->execute();
-    //         $owner= $statement->fetchObject();
-    //         if(!$owner){
-    //             $errors['email'] = 'Email does not exsits, please create an account';
-    //         }
-    //         elseif (!password_verify($this->body['password'],$owner->password))
-    //         {
-    //             $errors['password']='Password is incorrect';
-    //         }
-
-
-
-    //     }
-    //     if (empty($errors)){
-    //         return $owner;
-    //     }
-    //     return $errors;
-        
-    // }
 
     public function vehicle_Owner_login($email)
     {
@@ -91,6 +60,24 @@ class vehicle_Owner extends dbModel
                 
 
     }
+
+    /**
+     * @return string
+     */
+    public function getVoID(): string
+    {
+        return $this->vo_ID;
+    }
+
+    /**
+     * @param string $vo_ID
+     */
+    public function setVoID(string $vo_ID): void
+    {
+        $this->vo_ID = $vo_ID;
+    }
+
+
 
     public function getVehicleowner(){
         return Application::$app->db->pdo->query("SELECT * FROM vehicleowner WHERE vehicleowner.admin_approved=1 ")->fetchAll(\PDO::FETCH_ASSOC);

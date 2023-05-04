@@ -10,13 +10,76 @@ use app\core\dbModel;
 
 class veh_license extends dbModel
 {
+    /**
+     * @return string
+     */
+    public function getLicFromDate(): string
+    {
+        return $this->lic_from_date;
+    }
+
+    /**
+     * @param string $lic_from_date
+     */
+    public function setLicFromDate(string $lic_from_date): void
+    {
+        $this->lic_from_date = $lic_from_date;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLicExDate(): string
+    {
+        return $this->lic_ex_date;
+    }
+
+    /**
+     * @param string $lic_ex_date
+     */
+    public function setLicExDate(string $lic_ex_date): void
+    {
+        $this->lic_ex_date = $lic_ex_date;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLicOwner(): string
+    {
+        return $this->lic_owner;
+    }
+
+    /**
+     * @param string $lic_owner
+     */
+    public function setLicOwner(string $lic_owner): void
+    {
+        $this->lic_owner = $lic_owner;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLicScanCopy(): string
+    {
+        return $this->lic_scan_copy;
+    }
+
+    /**
+     * @param string $lic_scan_copy
+     */
+    public function setLicScanCopy(string $lic_scan_copy): void
+    {
+        $this->lic_scan_copy = $lic_scan_copy;
+    }
     protected string $veh_Id;
     protected string $license_No;
-    protected string $from_date;
-    protected string $ex_date;
-    protected string $owner;
-    protected string $scan_copy;
-    protected string $admin_approved;
+    protected string $lic_from_date;
+    protected string $lic_ex_date;
+    protected string $lic_owner;
+    protected string $lic_scan_copy;
+    protected string $admin_approved = '0';
     
     private array $body;
 
@@ -34,7 +97,7 @@ class veh_license extends dbModel
 
     public function attributes(): array
     {
-       return ['veh_Id','license_No','$from_date','$ex_date','$owner','scan_copy','$admin_approved'];
+        return ['veh_Id', 'license_No', 'lic_from_date', 'lic_ex_date', 'lic_owner', 'lic_scan_copy', 'admin_approved'];
     }
 
     public static function primaryKey(): string

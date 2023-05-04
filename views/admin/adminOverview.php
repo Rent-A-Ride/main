@@ -21,9 +21,14 @@
             <canvas id="myChart" ></canvas>
         </div>
         <div class="admin_overView-card">
-            
+            <canvas id="test1" ></canvas>
         </div>
-        <!-- <div class="admin_overView-card"></div> -->
+        
     </div>
+    <script>
+       
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src="/assets/javascript/adminOverview.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/assets/javascript/adminoverviewx.js"></script>

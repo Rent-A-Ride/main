@@ -45,6 +45,28 @@ class SiteController extends Controller
 
     }
 
+    // public function uploadDocument($inputName, $uploadFolder) {
+    //     if(isset($_FILES[$inputName])) {
+    //         // Get the file name and tmp file location
+    //         $fileName = $_FILES[$inputName]['name'];
+    //         $fileTmp = $_FILES[$inputName]['tmp_name'];
+
+    //         // Generate a unique file name
+    //         $newFileName = uniqid() . "_" . $fileName;
+
+    //         // Move the file to the upload folder
+    //         if(move_uploaded_file($fileTmp, $uploadFolder . $newFileName)) {
+    //             // File uploaded successfully
+    //             return $uploadFolder . $newFileName;
+    //         } else {
+    //             // File upload failed
+    //             return false;
+    //         }
+    //     } else {
+    //         // No file uploaded
+    //         return false;
+    //     }
+    // }
     public function generatePDF(Request $req, Response $res,$data)
     {
         // Create a new PDF document

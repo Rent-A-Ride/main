@@ -99,7 +99,7 @@ class Application
         elseif ($userType === 'vehicleowner'){
             if ($primaryValue) {
                 $primaryKey = $this->vehicleOwnerClass::primaryKey();
-                $this->user = $this->vehicleOwnerClass::findOne([$primaryKey => $primaryValue]);
+                $this->user = $this->vehicleOwnerClass::findOne([$primaryKey => $primaryValue ]);
             } else {
                 $this->user = null;
             }
