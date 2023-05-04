@@ -1,0 +1,15 @@
+Table created for Customer Notification
+
+Vehicle Reviews
+
+CREATE TABLE veh_Reviews (
+  id INT NOT NULL AUTO_INCREMENT,
+  veh_Id INT NOT NULL,
+  cus_Id INT NOT NULL,
+  rating DECIMAL(3,2) NOT NULL,
+  comments VARCHAR(255),
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  FOREIGN KEY (veh_Id) REFERENCES vehicle(veh_Id),
+  FOREIGN KEY (cus_Id) REFERENCES customer(cus_Id)
+);

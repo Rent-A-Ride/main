@@ -307,6 +307,37 @@ th, td {
     display: block;
 }
 
+.status-txt {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+}
+
+.status-txt.pending {
+    color: #f39c12;
+    background-color: #fff3cd;
+}
+
+.status-txt.booked {
+    color: #007bff;
+    background-color: #cde9ff;
+}
+
+.status-txt.confirmed {
+    color: #28a745;
+    background-color: #c3e6cb;
+}
+
+.status.cancelled {
+    color: #dc3545;
+    background-color: #f8d7da;
+}
+
+
 
 /* For small screens, change the display property to flex for the content */
 @media (max-width: 600px) {

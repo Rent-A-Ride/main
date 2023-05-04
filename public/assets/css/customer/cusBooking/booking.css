@@ -1,4 +1,4 @@
-booking-section {
+.booking-section {
     margin-top: 20px;
 }
 .sub-section {
@@ -48,6 +48,11 @@ booking-section {
     width: 60px;
     height: 34px;
   }
+
+.center {
+    display: flex;
+    justify-content: center;
+}
   
   .switch input {
     opacity: 0;
@@ -77,6 +82,15 @@ booking-section {
     background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
+  }
+
+label.switch input[type="checkbox"]:checked + span {
+    background-color: #ec9844;
+}
+
+
+.slider.round.yes {
+      background-color: #bebebe;
   }
   
   .booking-section input:checked + .booking-section.slider {

@@ -5,6 +5,7 @@ use app\models\Customer;
 
 ?>
 
+<h1>Register</h1>
 
 <main class="sign-up-mode">
     <div class="box-1">
@@ -113,6 +114,21 @@ use app\models\Customer;
                                 class="input-field<?= $model->hasError('address') ? ' invalid' : ''?>"
                                 autocomplete="off"
                                 value="<?= $model->thereIsError() ? $model->getAddress() : ''?>"
+
+                            />
+                            <label>Address</label>
+                            <span class="form-error"> <?= $model->getFirstError('address') ?></span>
+                        </div>
+
+
+
+                        <div class="input-wrap">
+                            <input
+                                name="address"
+                                type="text"
+                                class="input-field<?= $model->hasError('address') ? ' invalid' : ''?>"
+                                autocomplete="off"
+                                value=""
 
                             />
                             <label>Address</label>

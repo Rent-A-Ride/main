@@ -23,6 +23,8 @@ use app\core\Application; ?>
 
     <!-- JQUERY -->
     <script src="/assets/javascript/component/jquery-3.6.3.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 </head>
 <body>
@@ -70,11 +72,11 @@ use app\core\Application; ?>
             <span class="tooltip">Booking</span>
         </li>
         <li>
-            <a href="/Customer/notification">
-                <i class="fa-regular fa-bell"></i>
-                <span class="links_name">Notification</span>
+            <a href="/Customer/Complaints">
+                <i class='bx bx-comment-error' ></i>
+                <span class="links_name">Complaints</span>
             </a>
-            <span class="tooltip">Notification</span>
+            <span class="tooltip">Complaints</span>
         </li>
         <li>
             <a href="/Customer/Payment">
@@ -112,7 +114,7 @@ use app\core\Application; ?>
             <div class="notification-cont">
                 <div class="notification-icon">
                     <i class='bx bxs-bell'></i>
-                    <span class="notification-count">5</span>
+                    <span class="notification-count">0</span>
                 </div>
 
                 <div class="notification-panel">
@@ -120,12 +122,13 @@ use app\core\Application; ?>
                         <h3>Notifications</h3>
                         <button class="close-btn">&times;</button>
                     </div>
+
                     <ul class="notification-list">
-                        <li><a href="#">New message from John</a></li>
-                        <li><a href="#">You have 3 new emails</a></li>
-                        <li><a href="#">Today's weather forecast</a></li>
-                        <li><a href="#">Upcoming event reminder</a></li>
-                        <li><a href="#">New product release</a></li>
+<!--                        <li><a href="#">New message from John</a></li>-->
+<!--                        <li><a href="#">You have 3 new emails</a></li>-->
+<!--                        <li><a href="#">Today's weather forecast</a></li>-->
+<!--                        <li><a href="#">Upcoming event reminder</a></li>-->
+<!--                        <li><a href="#">New product release</a></li>-->
                     </ul>
                 </div>
 
@@ -172,7 +175,7 @@ use app\core\Application; ?>
     <?php endif; ?>
 
     <div class="banner-msg">
-        <h1>FAST AND EASY WAY TO <span class="bold yellow">RENT A VEHICLE</span></h1>
+        <h1 id="animation-1">FAST AND EASY WAY TO <span class="bold yellow">RENT A VEHICLE</span></h1>
     </div>
 
     {{content}}
@@ -182,17 +185,49 @@ use app\core\Application; ?>
 
 </body>
 <script>
-    let notificationIcon = document.querySelector('.notification-icon');
-    let notificationPanel = document.querySelector('.notification-panel');
-    let closeBtn8 = document.querySelector('.close-btn');
-
-    notificationIcon.addEventListener('click', () => {
-        notificationPanel.classList.toggle('active');
-    });
-
-    closeBtn8.addEventListener('click', () => {
-        notificationPanel.classList.remove('active');
-    });
+    // let notificationIcon = document.querySelector('.notification-icon');
+    // let notificationPanel = document.querySelector('.notification-panel');
+    // let closeBtn8 = document.querySelector('.close-btn');
+    //
+    // notificationIcon.addEventListener('click', () => {
+    //     notificationPanel.classList.toggle('active');
+    // });
+    //
+    // closeBtn8.addEventListener('click', () => {
+    //     notificationPanel.classList.remove('active');
+    // });
+    //
+    //
+    // // Function to get notifications using Ajax
+    // function getNotifications() {
+    //     $.ajax({
+    //         url: '/notifications',
+    //         method: 'POST',
+    //         dataType: 'json',
+    //         success: function(response) {
+    //             $('.notification-list').empty(); // Clear existing notifications
+    //
+    //             // Loop through notifications and add them to the UI
+    //             $.each(response, function(index, notification) {
+    //                 const notificationElement = $('<li><a href="#">' + notification.message + '</a></li>');
+    //                 $('.notification-list').append(notificationElement);
+    //             });
+    //         },
+    //         error: function(xhr, status, error) {
+    //             console.log('Error getting notifications: ' + error);
+    //         }
+    //     });
+    // }
+    //
+    // // Call getNotifications() function on page load
+    // $(document).ready(function() {
+    //     getNotifications();
+    // });
+    //
+    // // Call getNotifications() function every 10 seconds
+    // setInterval(function() {
+    //     getNotifications();
+    // }, 10000);
 </script>
 
 <script src="/assets/javascript/component/navbar.js"></script>
@@ -203,4 +238,6 @@ use app\core\Application; ?>
 <script src="/assets/javascript/customer/components/booking.js"></script>
 <script src="/assets/javascript/customer/components/profile.js"></script>
 <script src="/assets/javascript/customer/components/date-validation.js"></script>
+<script src="/assets/javascript/customer/components/ratings.js"></script>
+<script src="/assets/javascript/customer/components/complaints.js"></script>
 </html>

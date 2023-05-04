@@ -14,6 +14,7 @@
 }
 
 .details-cont {
+
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -192,6 +193,7 @@ img.small{
 }
 
 .vehicle-description {
+    font-size: larger;
     display: flex;
     margin: 2%;
     justify-content: space-between;

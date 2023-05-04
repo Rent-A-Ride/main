@@ -43,30 +43,37 @@ use app\models\viewCustomerReq;
                     <th>Payment Method</th>
                     <th>Special Note</th>
                     <th>Status</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php
                 foreach ($model as $row):
-                    if ($row->getStatus() == 1 && $row->getDriverReq() == 0):
+                    if ($row->getStatus() == 1 || $row->getStatus() == 2):
                     ?>
                     <tr>
                         <td><?php echo $row->getBookingId() ?></td>
-                        <td>Sam David</td>
-                        <td>076-6848398</td>
+                        <td><?php echo $customer[$row->getCusId()]->firstname.' '.$customer[$row->getCusId()]->lastname?></td>
+                        <td><?php echo $customer[$row->getCusId()]->phoneno?></td>
                         <!-- <td>Kandy</td> -->
-                        <td>Honda Fit</td>
+                        <td><?php echo $vehicle[$row->getVehId()]->getVehBrand().' '.$vehicle[$row->getVehId()]->getVehModel()?></td>
                         <td><?php echo $row->getPickupLocation() ?></td>
                         <td><?php echo $row->getStartDate() ?></td>
                         <td><?php echo $row->getEndDate() ?></td>
                         <td><?php echo $row->getPayMethod() ?></td>
                         <td><?php echo $row->getNote() ?></td>
 
-<!--                        <td><div class="status">-->
-<!--                                <button onclick="openPopup(accept)" class="accept-button">Accept </button>-->
-<!--                                <button onclick="openPopup(reject)" class="reject-button">Reject</button>-->
-<!---->
-<!--                            </div></td>-->
+                        <td><div class="status">
+                                <?php if ($row->getStatus() == 1): ?>
+                                    <span class="status-txt pending">Payment Pending</span>
+                                <?php elseif ($row->getStatus() == 2): ?>
+                                <span class="status-txt pending">Driver Pending</span>
+                                <?php endif; ?>
+
+
+
+                            </div></td>
+                        <td><button onclick="openPopup(reject)" class="reject-button">Cancel</button></td>
                     </tr>
                 <?php
                 endif;

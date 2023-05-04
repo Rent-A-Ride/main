@@ -1,4 +1,11 @@
-<h2 class="renew-page-name">Update Vehicle Documents</h2>
+<?php
+/** @var $vehicle vehicle */
+
+use app\models\vehicle;
+
+?>
+
+<h2 class="renew-page-name">Renew Vehicle Documents</h2>
 
 <div class="doc-update-container">
 
@@ -15,57 +22,33 @@
 
     <div class="wrapper-container">
         <div  class="wrapper">
-            <form action="" method="post" class="form_1">
+            <form method="post" class="form_1" enctype="multipart/form-data">
                 <h3>Renew Eco Test Details</h3>
                 <div class="inputBox">
 
                     <label for="vehicleno">Vehicle No:</label>
-                    <input type="text" id="vehicleno" name="vehicleno" required>
+                    <input type="text" id="vehicleno" name="vehicleno" value="<?= $vehicle->getPlateNo() ?>" disabled>
+                    <input hidden type="text" name="veh_Id" value="<?= $vehicle->getVehId()?>" >
 
                     <label for="Ecotestreceipt">Scanned Copy of Eco Test Receipt</label>
 
-                    <input type="file" accept="image/*" id="Ecotestreceipt" name="Ecotestreceipt" required>
+                    <input type="file" id="scan_copy" name="scan_copy" required>
+
+                    <label for="modified_date">Valid From</label>
+
+                    <input type="date" id="modified_date" name="modified_date" required>
+
+                    <label for="modified_date">Valid To</label>
+
+                    <input type="date" id="ex_date" name="ex_date" required>
                 </div>
 
 
 
-                <!--  DATE VALIDATION ~ CSS PART TO BE ADDED-->
 
-                From Date : <input id="TxtFrom">
-                To Date : <input id="TxtTo">
-                <script>
-
-                    $(function() {
-
-                        $("#TxtFrom") .datepicker({
-
-                            numberOfMonths: 1,
-                            dateFormat : 'DD,d MM,yy',
-                            onSelect : function(selectdate) {
-                                var dt=new Date(selectdate);
-                                dt.setDate (dt.getDate()+1)
-                                $("#TxtTo").datepicker("option","minDate",dt);
-
-                            }
-                        });
-
-                        $("#TxtTo") .datepicker({
-
-                            numberOfMonths: 1,
-                            dateFormat : 'DD,d MM,yy',
-                            onSelect : function(selectdate) {
-                                var dt=new Date(selectdate);
-                                dt.setDate (dt.getDate()-1)
-                                $("#TxtFrom").datepicker("option","maxDate",dt);
-
-                            }
-                        });
-
-                    });
-                </script>
 
                 <div>
-                    <button type="submit" class="btn" onclick="location.href='/vehicleowner_vehicle'">Submit</button>
+                    <input class="btn" type="submit" name="submit" value="Submit">
                 </div>
 
             </form>

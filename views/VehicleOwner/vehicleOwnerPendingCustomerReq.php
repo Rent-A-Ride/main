@@ -1,7 +1,17 @@
 <?php
 /* @var $row viewCustomerReq */
+/* @var $customer Customer */
+/* @var $vehicle vehicle */
+/* @var $drow driver */
 
+
+use app\models\Customer;
+use app\models\driver;
+use app\models\vehicle;
 use app\models\viewCustomerReq;
+
+
+$bookingID = [];
 
 ?>
 <section class="requests">
@@ -10,7 +20,7 @@ use app\models\viewCustomerReq;
 
         <a id="active" href="/CustomerPendingRequest">Pending Requests</a>
         <a href="/CustomerAcceptedRequest">Accepted Requests</a>
-<!--        <a href="#ongoing">Completed Requests</a>-->
+        <!--        <a href="#ongoing">Completed Requests</a>-->
         <a href="/CustomerRejectedRequest">Rejected Requests</a>
 
         <!-- <div class="search-container">
@@ -58,83 +68,31 @@ use app\models\viewCustomerReq;
                             </thead>
                             <tbody>
                             <tr>
-                                <td>01</td>
-                                <td>Sam David</td>
-                                <td>076-6848398</td>
+                                <?php
+                                $location = array();
+                                foreach ($model as $row):
+                                if ($row->getStatus() == 0 && $row->getDriverReq() == 1):
+                                $location[$row->getBookingId()] = $row->getPickupLocation();
+                                ?>
+                                <td><?= $row->getBookingId()?></td>
+                                <td><?= $customer[$row->getCusId()]->firstname.' '.$customer[$row->getCusId()]->lastname?></td>
+                                <td><?=$customer[$row->getCusId()]->phoneno?></td>
                                 <!-- <td>Kandy</td> -->
-                                <td>Honda Fit</td>
-                                <td>Kegalle</td>
-                                <td>03-24-22</td>
-                                <td>03-30-22</td>
-                                <td>Cash</td>
-                                <td><div class="status">
-                                        <button class="select-button ">Select </button>
-
-                                    </div></td>
-                            </tr>
-
-                            <tr>
-                                <td>01</td>
-                                <td>Sam David</td>
-                                <td>076-6848398</td>
-                                <!-- <td>Kandy</td> -->
-                                <td>Honda Fit</td>
-                                <td>Kegalle</td>
-                                <td>03-24-22</td>
-                                <td>03-30-22</td>
-                                <td>Cash</td>
-                                <td><div class="status">
-                                        <button class="select-button">Select</button>
-
-                                    </div></td>
-                            </tr>
-                            <tr>
-                                <td>01</td>
-                                <td>Sam David</td>
-                                <td>076-6848398</td>
-                                <!-- <td>Kandy</td> -->
-                                <td>Honda Fit</td>
-                                <td>Kegalle</td>
-                                <td>03-24-22</td>
-                                <td>03-30-22</td>
-                                <td>Cash</td>
-                                <td><div class="status">
-                                        <button class="select-button">Select</button>
-
-                                    </div></td>
-                            </tr>
-                            <tr >
-                                <td>01</td>
-                                <td>Sam David</td>
-                                <td>076-6848398</td>
-                                <!-- <td>Kandy</td> -->
-                                <td>Honda Fit</td>
-                                <td>Kegalle</td>
-                                <td>03-24-22</td>
-                                <td>03-30-22</td>
-                                <td>Cash</td>
-                                <td><div class="status">
-                                        <button class="select-button">Select</button>
-
-                                    </div></td>
-                            </tr>
-                            <tr >
-                                <td>01</td>
-                                <td>Sam David</td>
-                                <td>076-6848398</td>
-                                <!-- <td>Kandy</td> -->
-                                <td>Honda Fit</td>
-                                <td>Kegalle</td>
-                                <td>03-24-22</td>
-                                <td>03-30-22</td>
-                                <td>Cash</td>
+                                <td><?= $vehicle[$row->getVehId()]->getVehBrand().' '.$vehicle[$row->getVehId()]->getVehModel()?></td>
+                                <td><?= $row->getPickupLocation()?></td>
+                                <td><?php echo $row->getStartDate() ?></td>
+                                <td><?php echo $row->getEndDate() ?></td>
+                                <td><?php echo $row->getPayMethod() ?></td>
                                 <td>
                                     <div class="status">
-                                        <button class="select-button">Select </button>
-
+                                        <button class="select-button " onclick="openModal(<?= $row->getBookingId()?>)">Select </button>
+                                    </div>
                                 </td>
                             </tr>
-                            <script src="vehreq.js"></script>
+                            <?php
+                            endif;
+                            endforeach;
+                            ?>
                             </tbody>
                         </table>
                     </div>
@@ -164,38 +122,112 @@ use app\models\viewCustomerReq;
                         </thead>
                         <tbody>
                         <?php
+
                         foreach ($model as $row):
                             if ($row->getStatus() == 0 && $row->getDriverReq() == 0):
-                            ?>
-                            <tr>
-                                <td><?php echo $row->getBookingId() ?></td>
-                                <td><?php echo $row->getCusId()==1? "Kasun Perera":"Supun Thilanka"?></td>
-                                <td>076-6848398</td>
-                                <!-- <td>Kandy</td> -->
-                                <td>Honda Fit</td>
-                                <td><?php echo $row->getPickupLocation() ?></td>
-                                <td><?php echo $row->getStartDate() ?></td>
-                                <td><?php echo $row->getEndDate() ?></td>
-                                <td><?php echo $row->getPayMethod() ?></td>
-                                <td><?php echo $row->getNote() ?></td>
 
-                                <td><div class="status">
-                                        <button onclick="openPopup(<?= $row->getBookingId() ?>)" class="accept-button">Accept </button>
-                                        <button onclick="displayRejectPopup()" class="reject-button">Reject</button>
+                                ?>
+                                <tr>
+                                    <td><?php echo $row->getBookingId() ?></td>
+                                    <td><?php echo $customer[$row->getCusId()]->firstname.' '.$customer[$row->getCusId()]->lastname?></td>
+                                    <td><?php echo $customer[$row->getCusId()]->phoneno?></td>
+                                    <!-- <td>Kandy</td> -->
+                                    <td><?php echo $vehicle[$row->getVehId()]->getVehBrand().' '.$vehicle[$row->getVehId()]->getVehModel()?></td>
+                                    <td><?php echo $row->getPickupLocation() ?></td>
+                                    <td><?php echo $row->getStartDate() ?></td>
+                                    <td><?php echo $row->getEndDate() ?></td>
+                                    <td><?php echo $row->getPayMethod() ?></td>
+                                    <td><?php echo $row->getNote() ?></td>
 
-                                    </div></td>
-                            </tr>
-                        <?php
+                                    <td><div class="status">
+                                            <form method="post">
+                                                <input type="hidden" name="booking_Id" value="<?= $row->getBookingId() ?>">
+                                                <input type="hidden" name="status" value="1">
+                                                <input type="submit" class="accept-button" value="Accept">
+                                            </form>
+
+                                            <button onclick="openPopup(<?= $row->getBookingId() ?>)" class="accept-button">Accept </button>
+                                            <button onclick="displayRejectPopup()" class="reject-button">Reject</button>
+
+                                        </div></td>
+                                </tr>
+
+                            <?php
                             endif;
                         endforeach;
                         ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 
+
+        <!--                            Driver Pop-up -->
+        <div id="popup-driver" class="popup-container">
+            <div class="popup-box">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <div class="drivers-list">
+
+
+                    <table class="table">
+                        <input type="hidden" id="pickupLocation" value="">
+
+                        <thead>
+                        <tr>
+
+                            <th>Driver Name</th>
+                            <th>Telephone No.</th>
+                            <th>Location</th>
+                            <th>Reviews</th>
+                            <th>Assign Driver</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        // $booking_ID =
+                        foreach ($driver as $drow):
+                            if ($drow->getStatus() == 1):
+                                ?>
+                                <tr>
+                                    <input type="hidden" id="bookingId" value="<?= $row->getBookingId() ?>">
+                                    <td><?= $drow->getDriverFname().' '.$drow->getDriverLname()?></td>
+                                    <td><?= $drow->getPhoneNo()?></td>
+                                    <td><?= $drow->getArea()?></td>
+
+
+                                    <td>10 reviews</td>
+
+
+                                    <td>
+                                        <div class="status">
+<!--                                            <button class="assign-button">Assign </button>-->
+                                            <form method="post">
+                                                <input name="type" value="driver" hidden>
+                                                <input id="booking-id" type="hidden" name="booking_Id" value="">
+                                                <input type="hidden" name="driver_ID" value="<?= $drow->getDriverId() ?>">
+                                                <input type="hidden" name="status" value="1">
+                                                <input type="submit" class="accept-button" value="Send request">
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            <?php
+                            endif;
+                        endforeach;
+                        ?>
 
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+
+
+
+
+
 
 
 
@@ -222,3 +254,23 @@ use app\models\viewCustomerReq;
         <button onclick="closePopup()" id="no-button">No</button>
     </div>
 </div>
+
+
+
+
+
+/* Popup JS */
+<script>
+    const modal = document.getElementById("popup-driver");
+
+    function closeModal() {
+        modal.style.display = "none";
+    }
+
+    function openModal($id) {
+        modal.style.display = "block";
+        const bookingId = document.getElementById("booking-id");
+        bookingId.value = $id;
+
+    }
+</script>
