@@ -14,6 +14,7 @@ use app\models\VehBooking;
 use app\models\cusVehicle;
 use app\models\vehicle;
 use app\models\vehicle_Owner;
+use app\models\vehiclecomplaint;
 use app\models\VehInfo;
 use app\models\vehOwner_complaints;
 
@@ -369,7 +370,7 @@ class CustomerController extends Controller
 
                 if (isset($_FILES['images'])) {
                     $fileCount = count($_FILES['images']['name']);
-                    $uploadDir = Application::$ROOT_DIR.'/public/assets/img/uploads/customer-complaints/';
+                    $uploadDir = Application::$ROOT_DIR . '/public/assets/img/uploads/customer-complaints/';
 
                     for ($i = 0; $i < $fileCount; $i++) {
                         $fileName = uniqid() . '-' . $_FILES['images']['name'][$i];
@@ -401,6 +402,58 @@ class CustomerController extends Controller
                     $response->redirect('/Customer/Complaints');
                     return;
                 }
+            }if ($request->getBody()['complaint-about'] === 'vehicle'){
+                $complaint = new vehiclecomplaint();
+                $complaint->setComID('VC'.uniqid(true));
+                $complaint->setCusId($cusId);
+                $customer = Customer::findOne(['cus_Id' => $cusId]);
+                $complaint->setCusName($customer->firstname.' '.$customer->lastname);
+                $complaint->loadData($request->getBody());
+                $vehicle = vehicle::findOne(['veh_Id' => $request->getBody()['veh_Id']]);
+                $complaint->setVehicleNo($vehicle->getPlateNo());
+                $complaint->setComplaint(trim($request->getBody()['complaint']));
+
+//                echo '<pre>';
+//                var_dump($complaint);
+//                echo '</pre>';
+//                exit();
+
+                if (isset($_FILES['images'])) {
+                    $uploadDir = Application::$ROOT_DIR . '/public/assets/img/uploads/customer-complaints/';
+
+                        $fileName = uniqid().'-'.$_FILES['images']['name'][0];
+                        $uploadFile = $uploadDir . $fileName;
+
+                        if (move_uploaded_file($_FILES['images']['tmp_name'][0], $uploadFile)) {
+                                $complaint->setProof($fileName);
+                        } else {
+                            $complaint->addError('proof', 'File was not uploaded.');
+                            die('File was not uploaded.');
+                        }
+
+                    if ($complaint->save()) {
+                        Application::$app->session->setFlash('success', 'Complaint sent successfully!');
+                        $response->redirect('/Customer/Complaints');
+                        return;
+                    }else {
+                        echo '<pre>';
+                        var_dump($complaint->errors);
+                        echo '</pre>';
+                        exit();
+                        $params = [
+                            'bookings' => $bookings,
+                            'vehOwners' => $vehOwners,
+                            'vehicles' => $vehicles,
+                            'complaint' => $complaint
+                        ];
+
+                        $this->setLayout('customer-dashboard');
+                        return $this->render('Customer/v_customerComplaints', $params);
+                    }
+
+
+                }
+
             }
         }
 
