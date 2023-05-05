@@ -18,6 +18,7 @@ use app\models\veh_license;
 use app\models\VehBooking;
 use app\models\vehicle;
 use app\models\vehicle_Owner;
+use app\models\vehicleowner;
 use app\models\VehInfo;
 use app\models\viewCustomerReq;
 
@@ -31,7 +32,7 @@ class VehicleOwnerController extends Controller
 
     public function VehicleOwnerVehicle(Request $req, Response $res){
         if (Application::$app->session->get("user_role")==="vehicleowner"){
-            $voId = Application::$app->user->getVoID();
+            $voId = Application::$app->user->vo_ID;
             $vehicles = vehicle::retrieveAll(['vo_ID'=>$voId]);
 
             $param = [
@@ -54,33 +55,35 @@ class VehicleOwnerController extends Controller
     }
     public function vehownerViewProfile(Request $req,Response $res){
 
+        $vo_ID = Application::$app->user->vo_ID;
+        $vehowner = vehicleowner::findOne(['vo_ID' => $vo_ID]);
 
-            $vehowner = new vehicle_Owner();
-            $vehicleowner = $vehowner->Vehicleowner_profile(Application::$app->session->get("user"));
-            $id = Application::$app->session->get("user_id");
-            $nic = $vehicleowner[0]['Nic'];
+        if ($req->isPost()) {
+            $vehowner->loadData($req->getBody());
 
-            if ($req->isPost()) {
-                $vehicleowner = [new vehicle_Owner()];
-                $vehicleowner[0]->loadData($req->getBody());
-
-                if ($vehicleowner[0]->update($nic, ['owner_Fname', 'owner_Lname', 'phone_No', 'owner_address', 'license_No'])) {
-                    $req->session->setFlash('success', 'Profile Updated Successfully!');
-                    $res->redirect('/vehicleOwner/Profile');
-                    return;
-                } else {
-                    echo '<pre>';
-                    var_dump("fail");
-                    echo '</pre>';
-                    exit();
-                }
-//                $req->setFlash('profileUpdateErr', 'There was some error in updating your profile!');
-                return $res->render("VehicleOwner/vehicleOwnerProfile", "vehicleOwner-dashboard", ['vehicleowner' => $vehicleowner]);
-
+            if ($vehowner->update($vo_ID, ['owner_Fname', 'owner_Lname', 'phone_No', 'owner_address'])) {
+                $req->session->setFlash('success', 'Profile Updated Successfully!');
+                $res->redirect('/vehicleOwner/Profile');
+                return;
+            } else {
+                echo '<pre>';
+                var_dump("fail");
+                echo '</pre>';
+                exit();
             }
 
 
-            return $res->render("VehicleOwner/vehicleOwnerProfile", "vehicleOwner-dashboard", ['vehicleowner' => $vehicleowner]);
+//                $req->setFlash('profileUpdateErr', 'There was some error in updating your profile!');
+            return $res->render("VehicleOwner/vehicleOwnerProfile", "vehicleOwner-dashboard", $params);
+
+        }
+
+        $params = [
+            'vehicleowner' => $vehowner
+        ];
+
+
+            return $res->render("VehicleOwner/vehicleOwnerProfile", "vehicleOwner-dashboard", $params);
 
     }
 
@@ -177,15 +180,13 @@ class VehicleOwnerController extends Controller
 
     public function viewCustomerPendingRequests(Request $request, Response $response): string
     {
+
         $cusReq = viewCustomerReq::retrieveAll();
         $customer = Customer::retrieveAll();
         $vehicle = vehicle::retrieveAll();
         $driver = driver::retrieveAll();
 
-//        echo '<pre>';
-//        var_dump($driver);
-//        echo '</pre>';
-//        exit();
+
 
         $getCustomerById = [];
         $getVehicleById = [];
@@ -504,10 +505,32 @@ class VehicleOwnerController extends Controller
 
 //    !!!!!!!!!!!!
 //vehicle owner view vehicle profile to be completed
-    public function viewVehicleProfile(Request $request,Response $response)
+    public function VehicleProfile(Request $request,Response $response)
     {
+        $vehID = $request->getBody()['id'];
+        $vehicle = vehicle::findOne(['veh_Id' => $vehID]);
+        $vehInfo = VehInfo::findOne(['veh_Id' => $vehID]);
+        $vehLicense = veh_license::findOne(['veh_Id' => $vehID]);
+        $vehInsurance = veh_insurance::findOne(['veh_Id' => $vehID]);
+        $vehEcoTest = veh_ecotest::findOne(['veh_Id' => $vehID]);
+
+//        echo '<pre>';
+//        var_dump($vehEcoTest);
+//        echo '</pre>';
+//        exit();
+
+
+
+
+        $param = [
+            'vehicle' => $vehicle,
+            'vehInfo' => $vehInfo,
+            'vehLicense' => $vehLicense,
+            'vehInsurance' => $vehInsurance,
+            'vehEcoTest' => $vehEcoTest
+        ];
         $this->setLayout("vehicleOwner-dashboard");
-        return $this->render("/VehicleOwner/vehicleOwnerViewVehicleProfile");
+        return $this->render("/VehicleOwner/vehicleOwnerViewVehicleProfile", $param);
     }
 
 

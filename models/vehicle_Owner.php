@@ -13,18 +13,18 @@ use app\core\Database;
 class vehicle_Owner extends dbModel
 {
     protected string $vo_ID = '';
-    protected string $Nic;
+    protected string $Nic = '';
     protected string $owner_Fname;
     protected string $owner_Lname;
     protected string $owner_area = '';
     protected string $owner_address;
     protected string $phone_No;
     protected string $gender = '';
-    protected string $email;
+    protected string $email = '';
     protected string $license_No ;
-    protected string $password;
+    protected string $password = '';
     public string $passwordConfirm = '';
-    protected ?string $profile_pic = '';
+    protected string $profile_pic = '';
 
 
     // private \PDO $pdo;
@@ -140,7 +140,7 @@ class vehicle_Owner extends dbModel
     public function attributes(): array
     {
         //return the above created properties
-        return ['Nic', 'owner_Fname', 'owner_Lname', 'owner_area', 'owner_address', 'phone_No', 'gender', 'email', 'password', 'profile_pic'];
+        return ['Nic', 'owner_Fname', 'owner_Lname', 'owner_address', 'phone_No', 'gender', 'email', 'password'];
     }
 
     public static function primaryKey(): string

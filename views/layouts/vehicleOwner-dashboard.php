@@ -110,6 +110,15 @@ use app\core\Application;
         </li>
 
 
+
+        <li>
+            <a href="/vehicleOwner/Complaints">
+                <i class='bx bx-comment-error' ></i>
+                <span class="links_name">Complaints</span>
+            </a>
+            <span class="tooltip">Complaints</span>
+        </li>
+
         <li class="/logout">
             <a href="/logout" class="logout">
                 <i class='bx bx-log-out' ></i>

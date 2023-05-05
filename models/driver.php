@@ -28,7 +28,7 @@ class driver extends dbModel
     public string $gender;
     public string $admin_approved;
     public string $password;
-    public string $profile_pic;
+//    public string $profile_pic;
 
 
     public function __construct(array $registerBody=[])
@@ -54,7 +54,7 @@ class driver extends dbModel
     }
     public function attributes(): array
     {
-        return ['Nic','driver_Fname','driver_Lname','email','phone_No','area','address','gender','admin_approved','password'];
+        return ['Nic','driver_Fname','driver_Lname','email','phoneNo','area','address','gender','admin_approved','password', 'profile_pic', 'license_No', 'status'];
     }
 
 
