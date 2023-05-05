@@ -34,3 +34,17 @@ vehiclecomplaint table
 
 add status VARCHAR(50) DEFAULT 'Pending' to the table
 change com_ID to VARCHAR(255)
+
+
+system Complaints table
+
+CREATE TABLE system_complaints (
+  id VARCHAR(255) NOT NULL,
+  cus_ID INT NOT NULL,
+  complaint VARCHAR(255),
+  status VARCHAR(50) DEFAULT 'Pending',
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  FOREIGN KEY (cus_ID) REFERENCES customer(cus_ID)
+);
+

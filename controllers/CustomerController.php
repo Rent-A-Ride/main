@@ -9,6 +9,7 @@ use app\core\Request;
 use app\core\Response;
 use app\models\CancelBookings;
 use app\models\Customer;
+use app\models\system_complaints;
 use app\models\veh_Reviews;
 use app\models\VehBooking;
 use app\models\cusVehicle;
@@ -364,31 +365,7 @@ class CustomerController extends Controller
             if ($request->getBody()["complaint-about"] === 'vehicle-owner') {
                 $complaint = new vehOwner_complaints();
                 $complaint->setCid(uniqid(true));
-                $complaint->setCusId($cusId);
-                $complaint->loadData($request->getBody());
-                $complaint->setComplaint(trim($request->getBody()['complaint']));
-
-                if (isset($_FILES['images'])) {
-                    $fileCount = count($_FILES['images']['name']);
-                    $uploadDir = Application::$ROOT_DIR . '/public/assets/img/uploads/customer-complaints/';
-
-                    for ($i = 0; $i < $fileCount; $i++) {
-                        $fileName = uniqid() . '-' . $_FILES['images']['name'][$i];
-                        $uploadFile = $uploadDir . $fileName;
-
-                        if (move_uploaded_file($_FILES['images']['tmp_name'][$i], $uploadFile)) {
-                            if ($i === 0) {
-                                $complaint->setImage1($fileName);
-                            } else if ($i === 1) {
-                                $complaint->setImage2($fileName);
-                            } else if ($i === 2) {
-                                $complaint->setImage3($fileName);
-                            }
-                        } else {
-                            die('File was not uploaded.');
-                        }
-                    }
-                }
+                $this->cusComplaint($complaint, $cusId, $request);
 
                 echo '<pre>';
                 var_dump($complaint);
@@ -402,7 +379,8 @@ class CustomerController extends Controller
                     $response->redirect('/Customer/Complaints');
                     return;
                 }
-            }if ($request->getBody()['complaint-about'] === 'vehicle'){
+            }
+            if ($request->getBody()['complaint-about'] === 'vehicle'){
                 $complaint = new vehiclecomplaint();
                 $complaint->setComID('VC'.uniqid(true));
                 $complaint->setCusId($cusId);
@@ -455,6 +433,33 @@ class CustomerController extends Controller
                 }
 
             }
+            if ($request->getBody()['complaint-about'] === 'system') {
+                $complaint = new system_complaints();
+                $complaint->setCid("SC".uniqid(true));
+                $this->cusComplaint($complaint, $cusId, $request);
+
+                if ($complaint->save()) {
+                    Application::$app->session->setFlash('success', 'Complaint sent successfully!');
+                    $response->redirect('/Customer/Complaints');
+                    return;
+                }else {
+//                    echo '<pre>';
+//                    var_dump($complaint->errors);
+//                    echo '</pre>';
+//                    exit();
+                    $params = [
+                        'bookings' => $bookings,
+                        'vehOwners' => $vehOwners,
+                        'vehicles' => $vehicles,
+                        'complaint' => $complaint
+                    ];
+
+                    $this->setLayout('customer-dashboard');
+                    return $this->render('Customer/v_customerComplaints', $params);
+                }
+
+
+            }
         }
 
 //        if ($request->isGet()){
@@ -492,5 +497,45 @@ class CustomerController extends Controller
 
         $cus_Id = Application::$app->user->cus_Id;
         return $cus_Id;
+    }
+
+    /**
+     * @param system_complaints $complaint
+     * @param $cusId
+     * @param Request $request
+     * @return void
+     */
+    public function cusComplaint(system_complaints $complaint, $cusId, Request $request): void
+    {
+        $complaint->setCusId($cusId);
+        $complaint->loadData($request->getBody());
+        $complaint->setComplaint(trim($request->getBody()['complaint']));
+
+//                echo '<pre>';
+//                var_dump($complaint);
+//                echo '</pre>';
+//                exit();
+
+        if (isset($_FILES['images'])) {
+            $fileCount = count($_FILES['images']['name']);
+            $uploadDir = Application::$ROOT_DIR . '/public/assets/img/uploads/customer-complaints/';
+
+            for ($i = 0; $i < $fileCount; $i++) {
+                $fileName = uniqid() . '-' . $_FILES['images']['name'][$i];
+                $uploadFile = $uploadDir . $fileName;
+
+                if (move_uploaded_file($_FILES['images']['tmp_name'][$i], $uploadFile)) {
+                    if ($i === 0) {
+                        $complaint->setImage1($fileName);
+                    } else if ($i === 1) {
+                        $complaint->setImage2($fileName);
+                    } else if ($i === 2) {
+                        $complaint->setImage3($fileName);
+                    }
+                } else {
+                    die('File was not uploaded.');
+                }
+            }
+        }
     }
 }
