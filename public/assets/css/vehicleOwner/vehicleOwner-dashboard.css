@@ -3,6 +3,9 @@
 
 @import url('../components/nav.css');
 
+/* nav profile css */
+@import url('../components/navProfile.css');
+
 @import url('../components/sidebar.css');
 
 @import url('../components/style.css');
