@@ -1,5 +1,7 @@
 <?php
 
+use app\core\Application;
+
  ?>
 
 <!DOCTYPE html>
@@ -107,10 +109,15 @@
         <ul class="nav-list" id="nav-list">
             <!-- <li class="list-item 1"><a href="#">Sign in</a></li>
             <li class="list-item 2"><a href="#">Register</a></li>       -->
-            <div class="vision"><p>Mobility Without Hassel</p> </div>
+            <!-- <div class="vision"><p>Mobility Without Hassel</p> </div> -->
             <div class="profile-cont">
-                <span class="profile-name">Kalana</span>
-                <div class="img-cont"><img src="img/profile.png" class="profile-image"></div>
+                <span class="profile-name"><?= Application::$app->user->displayName(); ?></span>
+                <div class="img-cont"><img src="/assets/img/user_profile/<?= Application::$app->user->userprofile('profile_pic')?>" class="profile-image"></div>
+                <div class="profile-menu" style="display: none;">
+                    <a href="/ownerProfile">My Profile</a>
+                    <a href="/admin/Settings">Settings</a>
+                    <a href="/logout">Logout</a>
+                </div>
             </div>
 
         </ul>

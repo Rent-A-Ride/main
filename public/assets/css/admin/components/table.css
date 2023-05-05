@@ -80,7 +80,10 @@
 .table th,
 .table td{
     padding: 12px 15px;
+<<<<<<< HEAD
+=======
     text-align: center;
+>>>>>>> a3b4b81b7c9a1d231e73039103cc514f02c2c7fc
 
 
 }

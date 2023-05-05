@@ -1,7 +1,7 @@
 <?php
 use app\core\Application;
 
-/* @var $vehicleowner \app\models\vehicle_Owner */
+/* @var $vehicleowner \app\models\vehicleowner */
 ?>
 <h2 class="page-name">Profile</h2>
 
@@ -38,36 +38,32 @@ use app\core\Application;
             <div class="info_data">
                 <div class="data">
                     <h6>NIC</h6>
-                    <p><?php echo $vehicleowner[0]["Nic"] ?></p>
+                    <p><?php echo $vehicleowner->getNic() ?></p>
                 </div>
                 <div class="data">
                     <h6>First Name</h6>
-                    <p><?php echo $vehicleowner[0]["owner_Fname"] ?></p>
+                    <p><?php echo $vehicleowner->getOwnerFname() ?></p>
                 </div>
                 <div class="data">
                     <h6>Last Name</h6>
-                    <p><?php echo $vehicleowner[0]["owner_Lname"] ?></p>
+                    <p><?php echo $vehicleowner->getOwnerLname() ?></p>
                 </div>
 
                 <div class="data">
                     <h6>Email</h6>
-                    <p><?php echo $vehicleowner[0]["email"] ?></p>
+                    <p><?php echo $vehicleowner->getEmail() ?></p>
                 </div>
                 <div class="data">
                     <h6>Phone No</h6>
-                    <p><?php echo $vehicleowner[0]["phone_No"] ?></p>
+                    <p><?php echo $vehicleowner->getPhoneNo() ?></p>
                 </div>
                 <div class="data">
                     <h6>Address</h6>
-                    <p><?php echo $vehicleowner[0]["owner_address"] ?></p>
+                    <p><?php echo $vehicleowner->getOwnerAddress() ?></p>
                 </div>
                 <div class="data">
                     <h6>Gender</h6>
-                    <p><?php echo $vehicleowner[0]['gender'] ?></p>
-                </div>
-                <div class="data">
-                    <h6>License Number</h6>
-                    <p><?php echo $vehicleowner[0]["license_No"] ?></p>
+                    <p><?php echo $vehicleowner->getGender() ?></p>
                 </div>
 
             </div>
@@ -82,26 +78,27 @@ use app\core\Application;
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
         <form method="post" class="up-profile">
+            <input hidden name="vo_ID" value="<?= $vehicleowner->vo_ID?>">
             <label for="nic">NIC:</label>
-            <input disabled value="<?= $vehicleowner[0]["Nic"] ?>" type="text" id="nic" name="Owner_Nic">
+            <input readonly  value="<?= $vehicleowner->getNic() ?>" type="text" id="nic" name="Nic">
 
             <label for="fname">First Name:</label>
-            <input value="<?= $vehicleowner[0]["owner_Fname"] ?>" type="text" id="fname" name="owner_Fname">
+            <input value="<?= $vehicleowner->getOwnerFname() ?>" type="text" id="fname" name="owner_Fname">
 
             <label for="lname">Last Name:</label>
-            <input value="<?= $vehicleowner[0]["owner_Lname"] ?>" type="text" id="lname" name="owner_Lname">
+            <input value="<?= $vehicleowner->getOwnerLname() ?>" type="text" id="lname" name="owner_Lname">
 
             <label for="email">Email:</label>
-            <input disabled value="<?= $vehicleowner[0]["email"] ?>" type="email" id="email" name="email">
+            <input disabled value="<?= $vehicleowner->getEmail() ?>" type="email" id="email" name="email">
 
             <label for="phone">Phone Number:</label>
-            <input value="<?= $vehicleowner[0]["phone_No"] ?>" type="tel" id="phone" name="phone_No">
+            <input value="<?= $vehicleowner->getPhoneNo() ?>" type="tel" id="phone" name="phone_No">
 
             <label for="address">Address:</label>
-            <textarea id="address" name="owner_address"><?=$vehicleowner[0]["owner_address"]?></textarea>
+            <textarea id="address" name="owner_address"><?=$vehicleowner->getOwnerAddress()?></textarea>
 
-            <label for="licenseNo">License No:</label>
-            <textarea id="address" name="license_No"><?=$vehicleowner[0]["license_No"]?></textarea>
+<!--            <label for="licenseNo">License No:</label>-->
+<!--            <textarea id="address" name="license_No">--><?php //=$vehicleowner[0]["license_No"]?><!--</textarea>-->
 
             <div class="errors">
                 <span class="form-error"></span>

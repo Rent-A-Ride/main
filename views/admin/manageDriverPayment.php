@@ -10,6 +10,7 @@ use app\models\viewCustomerReq;
 
         <a  href="/admin/managepayment">Vehicle Owners Payments</a>
         <a id="active" href="/admin/managedriverpayment">Drivers Payments</a>
+        <a  href="/admin/manageCustomerPayment">Customers Payments</a>
 
 
 

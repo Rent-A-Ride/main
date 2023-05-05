@@ -1,7 +1,7 @@
 import {Modal} from "../component/Modal.js";
 import {htmlToElement} from "../utils/index.js"
 const confirmbtn = document.querySelectorAll(".payment-confirm");
-console.log(confirmbtn)
+const confirmdbtn = document.querySelectorAll(".payment-confirmd")
 
 confirmbtn.forEach(function (btn) {
     btn.addEventListener("click", function () {
@@ -45,11 +45,10 @@ confirmbtn.forEach(function (btn) {
             closable: true,
         });
         // console.log("kalana");
-    })
+    });
 
-    const confirmdbtn = document.querySelectorAll(".payment-confirmd")
-
-    confirmdbtn.forEach(function (btn) {
+    
+confirmdbtn.forEach(function (btn) {
         btn.addEventListener("click", function () {
         
         const vo_id=btn.dataset.vo_id;
@@ -93,4 +92,4 @@ confirmbtn.forEach(function (btn) {
         // console.log("kalana");
     })
 })
-})
+});

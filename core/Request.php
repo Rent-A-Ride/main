@@ -68,4 +68,23 @@ class Request extends Controller
 
         return $body;
     }
+
+    public function getFile($name): ?array
+    {
+        if (isset($_FILES[$name])) {
+            $file = $_FILES[$name];
+            $filename = $file['name'];
+            $tmp_name = $file['tmp_name'];
+            $error = $file['error'];
+
+            if ($error === UPLOAD_ERR_OK) {
+                return [
+                    'name' => $filename,
+                    'tmp_name' => $tmp_name
+                ];
+            }
+        }
+        return null;
+    }
+
 }

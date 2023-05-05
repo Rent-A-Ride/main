@@ -6,6 +6,10 @@
     font-weight: bold;
     text-align: center;
     display: inline-block;
+<<<<<<< HEAD
+    margin-bottom: 20px;
+=======
+>>>>>>> a3b4b81b7c9a1d231e73039103cc514f02c2c7fc
 }
 
 .flash-message.success {

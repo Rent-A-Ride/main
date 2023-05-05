@@ -97,7 +97,7 @@ class VehicleController extends Controller
 
             $vehicleModel = new vehicle();
             $vehicles = $vehicleModel->getVehicletoAdd();
-//            print_r($vehicles);
+            
             return $vehicles;
 //            return $res->render(view: "admin-vehicle",layout: "owner-dashboard",pageParams: ["vehicles"=>$vehicles]);
 
@@ -108,12 +108,12 @@ class VehicleController extends Controller
             $query=$req->query();
             $vehicleModel = new vehicle();
 
-            $vehicleModel->getVehicletoAdd((int)$query["id"]);
+            $vehicleModel->adminacceptVehicle((int)$query["id"]);
             $vehicleModel->adminacceptVehiclelicense((int)$query["id"]);
             $vehicleModel->adminacceptVehicleinsuarance((int)$query["id"]);
-            $vehicles = $vehicleModel->getVehicletoAdd();
+            // $vehicles = $vehicleModel->getVehicletoAdd();
 //            print_r($vehicles);
-            return $vehicles;
+            return true;
 //            return $res->render(view: "admin-vehicle",layout: "owner-dashboard",pageParams: ["vehicles"=>$vehicles]);
 
     }

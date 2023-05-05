@@ -12,16 +12,17 @@ use app\core\Database;
 
 class vehicle_Owner extends dbModel
 {
-    protected string $Nic;
+    protected string $vo_ID = '';
+    protected string $Nic = '';
     protected string $owner_Fname;
     protected string $owner_Lname;
     protected string $owner_area = '';
     protected string $owner_address;
     protected string $phone_No;
     protected string $gender = '';
-    protected string $email;
+    protected string $email = '';
     protected string $license_No ;
-    protected string $password;
+    protected string $password = '';
     public string $passwordConfirm = '';
     protected string $profile_pic = '';
 
@@ -60,6 +61,24 @@ class vehicle_Owner extends dbModel
 
     }
 
+    /**
+     * @return string
+     */
+    public function getVoID(): string
+    {
+        return $this->vo_ID;
+    }
+
+    /**
+     * @param string $vo_ID
+     */
+    public function setVoID(string $vo_ID): void
+    {
+        $this->vo_ID = $vo_ID;
+    }
+
+
+
     public function getVehicleowner(){
         return Application::$app->db->pdo->query("SELECT * FROM vehicleowner WHERE vehicleowner.admin_approved=1 ")->fetchAll(\PDO::FETCH_ASSOC);
 
@@ -89,7 +108,7 @@ class vehicle_Owner extends dbModel
     public function attributes(): array
     {
         //return the above created properties
-        return ['Nic', 'owner_Fname', 'owner_Lname', 'owner_area', 'owner_address', 'phone_No', 'gender', 'email', 'password', 'profile_pic'];
+        return ['Nic', 'owner_Fname', 'owner_Lname', 'owner_address', 'phone_No', 'gender', 'email', 'password'];
     }
 
     public static function primaryKey(): string

@@ -91,7 +91,6 @@ body {
     transform: translate(0, -5px) rotate(45deg);
 }
 
-
 @media all and (max-width: 480px) {
     .navbar {
         flex-direction: column;
