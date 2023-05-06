@@ -53,7 +53,6 @@
     font-size: 18px;
     margin-top: 10px;
     padding-left: 10px;
-
 }
 
 .vehicle-features {
@@ -67,6 +66,17 @@
 
 .vehicle-features > span {
     padding-left: 10px;
+}
+
+.vehicle-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-size: 1rem ;
+    font-weight: bold;
+    background-image: linear-gradient(to right, #fab84c, #f5f5f5);
 }
 
 #gallery {
@@ -191,16 +201,19 @@ img.small{
     border-radius: 15px;
 }
 
-.vehicle-description {
+.vehicle-description , .lic-ex-date, .ins-ex-date{
     display: flex;
     margin: 2%;
     justify-content: space-between;
     align-items: flex-start;
 }
 
-.vehicle-description > p {
+.vehicle-description > p , .lic-ex-date >p , .ins-ex-date >p {
     padding: 10px;
 
     text-align: left;
     text-justify: inter-word;
 }
+
+
+
