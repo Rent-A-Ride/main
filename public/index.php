@@ -267,9 +267,13 @@ $app->router->get("/Customer/ExpieringNotification", [VehicleOwnerController::cl
 
 
 
-
 //vehicle owner view vehicle profile
 $app->router->get("/vehicleOwner/viewVehicleProfile", [VehicleOwnerController::class, 'VehicleProfile']);
+
+
+//vehicle owner edit vehicle profile details
+$app->router->get("/vehicleOwner/editVehicleProfile", [VehicleOwnerController::class, 'editVehicleProfile']);
+$app->router->post("/vehicleOwner/editVehicleProfile", [VehicleOwnerController::class, 'editVehicleProfile']);
 
 $app->run();
 

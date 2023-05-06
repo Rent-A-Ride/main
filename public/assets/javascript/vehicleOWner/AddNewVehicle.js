@@ -100,13 +100,23 @@ vehicleType.addEventListener("input", () => {
   }
   rangeSlider.min = min;
   rangeSlider.max = max;
-  rangeSlider.value = min;
-  rangeValue.textContent = `Value: Rs. ${min}`; // set initial value
+
+//  if rangeSlider.value is not empty then set rangeValue.textContent to rangeSlider.value
+    if (rangeSlider.value){
+      rangeValue.textContent = `Value: Rs. ${rangeSlider.value}`;
+    }else{
+        rangeSlider.value = min;
+        rangeValue.textContent = `Value: Rs. ${min}`;
+    }
+
 });
 
 rangeSlider.addEventListener("input", () => {
   rangeValue.textContent = `Value: Rs. ${rangeSlider.value}`;
 });
+
+rangeSlider.value = rangeSlider.value;
+console.log(rangeSlider.value);
 
 
 

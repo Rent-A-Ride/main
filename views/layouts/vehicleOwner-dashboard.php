@@ -179,4 +179,5 @@ use app\core\Application;
 <script src="/assets/javascript/vehicleOwner/profile.js"></script>
 <script src="/assets/javascript/vehicleOwner/AddNewVehicle.js"></script>
 <script src="/assets/javascript/vehicleOwner/BookingCalendar.js"></script>  <!-- calendar -->
+<script src="/assets/javascript/vehicleOwner/vehProfileEdit.js"></script>
 </html>

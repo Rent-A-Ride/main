@@ -20,6 +20,7 @@ use app\models\vehicle;
 use app\models\vehicle_Owner;
 use app\models\vehicleowner;
 use app\models\VehInfo;
+use app\models\VehRates;
 use app\models\viewCustomerReq;
 
 class VehicleOwnerController extends Controller
@@ -503,8 +504,7 @@ class VehicleOwnerController extends Controller
         return $this->render("/VehicleOwner/vo_bookingCalendar");
     }
 
-//    !!!!!!!!!!!!
-//vehicle owner view vehicle profile to be completed
+
     public function VehicleProfile(Request $request,Response $response)
     {
         $vehID = $request->getBody()['id'];
@@ -533,6 +533,56 @@ class VehicleOwnerController extends Controller
         return $this->render("/VehicleOwner/vehicleOwnerViewVehicleProfile", $param);
     }
 
+
+    public function editVehicleProfile(Request $request,Response $response)
+    {
+        $vehID = $request->getBody()['id'];
+        $vehicle = vehicle::findOne(['veh_Id' => $vehID]);
+        $vehRates = VehRates::findOne(['vehType' => $vehicle->getVehType()]);
+        $vehInfo = VehInfo::findOne(['veh_Id' => $vehID]);
+        $vehLicense = veh_license::findOne(['veh_Id' => $vehID]);
+        $vehInsurance = veh_insurance::findOne(['veh_Id' => $vehID]);
+        $vehEcoTest = veh_ecotest::findOne(['veh_Id' => $vehID]);
+
+//        echo '<pre>';
+//        var_dump($vehEcoTest);
+//        echo '</pre>';
+//        exit();
+
+        //update vehicle details
+        if($request->isPost())
+        {
+
+             $vehicle->loadData($request->getBody());
+            $vehInfo->loadData($request->getBody());
+            $vehLicense->loadData($request->getBody());
+            $vehInsurance->loadData($request->getBody());
+            $vehEcoTest->loadData($request->getBody());
+
+            echo '<pre>';
+            var_dump($vehicle);
+            echo '</pre>';
+            exit();
+
+            if (($vehicle->validate() && $vehicle->update()) && ($vehInfo->validate() && $vehInfo->update()) && ($vehLicense->validate() && $vehLicense->update()) && ($vehInsurance->validate() && $vehInsurance->update()) && ($vehEcoTest->validate() && $vehEcoTest->update()))
+            {
+                return $response->redirect('/vehicleOwner/vehicleProfile?id='.$vehID);
+            }
+        }
+
+
+
+        $param = [
+            'vehicle' => $vehicle,
+            'vehInfo' => $vehInfo,
+            'vehLicense' => $vehLicense,
+            'vehRates' => $vehRates,
+            'vehInsurance' => $vehInsurance,
+            'vehEcoTest' => $vehEcoTest
+        ];
+        $this->setLayout("vehicleOwner-dashboard");
+        return $this->render("/VehicleOwner/VOEditVehDetails", $param);
+    }
 
 
 
