@@ -16,6 +16,7 @@ use app\models\cusVehicle;
 use app\models\vehicle;
 use app\models\vehicle_Owner;
 use app\models\vehiclecomplaint;
+use app\models\vehicleowner;
 use app\models\VehInfo;
 use app\models\vehOwner_complaints;
 
@@ -115,6 +116,7 @@ class CustomerController extends Controller
         $id=$request->getBody()['id'] ?? '';
         $vehInfo = VehInfo::findOne(['veh_Id' => $id]);
         $vehicle = cusVehicle::findOne(['veh_Id' => $id]);
+        $vehOwner = vehicleowner::findOne(['vo_Id' => $vehicle->getVoId()]);
         $vehBooking = new VehBooking();
         $cus_Id = Application::$app->user->cus_Id;
 
@@ -171,7 +173,8 @@ class CustomerController extends Controller
                 $params = [
                     'vehInfo' => $vehInfo,
                     'vehicle' => $vehicle,
-                    'vehBooking' => $vehBooking
+                    'vehBooking' => $vehBooking,
+                    'vehOwner' => $vehOwner,
                 ];
                 $this->setLayout('customer-dashboard');
                 return $this->render('Customer/v_vehicleInfo', $params);
