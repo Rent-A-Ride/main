@@ -490,7 +490,7 @@ class VehicleOwnerController extends Controller
 //vehicle owner booking calendar
     public function bookingCalendar(Request $request,Response $response)
     {
-        if ($request->isGet()){
+        if ($request->isPost()){
             if (isset($request->getBody()['search-date'])) {
                 $date = $request->getBody()['search-date'];
                 $booking = VehBooking::findBetweenDates($date);

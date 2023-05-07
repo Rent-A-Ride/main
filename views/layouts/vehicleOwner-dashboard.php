@@ -141,11 +141,20 @@ use app\core\Application;
             <li class="list-item 2"><a href="#">Register</a></li>       -->
             <!-- <div class="vision"><p>Mobility Without Hassel</p> </div> -->
             <div class="profile-cont">
-                <span class="profile-name">Buddhi Yapa</span>
-                <div class="img-cont"><img src="" class="profile-image"></div>
+                <span class="profile-name"><?= Application::$app->user->displayName(); ?></span>
+                <div class="img-cont"><img src="/assets/img/uploads/userProfile/<?= Application::$app->user->getProfilePic()?>" class="profile-image"></div>
+
+
+
             </div>
 
         </ul>
+        <div class="profile-menu" style="display: none;">
+            <a href="/Customer/Profile">My Profile</a>
+            <a href="/Customer/Settings">Settings</a>
+            <a href="/logout">Logout</a>
+        </div>
+
         <div id="toggle-btn" class="menu-container" onclick="myFunction(this)">
             <div class="bar1"></div>
             <div class="bar2"></div>

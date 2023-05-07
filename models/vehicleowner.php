@@ -72,6 +72,12 @@ class vehicleowner extends dbModel
         return ['Nic', 'vo_ID', 'owner_Fname', 'owner_Lname', 'owner_address', 'phone_No','email','gender','password'];
     }
 
+//    display name
+    public function displayName(): string
+    {
+        return $this->owner_Fname . ' ' . $this->owner_Lname;
+    }
+
     public function update($id, $Include=[], $Exclude = []): bool
     {
         $this->password = password_hash($this->password, PASSWORD_DEFAULT);
