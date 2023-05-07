@@ -142,6 +142,29 @@ abstract class dbModel extends Model
         return true;
     }
 
+    public static function findWhere($where)
+    {
+        $tableName = static::tableName();
+        $conditions = [];
+        $bindings = [];
+
+        foreach ($where as $key => $value) {
+            $conditions[] = "$key = :$key";
+            $bindings[":$key"] = $value;
+        }
+
+        $sql = implode(" AND ", $conditions);
+        $statement = self::prepare("SELECT * FROM $tableName WHERE $sql");
+
+        foreach ($bindings as $key => $value) {
+            $statement->bindValue($key, $value);
+        }
+
+        $statement->execute();
+
+        return $statement->fetchObject(static::class);
+    }
+
      public function deleteOne($id): bool
      {
          $tableName = static::tableName();

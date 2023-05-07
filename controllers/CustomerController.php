@@ -33,7 +33,12 @@ class CustomerController extends Controller
 
     public function home(Request $request, Response $response): string
     {
-        $vehicle = cusVehicle::retrieveAll();
+        $vehicle = cusVehicle::retrieveAll(['availability' => 1]);
+////        select all vehicle which are not in veh booking table
+//        $vehicle = array_filter($vehicle, function ($veh) {
+//            return !VehBooking::findWhere(['veh_Id' => $veh->getVehId(), 'status' => 1]);
+//        });
+
 
 //        // get the vehicle ratings by vehicle id
         $ratingsById = [];
@@ -93,7 +98,7 @@ class CustomerController extends Controller
         if ($request->isPost()){
             $vehBooking->loadData($request->getBody());
             if ($vehBooking->saveAs(['booking_Id','status'])){
-                Application::$app->session->setFlash('bookingSuccess', 'Booking Request send successfully!');
+                Application::$app->session->setFlash('Success', 'Booking Request send successfully!');
                 $response->redirect('/Customer/VehicleBookingTable');
                 return;
             }
