@@ -10,9 +10,6 @@ use app\models\driver;
 use app\models\vehicle;
 use app\models\viewCustomerReq;
 
-
-$bookingID = [];
-
 ?>
 <section class="requests">
 
@@ -109,9 +106,10 @@ $bookingID = [];
                         <tr>
                             <th>Request ID</th>
                             <th>Customer Name</th>
-                            <th>Telephone No.</th>
+                            <!-- Removed phone no cause veh owner don't want to know the customer contact no in this process -->
+<!--                            <th>Telephone No.</th>-->
                             <!-- <th>Address</th> -->
-                            <th>Vehicle Name</th>
+                            <th>Vehicle</th>
                             <th>Pickup Location</th>
                             <th>Start Date</th>
                             <th>End Date</th>
@@ -130,23 +128,23 @@ $bookingID = [];
                                 <tr>
                                     <td><?php echo $row->getBookingId() ?></td>
                                     <td><?php echo $customer[$row->getCusId()]->firstname.' '.$customer[$row->getCusId()]->lastname?></td>
-                                    <td><?php echo $customer[$row->getCusId()]->phoneno?></td>
+<!--                                    Removed phone no cause veh owner don't want to know the customer contact no in this process -->
+<!--                                    <td>--><?php //echo $customer[$row->getCusId()]->phoneno?><!--</td>-->
                                     <!-- <td>Kandy</td> -->
-                                    <td><?php echo $vehicle[$row->getVehId()]->getVehBrand().' '.$vehicle[$row->getVehId()]->getVehModel()?></td>
+                                    <td><?php echo $vehicle[$row->getVehId()]->getVehBrand().' '.$vehicle[$row->getVehId()]->getVehModel()."<br>".$vehicle[$row->getVehId()]->getPlateNo() ?></td>
                                     <td><?php echo $row->getPickupLocation() ?></td>
                                     <td><?php echo $row->getStartDate() ?></td>
                                     <td><?php echo $row->getEndDate() ?></td>
                                     <td><?php echo $row->getPayMethod() ?></td>
                                     <td><?php echo $row->getNote() ?></td>
 
-                                    <td><div class="status">
-                                            <form method="post">
+                                    <td><div class="status" style="display: flex">
+                                            <form method="post" onsubmit="return confirm('Are you sure you want to confirm this request?');">
                                                 <input type="hidden" name="booking_Id" value="<?= $row->getBookingId() ?>">
-                                                <input type="hidden" name="status" value="1">
                                                 <input type="submit" class="accept-button" value="Accept">
                                             </form>
 
-                                            <button onclick="openPopup(<?= $row->getBookingId() ?>)" class="accept-button">Accept </button>
+<!--                                            <button onclick="openPopup(<?php //= $row->getBookingId() ?>)" class="accept-button">Accept </button> -->
                                             <button onclick="displayRejectPopup()" class="reject-button">Reject</button>
 
                                         </div></td>
@@ -163,7 +161,7 @@ $bookingID = [];
         </div>
 
 
-        <!--                            Driver Pop-up -->
+        <!-- Driver Pop-up -->
         <div id="popup-driver" class="popup-container">
             <div class="popup-box">
                 <span class="close" onclick="closeModal()">&times;</span>
@@ -186,14 +184,13 @@ $bookingID = [];
                         <tbody>
                         <?php
                         // $booking_ID =
-                        foreach ($driver as $drow):
-                            if ($drow->getStatus() == 1):
+
                                 ?>
                                 <tr>
                                     <input type="hidden" id="bookingId" value="<?= $row->getBookingId() ?>">
-                                    <td><?= $drow->getDriverFname().' '.$drow->getDriverLname()?></td>
-                                    <td><?= $drow->getPhoneNo()?></td>
-                                    <td><?= $drow->getArea()?></td>
+<!--                                    <td>--><?php //= $drow->getDriverFname().' '.$drow->getDriverLname()?><!--</td>-->
+<!--                                    <td>--><?php //= $drow->getPhoneNo()?><!--</td>-->
+<!--                                    <td>--><?php //= $drow->getArea()?><!--</td>-->
 
 
                                     <td>10 reviews</td>
@@ -205,7 +202,7 @@ $bookingID = [];
                                             <form method="post">
                                                 <input name="type" value="driver" hidden>
                                                 <input id="booking-id" type="hidden" name="booking_Id" value="">
-                                                <input type="hidden" name="driver_ID" value="<?= $drow->getDriverId() ?>">
+                                                <input type="hidden" name="driver_ID" value="">
                                                 <input type="hidden" name="status" value="1">
                                                 <input type="submit" class="accept-button" value="Send request">
                                             </form>
@@ -214,8 +211,7 @@ $bookingID = [];
                                 </tr>
 
                             <?php
-                            endif;
-                        endforeach;
+
                         ?>
 
                         </tbody>

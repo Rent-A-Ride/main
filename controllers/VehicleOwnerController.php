@@ -20,16 +20,11 @@ use app\models\vehicle;
 use app\models\vehicle_Owner;
 use app\models\vehicleowner;
 use app\models\VehInfo;
+use app\models\VehRates;
 use app\models\viewCustomerReq;
 
 class VehicleOwnerController extends Controller
 {
-
-    // public function VehicleOwnerProfile(Request $req, Response $res){
-
-    //      return $res->render("/admin/owner","owner-dashboard");
-    // }
-
     public function VehicleOwnerVehicle(Request $req, Response $res){
         if (Application::$app->session->get("user_role")==="vehicleowner"){
             $voId = Application::$app->user->vo_ID;
@@ -180,8 +175,24 @@ class VehicleOwnerController extends Controller
 
     public function viewCustomerPendingRequests(Request $request, Response $response): string
     {
+        $voId = Application::$app->session->get('user');
+        $vehbookings = VehBooking::retrieveAll(['vo_id' => $voId]);
 
-        $cusReq = viewCustomerReq::retrieveAll();
+//        echo '<pre>';
+//        var_dump($vehbookings);
+//        echo '</pre>';
+//        exit();
+
+        $customers = [];
+        $vehicles = [];
+        $drivers = [];
+
+        foreach ($vehbookings as $vehbooking) {
+            $customers[$vehbooking->getCusId()] = Customer::findOne(['cus_Id'=> $vehbooking->getCusId()]);
+            $vehicles[$vehbooking->getVehId()] = vehicle::findOne(['veh_Id'=> $vehbooking->getVehId()]);
+
+        }
+
         $customer = Customer::retrieveAll();
         $vehicle = vehicle::retrieveAll();
         $driver = driver::retrieveAll();
@@ -199,62 +210,82 @@ class VehicleOwnerController extends Controller
 
         if ($request->isPost()){
 
-            $type=$request->getBody()['type'] ?? '';
 
-            if ($type == 'driver') {
-                $driverId = $request->getBody()['driver_ID'];
-                $bookingId = $request->getBody()['booking_Id'];
-                $driver = driver::findOne(['driver_Id' => $driverId]);
-                $booking = viewCustomerReq::findOne(['booking_Id' => $bookingId]);
+            $bookingId = $request->getBody()['booking_Id'];
 
-                $driverReq = new driver_requests();
-
-                $driverReq->setDriverId($driverId);
-                $driverReq->setReservationId($bookingId);
-                $driverReq->setUserID($booking->getCusId());
-                $driverReq->setVehicleID($booking->getVehId());
-                $driverReq->setStartDate(date($booking->getStartDate()));
-                $driverReq->setEndDate($booking->getEndDate());
-                $driverReq->setPickupLocation($booking->getPickupLocation());
-                $driverReq->setDestination($booking->getDestination());
-                $driverReq->setAccept(0);
-
-
-                if ($driverReq->save()){
-                    $booking->setStatus(2);
-                    if ($booking->update($bookingId, ['status'])){
-//                        Application::$app->session->setFlash('success', 'Driver Assigned Successfully!');
-                        return $response->redirect('/CustomerAcceptedRequest');
-                    }
-                }else{
-//                    Application::$app->session->setFlash('error', 'There was some error in assigning driver!');
-                    return $response->redirect('/CustomerAcceptedRequest');
-                }
-
-
+            $booking = VehBooking::findOne(['booking_Id' => $bookingId]);
+            $booking->setStatus(1);
+            if ($booking->update($bookingId,['status'])) {
+                Application::$app->session->setFlash('success', 'Booking Accepted Successfully!');
+                return $response->redirect('/CustomerAcceptedRequest');;
+            } else {
+                $params = [
+                    "model" => $vehbookings,
+                    'customer' => $customers,
+                    'vehicle' => $vehicles,
+                    'driver' => $driver
+                ];
+                $this->setLayout("vehicleOwner-dashboard");
+                return $this->render("/VehicleOwner/vehicleOwnerPendingCustomerReq", $params);
 
             }
+
+//            $type=$request->getBody()['type'] ?? '';
+//
+//            if ($type == 'driver') {
+//                $driverId = $request->getBody()['driver_ID'];
+//                $bookingId = $request->getBody()['booking_Id'];
+//                $driver = driver::findOne(['driver_Id' => $driverId]);
+//                $booking = viewCustomerReq::findOne(['booking_Id' => $bookingId]);
+//
+//                $driverReq = new driver_requests();
+//
+//                $driverReq->setDriverId($driverId);
+//                $driverReq->setReservationId($bookingId);
+//                $driverReq->setUserID($booking->getCusId());
+//                $driverReq->setVehicleID($booking->getVehId());
+//                $driverReq->setStartDate(date($booking->getStartDate()));
+//                $driverReq->setEndDate($booking->getEndDate());
+//                $driverReq->setPickupLocation($booking->getPickupLocation());
+//                $driverReq->setDestination($booking->getDestination());
+//                $driverReq->setAccept(0);
+//
+//
+//                if ($driverReq->save()){
+//                    $booking->setStatus(2);
+//                    if ($booking->update($bookingId, ['status'])){
+////                        Application::$app->session->setFlash('success', 'Driver Assigned Successfully!');
+//                        return $response->redirect('/CustomerAcceptedRequest');
+//                    }
+//                }else{
+////                    Application::$app->session->setFlash('error', 'There was some error in assigning driver!');
+//                    return $response->redirect('/CustomerAcceptedRequest');
+//                }
+//
+//
+//
+//            }
 
 //            echo '<pre>';
 //            var_dump($request->getBody());
 //            echo '</pre>';
 //            exit();
 
-            $bookingId = $request->getBody()['booking_Id'];
-            $booking = viewCustomerReq::findOne(['booking_Id' => $bookingId]);
-            $booking->setStatus(1);
-            if ($booking->update($bookingId, ['status'])){
-//                Application::$app->session->setFlash('success', 'Booking Accepted Successfully!');
-                return $response->redirect('/CustomerAcceptedRequest');
-            }
+//            $bookingId = $request->getBody()['booking_Id'];
+//            $booking = viewCustomerReq::findOne(['booking_Id' => $bookingId]);
+//            $booking->setStatus(1);
+//            if ($booking->update($bookingId, ['status'])){
+////                Application::$app->session->setFlash('success', 'Booking Accepted Successfully!');
+//                return $response->redirect('/CustomerAcceptedRequest');
+//            }
 
 
 
 
             $params = [
-                "model" => $cusReq,
-                'customer' => $getCustomerById,
-                'vehicle' => $getVehicleById,
+                "model" => $vehbookings,
+                'customer' => $customers,
+                'vehicle' => $vehicles,
                 'driver' => $driver
             ];
             return $this->render("/VehicleOwner/vehicleOwnerPendingCustomerReq", "vehicleOwner-dashboard", $params);
@@ -263,12 +294,13 @@ class VehicleOwnerController extends Controller
 
 
         $params = [
-            "model" => $cusReq,
-            'customer' => $getCustomerById,
-            'vehicle' => $getVehicleById,
+            "model" => $vehbookings,
+            'customer' => $customers,
+            'vehicle' => $vehicles,
             'driver' => $driver
         ];
-        return $this->render("/VehicleOwner/vehicleOwnerPendingCustomerReq", "vehicleOwner-dashboard", $params);
+        $this->setLayout("vehicleOwner-dashboard");
+        return $this->render("/VehicleOwner/vehicleOwnerPendingCustomerReq", $params);
 
 
     }
@@ -489,12 +521,57 @@ class VehicleOwnerController extends Controller
 //vehicle owner booking calendar
     public function bookingCalendar(Request $request,Response $response)
     {
-        if ($request->isGet()){
+        $voId = Application::$app->session->get('user');
+
+        if ($request->isPost()){
             if (isset($request->getBody()['search-date'])) {
                 $date = $request->getBody()['search-date'];
-                $booking = VehBooking::findBetweenDates($date);
+                $bookings = VehBooking::findBetweenDates($date, $voId);
 
-                return json_encode($booking);
+                // Create an array to store the data
+                $bookingData = [];
+
+                // Loop through the bookings and convert them to associative arrays
+                foreach ($bookings as $booking) {
+                    // Access the values using getter methods
+                    $bookingId = $booking->getBookingId();
+                    $cusId = $booking->getCusId();
+                    $vehicle = vehicle::findOne(['veh_Id' => $booking->getVehId()]);
+                    $vehImage = $vehicle->getFrontView();
+                    $vehName = $vehicle->getVehBrand().' '.$vehicle->getVehModel();
+                    $vehPlateNo = $vehicle->getPlateNo();
+                    $pickUpLocation = $booking->getPickUpLocation();
+                    $startDate = $booking->getStartDate();
+                    $endDate = $booking->getEndDate();
+                    $destination = $booking->getDestination();
+                    $rentalPrice = $booking->getRentalPrice();
+                    $payMethod = $booking->getPayMethod();
+                    $note = $booking->getNote();
+                    $status = $booking->getStatus();
+
+                    // Create an associative array with the booking data
+                    $bookingArr = [
+                        'booking_Id' => $bookingId,
+                        'cus_Id' => $cusId,
+                        'veh_Image' => $vehImage,
+                        'veh_Name' => $vehName,
+                        'veh_Plate_No' => $vehPlateNo,
+                        'pick_Up_Location' => $pickUpLocation,
+                        'start_Date' => $startDate,
+                        'end_Date' => $endDate,
+                        'destination' => $destination,
+                        'rental_Price' => $rentalPrice,
+                        'pay_Method' => $payMethod,
+                        'note' => $note,
+                        'status' => $status
+                        // Add other values as needed
+                    ];
+
+                    // Add the booking data to the array
+                    $bookingData[] = $bookingArr;
+                }
+
+                return json_encode($bookingData);
             }
 
         }
@@ -503,8 +580,7 @@ class VehicleOwnerController extends Controller
         return $this->render("/VehicleOwner/vo_bookingCalendar");
     }
 
-//    !!!!!!!!!!!!
-//vehicle owner view vehicle profile to be completed
+
     public function VehicleProfile(Request $request,Response $response)
     {
         $vehID = $request->getBody()['id'];
@@ -533,6 +609,56 @@ class VehicleOwnerController extends Controller
         return $this->render("/VehicleOwner/vehicleOwnerViewVehicleProfile", $param);
     }
 
+
+    public function editVehicleProfile(Request $request,Response $response)
+    {
+        $vehID = $request->getBody()['id'];
+        $vehicle = vehicle::findOne(['veh_Id' => $vehID]);
+        $vehRates = VehRates::findOne(['vehType' => $vehicle->getVehType()]);
+        $vehInfo = VehInfo::findOne(['veh_Id' => $vehID]);
+        $vehLicense = veh_license::findOne(['veh_Id' => $vehID]);
+        $vehInsurance = veh_insurance::findOne(['veh_Id' => $vehID]);
+        $vehEcoTest = veh_ecotest::findOne(['veh_Id' => $vehID]);
+
+//        echo '<pre>';
+//        var_dump($vehEcoTest);
+//        echo '</pre>';
+//        exit();
+
+        //update vehicle details
+        if($request->isPost())
+        {
+
+             $vehicle->loadData($request->getBody());
+            $vehInfo->loadData($request->getBody());
+            $vehLicense->loadData($request->getBody());
+            $vehInsurance->loadData($request->getBody());
+            $vehEcoTest->loadData($request->getBody());
+
+            echo '<pre>';
+            var_dump($vehicle);
+            echo '</pre>';
+            exit();
+
+            if (($vehicle->validate() && $vehicle->update()) && ($vehInfo->validate() && $vehInfo->update()) && ($vehLicense->validate() && $vehLicense->update()) && ($vehInsurance->validate() && $vehInsurance->update()) && ($vehEcoTest->validate() && $vehEcoTest->update()))
+            {
+                return $response->redirect('/vehicleOwner/vehicleProfile?id='.$vehID);
+            }
+        }
+
+
+
+        $param = [
+            'vehicle' => $vehicle,
+            'vehInfo' => $vehInfo,
+            'vehLicense' => $vehLicense,
+            'vehRates' => $vehRates,
+            'vehInsurance' => $vehInsurance,
+            'vehEcoTest' => $vehEcoTest
+        ];
+        $this->setLayout("vehicleOwner-dashboard");
+        return $this->render("/VehicleOwner/VOEditVehDetails", $param);
+    }
 
 
 

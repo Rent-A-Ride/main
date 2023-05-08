@@ -28,6 +28,7 @@ use app\models\VehInfo;
                     <img src="/assets/img/uploads/vehicle/<?= $vehicle->getSideView() ?>" data-large="<?= $vehicle->getSideView() ?>">
                     <img src="/assets/img/uploads/vehicle/<?= $vehicle->getBackView() ?>" data-large="<?= $vehicle->getBackView() ?>">
                 </div>
+
             </div>
 
         </div>
@@ -73,15 +74,23 @@ use app\models\VehInfo;
                 </div>
 
                 <div class="vehicle-description">
-                    <p class="bold">Description: <?= $vehInfo->getDescription()?></p><br>
+                    <p class="bold">Description: <?= $vehInfo->getDescription()?></p>
+                </div>
+
+                <div class="vehicle-rent-price">
+                    <p class="bold">Rent Price (Per/ Day):<?= $vehicle->getPrice()?>.00 </p><br>
+                </div>
+
+                <div class="editVehProfileBtn">
+                    <button id="editVehInfobutton" onclick="location.href='/vehicleOwner/editVehicleProfile?id=<?= $vehicle->getVehId() ?>'" class="editVehInfobutton" role="button">Edit Details</button>
+
+                </div>
                 </div>
 
 
+            </div>
 
-                <div class="vehicle-price">
-                    <span>Vehicle Rent Price (Per/ Day):</span>
-                    <span class="price">Rs. <?= $vehicle->getPrice()?>.00 </span>
-                </div>
+
 
             </div>
 
@@ -92,6 +101,10 @@ use app\models\VehInfo;
 
     
 </div>
+
+
+
+
 
 
 
