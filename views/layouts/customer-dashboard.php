@@ -140,12 +140,11 @@ use app\core\Application; ?>
                 <span class="profile-name"><?= Application::$app->user->displayName(); ?></span>
                 <div class="img-cont"><img src="/assets/img/uploads/userProfile/<?= Application::$app->user->userprofile('profile_pic')?>" class="profile-image"></div>
 
-                <div class="profile-menu" style="display: none;">
-                    <a href="/Customer/Profile">My Profile</a>
-                    <a href="/Customer/Settings">Settings</a>
-                    <a href="/logout">Logout</a>
-                </div>
-
+            </div>
+            <div class="profile-menu" style="display: none;">
+                <a href="/Customer/Profile">My Profile</a>
+                <a href="/Customer/Settings">Settings</a>
+                <a href="/logout">Logout</a>
             </div>
 
 
