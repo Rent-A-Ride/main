@@ -123,6 +123,15 @@ $app->router->get("/admin/managedriverpayment", [OwnerController::class, "manage
 
 $app->router->get("/admin/add-driver", [OwnerController::class, "add_driver"]);
 
+$app->router->get("/admin/manageCustomerPayment", [OwnerController::class, "manage_customer_Payment"]);
+$app->router->post("/admin/manageCustomerPayment", [OwnerController::class, "manage_customer_Payment"]);
+
+$app->router->get("/admin/Settings", [OwnerController::class, "setting"]);
+$app->router->post("/admin/Settings", [OwnerController::class, "setting"]);
+
+$app->router->get("/admin/chart", [OwnerController::class, "test1"]);
+$app->router->get("/admin/charts", [OwnerController::class, "test2"]);
+
 //Hasantha
 $app->router->post('/notifications', [notificationController::class, 'notification']);
 
@@ -154,6 +163,11 @@ $app->router->get('/Customer/Settings', [CustomerController::class, 'customerSet
 $app->router->post('/Customer/Settings', [CustomerController::class, 'customerSettings']);
 
 $app->router->post("/cancelBooking", [CustomerController::class, 'cancelBooking']);
+
+$app->router->get("/Customer/Payment", [CustomerController::class, 'customerPayment']);
+
+$app->router->get("/Customer/Complaints", [CustomerController::class, 'customerComplaint']);
+$app->router->post("/Customer/Complaints", [CustomerController::class, 'customerComplaint']);
 
 
 
@@ -211,6 +225,7 @@ $app->router->get("/CustomerRejectedRequest", [VehicleOwnerController::class, 'v
 //Tharundya
 
 $app->router->get("/driver/driver_profile", [DriverController::class, 'driverViewProfile']);
+$app->router->post("/driver/driver_profile", [DriverController::class, 'driverViewProfile']);
 $app->router->get("/driver/editprofile", [DriverController::class, 'driverEditProfile']);
 
 $app->router->get("/driver/review", [DriverController::class, 'driverViewReview']);

@@ -1,4 +1,4 @@
-console.log("Kalana");
+
 const withDriver = document.getElementById('with-driver');
 const withoutDriver = document.getElementById('without-driver');
 const withDriverContainer = document.querySelector('.with-driver-container');

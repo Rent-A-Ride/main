@@ -27,7 +27,6 @@
     padding: 1px 4px;
     margin-left: 10px;
 }
-
 .profile-menu {
     position: absolute;
     top: 60px;
@@ -53,5 +52,4 @@
 .profile-menu a:hover {
     background-color: #eee;
 }
-
 

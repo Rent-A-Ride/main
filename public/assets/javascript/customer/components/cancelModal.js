@@ -32,7 +32,7 @@ window.onclick = function(event) {
     }
 }
 
-const form = document.querySelector("form");
+const form = document.querySelector("#booking-cancel-form");
 form.addEventListener("submit", (event) => {
     event.preventDefault();
     const formData = new FormData(form);

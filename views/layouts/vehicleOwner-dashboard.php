@@ -144,8 +144,6 @@ use app\core\Application;
                 <span class="profile-name"><?= Application::$app->user->displayName(); ?></span>
                 <div class="img-cont"><img src="/assets/img/uploads/userProfile/<?= Application::$app->user->getProfilePic()?>" class="profile-image"></div>
 
-
-
             </div>
 
         </ul>

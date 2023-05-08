@@ -100,7 +100,7 @@ use app\core\Application;
             <textarea id="address" name="address"><?=$model->address?></textarea>
 
             <div class="errors">
-                <span class="form-error"><?= $model->lastname ?></span>
+                <span class="form-error"></span>
             </div>
 
             <input type="submit" value="Save Changes">

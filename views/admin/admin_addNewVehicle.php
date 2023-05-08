@@ -43,14 +43,14 @@
         <button class='vans'>Vans</button>
         <button class=''>Clear</button>
     </div>
-    <div class="date-select">
+    <!-- <div class="date-select">
 
         <button onclick="location.href='/admin/vehicle/add_vehicle'" class="book-button1"><i class="fa-solid fa-plus"></i></button>
         
-    </div>
-    <div>
+    </div> -->
+    <!-- <div>
         <button onclick="location.href='/admin/vehicle/disable_vehicle'" class="book-button1"><i class="fa-solid fa-plus"></i></button>
-    </div>
+    </div> -->
 </div>
 
 <!-- Table -->
@@ -67,7 +67,7 @@
 		    <div class="header__item"><a id="total" class="filter__link filter__link--number" href="#"> <i class="fa-solid fa-gas-pump"></i></a></div>
             <div class="header__item"><a id="total" class="filter__link filter__link--number" href="#"></a></div>
             <div class="header__item"><a id="total" class="filter__link filter__link--number" href="#"></a></div>
-            <div class="header__item"><a id="total" class="filter__link filter__link--number" href="#"></a></div>
+            <!-- <div class="header__item"><a id="total" class="filter__link filter__link--number" href="#"></a></div> -->
         </div>
         <div class="table-content" >
             <?php
@@ -83,8 +83,8 @@
                     <div class="table-data"><?php echo $row["transmission"]?></div>
                     <div class="table-data"><?php echo $row["fuel_type"]?></div>
                     <div class="table-data"><button onclick="location.href='/viewVehicleProfile?id=<?php echo $vehicle_id; ?>'" class="book-button"><i class="fa-regular fa-eye"></i></button></div>
-                    <div class="table-data"><button onclick="location.href='/admin/vehicle/update?id=<?php echo $vehicle_id; ?>'" class="book-button"><i class="fa-regular fa-pen-to-square"></i></button></div>
-			  <div class="table-data"><button data-vehId='<?php echo($row['veh_Id'])?>' data-vehNo='<?php echo($row['plate_No'])?>' class="book-button disable_vehicle disable_vehicle"><i class="fa-solid fa-trash-can"></i></button></div>
+                    <div class="table-data"><button onclick="location.href='/admin/accept_vehicle?id=<?php echo $vehicle_id; ?>'" class="book-button"><i class="fa-solid fa-plus"></i></button></div>
+			  <!-- <div class="table-data"><button data-vehId='<?php echo($row['veh_Id'])?>' data-vehNo='<?php echo($row['plate_No'])?>' class="book-button disable_vehicle disable_vehicle"><i class="fa-solid fa-trash-can"></i></button></div> -->
                 </div>
             <?php
             endforeach;
