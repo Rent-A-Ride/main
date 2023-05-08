@@ -120,11 +120,12 @@ abstract class dbModel extends Model
 
     }
 
-    public static function findBetweenDates($date)
+    public static function findBetweenDates($date, $voId)
     {
         $tableName = static::tableName();
-        $statement = self::prepare("SELECT * FROM $tableName WHERE startDate <= :date AND endDate >= :date");
+        $statement = self::prepare("SELECT * FROM $tableName WHERE startDate <= :date AND endDate >= :date AND vo_Id = :voId");
         $statement->bindValue(":date", $date);
+        $statement->bindValue(":voId", $voId);
         $statement->execute();
         return $statement->fetchAll(\PDO::FETCH_CLASS, static::class);
     }

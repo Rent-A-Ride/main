@@ -490,12 +490,57 @@ class VehicleOwnerController extends Controller
 //vehicle owner booking calendar
     public function bookingCalendar(Request $request,Response $response)
     {
+        $voId = Application::$app->session->get('user');
+
         if ($request->isPost()){
             if (isset($request->getBody()['search-date'])) {
                 $date = $request->getBody()['search-date'];
-                $booking = VehBooking::findBetweenDates($date);
+                $bookings = VehBooking::findBetweenDates($date, $voId);
 
-                return json_encode($booking);
+                // Create an array to store the data
+                $bookingData = [];
+
+                // Loop through the bookings and convert them to associative arrays
+                foreach ($bookings as $booking) {
+                    // Access the values using getter methods
+                    $bookingId = $booking->getBookingId();
+                    $cusId = $booking->getCusId();
+                    $vehicle = vehicle::findOne(['veh_Id' => $booking->getVehId()]);
+                    $vehImage = $vehicle->getFrontView();
+                    $vehName = $vehicle->getVehBrand().' '.$vehicle->getVehModel();
+                    $vehPlateNo = $vehicle->getPlateNo();
+                    $pickUpLocation = $booking->getPickUpLocation();
+                    $startDate = $booking->getStartDate();
+                    $endDate = $booking->getEndDate();
+                    $destination = $booking->getDestination();
+                    $rentalPrice = $booking->getRentalPrice();
+                    $payMethod = $booking->getPayMethod();
+                    $note = $booking->getNote();
+                    $status = $booking->getStatus();
+
+                    // Create an associative array with the booking data
+                    $bookingArr = [
+                        'booking_Id' => $bookingId,
+                        'cus_Id' => $cusId,
+                        'veh_Image' => $vehImage,
+                        'veh_Name' => $vehName,
+                        'veh_Plate_No' => $vehPlateNo,
+                        'pick_Up_Location' => $pickUpLocation,
+                        'start_Date' => $startDate,
+                        'end_Date' => $endDate,
+                        'destination' => $destination,
+                        'rental_Price' => $rentalPrice,
+                        'pay_Method' => $payMethod,
+                        'note' => $note,
+                        'status' => $status
+                        // Add other values as needed
+                    ];
+
+                    // Add the booking data to the array
+                    $bookingData[] = $bookingArr;
+                }
+
+                return json_encode($bookingData);
             }
 
         }

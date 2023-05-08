@@ -13,18 +13,18 @@
 
 
 
-<h2>Scheduled Bookings for Today </h2>
+<h2 id="bookings-heading">Scheduled Bookings for Today </h2>
 
 
 
-<div class="table-wrapper">
+<div class="table-wrapper" id="schedule-table" style="display: none">
     <table id="myTable" class="bookingTable">
         <thead>
         <tr>
             <th>Booking ID</th>
             <th>Vehicle</th>
             <th>Total Rent</th>
-            <th>Payment</th>
+            <th>Payment Method</th>
             <th>Status</th>
             <th>Action</th>
         </tr>
