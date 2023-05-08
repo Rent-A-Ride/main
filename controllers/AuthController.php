@@ -80,9 +80,9 @@ class AuthController extends Controller
             if($login->validate()){
                 $user = $login->login($body['user_type']);
 
-                if(!$user){
-                    $res->redirect('/login');
-                }
+//                if(!$user){
+//                    $res->redirect('/login');
+//                }
                 if($user === true){
                     if($body['user_type']=='owner'){
                         $res->redirect('/owner');
