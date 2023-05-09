@@ -8,7 +8,7 @@ class Notification extends dbModel
 {
     protected int $notification_Id;
 
-    protected int $user_Id;
+    protected int $user_id;
     protected string $title;
     protected string $message;
     protected string $status = 'unread';
@@ -27,7 +27,7 @@ class Notification extends dbModel
 
     public function attributes(): array
     {
-        return ['user_Id', 'title', 'message', 'status', 'created_at'];
+        return ['user_id', 'title', 'message', 'status'];
     }
 
     public static function primaryKey(): string
@@ -56,7 +56,7 @@ class Notification extends dbModel
      */
     public function getUserId(): int
     {
-        return $this->user_Id;
+        return $this->user_id;
     }
 
     /**
@@ -64,7 +64,7 @@ class Notification extends dbModel
      */
     public function setUserId(int $user_Id): void
     {
-        $this->user_Id = $user_Id;
+        $this->user_id = $user_Id;
     }
 
     /**

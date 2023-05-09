@@ -29,6 +29,7 @@
 }
 .profile-menu {
     position: absolute;
+    z-index: 1;
     top: 60px;
     left: 90%;
     width: 100px;
