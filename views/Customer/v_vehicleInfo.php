@@ -2,6 +2,7 @@
 /*  @var $vehInfo VehInfo*/
 /*  @var $vehicle cusVehicle*/
 /*  @var $vehBooking VehBooking*/
+/*  @var $vehOwner \app\models\vehicleowner*/
 
 use app\models\cusVehicle;
 use app\models\VehInfo;
@@ -9,7 +10,7 @@ use app\models\VehInfo;
 ?>
 
 <div class="vehicle-card">
-    <h2 class="vehicle-name"><?= $vehicle->getVehBrand().' '.$vehicle->getVehModel()?><span> • RR</span></h2>
+    <h2 class="vehicle-name"><?= $vehicle->getVehBrand().' '.$vehicle->getVehModel()?><span> • <?= $vehOwner->getOwnerFname().' '.$vehOwner->getOwnerLname() ?></span></h2>
     <div class="details-cont">
         <div id="gallery">
             <div class="row">

@@ -215,11 +215,14 @@
             <div class="profile-cont">
                 <span class="profile-name"><?= Application::$app->user->displayName(); ?></span>
                 <div class="img-cont"><img src="/assets/img/user_profile/<?= Application::$app->user->userprofile('profile_pic')?>" class="profile-image"></div>
-                <div class="profile-menu" style="display: none;">
-                    <a href="/ownerProfile">My Profile</a>
-                    <a href="/admin/Settings">Settings</a>
-                    <a href="/logout">Logout</a>
-                </div>
+
+            </div>
+
+            <!-- This is corrected! -->
+            <div class="profile-menu" style="display: none;">
+                <a href="/ownerProfile">My Profile</a>
+                <a href="/admin/Settings">Settings</a>
+                <a href="/logout">Logout</a>
             </div>
 
         </ul>

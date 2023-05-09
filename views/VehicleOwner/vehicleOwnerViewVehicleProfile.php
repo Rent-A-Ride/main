@@ -3,30 +3,32 @@
 /*  @var $vehicle cusVehicle*/
 /*  @var $vehBooking VehBooking*/
 
+
 use app\models\cusVehicle;
 use app\models\VehInfo;
 
 ?>
-<link rel="stylesheet" type="text/css" href="cus_vehview.css">
-<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<!--<link rel="stylesheet" type="text/css" href="cus_vehview.css">-->
+<!--<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>-->
 
 
 
 <div class="vehicle-card">
-    <h2 class="vehicle-name"><?= $vehicle->getVehBrand().' '.$vehicle->getVehModel()?><span> • RR</span></h2>
+    <h2 class="vehicle-name"><?= $vehicle->getVehBrand().' '.$vehicle->getVehModel()?><span> </span></h2>
     <div class="details-cont">
         <div id="gallery">
             <div class="row">
                 <div class="large-image">
-                    <img src="<?= $vehicle->getFrontView() ?>">
+                    <img src="/assets/img/uploads/vehicle/<?= $vehicle->getFrontView() ?>">
                 </div>
             </div>
             <div class="row">
                 <div class="thumbnails">
-                    <img src="<?= $vehicle->getFrontView() ?>" data-large="<?= $vehicle->getFrontView() ?>">
-                    <img src="<?= $vehicle->getSideView() ?>" data-large="<?= $vehicle->getSideView() ?>">
-                    <img src="<?= $vehicle->getBackView() ?>" data-large="<?= $vehicle->getBackView() ?>">
+                    <img src="/assets/img/uploads/vehicle/<?= $vehicle->getFrontView() ?>" data-large="<?= $vehicle->getFrontView() ?>">
+                    <img src="/assets/img/uploads/vehicle/<?= $vehicle->getSideView() ?>" data-large="<?= $vehicle->getSideView() ?>">
+                    <img src="/assets/img/uploads/vehicle/<?= $vehicle->getBackView() ?>" data-large="<?= $vehicle->getBackView() ?>">
                 </div>
+
             </div>
 
         </div>
@@ -48,27 +50,47 @@ use app\models\VehInfo;
                             <li class="bold">Brand: <?= $vehicle->getVehBrand()?></li>
                             <li class="bold">Model: <?= $vehicle->getVehModel()?></li>
                             <li class="bold">Type: <?= $vehicle->getVehType()?></li>
-                            <li class="bold">Plate No: <?= substr($vehicle->getPlateNo(), 0, -3) . '***' ?></li>
-                            <li class="bold">Year: <?= $vehInfo->getYear()?></li>
+                            <li class="bold">Plate No: <?= $vehicle->getPlateNo()?></li>
                         </ul>
                     </div>
                     <div class="right-column">
                         <ul>
+                            <li class="bold">Year: <?= $vehInfo->getYear()?></li>
+
                             <li class="bold">Color:  <?= $vehInfo->getVehColor()?></li>
-                            <li class="bold">Seats:  <?= $vehInfo->getSeatsCount()?></li>
+<!--                            <li class="bold">Seats:  --><?php //= $vehInfo->getSeatsCount()?><!--</li>-->
                             <li class="bold">Transmission:  <?= $vehInfo->getTransmission()?></li>
                             <li class="bold">Fuel:  <?= $vehInfo->getFuelType()?></li>
                         </ul>
                     </div>
                 </div>
+
+                <div class="lic-ex-date">
+                    <p class="bold">License Expiry Date: <?= $vehLicense->getLicExDate()?></p>
+                </div>
+
+                <div class="ins-ex-date">
+                    <p class="bold">Insurance Expiry Date: <?= $vehInsurance->getInsExDate()?></p>
+                </div>
+
                 <div class="vehicle-description">
-                    <p class="bold">Description</p>
-                    <p><?= $vehInfo->getDescription()?></p>
+                    <p class="bold">Description: <?= $vehInfo->getDescription()?></p>
                 </div>
-                <div class="vehicle-price">
-                    <span>Vehicle Rent Price (Per/ Day):</span>
-                    <span class="price">Rs. <?= $vehicle->getPrice()?>.00 </span>
+
+                <div class="vehicle-rent-price">
+                    <p class="bold">Rent Price (Per/ Day):<?= $vehicle->getPrice()?>.00 </p><br>
                 </div>
+
+                <div class="editVehProfileBtn">
+                    <button id="editVehInfobutton" onclick="location.href='/vehicleOwner/editVehicleProfile?id=<?= $vehicle->getVehId() ?>'" class="editVehInfobutton" role="button">Edit Details</button>
+
+                </div>
+                </div>
+
+
+            </div>
+
+
 
             </div>
 
@@ -79,6 +101,10 @@ use app\models\VehInfo;
 
     
 </div>
+
+
+
+
 
 
 

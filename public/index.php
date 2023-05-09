@@ -15,6 +15,7 @@ use app\models\Email\Email;
 use app\models\owner;
 use app\models\vehicle;
 use app\models\vehicle_Owner;
+use app\models\vehicleowner;
 
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -25,7 +26,7 @@ $dotenv->load();
 $config = [
     'customerClass'=>Customer::class,
     'ownerClass'=>owner::class,
-    'vehicleOwnerClass'=> vehicle_Owner::class,
+    'vehicleOwnerClass'=> vehicleowner::class,
     'driverClass'=> driver::class,
     'db'=> [
         'dsn'=>$_ENV['DB_DSN'],
@@ -292,9 +293,13 @@ $app->router->get("/Customer/ExpieringNotification", [VehicleOwnerController::cl
 
 
 
-
 //vehicle owner view vehicle profile
-$app->router->get("/vehicleOwner/viewVehicleProfile", [VehicleOwnerController::class, 'vehownerVehicleProfile']);
+$app->router->get("/vehicleOwner/viewVehicleProfile", [VehicleOwnerController::class, 'VehicleProfile']);
+
+
+//vehicle owner edit vehicle profile details
+$app->router->get("/vehicleOwner/editVehicleProfile", [VehicleOwnerController::class, 'editVehicleProfile']);
+$app->router->post("/vehicleOwner/editVehicleProfile", [VehicleOwnerController::class, 'editVehicleProfile']);
 
 $app->router->get("/driver/availability", [DriverController::class, 'driverAvailability']);
 
