@@ -4,6 +4,7 @@ namespace app\core;
 
 use app\models\Customer;
 use app\models\driver;
+use app\models\Email\Email;
 use app\models\LoginForm;
 use app\models\owner;
 use app\models\vehicleowner;
@@ -17,6 +18,7 @@ class Application
     public Request $request;
     public Response $response;
     public Database $db;
+    public Email $email;
     public Session $session;
     public ?Controller $controller = null;
 
@@ -83,7 +85,8 @@ class Application
         $this->response = new Response();
          $this->session = new Session();
         $this->router = new Router($this->request,$this->response);
-        $this->db = new Database($config['db']); 
+        $this->db = new Database($config['db']);
+        $this->email=new Email($config['email']);
 
         $primaryValue = $this->session->get('user');
         $userType = $this->session->get('user_role');
