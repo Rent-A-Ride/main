@@ -120,11 +120,12 @@ abstract class dbModel extends Model
 
     }
 
-    public static function findBetweenDates($date)
+    public static function findBetweenDates($date, $voId)
     {
         $tableName = static::tableName();
-        $statement = self::prepare("SELECT * FROM $tableName WHERE startDate <= :date AND endDate >= :date");
+        $statement = self::prepare("SELECT * FROM $tableName WHERE startDate <= :date AND endDate >= :date AND vo_Id = :voId");
         $statement->bindValue(":date", $date);
+        $statement->bindValue(":voId", $voId);
         $statement->execute();
         return $statement->fetchAll(\PDO::FETCH_CLASS, static::class);
     }
@@ -140,6 +141,29 @@ abstract class dbModel extends Model
         $statement->execute();
 
         return true;
+    }
+
+    public static function findWhere($where)
+    {
+        $tableName = static::tableName();
+        $conditions = [];
+        $bindings = [];
+
+        foreach ($where as $key => $value) {
+            $conditions[] = "$key = :$key";
+            $bindings[":$key"] = $value;
+        }
+
+        $sql = implode(" AND ", $conditions);
+        $statement = self::prepare("SELECT * FROM $tableName WHERE $sql");
+
+        foreach ($bindings as $key => $value) {
+            $statement->bindValue($key, $value);
+        }
+
+        $statement->execute();
+
+        return $statement->fetchObject(static::class);
     }
 
      public function deleteOne($id): bool

@@ -20,10 +20,11 @@ class vehicleowner extends dbModel
     public string $owner_address;
     public string $phone_No;
 //    public string $license_No= '';
-    public string $email;
+    public string $email = '';
     public string $gender = '';
      public string $password;
      public string $passwordConfirm;
+    public ?string $profile_pic = '';
 
 
 
@@ -68,12 +69,26 @@ class vehicleowner extends dbModel
 
     public function attributes(): array
     {
-        return ['Nic', 'vo_ID', 'owner_Fname', 'owner_Lname', 'owner_area', 'owner_address', 'phone_No','email','gender','admin_approved'];
+        return ['Nic', 'vo_ID', 'owner_Fname', 'owner_Lname', 'owner_address', 'phone_No','email','gender','password'];
     }
 
-    public function getvo_ID(){
-        return $this->vo_ID;
+//    display name
+    public function displayName(): string
+    {
+        return $this->owner_Fname . ' ' . $this->owner_Lname;
     }
+
+    public function update($id, $Include=[], $Exclude = []): bool
+    {
+        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+        return parent::update($id, $Include, $Exclude);
+    }
+
+    public function displayName(): string
+    {
+        return $this->owner_Fname . ' ' . $this->owner_Lname;
+    }
+
 
     public  function admindisablevehowner($vo_id){
         $availability=0;
@@ -102,7 +117,189 @@ class vehicleowner extends dbModel
         return Application::$app->db->pdo->query("SELECT COUNT(vo_ID) As veho_count FROM vehicleowner")->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+
     public function getvehOwner($vo_ID){
         return Application::$app->db->pdo->query("SELECT * FROM vehicleowner WHERE vo_ID=$vo_ID")->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    /**
+     * @return int
+     */
+    public function getVoID(): int
+    {
+        return $this->vo_ID;
+    }
+
+    /**
+     * @param int $vo_ID
+     */
+    public function setVoID(int $vo_ID): void
+    {
+        $this->vo_ID = $vo_ID;
+    }
+
+
+
+    /**
+     * @return string
+     */
+    public function getNic(): string
+    {
+        return $this->Nic;
+    }
+
+    /**
+     * @param string $Nic
+     */
+    public function setNic(string $Nic): void
+    {
+        $this->Nic = $Nic;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOwnerFname(): string
+    {
+        return $this->owner_Fname;
+    }
+
+    /**
+     * @param string $owner_Fname
+     */
+    public function setOwnerFname(string $owner_Fname): void
+    {
+        $this->owner_Fname = $owner_Fname;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOwnerLname(): string
+    {
+        return $this->owner_Lname;
+    }
+
+    /**
+     * @param string $owner_Lname
+     */
+    public function setOwnerLname(string $owner_Lname): void
+    {
+        $this->owner_Lname = $owner_Lname;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOwnerAddress(): string
+    {
+        return $this->owner_address;
+    }
+
+    /**
+     * @param string $owner_address
+     */
+    public function setOwnerAddress(string $owner_address): void
+    {
+        $this->owner_address = $owner_address;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhoneNo(): string
+    {
+        return $this->phone_No;
+    }
+
+    /**
+     * @param string $phone_No
+     */
+    public function setPhoneNo(string $phone_No): void
+    {
+        $this->phone_No = $phone_No;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGender(): string
+    {
+        return $this->gender;
+    }
+
+    /**
+     * @param string $gender
+     */
+    public function setGender(string $gender): void
+    {
+        $this->gender = $gender;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param string $password
+     */
+    public function setPassword(string $password): void
+    {
+        $this->password = $password;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPasswordConfirm(): string
+    {
+        return $this->passwordConfirm;
+    }
+
+    /**
+     * @param string $passwordConfirm
+     */
+    public function setPasswordConfirm(string $passwordConfirm): void
+    {
+        $this->passwordConfirm = $passwordConfirm;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getProfilePic(): ?string
+    {
+        return $this->profile_pic;
+    }
+
+    /**
+     * @param string|null $profile_pic
+     */
+    public function setProfilePic(?string $profile_pic): void
+    {
+        $this->profile_pic = $profile_pic;
+    }
+
+
+
 }

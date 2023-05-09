@@ -1,4 +1,11 @@
 /* Table */
+#bookings-heading {
+    text-align: left;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 50px 50px;
+}
+
 .table-wrapper {
     max-width: 100%;
     height: max-content;
@@ -44,9 +51,8 @@
 }
 
 .bookingTable tbody tr.parent {
-    cursor: pointer;
+
     background-color: #ffffff;
-    transition: background-color 0.3s ease-in-out;
     transition: 0.4s;
 }
 
@@ -62,10 +68,10 @@
     margin-right: 20px;
 }
 
-.bookingTable tbody tr.parent:hover {
-    box-shadow: 0px 0px 10px #909090;
-    transform: scale(1.009);
-}
+/*.bookingTable tbody tr.parent:hover {*/
+/*    box-shadow: 0 0 10px #909090;*/
+/*    transform: scale(1.009);*/
+/*}*/
 
 .bookingTable tbody tr.child {
     background-color: #ffffff;
@@ -225,7 +231,7 @@
 }
 
 .driver-image img {
-    max-width: 100%;
+    max-width: 75%;
     height: auto;
     border-radius: 50%;
 }

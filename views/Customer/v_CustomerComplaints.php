@@ -1,6 +1,6 @@
 <?php
     use app\models\VehBooking;
- /* @var $booking VehBooking */
+/* @var $booking VehBooking */
 ?>
 
     <div class="complaint-wrapper-container">
@@ -32,6 +32,8 @@
                                 <input type="file" class="custom-file-input" id="images" name="images[]" multiple>
 <!--                                <label class="custom-file-label" for="images">Choose files</label>-->
                             </div>
+<!--                            Add an error-->
+<!--                            <span class="error">--><?php //echo $complaint->errors; ?><!--</span>-->
                         </div>
 
                         <div class="output"></div>
@@ -73,6 +75,7 @@
         } else if (complaintAbout === 'vehicle') {
             const select = document.createElement('select');
             select.classList.add('complaint-form');
+            select.setAttribute('name','veh_Id');
             select.innerHTML = `
         <option value="" selected disabled>Select a vehicle</option>
         <?php foreach ($bookings as $booking): ?>
