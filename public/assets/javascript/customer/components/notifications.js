@@ -35,13 +35,11 @@ function fetchNotifications() {
     }) // Assuming the endpoint is set to '/notification'
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             if (data.error) {
                 console.error(data.error);
                 return;
             }
 
-            console.log(data[0].output);
 
             if (data[0].output) {
                 notificationList.innerHTML = data[0].output;
