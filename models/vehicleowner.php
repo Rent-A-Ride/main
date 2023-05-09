@@ -84,10 +84,10 @@ class vehicleowner extends dbModel
         return parent::update($id, $Include, $Exclude);
     }
 
-    public function displayName(): string
-    {
-        return $this->owner_Fname . ' ' . $this->owner_Lname;
-    }
+    // public function displayName(): string
+    // {
+    //     return $this->owner_Fname . ' ' . $this->owner_Lname;
+    // }
 
 
     public  function admindisablevehowner($vo_id){
