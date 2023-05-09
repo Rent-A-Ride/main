@@ -91,3 +91,8 @@ background: #44585e;
 .days li:not(.active1):hover::before{
 background: #f2f2f2;
 }
+
+
+.booked{
+    background-color: red;
+}
