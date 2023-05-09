@@ -11,6 +11,7 @@ class Notification extends dbModel
     protected int $user_id;
     protected string $title;
     protected string $message;
+    protected ?string $link = null;
     protected string $status = 'unread';
 
 
@@ -27,12 +28,25 @@ class Notification extends dbModel
 
     public function attributes(): array
     {
-        return ['user_id', 'title', 'message', 'status'];
+        return ['user_id', 'title', 'message', 'link', 'status'];
     }
 
     public static function primaryKey(): string
     {
         return 'notification_Id';
+    }
+
+//    Send a notification function
+    public static function sendNotification($userId, $title, $message, $link = null): bool
+    {
+        $notification = new Notification();
+        $notification->setUserId($userId);
+        $notification->setTitle($title);
+        $notification->setMessage($message);
+        $notification->setLink($link);
+        $notification->save();
+
+        return true;
     }
 
     /**
@@ -98,6 +112,24 @@ class Notification extends dbModel
     {
         $this->message = $message;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getLink(): ?string
+    {
+        return $this->link;
+    }
+
+    /**
+     * @param string|null $link
+     */
+    public function setLink(?string $link): void
+    {
+        $this->link = $link;
+    }
+
+
 
     /**
      * @return string

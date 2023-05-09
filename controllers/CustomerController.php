@@ -9,6 +9,7 @@ use app\core\Request;
 use app\core\Response;
 use app\models\CancelBookings;
 use app\models\Customer;
+use app\models\Notification;
 use app\models\system_complaints;
 use app\models\veh_Reviews;
 use app\models\VehBooking;
@@ -73,6 +74,7 @@ class CustomerController extends Controller
             $customer->loadData($request->getBody());
             if ($customer->validateWith(['firstname','lastname','address']) && $customer->update($id,['firstname','lastname', 'phoneno', 'address'])){
                 Application::$app->session->setFlash('profileUpdate', 'Profile Updated Successfully!');
+                Notification::sendNotification($id, 'Profile Updated', 'Your profile has been updated successfully!', '/Customer/Profile');
                 $response->redirect('/Customer/Profile');
                 return;
             }

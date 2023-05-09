@@ -21,15 +21,15 @@
     background-color: red;
     color: white;
     font-size: 12px;
-    padding: 2px 4px;
+    padding: 0px 5px;
     border-radius: 50%;
 }
 
 .notification-panel {
     position: absolute;
-    top: 40px;
-    right: 0;
-    width: 300px;
+    top: 85px;
+    right: 10px;
+    width: 350px;
     background-color: white;
     border-radius: 4px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

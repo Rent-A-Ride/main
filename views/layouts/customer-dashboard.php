@@ -113,7 +113,7 @@ use app\core\Application; ?>
         <ul class="nav-list" id="nav-list">
             <div class="notification-cont">
                 <div class="notification-icon">
-                    <i class='bx bxs-bell'></i>
+                    <i class='bx bx-bell'></i>
                     <span class="notification-count">0</span>
                 </div>
 

@@ -31,7 +31,7 @@ class notificationController extends Controller
         $output = '';
 
         foreach ($notifications as $notification) {
-            $output .= '<li><a href="#" onclick="markAsRead('.$notification->getNotificationId().')">' . $notification->getTitle() . '</a><p>' . $notification->getMessage() . '</p></li>';
+            $output .= '<li><a href="'.$notification->getLink().'" onclick="markAsRead('.$notification->getNotificationId().')">' . $notification->getTitle() . '</a><p>' . $notification->getMessage() . '</p></li>';
         }
 
         $params = [

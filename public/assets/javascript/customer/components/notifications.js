@@ -4,6 +4,8 @@ const closeBtn8 = document.querySelector('.close-btn');
 const notificationList = document.querySelector('.notification-list');
 const notificationCount = document.querySelector('.notification-count');
 
+
+
 notificationIcon.addEventListener('click', () => {
     notificationPanel.classList.toggle('active');
     fetchNotifications();
@@ -41,9 +43,13 @@ function fetchNotifications() {
 
             console.log(data[0].output);
 
-            notificationList.innerHTML = data[0].output;
-
-            notificationCount.textContent = data[0].count;
+            if (data[0].output) {
+                notificationList.innerHTML = data[0].output;
+                notificationCount.textContent = data[0].count;
+            } else {
+                notificationList.innerHTML = '<li style="text-align: center"><p>--No notifications available.--</p></li>';
+                notificationCount.textContent = '0';
+            }
         })
         // .catch(error => {
         //     console.error(error)
