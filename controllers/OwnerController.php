@@ -19,6 +19,8 @@ use app\models\ren_insuarance;
 use app\models\ren_license;
 use app\models\veh_insurance;
 use app\models\cusVehicle;
+use app\models\driver_requests;
+use app\models\driverInvoice;
 use app\models\driverpayment;
 use app\models\MonthlyRevenue;
 use app\models\vehicle_Owner;
@@ -28,6 +30,7 @@ use app\models\VehBooking;
 use app\models\vehicle;
 use app\models\vehicle_complaint_resolve_notification;
 use app\models\vehicleowner;
+use app\models\vehicleownerinvoice;
 use app\models\vehicleownerpayment;
 use app\models\vehiclereview;
 
@@ -128,10 +131,13 @@ class OwnerController extends Controller
             $vehicle2=$vehicles->viewVehicleProfilelicense($req,$res,$query);
             $review=new vehiclereview();
             $reviews=$review->getReviews((int)$query["id"]);
+            $book=new VehBooking();
+            $vehiclebook = $book->getvehBooking((int)$query["id"]);
+           
             $ownerprofile = new owner();
             $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
             $this->setLayout("owner-dashboard");
-             return $this->render("/admin/ownerViewVehicleProfile",['veh_info'=>$vehicle1,'veh_li'=>$vehicle2,'reviews'=>$reviews],['profile_img'=>$owner_img, 'function'=>'Vehicle']);
+             return $this->render("/admin/ownerViewVehicleProfile",['veh_info'=>$vehicle1,'veh_li'=>$vehicle2,'reviews'=>$reviews,'bookings'=>$vehiclebook],['profile_img'=>$owner_img, 'function'=>'Vehicle']);
         }
         return $res->render("Home","home");
     }
@@ -478,12 +484,38 @@ class OwnerController extends Controller
 
     public function manage_vehownerPayment(Request $req, Response $res){
         if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="owner"){
-
+            $currentMonth = date('m');
             if ($req->isPost()) {
+                $img_name = $_FILES['pay_proof']['name'];
+                $pdf_name = $_FILES['invoice']['name'];
+
+                // Generate a unique ID with one letter prefix
+                $unique_id = 'I'. $currentMonth . uniqid();
+
+                // Set the destination folder
+                $destination_image = Application::$ROOT_DIR.'/public/assets/img/PaymentSlip/';
+                $destination_pdf = Application::$ROOT_DIR.'/public/assets/Invoice/VehicleOwner_Invoice/';
+
+                // Save the image file with a unique name
+                if($img_name) {
+                    $img_ext = pathinfo($img_name, PATHINFO_EXTENSION);
+                    $img_new_name = $unique_id . '.' . $img_ext;
+                    move_uploaded_file($_FILES['pay_proof']['tmp_name'], $destination_image . $img_new_name);
+                }
+
+                // Save the PDF file with a unique name
+                if($pdf_name) {
+                    $pdf_ext = pathinfo($pdf_name, PATHINFO_EXTENSION);
+                    $pdf_new_name = $unique_id . '.' . $pdf_ext;
+                    move_uploaded_file($_FILES['invoice']['tmp_name'], $destination_pdf . $pdf_new_name);
+                }
+                // var_dump($_FILES);
                 $body=$req->getBody();
                 $vo_id=(int)$body['vo_Id'];
                 $booking = new vehicleownerpayment();
-                $booking->confirm_payment($vo_id);
+                $booking->confirm_payment($vo_id,$body['month'],$img_new_name);
+                $invoi=new vehicleownerinvoice();
+                $invoi->confirm_invoice($vo_id,$body['month'],$pdf_new_name);
                 $res->redirect("/admin/managepayment");
             }
             else {
@@ -494,8 +526,12 @@ class OwnerController extends Controller
                 $booking = new vehicleownerpayment();
                 $payment = $booking->getpayment_currentMonth();
                 $allpayment=$booking->getpayment();
+                $invoi=new vehicleownerinvoice();
+                $invoice=$invoi->getvoInvoice();
+                // var_dump($invoice);
+                // exit;
                 $this->setLayout("owner-dashboard");
-                return $this->render("/admin/manage_payment",['vehicleowners'=>$vehicleowners, 'rent'=>$payment,'rent2'=>$allpayment],['profile_img'=>$owner_img, 'function'=>'Payment']);
+                return $this->render("/admin/manage_payment",['vehicleowners'=>$vehicleowners, 'rent'=>$payment,'rent2'=>$allpayment,'invoice'=>$invoice],['profile_img'=>$owner_img, 'function'=>'Payment']);
             }
             
         }    
@@ -503,15 +539,52 @@ class OwnerController extends Controller
 
     public function manage_driverPayment(Request $req, Response $res){
         if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="owner"){
-            $ownerprofile = new owner();
-            $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
-            $driver = new driver();
-            $drivers= $driver->getDriver();
-            $booking = new driverpayment();
-            $payment = $booking->getpayment_currentMonth();
-            $allpayment=$booking->getpayment();
-            $this->setLayout("owner-dashboard");
-            return $this->render("/admin/manageDriverPayment",['drivers'=>$drivers, 'rent'=>$payment,'rent2'=>$allpayment],['profile_img'=>$owner_img, 'function'=>'Payment']);
+
+            if ($req->isPost()) {
+                $currentMonth = date('m');
+                $img_name = $_FILES['pay_proof']['name'];
+                $pdf_name = $_FILES['invoice']['name'];
+
+                // Generate a unique ID with one letter prefix
+                $unique_id = 'I'. $currentMonth . uniqid();
+
+                // Set the destination folder
+                $destination_image = Application::$ROOT_DIR.'/public/assets/img/PaymentSlip/';
+                $destination_pdf = Application::$ROOT_DIR.'/public/assets/Invoice/DriverInvoice/';
+
+                // Save the image file with a unique name
+                if($img_name) {
+                    $img_ext = pathinfo($img_name, PATHINFO_EXTENSION);
+                    $img_new_name = $unique_id . '.' . $img_ext;
+                    move_uploaded_file($_FILES['pay_proof']['tmp_name'], $destination_image . $img_new_name);
+                }
+
+                // Save the PDF file with a unique name
+                if($pdf_name) {
+                    $pdf_ext = pathinfo($pdf_name, PATHINFO_EXTENSION);
+                    $pdf_new_name = $unique_id . '.' . $pdf_ext;
+                    move_uploaded_file($_FILES['invoice']['tmp_name'], $destination_pdf . $pdf_new_name);
+                }
+                $body=$req->getBody();
+                $driver_id=(int)$body['driver_Id'];
+                $booking = new driverpayment();
+                $booking->confirm_payment($driver_id,$body['month'],$img_new_name);
+                $inv= new driverInvoice();
+                $inv->confirm_invoice($driver_id,$body['month'],$pdf_new_name);
+                $res->redirect("/admin/managedriverpayment");
+            }else{
+                $ownerprofile = new owner();
+                $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
+                $driver = new driver();
+                $drivers= $driver->getDriver();
+                $booking = new driverpayment();
+                $payment = $booking->getpayment_currentMonth();
+                $allpayment=$booking->getpayment();
+                $this->setLayout("owner-dashboard");
+                return $this->render("/admin/manageDriverPayment",['drivers'=>$drivers, 'rent'=>$payment,'rent2'=>$allpayment],['profile_img'=>$owner_img, 'function'=>'Payment']);
+
+            }
+            
         }    
     }
 
@@ -594,6 +667,99 @@ class OwnerController extends Controller
             
             }
         }
+    }
+
+
+    public function vehowerInvoice(Request $req, Response $res){
+        if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="owner"){
+
+            if ($req->isPost()) {
+                $body=$req->getBody();
+                
+                $vo_ID=intval($body['vo_ID']);
+                $vehicle=new vehicle();
+                $veh_ownerVehicle=$vehicle->vehicleOwnergetVehicle($vo_ID);
+                
+                $veh_booking=new VehBooking();
+                $vehiclebooking=$veh_booking->getBookingForMonth($vo_ID,$body['month']);
+
+                $vo = new vehicleowner();
+                $vowner=$vo->getvehOwner($vo_ID);
+                
+                $this->setLayout("invoice");
+                return $this->render("/admin/voInvoice",['vehicle'=>$veh_ownerVehicle,'veh_booking'=>$vehiclebooking,'vowner'=>$vowner],['function'=>'Invoice']);
+
+
+            }
+            else {
+                $ownerprofile = new owner();
+                $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
+                $vehicleowner = new vehicle_Owner();
+                $vehicleowners= $vehicleowner->veh();
+                // $booking = new vehicleownerpayment();
+                // $payment = $booking->getpayment_currentMonth();
+                // $allpayment=$booking->getpayment();
+                $invoi=new vehicleownerinvoice();
+                $invoice=$invoi->getvoInvoice();
+                // var_dump($invoice);
+                // exit;
+                $this->setLayout("owner-dashboard");
+                return $this->render("/admin/adminGenarateVoInvoice",['vehicleowners'=>$vehicleowners,'invoice'=>$invoice],['profile_img'=>$owner_img, 'function'=>'Invoice']);
+            }
+            
+        }
+
+    }
+
+    public function driverInvoice(Request $req, Response $res){
+        if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="owner"){
+
+            if ($req->isPost()) {
+                $body=$req->getBody();
+                
+                $driver_ID=intval($body['driver_ID']);
+                $request= new driver_requests();
+                $requests=$request->getdriverReqforDriver($body['month'],$driver_ID);
+                $dri=new driver();
+                $driver=$dri->getDriverbyId($driver_ID);
+                $this->setLayout("invoice");
+                return $this->render("/admin/driverInvoice",['requests'=>$requests,'driver'=>$driver],['function'=>'Invoice']);
+
+
+            }
+            else {
+               
+                $driver = new driver();
+                $drivers= $driver->getDriver();
+                $invoi=new driverInvoice();
+                $invoice=$invoi->getvoInvoice();
+                $this->setLayout("owner-dashboard");
+                return $this->render("/admin/adminGenarateDriverInvoice",['drivers'=>$drivers,'invoice'=>$invoice],['function'=>'Invoice']);
+            }
+            
+        }
+
+    }
+
+
+    public function driversInvoice(Request $req, Response $res){
+        if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="owner"){
+
+                $body=$req->getBody();
+                
+                $driver_ID=intval($body['driver_ID']);
+                $request= new driver_requests();
+                $requests=$request->getdriverReqforDriver($body['month'],$driver_ID);
+                $dri=new driver();
+                $driver=$dri->getDriverbyId($driver_ID);
+                $this->setLayout("invoice");
+                return $this->render("/admin/driverInvoice",['requests'=>$requests,'driver'=>$driver],['function'=>'Invoice']);
+
+
+            
+            
+        }
+
     }
 
 }

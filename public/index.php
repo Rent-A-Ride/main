@@ -32,13 +32,13 @@ $config = [
         'user'=>$_ENV['DB_USER'],
         'password'=>$_ENV['DB_PASSWORD'],
     ],
-    // 'email'=>[
-    //     'host'=>$_ENV['EMAIL_HOST'],
-    //     'port'=>$_ENV['EMAIL_PORT'],
-    //     'username'=>$_ENV['EMAIL_USERNAME'],
-    //     'password'=>$_ENV['EMAIL_PASSWORD'],
-    //     'encryption'=>$_ENV['EMAIL_ENCRYPTION'],
-    // ]
+    'email'=>[
+        'host'=>$_ENV['EMAIL_HOST'],
+        'port'=>$_ENV['EMAIL_PORT'],
+        'username'=>$_ENV['EMAIL_USERNAME'],
+        'password'=>$_ENV['EMAIL_PASSWORD'],
+        'encryption'=>$_ENV['EMAIL_ENCRYPTION'],
+    ]
 ];
 
 $app = new Application(dirname(__DIR__),$config);
@@ -120,6 +120,7 @@ $app->router->get("/admin/managepayment", [OwnerController::class, "manage_vehow
 $app->router->post("/admin/managepayment", [OwnerController::class, "manage_vehownerPayment"]);
 
 $app->router->get("/admin/managedriverpayment", [OwnerController::class, "manage_driverPayment"]);
+$app->router->post("/admin/managedriverpayment", [OwnerController::class, "manage_driverPayment"]);
 
 $app->router->get("/admin/add-driver", [OwnerController::class, "add_driver"]);
 
@@ -131,6 +132,13 @@ $app->router->post("/admin/Settings", [OwnerController::class, "setting"]);
 
 $app->router->get("/admin/chart", [OwnerController::class, "test1"]);
 $app->router->get("/admin/charts", [OwnerController::class, "test2"]);
+
+$app->router->get("/admin/vehicleownerInvoice", [OwnerController::class, "vehowerInvoice"]);
+$app->router->post("/admin/vehicleownerInvoice", [OwnerController::class, "vehowerInvoice"]);
+
+$app->router->get("/admin/driverInvoice", [OwnerController::class, "driverInvoice"]);
+$app->router->post("/admin/driverInvoice", [OwnerController::class, "driverInvoice"]);
+
 
 //Hasantha
 $app->router->post('/notifications', [notificationController::class, 'notification']);
@@ -289,6 +297,8 @@ $app->router->get("/vehicleOwner/viewVehicleProfile", [VehicleOwnerController::c
 //vehicle owner edit vehicle profile details
 $app->router->get("/vehicleOwner/editVehicleProfile", [VehicleOwnerController::class, 'editVehicleProfile']);
 $app->router->post("/vehicleOwner/editVehicleProfile", [VehicleOwnerController::class, 'editVehicleProfile']);
+
+$app->router->get("/driver/availability", [DriverController::class, 'driverAvailability']);
 
 $app->run();
 
