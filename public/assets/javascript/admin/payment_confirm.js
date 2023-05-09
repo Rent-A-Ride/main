@@ -7,6 +7,7 @@ confirmbtn.forEach(function (btn) {
     btn.addEventListener("click", function () {
         
         const vo_id=btn.dataset.vo_id;
+        const month=btn.dataset.month;
         console.log(vo_id);
 
         const vehicle ={
@@ -20,13 +21,22 @@ confirmbtn.forEach(function (btn) {
                     <div>
                         <form action="/admin/managepayment" method="post" enctype="multipart/form-data" id="confirm_vehPayment">
                             <div> <input type="number" style="display:none" name='vo_Id' placeholder='' required  value='${vehicle.vo_id}' /> </div>
+                            <div> <input type="text" style="display:none" name='month' placeholder='' required  value='${vehicle.month}' /> </div>
+                            <div> 
+                                <label for="invoice"><h3>Invoice:</h3></label>
+                                <input type="file"  name="invoice"/> 
+                            </div>
+                            <div> 
+                                <label for="pay_proof"><h3>Payment Slip:</h3></label>
+                                <input type="file"  name="pay_proof" /> 
+                            </div>
                             <div class="flex-centered-y justify-between mt-4">
                                 <button class="btn btn--thin" id="payment-confirm-modal-btn" style="background-color:green" type="button">
                                     Confirm
                                 </button>
                 
                             </div>
-                        </form
+                        </form>
                     </div>
                 </div>
             </div>`
@@ -52,10 +62,12 @@ confirmdbtn.forEach(function (btn) {
         btn.addEventListener("click", function () {
         
         const vo_id=btn.dataset.vo_id;
+        const month=btn.dataset.month;
         console.log(vo_id);
 
         const vehicle ={
-            vo_id
+            vo_id,
+            month
         };
 
         const confirmpayment = htmlToElement(
@@ -65,6 +77,15 @@ confirmdbtn.forEach(function (btn) {
                     <div>
                         <form action="/admin/managepayment" method="post" enctype="multipart/form-data" id="confirm_vehPayment">
                             <div> <input type="number" style="display:none" name='vo_Id' placeholder='' required  value='${vehicle.vo_id}' /> </div>
+                            <div> <input type="text" style="display:none" name='month' placeholder='' required  value='${vehicle.month}' /> </div>
+                            <div> 
+                                <label for="invoice"><h3>Invoice:</h3></label>
+                                <input type="file"  name="invoice" class="input"> 
+                            </div>
+                            <div> 
+                                <label for="pay_proof"><h3>Payment Slip:</h3></label>
+                                <input type="file"  name="pay_proof" class="input"> 
+                            </div>
                             <div class="flex-centered-y justify-between mt-4">
                                 <button class="btn btn--thin" id="payment-confirm-modal-btn" style="background-color:green" type="button">
                                     Confirm

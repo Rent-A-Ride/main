@@ -163,6 +163,19 @@
             </a>
             <span class="tooltip">Payment</span>
         </li>
+        
+        <li class="<?php 
+        if($function=='Invoice'){
+            echo ('active');
+        }
+        ?>">
+            <a href="/admin/vehicleownerInvoice">
+                <i class="fa-solid fa-file-invoice"></i>
+                <span class="links_name">Invoice</span>
+            </a>
+            <span class="tooltip">Invoice</span>
+        </li>
+
         <li class="<?php 
         if($function=='Settings'){
             echo ('active');
@@ -174,6 +187,7 @@
             </a>
             <span class="tooltip">Settings</span>
         </li>
+        
         
 
         <li class="profile">

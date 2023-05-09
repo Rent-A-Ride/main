@@ -24,6 +24,8 @@ import "./table.js"
 import "./payment_confirm.js"
 // import "./table.js"
 import "./inform_payment.js"
+
+import "./driverPaymentConfirm.js"
 // import "./update_vehiclelin.js"
 // import "./update_vehicleins.js"
 // import "../component/calender.js"
