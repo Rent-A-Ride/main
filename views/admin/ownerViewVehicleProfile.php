@@ -13,7 +13,6 @@ foreach ($bookings as $booking) {
 }
 
 
-
 ?>
 
 <!-- <div class="ownerProfile_body"> -->
@@ -86,7 +85,9 @@ foreach ($bookings as $booking) {
                             <li class="bold">Fuel:  <?php echo($veh_info[0]['fuel_type'])?></li>
                         </ul>
                     </div>
+                    
                 </div>
+                
                 <div class="vehicle-description">
                     <p class="bold">Description</p>
                     <p><?php echo($veh_info[0]['Description'])?></p>
@@ -94,6 +95,22 @@ foreach ($bookings as $booking) {
                 <div class="vehicle-price">
                     <span>Vehicle Rent Price (Per/ Day):</span>
                     <span class="price">Rs. <?php echo($veh_info[0]['price'])?>.00 </span>
+                </div>
+                <div class="vehicle-price">
+                    <span><b> License No:</b></span>
+                    <span class="price"><?php echo($veh_li[0]['license_No'])?></span>
+                </div>
+                <div class="vehicle-price">
+                    <span><b>License Scan Copy:</b></span>
+                    <span class="price"><?php echo($veh_li[0]['scan_copy'])?></span>
+                </div>
+                <div class="vehicle-price">
+                    <span><b> Insuarance No:</b></span>
+                    <span class="price"><?php echo($veh_li[0]['ins_No'])?></span>
+                </div>
+                <div class="vehicle-price">
+                    <span><b> Insuarance Scan Copy:</b></span>
+                    <span class="price"><?php echo($veh_li[0]['insscan_copy'])?></span>
                 </div>
 
             </div>

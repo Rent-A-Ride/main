@@ -78,6 +78,12 @@ class adminCustomer
     public function getCustomer_count(){
         return Application::$app->db->pdo->query("SELECT COUNT(driver_ID) As driver_count FROM driver")->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    public function getcustomerbyID($cus_id){
+        
+        return Application::$app->db->pdo->query("SELECT * FROM customer WHERE cus_Id=$cus_id")->fetchAll(\PDO::FETCH_ASSOC);
+
+    }
                 
 
     

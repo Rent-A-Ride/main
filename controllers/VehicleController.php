@@ -8,7 +8,8 @@ use app\core\Request;
 use app\core\Response;
 use app\models\cusVehicle;
 use app\models\vehicle;
-
+use app\models\vehicleowner;
+use Exception;
 
 class VehicleController extends Controller
 {
@@ -108,10 +109,29 @@ class VehicleController extends Controller
             $query=$req->query();
             $vehicleModel = new vehicle();
 
+
             $vehicleModel->adminacceptVehicle((int)$query["id"]);
             $vehicleModel->adminacceptVehiclelicense((int)$query["id"]);
             $vehicleModel->adminacceptVehicleinsuarance((int)$query["id"]);
-            // $vehicles = $vehicleModel->getVehicletoAdd();
+            $vehicles = $vehicleModel->getvoByVehId((int)$query["id"]);
+            $vo_Id=$vehicles[0]['vo_Id'];
+            $vowner=new vehicleowner();
+            $vo=$vowner->getvehOwner($vo_Id);
+            $subject = "Added Your Vehicle Into Our System";
+                $msg = "Vehicle :".$vehicles[0]['plate_No']."</br><b>Welcome To Our System Your Vehicle IS Added Successfully</b> "."</b> <br>.";
+                
+                $emailData = [
+                    'email' => $vo[0]['email'],
+                    'subject' => $subject,
+                    'body' => $msg
+                ];
+
+                try {
+                   Application::$app->email->sendEmail($emailData);
+                } catch ( Exception $e) {
+                    echo $e->getMessage();
+                }
+
 //            print_r($vehicles);
             return true;
 //            return $res->render(view: "admin-vehicle",layout: "owner-dashboard",pageParams: ["vehicles"=>$vehicles]);
