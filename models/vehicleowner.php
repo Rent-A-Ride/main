@@ -111,6 +111,11 @@ class vehicleowner extends dbModel
         return Application::$app->db->pdo->query("SELECT COUNT(vo_ID) As veho_count FROM vehicleowner")->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+
+    public function getvehOwner($vo_ID){
+        return Application::$app->db->pdo->query("SELECT * FROM vehicleowner WHERE vo_ID=$vo_ID")->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     /**
      * @return int
      */
@@ -288,6 +293,7 @@ class vehicleowner extends dbModel
     {
         $this->profile_pic = $profile_pic;
     }
+
 
 
 }

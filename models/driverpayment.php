@@ -163,21 +163,35 @@ class driverpayment extends dbModel
     public function getpayment_currentMonth(){
         
         
-        return Application::$app->db->pdo->query("SELECT driver_Id, SUM(payment) AS total
+        return Application::$app->db->pdo->query("SELECT driver_ID, SUM(payment) AS total,`month`
         FROM driverpayment
-        WHERE endDate >= DATE_FORMAT(NOW(), '%Y-%m-01') AND endDate < DATE_FORMAT(NOW() + INTERVAL 1 MONTH, '%Y-%m-01') AND pay_status=0
-        GROUP BY driver_Id; ")->fetchAll(\PDO::FETCH_ASSOC);
+        WHERE `month` >= DATE_FORMAT(NOW(), '%Y-%m-01') AND `month` < DATE_FORMAT(NOW() + INTERVAL 1 MONTH, '%Y-%m-01') AND pay_status=0
+        GROUP BY driver_ID; ")->fetchAll(\PDO::FETCH_ASSOC);
             
         
     }
 
     public function getpayment(){
         
-        return Application::$app->db->pdo->query("SELECT driver_Id, DATE_FORMAT(endDate, '%M %Y') AS month_name, SUM(payment) AS total_rent,SUM(pay_status)AS pay_status
+        return Application::$app->db->pdo->query("SELECT driver_ID, DATE_FORMAT(`month`, '%M %Y') AS month_name, SUM(payment) AS total_rent,SUM(pay_status)AS pay_status,`month`
         FROM driverpayment
-        GROUP BY driver_Id, DATE_FORMAT(endDate, '%M %Y'),pay_status; ")->fetchAll(\PDO::FETCH_ASSOC);
+        GROUP BY driver_ID, DATE_FORMAT(`month`, '%M %Y'),pay_status; ")->fetchAll(\PDO::FETCH_ASSOC);
             
         
+    }
+
+    public function confirm_payment($driver_id,$month,$payment_slip){
+        $pay_status=1;
+        $query1="UPDATE driverpayment SET pay_status =:paystatus, Payment_slip=:pay_slip WHERE MONTH(month) = MONTH('$month') AND YEAR(month) = YEAR('$month') AND driver_ID=$driver_id";
+        $statement1= Application::$app->db->prepare($query1);
+        $statement1->bindValue(":paystatus",$pay_status);
+        $statement1->bindValue(":pay_slip",$payment_slip);
+        $statement1->execute();
+    }
+
+
+    public function getdriverPayments($user_id){
+            return Application::$app->db->pdo->query("SELECT * FROM driverpayment  WHERE driverpayment.driver_ID=$user_id  ORDER BY `month` DESC")->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     

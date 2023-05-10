@@ -76,9 +76,9 @@ use app\models\viewCustomerReq;
                                                 <td><?php echo($row['owner_Fname']." ".$row['owner_Lname']); ?></td>
                                                 <td><?php echo($row['email']); ?></td>
                                                 <td><?php echo($a['total']); ?></td>
-                                                <td><?php echo($a['total']*0.08); ?></td>
-                                                <td><?php echo($a['total']-$a['total']*0.08); ?></td>
-                                                <td><button style="padding:0px 20px" class="payment-confirm" data-vo_id="<?php echo($a['vo_Id']) ?>">PAY</button></td>
+                                                <td><?php echo($a['total']*0.2); ?></td>
+                                                <td><?php echo($a['total']-$a['total']*0.2); ?></td>
+                                                <td><button style="padding:0px 20px" class="book-button payment-confirm" data-month="<?php echo($a['month']) ?>" data-vo_id="<?php echo($a['vo_Id']) ?>">PAY</button></td>
                                             
                                     </tr>
 
@@ -140,13 +140,13 @@ use app\models\viewCustomerReq;
                                                 <td><?php echo($a['owner_Fname']." ".$a['owner_Lname']); ?></td>
                                                 <td><?php echo($a['email']); ?></td>
                                                 <td><?php echo($row['total_rent']); ?></td>
-                                                <td><?php echo($row['total_rent']*0.08); ?></td>
-                                                <td><?php echo($row['total_rent']-$row['total_rent']*0.08); ?></td>
+                                                <td><?php echo($row['total_rent']*0.2); ?></td>
+                                                <td><?php echo($row['total_rent']-$row['total_rent']*0.2); ?></td>
                                                 <td><?php echo($row['month_name']); ?></td>
                                                 <?php 
                                                    if ($row['pay_status']==0) {
                                                    ?>
-                                                    <td><button style="padding:0px 20px" class="payment-confirmd" data-vo_id="<?php echo ($row['vo_Id']) ?>">PAY</button></td>
+                                                    <td><button style="padding:0px 20px" class="book-button payment-confirmd" data-month="<?php echo ($row['month']) ?>" data-vo_id="<?php echo ($row['vo_Id']) ?>">PAY</button></td>
                                                 <?php
                                                    }
                                                    else{

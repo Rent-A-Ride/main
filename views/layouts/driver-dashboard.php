@@ -172,4 +172,5 @@ use app\core\Application;
             }
         }
 </script>
+<script src="/assets/javascript/component/calender.js"></script>
 </html>

@@ -1,0 +1,104 @@
+.invoice-heder-container{
+    width: 100%;
+    background-color: gray;
+    min-height: 100px;
+    padding: 20px;
+    display: flex;
+    margin: 0;
+}
+
+.invoice-heder-container-invoice{
+    /* background-color: red; */
+    width: 30%;
+    min-height: 100px;
+    margin-right: 5px;
+    position: relative;
+    text-align: center;
+    font-size: 20px;
+    color: #ffff;
+    
+}
+
+.invoice-heder-container-details{
+    /* background-color: red; */
+    width: 30%;
+    min-height: 100px;
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.invoice-heder-container-contact{
+    /* background-color: red; */
+    width: 25%;
+    min-height: 100px;
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.invoice-heder-container-follow{
+    /* background-color: red; */
+    width: 10%;
+    min-height: 100px;
+    position: relative;
+    text-align: center;
+    color: #ffff;
+}
+
+.invoice-vowner-details{
+    width: 60%;
+    /* background-color: blue; */
+    height: 100px;
+    display: flex;
+    margin-top: 20px;
+}
+
+.invoice-vowner-details-h{
+    margin:0 2rem;
+    position: relative;
+    text-align: left;
+
+}
+.invoice-vowner-details-d{
+    margin:0 2rem;
+    position: relative;
+    text-align: left;
+
+}
+
+.invoice-items {
+    margin: 10px;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  .book-button {
+    background-color: #FAB84C;
+    color: black;
+    font-weight: 500;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    width: 70%;
+}
+
+@media print {
+    .book-button {
+      display: none;
+    }
+  }
