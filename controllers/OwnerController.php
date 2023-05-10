@@ -291,12 +291,16 @@ class OwnerController extends Controller
         if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="owner"){
             $vehiclecom= new vehiclecomplaint();
             $vehiclecomplaint=$vehiclecom->viewcomplaint();
-            // var_dump($vehiclecomplaint);
-            // die();
+            $resolve=new vehicle_complaint_resolve_notification();
+            $resolvenot=$resolve->get_not();
+            $data=[];
+            foreach($resolvenot as $row){
+                $data[$row['com_ID']]=$row['action'];
+            }
             $ownerprofile = new owner();
             $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
             $this->setLayout("owner-dashboard");
-            return $this->render("/admin/admin_vehicleComplaint",['complaint'=>$vehiclecomplaint],['profile_img'=>$owner_img, 'function'=>'complaint']);
+            return $this->render("/admin/admin_vehicleComplaint",['complaint'=>$vehiclecomplaint,'data'=>$data],['profile_img'=>$owner_img, 'function'=>'complaint']);
         }
         else{
             return $res->render("Home","home");
@@ -309,8 +313,14 @@ class OwnerController extends Controller
             $drivercomplaint=$drivercom->viewcomplaint();
             $ownerprofile = new owner();
             $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
+            $resolve=new driver_complaint_resolve_notification();
+            $resolvenot=$resolve->get_not();
+            $data=[];
+            foreach($resolvenot as $row){
+                $data[$row['com_ID']]=$row['action'];
+            }
             $this->setLayout("owner-dashboard");
-            return $this->render("/admin/admin_driverComplaint",['complaint'=>$drivercomplaint],['profile_img'=>$owner_img, 'function'=>'complaint']);
+            return $this->render("/admin/admin_driverComplaint",['complaint'=>$drivercomplaint,'data'=>$data],['profile_img'=>$owner_img, 'function'=>'complaint']);
         }
         else{
             return $res->render("Home","home");
@@ -343,9 +353,13 @@ class OwnerController extends Controller
             $notification = new vehicle_complaint_resolve_notification();
             if ($req->isPost()){
                 $body=$req->getBody();
-                var_dump($body);
+                // var_dump($body['com_ID']);
+                // exit;
                 $notification->loadData($body);
                 $notification->save();
+                $com=new vehiclecomplaint;
+                $com->resolve(intval($body['com_ID']));
+
                 $res->redirect('/admin/vehicleComplaint');
             }
             
@@ -363,6 +377,8 @@ class OwnerController extends Controller
                 // var_dump($body);
                 $notification->loadData($body);
                 $notification->save();
+                $com=new drivercomplaint();
+                $com->resolve(intval($body['com_ID']));
                 $res->redirect('/admin/driverComplaint');
             }
             
