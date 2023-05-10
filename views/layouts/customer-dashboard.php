@@ -1,6 +1,10 @@
 <?php
 
-use app\core\Application; ?>
+
+
+use app\core\Application;
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -184,49 +188,7 @@ use app\core\Application; ?>
 
 </body>
 <script>
-    // let notificationIcon = document.querySelector('.notification-icon');
-    // let notificationPanel = document.querySelector('.notification-panel');
-    // let closeBtn8 = document.querySelector('.close-btn');
-    //
-    // notificationIcon.addEventListener('click', () => {
-    //     notificationPanel.classList.toggle('active');
-    // });
-    //
-    // closeBtn8.addEventListener('click', () => {
-    //     notificationPanel.classList.remove('active');
-    // });
-    //
-    //
-    // // Function to get notifications using Ajax
-    // function getNotifications() {
-    //     $.ajax({
-    //         url: '/notifications',
-    //         method: 'POST',
-    //         dataType: 'json',
-    //         success: function(response) {
-    //             $('.notification-list').empty(); // Clear existing notifications
-    //
-    //             // Loop through notifications and add them to the UI
-    //             $.each(response, function(index, notification) {
-    //                 const notificationElement = $('<li><a href="#">' + notification.message + '</a></li>');
-    //                 $('.notification-list').append(notificationElement);
-    //             });
-    //         },
-    //         error: function(xhr, status, error) {
-    //             console.log('Error getting notifications: ' + error);
-    //         }
-    //     });
-    // }
-    //
-    // // Call getNotifications() function on page load
-    // $(document).ready(function() {
-    //     getNotifications();
-    // });
-    //
-    // // Call getNotifications() function every 10 seconds
-    // setInterval(function() {
-    //     getNotifications();
-    // }, 10000);
+   console.log('This loaded');
 </script>
 
 <script src="/assets/javascript/component/navbar.js"></script>
