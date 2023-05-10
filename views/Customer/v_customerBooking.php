@@ -43,7 +43,7 @@ use app\models\cusVehicle;
                             <span id="driver-price" class="price">Rs. 0.00 </span>
                         </div>
                         <div class="price-details-row">
-                            <span>Total Amount:</span>
+                            <span><strong>Total Amount:</strong></span>
                             <span id="total-price" class="price" name="rental_price">Rs. 0.00 </span>
                             <input type="hidden" name="rental_price" value="" id="setRentalPrice">
                         </div>
@@ -100,41 +100,62 @@ use app\models\cusVehicle;
             <section class="add-driver" id="self-drive-terms" style="display: none">
                 <h4>Self Drive Terms</h4>
                 <div class="center">
-                    <div class="form-group">
-                        <label for="licenseNumber">Enter your driving license number:</label>
-                        <input type="text" name="licenseNumber" id="licenseNumber" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="expireDate">Enter the expiration date:</label>
-                        <input type="date" name="expireDate" id="expireDate" class="form-control">
-                    </div>
+
+                        <div class="form-group-1 ">
+                            <label for="licenseNumber">Enter your driving license number:</label>
+                            <input type="text" name="licenseNumber" id="licenseNumber" class="form-control">
+                        </div>
+                        <div class="form-group-1">
+                            <label for="expireDate">Enter the expiration date:</label>
+                            <input type="date" name="expireDate" id="expireDate" class="form-control">
+                        </div>
+
+
                 </div>
 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#self-drive-modal">
-                    View Self Drive Terms
-                </button>
+                <div class="center margin-20">
+                    <button type="button" class="terms-btn" onclick="showModal()">
+                        <i class='bx bx-paperclip'></i> Self Drive Terms
+                    </button>
+                    <small style="color: red">* By Selecting self-drive you should adhere to the given self drive terms and conditions</small>
+                </div>
+
+
+
+
             </section>
         </div>
 
         <!-- Modal -->
-<!--        <div class="modal fade" id="self-drive-modal" tabindex="-1" role="dialog" aria-labelledby="self-drive-modal-label" aria-hidden="true">-->
-<!--            <div class="modal-dialog modal-dialog-centered" role="document">-->
-<!--                <div class="modal-content">-->
-<!--                    <div class="modal-header">-->
-<!--                        <h5 class="modal-title" id="self-drive-modal-label">Self Drive Terms and Conditions</h5>-->
-<!--                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--                            <span aria-hidden="true">&times;</span>-->
-<!--                        </button>-->
-<!--                    </div>-->
-<!--                    <div class="modal-body">-->
-<!--                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in libero euismod, aliquet dolor eu, mattis est. Nullam dictum, dolor sed maximus tempus, purus mi gravida massa, et finibus ipsum risus vel nulla. Duis id ligula purus. Nam ut nibh vel enim tincidunt malesuada. Donec in risus ut tellus malesuada lacinia. Praesent vehicula laoreet vestibulum. Ut porttitor libero ac eros dignissim, eu sollicitudin velit molestie. Ut a ipsum justo. Nam ac massa sapien. Ut hendrerit, nisi eu molestie volutpat, orci metus aliquam sapien, nec euismod arcu elit et dui.</p>-->
-<!--                    </div>-->
-<!--                    <div class="modal-footer">-->
-<!--                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
+        <div class="modal" id="self-drive-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Self Drive Terms and Conditions</h5>
+                    <button type="button" class="close" onclick="hideModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Please read these terms and conditions carefully before participating in our self-drive service:</p>
+
+                    <ol>
+                        <li>By using our self-drive service, you agree to comply with all applicable traffic laws and regulations.</li>
+                        <li>You must possess a valid driver's license and be of legal driving age to use the service.</li>
+                        <li>The rented vehicle should be used for personal, non-commercial purposes only.</li>
+                        <li>You are responsible for the vehicle during the rental period, including any damages or fines incurred.</li>
+                        <li>Smoking and transporting illegal substances are strictly prohibited in the vehicle.</li>
+                        <li>Any mechanical issues or accidents should be reported immediately to our customer service.</li>
+                        <li>The vehicle should be returned in the same condition as received, with a full tank of fuel.</li>
+                        <li>We reserve the right to terminate the rental agreement and charge additional fees for violations of the terms.</li>
+                        <li>We are not liable for any personal injury or property damage that occurs during the rental period.</li>
+                        <li>These terms and conditions are subject to change without prior notice. It is your responsibility to review them periodically.</li>
+                    </ol>
+
+                    <p>By proceeding with the self-drive service, you acknowledge that you have read, understood, and agreed to these terms and conditions.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="hideModal()">Close</button>
+                </div>
+            </div>
+        </div>
 
 
         <div class="booking-section">
