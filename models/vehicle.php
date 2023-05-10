@@ -525,6 +525,11 @@ class vehicle extends dbModel
         return Application::$app->db->pdo->query("SELECT COUNT(veh_Id) As veh_count,veh_type FROM vehicle GROUP BY veh_type")->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function getvoByVehId($veh_ID){
+        return Application::$app->db->pdo->query("SELECT * FROM vehicle WHERE veh_Id=$veh_ID")->fetchAll(\PDO::FETCH_ASSOC);
+
+    }
+
 
 
 
