@@ -1,14 +1,14 @@
 <?php
-
-//    var_dump(password_hash('admin123',PASSWORD_DEFAULT));
-    $hasErrors = isset($errors) && !empty($errors);
-    $isemailError = $hasErrors && isset($errors['email']);
-    $isPasswordlError = $hasErrors && isset($errors['password']);
-    $isUserTypeError = $hasErrors && isset($errors['user_type']);
-
-
-
-?>
+//
+////    var_dump(password_hash('admin123',PASSWORD_DEFAULT));
+//    $hasErrors = isset($errors) && !empty($errors);
+//    $isemailError = $hasErrors && isset($errors['email']);
+//    $isPasswordlError = $hasErrors && isset($errors['password']);
+//    $isUserTypeError = $hasErrors && isset($errors['user_type']);
+//
+//
+//
+//?>
 <main class="">
     <div class="box">
         <div class="inner-box">
