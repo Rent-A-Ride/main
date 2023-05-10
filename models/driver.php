@@ -57,6 +57,16 @@ class driver extends dbModel
         return ['Nic','driver_Fname','driver_Lname','email','phoneNo','area','address','gender','admin_approved','password', 'profile_pic', 'license_No', 'status'];
     }
 
+    public function displayName(): string
+    {
+        return $this->driver_Fname.' '.$this->driver_Lname;
+    }
+
+    public function userProfile(string $data)
+    {
+        return $this->$data;
+    }
+
 
 
     // public function login():array|object
@@ -152,7 +162,7 @@ class driver extends dbModel
 
     public function getrequest($user_id){
         // var_dump($user_id);
-        return Application::$app->db->pdo->query("SELECT * FROM driver_requests INNER JOIN users WHERE driver_requests.user_ID=$user_id AND users.user_ID=$user_id ORDER BY reservation_id DESC")->fetchAll(\PDO::FETCH_ASSOC);
+        return Application::$app->db->pdo->query("SELECT * FROM driver_requests INNER JOIN driver WHERE driver_requests.user_ID=$user_id AND driver.driver_ID=$user_id ORDER BY reservation_id DESC")->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function getReviews($user_id){
@@ -345,6 +355,29 @@ class driver extends dbModel
 
     public function getdriverCount(){
         return Application::$app->db->pdo->query("SELECT COUNT(driver_ID) As driver_count FROM driver")->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function getrejectrequest($user_id){
+        $user_id=intval($user_id);
+        return Application::$app->db->pdo->query("SELECT * FROM driver_requests INNER JOIN driver WHERE driver_requests.user_ID=driver.driver_ID AND driver.driver_ID=$user_id AND driver_requests.accept=2 ORDER BY driver_requests.reservation_id DESC")->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function UpdateProfile($body,$driver_id){
+        
+        $fname=$body['firstname'];
+        $lname=$body['lastname'];
+        $phoneNo=$body['phoneNo'];
+        $address=$body['address'];
+        $area=$body['area'];
+        // var_dump($vehicle_id);
+        $query1="UPDATE driver SET driver_Fname=:firstname,driver_Lname=:lastname,phoneNo=:phoneNO, area=:area, `address`=:addres WHERE driver_ID=$driver_id";
+        $statement1= Application::$app->db->prepare($query1);
+        $statement1->bindValue(":firstname",$fname);
+        $statement1->bindValue(":lastname",$lname);
+        $statement1->bindValue(":phoneNO",$phoneNo);
+        $statement1->bindValue(":addres",$address);
+        $statement1->bindValue(":area", $area);
+        $statement1->execute();
     }
     
 

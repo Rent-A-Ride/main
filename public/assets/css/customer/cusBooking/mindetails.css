@@ -33,7 +33,7 @@
   }
   
   .vehicle-name {
-    font-size: 16px;
+    font-size: 22px;
     margin-top: 10px;
     padding-bottom: 5px;
     text-align: left;
@@ -68,7 +68,7 @@
     display: flex;
     align-items: stretch;
     justify-content: flex-start;
-    font-size: 12px;
+    font-size: 15px;
     font-weight: 600;
     padding: 10px;
   }
@@ -131,6 +131,7 @@
   }
 
   .two-column-layout {
+    font-size: larger;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;

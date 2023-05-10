@@ -3,6 +3,9 @@
 
 @import url('../components/nav.css');
 
+/* nav profile css */
+@import url('../components/navProfile.css');
+
 @import url('../components/sidebar.css');
 
 @import url('../components/style.css');
@@ -61,6 +64,66 @@
 
 /* Schedule Booking search*/
 @import url('Schedule Bookings/scheduleTable.css');
+
+
+
+/* nav Profile CSS*/
+.profile-cont {
+    display: inline-flex;
+    align-items: center;
+}
+
+.img-cont {
+    padding: 0 20px;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #FAB84C;
+    border-radius: 50%;
+}
+
+.profile-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: #2f2f2f;
+    background-color: #f6d59f;
+    border: 1px solid #FAB84C;
+    border-radius: 8px;
+    height: fit-content;
+    padding: 1px 4px;
+    margin-left: 10px;
+}
+
+.profile-menu {
+    position: absolute;
+    top: 60px;
+    left: 90%;
+    width: 100px;
+    background-color: #fff;
+    padding: 10px;
+    list-style: none;
+    margin: 0;
+    border-radius: 5px;
+    display: none;
+}
+
+.profile-menu a {
+    display: block;
+    font-size: 12px;
+    font-weight: normal;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.profile-menu a:hover {
+    background-color: #eee;
+}
+
 
 
 

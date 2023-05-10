@@ -1,0 +1,235 @@
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-control {
+    width: 100%;
+}
+
+#additional-fields {
+    display: none;
+}
+
+.form_1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0rem 5rem;
+    transition: all 0.2s 0.7s;
+    overflow: hidden;
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}
+
+
+
+
+.title {
+    font-size: 2.2rem;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.input-field {
+    max-width: 380px;
+    width: 100%;
+    background-color: #f0f0f0;
+    margin: 10px ;
+    height: 55px;
+    border-radius: .10rem;
+    display: grid;
+    grid-template-columns: 15% 85%;
+    padding: 0 0.4rem;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: small;
+}
+
+.complaint-form {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    padding: 10px 15px;
+    font-size: 16px;
+    outline: none;
+}
+
+.complaint-form:focus {
+    border: 1.5px solid black;
+}
+
+.complaint-form option {
+    padding: 5px 10px;
+    background-color: #eee;
+}
+
+.complaint-form option:focus {
+    background-color: #fab84c;
+}
+
+/*.complaint-form option:checked {*/
+/*    background-color: #000000;*/
+/*    color: #fff;*/
+/*}*/
+
+.complaint-submit-btn {
+    width: 200px;
+    background-color: #FAB84C;
+    border: none;
+    outline: none;
+    height: 36px;
+    border-radius: .3rem;
+    /* display: block; */
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.complaint-submit-btn.transparent:hover {
+    background-color: white;
+    color: #050505;
+}
+
+.complaint-submit-btn:hover {
+    background-color: #080808;
+}
+.complaint-wrapper {
+    display: inline-block;
+    max-width: 800px;
+    width: 100%;
+    margin: auto;
+    height: max-content;
+    border-radius: 4px;
+    padding: 2rem;
+    position: relative;
+    background-color: #ffffff;
+    justify-content: center;
+    box-shadow: 7px 10px 65px -19px rgba(0,0,0,0.6);
+    -webkit-box-shadow: 7px 10px 65px -19px rgba(0,0,0,0.6);
+    -moz-box-shadow: 7px 10px 65px -19px rgba(0,0,0,0.6);
+}
+
+.complaint-wrapper-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+
+
+}
+.complaint-wrapper .complaint-inputBox{
+    width: 100%;
+    height: 50%;
+    margin-bottom: 1.3rem;
+    position:relative;
+}
+
+.complaint-wrapper .complaint-inputBox input{
+    width: 100%;
+    height: 100%;
+    border: 1px solid #eee;
+    outline: #aaa;
+    border-radius: 4px;
+    padding: 1rem;
+    background-color:#D9D9D9;
+}
+
+.btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.complaint-wrapper .complaint-inputBox button{
+    width: 25%;
+    margin-top: 1rem;
+    display: block;
+}
+
+
+.complaint-form-title {
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+
+}
+
+
+/* Multiple upload images */
+.image {
+    width: 100px;
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.image img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.image span {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #fff;
+    color: #000;
+    border-radius: 50%;
+    padding: 2px 5px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.custom-file-input {
+    padding: 12px;
+}
+
+.custom-file-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+}
+.custom-file-input::before {
+    content: 'Upload';
+    display: inline-block;
+    background-color: #000000;
+    color: #fff;
+    padding: 6px 12px;
+    border: 1px dot-dot-dash black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.custom-file-input:hover::before {
+    background-color: #343434;
+}
+.custom-file-input:active::before {
+    background-color: #262626;
+}
+.custom-file-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 80%;
+    display: inline-block;
+}
+
