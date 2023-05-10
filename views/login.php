@@ -31,12 +31,12 @@
                                     name="email"
                                     type="email"
                                     minlength="4"
-                                    class="input-field<?php echo $isemailError? ' invalid' : ''?>"
-                                    
+                                    class="input-field<?= $model->hasError('email') ? ' invalid' : ''?>"
+                                    value="<?= $model->thereIsError() ? $model->email : ''?>"
                                      
                             />
-                            <label>Email</label>
-                            <span class="form-error"><?php echo $isemailError? "{$errors['email']}" : ""?></span>
+                            <label class="label<?= $model->hasError('email') ? ' invalid' : ''?>">Email</label>
+                            <span class="form-error"><?= $model->getFirstError('email') ?></span>
 
                         </div>
 
@@ -45,12 +45,11 @@
                                     name="password"
                                     type="password"
                                     minlength="4"
-                                    class="input-field<?php echo $isPasswordlError? ' invalid' : ''?>"
+                                    class="input-field<?= $model->hasError('password') ? ' invalid' : ''?>"
                                     autocomplete="off"
-
                             />
-                            <label>Password</label>
-                            <span class="form-error"> <?php echo $isPasswordlError? "{$errors['password']}" : ""?></span>
+                            <label class="label<?= $model->hasError('password') ? ' invalid' : ''?>" >Password</label>
+                            <span class="form-error"><?= $model->getFirstError('password') ?></span>
                         </div>
                         <div class="input-wrap">
                             <select 

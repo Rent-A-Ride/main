@@ -35,7 +35,7 @@
 
                         <label for="vehicle_type">Type</label>
 
-                        <select id="vehicle-type" class = "select-item" name = "veh_type">
+                        <select id="vehicle-type" class = "select-item" name = "veh_type" required>
                             <option selected disabled class="item" value ="">--SELECT YOUR VEHICLE TYPE--</option>
                             <option  class="item" value ="car">Car</option>
                             <option class="item" value ="van">Van</option>
@@ -47,31 +47,31 @@
                     </div>
                     <div class="input_wrap">
                         <label for="user_name">Vehicle Brand</label>
-                        <input type="text" name="veh_brand" class="input" id="brand">
+                        <input type="text" name="veh_brand" class="input" id="brand" required>
                     </div>
                     <div class="input_wrap">
                         <label for="user_name">Vehicle Model</label>
-                        <input type="text" name="veh_model" class="input" id="model">
+                        <input type="text" name="veh_model" class="input" id="model" required>
                     </div>
                     <div class="input_wrap">
                         <label for="user_name">Plate No.</label>
-                        <input type="text" name="plate_No" class="input" id="plateno">
+                        <input type="text" name="plate_No" class="input" id="plateno" required>
                     </div>
 
                     <div class="input_wrap">
                         <label for="user_name">Location</label>
-                        <input type="text" name="veh_location" class="input" id="location">
+                        <input type="text" name="veh_location" class="input" id="location" required>
                     </div>
 
                     <div class="input_wrap">
                         <label for="range-slider">Vehicle Rent Price Rate:</label>
-                        <input id="range-slider" type="range" step="50" name="price">
+                        <input id="range-slider" type="range" step="50" name="price" required>
                         <span id="range-value"></span>
                     </div>
 
                     <div class="input_wrap">
                         <label for="user_name">Front View</label>
-                        <input type="file" name="front_view" class="input" id="front_view" max="1000000">
+                        <input type="file" name="front_view" class="input" id="front_view" max="1000000" required>
                     </div>
 
                     <div class="input_wrap">
@@ -151,7 +151,7 @@
                         <h3>License Details</h3>
                         <div class="form-group input_wrap">
                             <label for="license-no">License Number:</label>
-                            <input type="text" id="license-no" name="license_No" class="input">
+                            <input type="text" id="license-no" name="license_No" class="input" required>
                         </div>
 
 
