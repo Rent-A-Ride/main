@@ -12,6 +12,7 @@ use app\models\driver_requests;
 use app\models\license_expire_notification;
 use app\models\owner;
 use app\models\ren_ecotest;
+use app\models\ren_insuarance;
 use app\models\veh_ecotest;
 use app\models\veh_insurance;
 use app\models\veh_license;

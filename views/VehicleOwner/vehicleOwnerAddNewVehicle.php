@@ -1,8 +1,10 @@
 <?php
 ?>
 <h1>Add New Vehicle</h1>
+
+<!--new vehicle adding form-->
 <div class="wrapper-addveh">
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" id="add-new-form">
     <div class="header">
         <ul style="list-style-type: none">
             <li class="active form_1_progessbar">
@@ -47,41 +49,41 @@
                     </div>
                     <div class="input_wrap">
                         <label for="user_name">Vehicle Brand</label>
-                        <input type="text" name="veh_brand" class="input" id="brand">
+                        <input type="text" name="veh_brand" required class="input" id="brand" placeholder="ex: Toyota" required>
                     </div>
                     <div class="input_wrap">
                         <label for="user_name">Vehicle Model</label>
-                        <input type="text" name="veh_model" class="input" id="model">
+                        <input type="text" name="veh_model" class="input" id="model"  placeholder="ex: Corolla" required>
                     </div>
                     <div class="input_wrap">
                         <label for="user_name">Plate No.</label>
-                        <input type="text" name="plate_No" class="input" id="plateno">
+                        <input type="text" name="plate_No" class="input" id="plateno" placeholder="ex: wp KX 7890" required>
                     </div>
 
                     <div class="input_wrap">
                         <label for="user_name">Location</label>
-                        <input type="text" name="veh_location" class="input" id="location">
+                        <input type="text" name="veh_location" class="input" id="location" required>
                     </div>
 
                     <div class="input_wrap">
                         <label for="range-slider">Vehicle Rent Price Rate:</label>
-                        <input id="range-slider" type="range" step="50" name="price">
+                        <input id="range-slider" type="range" step="50" name="price" required>
                         <span id="range-value"></span>
                     </div>
 
                     <div class="input_wrap">
                         <label for="user_name">Front View</label>
-                        <input type="file" name="front_view" class="input" id="front_view" max="1000000">
+                        <input type="file" name="front_view" class="input" id="front_view" max="1000000" required>
                     </div>
 
                     <div class="input_wrap">
                         <label for="user_name">Back View</label>
-                        <input type="file" name="back_view" class="input" id="back_view" max="1000000">
+                        <input type="file" name="back_view" class="input" id="back_view" max="1000000" required>
                     </div>
 
                     <div class="input_wrap">
                         <label for="user_name">Side View</label>
-                        <input type="file" name="side_view" class="input" id="side_view" max="1000000">
+                        <input type="file" name="side_view" class="input" id="side_view" max="1000000" required>
                     </div>
 
 
@@ -94,17 +96,28 @@
 
                 <div class="form_container">
                     <div class="input_wrap">
-                        <label for="user_name">Year</label>
-                        <input type="text" name="year" class="input">
+
+                        <label for="year-input">Manufactured Year:</label>
+
+                        <select class = "select-item" id="year-input" name="year" required>
+<!--                            <select class = "select-item" name = "transmission" required>-->
+                            <option class="item" value="">--Select year--</option>
+                        </select>
                     </div>
+
+
+
+
+
+
                     <div class="input_wrap">
-                        <label for="first_name">Capacity</label>
-                        <input type="text" name="capacity" class="input">
+                        <label for="first_name">Capacity (CC)</label>
+                        <input type="number" name="capacity" class="input" min="80" required>
                     </div>
                     <div class="input_wrap">
                         <label for="last_name">Transmission</label>
 
-                        <select class = "select-item" name = "transmission">
+                        <select class = "select-item" name = "transmission" required>
                             <option class="item" value = "Auto" >Auto</option>
                             <option class="item" value = "Manual">Manual</option>
 
@@ -114,7 +127,7 @@
                     <div class="input_wrap">
                         <label for="last_name">Fuel Type</label>
 
-                        <select class ="select-item" name = "fuel_type">
+                        <select class ="select-item" name = "fuel_type" required>
                             <option value = "Petrol" >Petrol</option>
                             <option value = "Diesel">Diesel</option>
 
@@ -123,20 +136,20 @@
                     </div>
                     <div class="input_wrap">
                         <label for="vehColor">Color</label>
-                        <input type="text" name="vehColor" class="input">
+                        <input type="text" name="vehColor" class="input" required>
                     </div>
                     <div class="input_wrap">
                         <label for="seatsCount">No of Seats</label>
-                        <input type="text" name="seatsCount" class="input">
+                        <input type="number" name="seatsCount" class="input" min="1" required>
                     </div>
                     <div class="input_wrap">
-                        <label for="avgfuel">Average Fuel Consumption</label>
-                        <input type="text" name="avgfuel" class="input" id="first_name">
+                        <label for="avgfuel">Average Fuel Consumption (km/l) </label>
+                        <input type="number" name="avgfuel" class="input" id="first_name" step="0.01" min="1" required>
                     </div>
                     <div class="input_wrap">
                         <label for="Description">Description</label>
                         <!-- 						<input type="text" name="First Name" class="input" id="first_name"> -->
-                        <textarea name="Description" class ="input" style="resize: none;" maxlength="100"></textarea>
+                        <textarea name="Description" class ="input" style="resize: none;" maxlength="100" required></textarea>
                     </div>
 
                 </div>
@@ -151,21 +164,21 @@
                         <h3>License Details</h3>
                         <div class="form-group input_wrap">
                             <label for="license-no">License Number:</label>
-                            <input type="text" id="license-no" name="license_No" class="input">
+                            <input type="text" id="license-no" name="license_No" class="input" required>
                         </div>
 
 
                         <div class="form-group input_wrap">
                             <label for="valid-from">Valid From:</label>
-                            <input type="date" id="valid-from" name="lic_from_date" class="input">
+                            <input type="date" id="valid-from" name="lic_from_date" class="input" required>
                         </div>
                         <div class="form-group input_wrap">
                             <label for="valid-to">Valid To:</label>
-                            <input type="date" id="valid-to" name="lic_ex_date" class="input">
+                            <input type="date" id="valid-to" name="lic_ex_date" class="input" required>
                         </div>
                         <div class="form-group input_wrap">
                             <label for="license-scan">Scanned Copy:</label>
-                            <input type="file" accept="image/png,image/jpeg" id="license-scan" name="lic_scan_copy" class="input">
+                            <input type="file" accept="image/png,image/jpeg" id="license-scan" name="lic_scan_copy" class="input" required>
                         </div>
                     </div>
 
@@ -173,34 +186,34 @@
                         <h3>Insurance Details</h3>
                         <div class="form-group input_wrap">
                             <label for="insurance-no">Insurance Number:</label>
-                            <input type="text" id="insurance-no" name="ins_No" class="input">
+                            <input type="text" id="insurance-no" name="ins_No" class="input" required>
                         </div>
                         <div class="form-group input_wrap">
                             <label for="insurance-valid-from">Valid From:</label>
-                            <input type="date" id="insurance-valid-from" name="ins_from_date" class="input">
+                            <input type="date" id="insurance-valid-from" name="ins_from_date" class="input" required>
                         </div>
                         <div class="form-group input_wrap">
                             <label for="insurance-valid-to">Valid To:</label>
-                            <input type="date" id="insurance-valid-to" name="ins_ex_date" class="input">
+                            <input type="date" id="insurance-valid-to" name="ins_ex_date" class="input" required>
                         </div>
                         <div class="form-group input_wrap">
                             <label for="insurance-company">Insurance Company:</label>
-                            <input type="text" id="insurance-company" name="insure_com" class="input">
+                            <input type="text" id="insurance-company" name="insure_com" class="input"required>
                         </div>
                         <div class="form-group input_wrap">
                             <label for="insurance-type">Insurance Type:</label>
-                            <input type="text" id="insurance-type" name="insure_type" class="input">
+                            <input type="text" id="insurance-type" name="insure_type" class="input" required>
                         </div>
                         <div class="form-group input_wrap">
                             <label for="insurance-scan">Scanned Copy:</label>
-                            <input type="file" id="insurance-scan" name="ins_scan_copy" class="input">
+                            <input type="file" id="insurance-scan" name="ins_scan_copy" class="input" required>
                         </div>
                     </div>
                     <div class="column">
                         <h3>Eco Test Details</h3>
                         <div class="form-group input_wrap">
                             <label for="eco-test-scan">Scanned Copy:</label>
-                            <input type="file" id="eco-test-scan" name="eco_scan_copy" class="input">
+                            <input type="file" id="eco-test-scan" name="eco_scan_copy" class="input" required>
                         </div>
                     </div>
                 </div>
