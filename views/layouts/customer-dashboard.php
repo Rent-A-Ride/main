@@ -113,7 +113,7 @@ use app\core\Application; ?>
         <ul class="nav-list" id="nav-list">
             <div class="notification-cont">
                 <div class="notification-icon">
-                    <i class='bx bxs-bell'></i>
+                    <i class='bx bx-bell'></i>
                     <span class="notification-count">0</span>
                 </div>
 
@@ -124,7 +124,7 @@ use app\core\Application; ?>
                     </div>
 
                     <ul class="notification-list">
-<!--                        <li><a href="#">New message from John</a></li>-->
+                        <li><a href="#">New message from John</a></li>
 <!--                        <li><a href="#">You have 3 new emails</a></li>-->
 <!--                        <li><a href="#">Today's weather forecast</a></li>-->
 <!--                        <li><a href="#">Upcoming event reminder</a></li>-->
@@ -141,15 +141,15 @@ use app\core\Application; ?>
                 <div class="img-cont"><img src="/assets/img/uploads/userProfile/<?= Application::$app->user->userprofile('profile_pic')?>" class="profile-image"></div>
 
             </div>
-            <div class="profile-menu" style="display: none;">
-                <a href="/Customer/Profile">My Profile</a>
-                <a href="/Customer/Settings">Settings</a>
-                <a href="/logout">Logout</a>
-            </div>
 
 
 
         </ul>
+        <div class="profile-menu" style="display: none;">
+            <a href="/Customer/Profile">My Profile</a>
+            <a href="/Customer/Settings">Settings</a>
+            <a href="/logout">Logout</a>
+        </div>
 
         <div id="toggle-btn" class="menu-container" onclick="myFunction(this)">
             <div class="bar1"></div>

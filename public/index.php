@@ -142,6 +142,12 @@ $app->router->post("/admin/driverInvoice", [OwnerController::class, "driverInvoi
 
 //Hasantha
 $app->router->post('/notifications', [notificationController::class, 'notification']);
+$app->router->get('/notifications', [notificationController::class, 'notification']);
+
+//update notification status
+$app->router->get('/update-notification-status', [notificationController::class, 'updateNotificationStatus']);
+$app->router->post('/update-notification-status', [notificationController::class, 'updateNotificationStatus']);
+
 
 $app->router->get('/Customer/login', [AuthController::class, 'cus_login']);
 $app->router->post('/Customer/login', [AuthController::class, 'cus_login']);

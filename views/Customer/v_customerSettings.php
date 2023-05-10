@@ -46,7 +46,7 @@ use app\models\Customer;
     <h2>Change Email</h2>
     <form>
         <label for="current-password">New Email:</label>
-        <input type="password" id="current-password" name="current-password" required>
+        <input type="password" id="" name="current-password" required>
 
         <button type="submit">Send Link</button>
     </form>

@@ -78,8 +78,7 @@ class AuthController extends Controller
             // var_dump($body);
             $login->loadData($body);
             if($login->validate()){
-                $user = $login->login($body['user_type']);
-                
+                $user = $login->login($body['user_type']);                
                 if(!$user){
                     $res->redirect('/login');
                 }
