@@ -1,5 +1,5 @@
 <?php
-/* @var $row viewCustomerReq */
+/* @var $row VehBooking */
 /* @var $customer Customer */
 /* @var $vehicle vehicle */
 /* @var $drow driver */
@@ -7,6 +7,7 @@
 
 use app\models\Customer;
 use app\models\driver;
+use app\models\VehBooking;
 use app\models\vehicle;
 use app\models\viewCustomerReq;
 
@@ -50,17 +51,20 @@ use app\models\viewCustomerReq;
                         <table class="table">
 
                             <thead>
-                            <tr>
-                                <th>Request ID</th>
-                                <th>Customer Name</th>
-                                <th>Telephone No.</th>
-                                <!-- <th>Address</th> -->
-                                <th>Vehicle Name</th>
-                                <th>Pickup Location</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                                <th>Payment Method</th>
+                            <tr  style="text-align: center">
+
+
+                                <th>Request<br>
+                                    ID</th>
+                                <th colspan="2">Vehicle</th>
+                                <th>Customer </th>
+                                <th>Duration</th>
+
+                                <th>Destination</th>
+                                <th>Payment Amount</th>
+                                <th>Note</th>
                                 <th>Select Driver</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -72,18 +76,50 @@ use app\models\viewCustomerReq;
                                 $location[$row->getBookingId()] = $row->getPickupLocation();
                                 ?>
                                 <td><?= $row->getBookingId()?></td>
+                                <td><img src="/assets/img/uploads/vehicle/<?= $vehicle[$row->getVehId()]->getFrontView()?>" width="56px"></td>
+                                <td><?= $vehicle[$row->getVehId()]->getVehBrand().' '.$vehicle[$row->getVehId()]->getVehModel()."<br>".$vehicle[$row->getVehId()]->getPlateNo()?></td>
                                 <td><?= $customer[$row->getCusId()]->firstname.' '.$customer[$row->getCusId()]->lastname?></td>
-                                <td><?=$customer[$row->getCusId()]->phoneno?></td>
-                                <!-- <td>Kandy</td> -->
-                                <td><?= $vehicle[$row->getVehId()]->getVehBrand().' '.$vehicle[$row->getVehId()]->getVehModel()?></td>
-                                <td><?= $row->getPickupLocation()?></td>
-                                <td><?php echo $row->getStartDate() ?></td>
-                                <td><?php echo $row->getEndDate() ?></td>
-                                <td><?php echo $row->getPayMethod() ?></td>
+                                <td><?php echo $row->getStartDate() ."<br>". "To"."<br>".$row->getEndDate()?></td>
+                                <td><?php echo $row->getDestination() ?></td>
+                                <td><?php echo $row->getRentalPrice() ?></td>
+                                <td><?php echo $row->getNote() ?></td>
+
+
+
                                 <td>
-                                    <div class="status">
-                                        <button class="select-button " onclick="openModal(<?= $row->getBookingId()?>)">Select </button>
+<!--                                    <div class="status">-->
+<!--                                        <button class="select-button " onclick="openModal(--><?php //= $row->getBookingId()?><!--)">Select </button>-->
+<!--                                    </div>-->
+
+                                    <div class="driver-select">
+                                        <select class="driver-selection" name="driver" >
+                                            <option value="">Select a driver</option>
+                                            <?php
+                                            foreach ($drivers as $driver):
+                                            ?>
+                                            <option value="">
+                                                <?= $driver->getDriverFname().' '.$driver->getDriverLname()?>
+                                            </option>
+                                            <?php
+                                            endforeach;
+                                            ?>
+
+
+                                        </select>
                                     </div>
+                                </td>
+                                <td>
+
+
+                                    <form method="post" onsubmit="return confirm('Are you sure you want to send this request?');">
+                                        <input type="hidden" name="booking_Id" >
+                                        <input type="submit" class="driver-req-button" value="Send Request">
+                                    </form>
+                                    <br>
+                                    <form method="post" onsubmit="return confirm('Are you sure you want to reject this request?');">
+                                        <input type="hidden" name="booking_Id" value="<?= $row->getBookingId() ?>">
+                                        <input type="submit" class="reject-button" value="Reject">
+                                    </form>
                                 </td>
                             </tr>
                             <?php
@@ -103,39 +139,37 @@ use app\models\viewCustomerReq;
                     <table class="table">
 
                         <thead>
-                        <tr>
+                        <tr  style="text-align: center">
+
+
                             <th>Request ID</th>
-                            <th>Customer Name</th>
-                            <!-- Removed phone no cause veh owner don't want to know the customer contact no in this process -->
-<!--                            <th>Telephone No.</th>-->
-                            <!-- <th>Address</th> -->
-                            <th>Vehicle</th>
-                            <th>Pickup Location</th>
+                            <th colspan="2">Vehicle</th>
+                            <th>Customer </th>
                             <th>Start Date</th>
                             <th>End Date</th>
-                            <th>Payment Method</th>
-                            <th>Special Note</th>
-                            <th>Status</th>
+                            <th>Payment Amount</th>
+                            <th>Note</th>
+                            <th>Action</th>
+
+
                         </tr>
                         </thead>
                         <tbody>
                         <?php
 
                         foreach ($model as $row):
-                            if ($row->getStatus() == 0 && $row->getDriverReq() == 0):
+                            if ((int)$row->getDriverReq() ==0 && (int)$row->getStatus() == 0):
 
                                 ?>
                                 <tr>
                                     <td><?php echo $row->getBookingId() ?></td>
-                                    <td><?php echo $customer[$row->getCusId()]->firstname.' '.$customer[$row->getCusId()]->lastname?></td>
-<!--                                    Removed phone no cause veh owner don't want to know the customer contact no in this process -->
-<!--                                    <td>--><?php //echo $customer[$row->getCusId()]->phoneno?><!--</td>-->
-                                    <!-- <td>Kandy</td> -->
+                                    <td><img src="/assets/img/uploads/vehicle/<?= $vehicle[$row->getVehId()]->getFrontView()?>" width="56px"></td>
                                     <td><?php echo $vehicle[$row->getVehId()]->getVehBrand().' '.$vehicle[$row->getVehId()]->getVehModel()."<br>".$vehicle[$row->getVehId()]->getPlateNo() ?></td>
-                                    <td><?php echo $row->getPickupLocation() ?></td>
+                                    <td><?php echo $customer[$row->getCusId()]->firstname.' '.$customer[$row->getCusId()]->lastname?></td>
                                     <td><?php echo $row->getStartDate() ?></td>
                                     <td><?php echo $row->getEndDate() ?></td>
-                                    <td><?php echo $row->getPayMethod() ?></td>
+
+                                    <td><?php echo $row->getRentalPrice() ?></td>
                                     <td><?php echo $row->getNote() ?></td>
 
                                     <td><div class="status" style="display: flex">
@@ -143,10 +177,11 @@ use app\models\viewCustomerReq;
                                                 <input type="hidden" name="booking_Id" value="<?= $row->getBookingId() ?>">
                                                 <input type="submit" class="accept-button" value="Accept">
                                             </form>
-
-<!--                                            <button onclick="openPopup(<?php //= $row->getBookingId() ?>)" class="accept-button">Accept </button> -->
-                                            <button onclick="displayRejectPopup()" class="reject-button">Reject</button>
-
+                                            <br>
+                                            <form method="post" onsubmit="return confirm('Are you sure you want to reject this request?');">
+                                                <input type="hidden" name="booking_Id" value="<?= $row->getBookingId() ?>">
+                                                <input type="submit" class="reject-button" value="Reject">
+                                            </form>
                                         </div></td>
                                 </tr>
 
@@ -183,14 +218,16 @@ use app\models\viewCustomerReq;
                         </thead>
                         <tbody>
                         <?php
+//                        foreach ($drivers as $driver):
+//                            $vehicle
                         // $booking_ID =
 
                                 ?>
                                 <tr>
                                     <input type="hidden" id="bookingId" value="<?= $row->getBookingId() ?>">
-<!--                                    <td>--><?php //= $drow->getDriverFname().' '.$drow->getDriverLname()?><!--</td>-->
-<!--                                    <td>--><?php //= $drow->getPhoneNo()?><!--</td>-->
-<!--                                    <td>--><?php //= $drow->getArea()?><!--</td>-->
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
 
 
                                     <td>10 reviews</td>
@@ -201,7 +238,7 @@ use app\models\viewCustomerReq;
 <!--                                            <button class="assign-button">Assign </button>-->
                                             <form method="post">
                                                 <input name="type" value="driver" hidden>
-                                                <input id="booking-id" type="hidden" name="booking_Id" value="">
+                                                <input id="booking-id" type="hidden" name="booking_Id" value="<?= $booking_Id ?>">
                                                 <input type="hidden" name="driver_ID" value="">
                                                 <input type="hidden" name="status" value="1">
                                                 <input type="submit" class="accept-button" value="Send request">

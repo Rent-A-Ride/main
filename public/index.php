@@ -74,6 +74,7 @@ $app->router->get("/viewownerDriver", [OwnerController::class, "ownerDriver"]);
 
 
 $app->router->get("/vehicleowner/vehicles", [VehicleOwnerController::class, "VehicleOwnerVehicle"]);
+$app->router->post("/vehicleowner/vehicles", [VehicleOwnerController::class, "VehicleOwnerVehicle"]);
 
 $app->router->get("/ownerProfile", [OwnerController::class, "ownerProfile"]);
 $app->router->post("/ownerProfile", [OwnerController::class, "ownerProfile"]);
@@ -289,6 +290,10 @@ $app->router->get("/vehicleOwner/viewVehicleProfile", [VehicleOwnerController::c
 //vehicle owner edit vehicle profile details
 $app->router->get("/vehicleOwner/editVehicleProfile", [VehicleOwnerController::class, 'editVehicleProfile']);
 $app->router->post("/vehicleOwner/editVehicleProfile", [VehicleOwnerController::class, 'editVehicleProfile']);
+
+//vehicle owner disable vehicles
+$app->router->get("/vehicleOwner/disabledVehicles", [VehicleOwnerController::class, 'disableVehicleView']);
+$app->router->post("/vehicleOwner/disabledVehicles", [VehicleOwnerController::class, 'disableVehicleView']);
 
 $app->run();
 

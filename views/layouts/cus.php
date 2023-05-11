@@ -22,7 +22,7 @@ use app\core\Application; ?>
     <link rel="stylesheet" href="assets/css/layout/cus_home/table.css">
 
     <!-- JQUERY -->
-    <script src="assets/javascript/jquery-3.6.3.min.js"></script>
+    <script src="/assets/javascript/jquery-3.6.3.min.js"></script>
 
 </head>
 <body>

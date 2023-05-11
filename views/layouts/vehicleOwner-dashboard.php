@@ -3,6 +3,7 @@ use app\core\Application;
 ?>
 
 <!DOCTYPE html>
+<!--Vehicle Owner Dashboard-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,7 +20,7 @@ use app\core\Application;
 
 
     <!-- JQUERY -->
-    <script src="assets/javascript/jquery-3.6.3.min.js"></script>
+    <script src="/assets/javascript/jquery-3.6.3.min.js"></script>
 
     <!-- ajax -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
