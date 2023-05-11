@@ -58,7 +58,7 @@ use app\models\viewCustomerReq;
                                     
                                    foreach ($complaint as $row){
 
-                                        if ($row['com_status']==0) {
+                                        if ($row['status']==0) {
                                             # code...
                                         
                                 ?>
@@ -117,7 +117,7 @@ use app\models\viewCustomerReq;
                                     
                                    foreach ($complaint as $row){
                                     
-                                        if ($row['com_status']==1) {
+                                        if ($row['status']==1) {
                                             # code...
                                         
                                         # code...

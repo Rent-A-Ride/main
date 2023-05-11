@@ -75,7 +75,7 @@
                 ?>
                 <div class="table-row <?=$row['veh_type']?>">
                     <?php $vehicle_id=$row["veh_Id"] ?> 
-                    <div class="table-data"><img src="/assets/img/Vehicle_img/<?php echo $row['front_view']?>" width="56px"></div>
+                    <div class="table-data"><img src="/assets/img/uploads/vehicle/<?php echo $row['front_view']?>" width="56px"></div>
                     <div class="table-data"><?= $row['veh_brand'].' '.$row['veh_model'] ?></div>
                     <div class="table-data"><?= $row['veh_location']?></div>
                     <div class="table-data">Rs <?= $row['price'].'.00' ?></div>
