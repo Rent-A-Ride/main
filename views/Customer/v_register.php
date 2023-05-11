@@ -124,21 +124,6 @@ use app\models\Customer;
 
                         <div class="input-wrap">
                             <input
-                                name="address"
-                                type="text"
-                                class="input-field<?= $model->hasError('address') ? ' invalid' : ''?>"
-                                autocomplete="off"
-                                value=""
-
-                            />
-                            <label>Address</label>
-                            <span class="form-error"> <?= $model->getFirstError('address') ?></span>
-                        </div>
-
-
-
-                        <div class="input-wrap">
-                            <input
                                 name="password"
                                 type="password"
                                 minlength="4"
