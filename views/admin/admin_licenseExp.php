@@ -3,6 +3,7 @@
 
 use app\models\viewCustomerReq;
 
+
 ?>
 <section class="requests">
 
@@ -61,7 +62,7 @@ use app\models\viewCustomerReq;
                             
                             
                                    foreach ($veh_ins as $row){
-                                    $string_date = $row['ex_date']; // A string representing a date
+                                    $string_date = $row['ins_ex_date']; // A string representing a date
                                     $timestamp=strtotime($string_date);
                                     $today = time(); // Get current timestamp
                                     if($today>=$timestamp){
@@ -87,9 +88,9 @@ use app\models\viewCustomerReq;
                                     <tr>
                                         <td><?php echo($num); ?></td>
                                         <td><?php echo($row['plate_No']); ?></td>
-                                        <td><?php echo($row['owner']); ?></td>
+                                        <td><?php echo($row['owner_Fname'].' '.$row['owner_Lname']); ?></td>
                                         <td><?php echo($row['email']); ?></td>
-                                        <td><?php echo($row['ex_date']); ?></td>
+                                        <td><?php echo($row['ins_ex_date']); ?></td>
                                         <td><?php echo($days); ?></td>
                                         <td><button class="license_exp" data-voID='<?php echo($row['vo_ID'])?>' data-vehID='<?php echo($row['veh_Id'])?>'data-type='insuarance'>Send Notification</button></td>
                                     </tr>
@@ -102,9 +103,9 @@ use app\models\viewCustomerReq;
                                     <tr>
                                         <td><?php echo($num); ?></td>
                                         <td><?php echo($row['plate_No']); ?></td>
-                                        <td><?php echo($row['owner']); ?></td>
+                                        <td><?php echo($row['owner_Fname'].' '.$row['owner_Lname']); ?></td>
                                         <td><?php echo($row['email']); ?></td>
-                                        <td><?php echo($row['ex_date']); ?></td>
+                                        <td><?php echo($row['ins_ex_date']); ?></td>
                                         <td style="color: red"><?php echo("Expired"); ?></td>
                                         <td><button class="license_exp" data-voID='<?php echo($row['vo_ID'])?>'data-voID='<?php echo($row['veh_Id'])?>'data-type='insuarance'>Send Notification</button></td>
                                     </tr>
@@ -150,7 +151,7 @@ use app\models\viewCustomerReq;
                     
                            foreach ($complaint as $row){
                             
-                            $string_date = $row['ex_date']; // A string representing a date
+                            $string_date = $row['lic_ex_date']; // A string representing a date
                             $timestamp=strtotime($string_date);
                             $today = time(); // Get current timestamp
                             if($today>=$timestamp){
@@ -176,9 +177,9 @@ use app\models\viewCustomerReq;
                             <tr>
                                 <td><?php echo($num); ?></td>
                                 <td><?php echo($row['plate_No']); ?></td>
-                                <td><?php echo($row['owner']); ?></td>
+                                <td><?php echo($row['owner_Fname'].' '.$row['owner_Lname']); ?></td>
                                 <td><?php echo($row['email']); ?></td>
-                                <td><?php echo($row['ex_date']); ?></td>
+                                <td><?php echo($row['lic_ex_date']); ?></td>
                                 <td><?php echo($days); ?></td>
                                 <td><button class="license_exp" data-vo='<?php  echo($row['vo_ID'])?>' data-vehID='<?php echo($row['veh_Id'])?>' data-type='license'>Send Notification</button></td>
                             </tr>
@@ -191,9 +192,9 @@ use app\models\viewCustomerReq;
                             <tr>
                                 <td><?php echo($num); ?></td>
                                 <td><?php echo($row['plate_No']); ?></td>
-                                <td><?php echo($row['owner']); ?></td>
+                                <td><?php echo($row['owner_Fname'].' '.$row['owner_Lname']); ?></td>
                                 <td><?php echo($row['email']); ?></td>
-                                <td><?php echo($row['ex_date']); ?></td>
+                                <td><?php echo($row['lic_ex_date']); ?></td>
                                 <td style="color: red"><?php echo("Expired"); ?></td>
                                 <td><button class="license_exp" data-vo='<?php echo($row['vo_ID'])?>'data-voID='<?php echo($row['veh_Id'])?>' data-type='license'>Send Notification</button></td>
                             </tr>
