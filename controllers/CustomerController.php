@@ -20,6 +20,9 @@ use app\models\vehiclecomplaint;
 use app\models\vehicleowner;
 use app\models\VehInfo;
 use app\models\vehOwner_complaints;
+use Stripe\Checkout\Session;
+use Stripe\Stripe;
+use Stripe\StripeClient;
 
 class CustomerController extends Controller
 {
@@ -331,22 +334,52 @@ class CustomerController extends Controller
                 Application::$app->session->setFlash('error', 'You cannot pay for this booking!');
                 Application::$app->response->redirect('/Customer/VehicleBookingTable');
             }
+
+            $total = $vehBooking->getRentalPrice();
+
+            $params = [
+                'bookingId' => $bookingId,
+                'total' => $total
+            ];
+
+
+            $this->setLayout('customer-dashboard');
+            return $this->render('Customer/v_customerPay', $params);
         }
 
         if ($request->isPost()){
+            echo '<pre>';
+            var_dump($request->getBody());
+            echo '</pre>';
+            exit();
+            $Stripe = new StripeClient($_ENV['STRIPE_SECRET_KEY']);
+            $totalPay = $request->getBody()['total_pay'];
+            $item[] = [
+                'price_data' => [
+                    'currency' => 'lkr',
+                    'unit_amount' => $totalPay * 100,
+                    'product_data' => [
+                        'name' => 'Vehicle Rental',
+                    ],
+                ],
+                'quantity' => 1,
+            ];
+            Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
+            $checkout_session = Session::create([
+                'payment_method_types' => ['card'],
+                'line_items' => $item,
+                'mode' => 'payment',
+                'success_url' => 'http://localhost:8080/Customer/PaymentSuccess',
+                'cancel_url' => 'http://localhost:8080/Customer/PaymentCancel',
+            ]);
+
+            $response->redirect($checkout_session->url);
 
         }
 
-        $total = $vehBooking->getRentalPrice();
-
-        $params = [
-            'bookingId' => $bookingId,
-            'total' => $total
-        ];
 
 
-        $this->setLayout('customer-dashboard');
-        return $this->render('Customer/v_customerPay', $params);
+
     }
 
     public function customerComplaint(Request $request, Response $response)

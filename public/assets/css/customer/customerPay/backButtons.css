@@ -90,10 +90,11 @@ label.currency {
     color: white;
     font-weight: 500;
     float: right;
-    margin-right: 233px;
+    margin-right: 50px;
 }
 
 .pay-form-group input {
+    text-align: right;
     background-color: transparent;
     border: none;
     color: #fff;
@@ -113,7 +114,8 @@ label.currency {
 }
 
 .pay-form-group button {
-    background-color: #4da6ff;
+    margin-left: auto;
+    background-color: #fab84c;
     border: none;
     border-radius: 5px;
     color: #fff;
@@ -129,7 +131,7 @@ label.currency {
 }
 
 .pay-form-group select {
-    width: 25%;
+    width: 15%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;

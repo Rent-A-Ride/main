@@ -10,6 +10,7 @@
         <hr>
         <label class="currency">Rs.</label>
         <form id="payment-form" method="post">
+            <input hidden name="bookingId" value="<?= $bookingId ?>">
             <div class="pay-form-group">
                 <label for="total-rent">Total Rent Amount</label>
                 <input name="rental_price" type="text" id="total-rent" value="<?= number_format($total, 2) ?>" readonly>
@@ -31,10 +32,14 @@
                 </select>
             </div>
 
+            <hr style="width: 25%; margin-left: auto">
+
             <div class="pay-form-group">
                 <label for="total">Total Payment Amount</label>
                 <input name="total_pay" type="text" id="total-pay" value="" readonly>
             </div>
+
+
 
 
             <div class="pay-form-group">
