@@ -85,6 +85,14 @@
     font-weight: bold;
 }
 
+label.currency {
+    font-size: 14px;
+    color: white;
+    font-weight: 500;
+    float: right;
+    margin-right: 233px;
+}
+
 .pay-form-group input {
     background-color: transparent;
     border: none;
@@ -119,4 +127,18 @@
 .pay-form-group button:hover {
     background-color: #5bb2ff;
 }
+
+.pay-form-group select {
+    width: 25%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.pay-form-group select:focus {
+    outline: none;
+    box-shadow: 0 0 5px #aaa;
+}
+
 

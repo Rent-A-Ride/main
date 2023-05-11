@@ -13,9 +13,7 @@
     },
     "require": {
         "vlucas/phpdotenv": "^5.5",
-      "ext-json": "*"
+      "ext-json": "*",
+        "stripe/stripe-php": "^10.12"
     }
 }
-
-
-

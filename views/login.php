@@ -64,7 +64,6 @@
                                 <option value="customer">Customer</option>
                             </select>
                             <label>User Role</label>
-                            <span class="form-error"> <?php echo $isUserTypeError? "{$errors['user_type']}" : ""?></span>
                         </div>  
 
                         <input type="submit" value="Sign In" class="sign-btn">

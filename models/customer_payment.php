@@ -10,8 +10,7 @@ class customer_payment extends dbModel
     protected int $booking_Id;
     protected float $total_rent;
     protected float $payment_amount;
-    protected float $remaining_amount;
-    protected string $status;
+    protected string $status_pay;
 
     public function rules(): array
     {
@@ -20,7 +19,7 @@ class customer_payment extends dbModel
 
     public static function tableName(): string
     {
-        return 'custmer_payment';
+        return 'customer_payment';
     }
 
     public function attributes(): array
@@ -34,7 +33,7 @@ class customer_payment extends dbModel
     }
 
     /**
-     * @return string
+     * @return int
      */
     public function getBookingId(): int
     {
@@ -42,46 +41,64 @@ class customer_payment extends dbModel
     }
 
     /**
-     * @param string $booking_Id
+     * @param int $booking_Id
      */
-    public function setBookingId(string $booking_Id): void
+    public function setBookingId(int $booking_Id): void
     {
         $this->booking_Id = $booking_Id;
     }
 
-    
-
     /**
-     * @return string
+     * @return float
      */
-    public function gettotal_rent(): int
+    public function getTotalRent(): float
     {
         return $this->total_rent;
     }
 
     /**
-     * @param string $vo_Id
+     * @param float $total_rent
      */
-    public function settotal_rent(int $rent): void
+    public function setTotalRent(float $total_rent): void
     {
-        $this->total_rent = $rent;
+        $this->total_rent = $total_rent;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPaymentAmount(): float
+    {
+        return $this->payment_amount;
+    }
+
+    /**
+     * @param float $payment_amount
+     */
+    public function setPaymentAmount(float $payment_amount): void
+    {
+        $this->payment_amount = $payment_amount;
     }
 
     /**
      * @return string
      */
-    public function getStatus(): int
+    public function getStatusPay(): string
     {
-        return $this->status;
+        return $this->status_pay;
     }
 
     /**
-     * @param string $veh_Id
+     * @param string $status_pay
      */
-    public function setstatus(string $status): void
+    public function setStatusPay(string $status_pay): void
     {
-        $this->status = $status;
+        $this->status_pay = $status_pay;
     }
+
+
+
+
 
 
     public function manageCustomerPayment(){

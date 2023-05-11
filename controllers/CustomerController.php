@@ -120,10 +120,6 @@ class CustomerController extends Controller
 
     public function vehicleInfo(Request $request, Response $response)
     {
-        $id=$request->getBody()['id'] ?? '';
-        $vehInfo = VehInfo::findOne(['veh_Id' => $id]);
-        $vehicle = cusVehicle::findOne(['veh_Id' => $id]);
-        $vehOwner = vehicleowner::findOne(['vo_Id' => $vehicle->getVoId()]);
         $vehBooking = new VehBooking();
         $cus_Id = Application::$app->user->cus_Id;
 
@@ -134,20 +130,26 @@ class CustomerController extends Controller
 //            $ve);hBooking->setCusId(Application::$app->user::primaryKey());
 //            $vehBooking->setVoId($vehicle->getVoId()
 
-            if($vehBooking->saveAs(['booking_Id','status'])){
+            if ($vehBooking->saveAs(['booking_Id','status'])){
                 Application::$app->session->setFlash('success', 'Booking Request send successfully!');
-                $response->redirect('/VehicleBookingTable');
+                $response->redirect('/Customer/VehicleBookingTable');
             }else{
                 Application::$app->session->setFlash('error', 'There was some error in booking your vehicle!');
                 $response->redirect('/Customer/Home');
-                //                $this->setLayout('customer-dashboard');
-//                return $this->render('Customer/cusBooking',[
-//                    'model'=>$vehBooking,
-//                ]);
             }
             return;
 
+
         }
+
+        $id=$request->getBody()['id'] ?? '';
+        $vehInfo = VehInfo::findOne(['veh_Id' => $id]);
+        $vehicle = vehicle::findOne(['veh_Id' => $id]);
+        $vehOwner = vehicleowner::findOne(['vo_Id' => $vehicle->getVoId()]);
+
+
+
+
         if($request->isGet()){
             $vehInfo = VehInfo::findOne(['veh_Id' => $id]);
             $vehicle = cusVehicle::findOne(['veh_Id' => $id]);
@@ -173,9 +175,6 @@ class CustomerController extends Controller
                 ];
                 $this->setLayout('customer-dashboard');
                 return $this->render('Customer/v_customerBooking', $params);
-
-
-
             }else{
                 $params = [
                     'vehInfo' => $vehInfo,
@@ -323,8 +322,31 @@ class CustomerController extends Controller
 
     public function customerPayment(Request $request, Response $response)
     {
+        // get the booking id from the request body
+        if ($request->isGet()){
+            $bookingId = $request->getBody()['booking'];
+            $vehBooking = VehBooking::findOne(['booking_Id' => $bookingId]);
+
+            if ($vehBooking->getStatus() != 1 ){
+                Application::$app->session->setFlash('error', 'You cannot pay for this booking!');
+                Application::$app->response->redirect('/Customer/VehicleBookingTable');
+            }
+        }
+
+        if ($request->isPost()){
+
+        }
+
+        $total = $vehBooking->getRentalPrice();
+
+        $params = [
+            'bookingId' => $bookingId,
+            'total' => $total
+        ];
+
+
         $this->setLayout('customer-dashboard');
-        return $this->render('Customer/v_customerPay');
+        return $this->render('Customer/v_customerPay', $params);
     }
 
     public function customerComplaint(Request $request, Response $response)
@@ -424,10 +446,6 @@ class CustomerController extends Controller
                         $response->redirect('/Customer/Complaints');
                         return;
                     }else {
-                        echo '<pre>';
-                        var_dump($complaint->errors);
-                        echo '</pre>';
-                        exit();
                         $params = [
                             'bookings' => $bookings,
                             'vehOwners' => $vehOwners,
