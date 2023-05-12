@@ -3,17 +3,17 @@
 <button type="backBtn" id="backBtn">← Back</button>
 
 <div class="pay-details">
-    <h1>Payment for Vehicle Booking</h1>
+    <h3 style="padding: 10px 0px">Payment for Vehicle Booking #<?=$bookingId?></h3>
 
     <div class="total-amount">
         <h2>Total Amount</h2>
-        <hr>
-        <label class="currency">Rs.</label>
+        <hr class="hr1">
+        <label class="currency">LKR</label>
         <form id="payment-form" method="post">
             <input hidden name="bookingId" value="<?= $bookingId ?>">
             <div class="pay-form-group">
-                <label for="total-rent">Total Rent Amount</label>
-                <input name="rental_price" type="text" id="total-rent" value="<?= number_format($total, 2) ?>" readonly>
+                <label for="rental-price">Total Rent Amount</label>
+                <input name="rental_price" type="text" id="rental-price" value="<?= number_format($total, 2) ?>" readonly>
             </div>
             <div class="pay-form-group">
                 <label for="tax">Tax (5%)</label>
@@ -32,18 +32,19 @@
                 </select>
             </div>
 
-            <hr style="width: 25%; margin-left: auto">
+            <hr style="width: 25%; margin-left: auto" class="hr1">
 
             <div class="pay-form-group">
                 <label for="total">Total Payment Amount</label>
                 <input name="total_pay" type="text" id="total-pay" value="" readonly>
             </div>
+            <input hidden name="total-rent" value="" id="total-rent">
 
 
 
 
             <div class="pay-form-group">
-                <button type="submit" id="pay-button">Pay Now</button>
+                <button type="submit" id="pay-button"><i class='bx bxl-stripe' ></i> Pay Now</button>
             </div>
         </form>
     </div>
@@ -67,30 +68,31 @@
         window.history.back();
     }
 
-    document.addEventListener("DOMContentLoaded", function() {
-        const paymentForm = document.getElementById("payment-form");
-
-        paymentForm.addEventListener("submit", function(event) {
-
-            var paymentType = document.querySelector('input[name="payment-type"]:checked').value;
-            var totalRent = parseFloat(document.getElementById("total-rent").value.replace("$", ""));
-            var tax = parseFloat(document.getElementById("tax").value.replace("$", ""));
-            var discount = parseFloat(document.getElementById("discount").value.replace("Rs. ", ""));
-
-            var paymentAmount = totalRent + tax - discount;
-
-            if (paymentType === "advance") {
-                paymentAmount *= 0.4;
-            }
-
-            // Use Stripe API here to initiate the payment process
-            // Replace the following line with the actual Stripe API call
-            console.log("Payment Amount: $" + paymentAmount);
-        });
-    });
+    // document.addEventListener("DOMContentLoaded", function() {
+    //     const paymentForm = document.getElementById("payment-form");
+    //
+    //     paymentForm.addEventListener("submit", function(event) {
+    //
+    //         var paymentType = document.querySelector('input[name="payment-type"]:checked').value;
+    //         var totalRent = parseFloat(document.getElementById("total-rent").value.replace("$", ""));
+    //         var tax = parseFloat(document.getElementById("tax").value.replace("$", ""));
+    //         var discount = parseFloat(document.getElementById("discount").value.replace("Rs. ", ""));
+    //
+    //         var paymentAmount = totalRent + tax - discount;
+    //
+    //         if (paymentType === "advance") {
+    //             paymentAmount *= 0.4;
+    //         }
+    //
+    //         // Use Stripe API here to initiate the payment process
+    //         // Replace the following line with the actual Stripe API call
+    //         console.log("Payment Amount: $" + paymentAmount);
+    //     });
+    // });
 
     // Get the necessary elements
-    const totalRentInput = document.getElementById('total-rent');
+    const total_Rent = document.getElementById('total-rent');
+    const totalRentInput = document.getElementById('rental-price');
     const taxInput = document.getElementById('tax');
     const paymentTypeSelect = document.getElementById('payment-type');
     const totalPayInput = document.getElementById('total-pay');
@@ -134,6 +136,7 @@
 
         // Update the total payment input field value
         totalPayInput.value = totalPay;
+        total_Rent.value = (totalRent + parseFloat(tax)).toFixed(2);
     }
 
     // Initially calculate the payment amount

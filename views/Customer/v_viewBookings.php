@@ -47,7 +47,7 @@ use app\models\cusVehicle;
                     </td>
                     <td><strong> <?= 'Rs. '.$row->getRentalPrice().'.00' ?></strong></td>
                     <td><span class="status pending">Pending</span></td>
-                    <td><button id="cancelBookingBtn" class="pay-btn" data-booking-id="<?= $row->getBookingId();?>"><i class='bx bxs-wallet'></i>&nbsp;Pay</button></td>
+                    <td><button onclick="location.href='/Customer/Payment?booking=<?=$row->getBookingId()?>'" id="cancelBookingBtn" class="pay-btn" data-booking-id="<?= $row->getBookingId();?>"><i class='bx bxs-wallet'></i>&nbsp;Pay</button></td>
                     <td><button id="cancelBookingBtn" class="cancel-btn" data-booking-id="<?= $row->getBookingId();?>"><i class='bx bxs-trash'></i> Cancel</button></td>
                 </tr>
                 <tr class="child tr1" style="display: none;">

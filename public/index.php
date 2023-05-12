@@ -181,6 +181,9 @@ $app->router->post("/cancelBooking", [CustomerController::class, 'cancelBooking'
 $app->router->get("/Customer/Payment", [CustomerController::class, 'customerPayment']);
 $app->router->post("/Customer/Payment", [CustomerController::class, 'customerPayment']);
 
+$app->router->get("/Customer/PaymentSuccess", [CustomerController::class, 'paymentSuccess']);
+$app->router->post("/Customer/PaymentSuccess", [CustomerController::class, 'paymentSuccess']);
+
 $app->router->get("/Customer/Complaints", [CustomerController::class, 'customerComplaint']);
 $app->router->post("/Customer/Complaints", [CustomerController::class, 'customerComplaint']);
 

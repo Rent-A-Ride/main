@@ -51,8 +51,9 @@
 .pay-details {
     max-width: 100%;
     margin: 25px 50px;
-    padding: 0 20px;
+    padding: 10px 20px;
     background: white;
+    border-radius: 15px;
 }
 
 
@@ -80,17 +81,19 @@
 }
 
 .pay-form-group label {
+    display: flex;
+    align-items: center;
     color: #fff;
     font-size: 1.2rem;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 label.currency {
-    font-size: 14px;
+    font-size: 16px;
     color: white;
     font-weight: 500;
     float: right;
-    margin-right: 50px;
+    margin-right: 40px;
 }
 
 .pay-form-group input {
@@ -105,17 +108,18 @@ label.currency {
 
 .pay-form-group input:focus {
     outline: none;
-    border-bottom-color: #4da6ff;
+    border-bottom-color: #fab84c;
 }
 
 .pay-form-group input[type="text"][readonly] {
     color: #fff;
-    font-weight: bold;
+    font-weight: normal;
 }
 
 .pay-form-group button {
+    width: 18.5rem;
     margin-left: auto;
-    background-color: #fab84c;
+    background-color: #556cd6;
     border: none;
     border-radius: 5px;
     color: #fff;
@@ -127,7 +131,10 @@ label.currency {
 }
 
 .pay-form-group button:hover {
-    background-color: #5bb2ff;
+    background-color: #6074d9;
+/*    shadow for the button*/
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
 }
 
 .pay-form-group select {
@@ -141,6 +148,10 @@ label.currency {
 .pay-form-group select:focus {
     outline: none;
     box-shadow: 0 0 5px #aaa;
+}
+
+.hr1 {
+    margin: 10px 0;
 }
 
 

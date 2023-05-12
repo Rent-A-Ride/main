@@ -7,10 +7,15 @@ use app\core\dbModel;
 
 class customer_payment extends dbModel
 {
+    const FULL_PAYMENT = 2;
+    const ADVANCE_PAYMENT = 1;
+
+    const PAYMENT_NOT_PAID = 0;
+
     protected int $booking_Id;
     protected float $total_rent;
     protected float $payment_amount;
-    protected string $status_pay;
+    protected int $status_pay = self::PAYMENT_NOT_PAID;
 
     public function rules(): array
     {
@@ -24,7 +29,7 @@ class customer_payment extends dbModel
 
     public function attributes(): array
     {
-        return ['booking_Id','total_rent','payment_amount','remaining_amount','status'];
+        return ['booking_Id','total_rent','payment_amount','status_pay'];
     }
 
     public static function primaryKey(): string
@@ -81,17 +86,17 @@ class customer_payment extends dbModel
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getStatusPay(): string
+    public function getStatusPay(): int
     {
         return $this->status_pay;
     }
 
     /**
-     * @param string $status_pay
+     * @param int $status_pay
      */
-    public function setStatusPay(string $status_pay): void
+    public function setStatusPay(int $status_pay): void
     {
         $this->status_pay = $status_pay;
     }
