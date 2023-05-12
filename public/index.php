@@ -175,6 +175,12 @@ $app->router->get('/Customer/VehicleBooking', [CustomerController::class, 'Vehic
 $app->router->post('/Customer/VehicleBooking', [CustomerController::class, 'VehicleBooking']);
 
 $app->router->get('/Customer/VehicleBookingTable', [CustomerController::class, 'vehicleBookingTable']);
+$app->router->post('/Customer/VehicleBookingTable', [CustomerController::class, 'vehicleBookingTable']);
+
+$app->router->get('/Customer/VehicleBookingTable/Active', [CustomerController::class, 'activeBookings']);
+$app->router->post('/Customer/VehicleBookingTable/Active', [CustomerController::class, 'activeBookings']);
+
+$app->router->get('/Customer/VehicleBookingTable/Complete', [CustomerController::class, 'completedBookings']);
 
 $app->router->get('/Customer/Settings', [CustomerController::class, 'customerSettings']);
 $app->router->post('/Customer/Settings', [CustomerController::class, 'customerSettings']);
@@ -182,37 +188,13 @@ $app->router->post('/Customer/Settings', [CustomerController::class, 'customerSe
 $app->router->post("/cancelBooking", [CustomerController::class, 'cancelBooking']);
 
 $app->router->get("/Customer/Payment", [CustomerController::class, 'customerPayment']);
+$app->router->post("/Customer/Payment", [CustomerController::class, 'customerPayment']);
+
+$app->router->get("/Customer/PaymentSuccess", [CustomerController::class, 'paymentSuccess']);
+$app->router->post("/Customer/PaymentSuccess", [CustomerController::class, 'paymentSuccess']);
 
 $app->router->get("/Customer/Complaints", [CustomerController::class, 'customerComplaint']);
 $app->router->post("/Customer/Complaints", [CustomerController::class, 'customerComplaint']);
-
-
-
-
-
-
-
-
-
-
-$app->router->get("/Customer/Home", [CustomerController::class, 'home']);
-$app->router->post("/Customer/Home", [CustomerController::class, 'home']);
-
-$app->router->get("/Customer/Profile", [CustomerController::class, 'profile']);
-$app->router->post("/Customer/Profile", [CustomerController::class, 'profile']);
-
-$app->router->post("/upload", [SiteController::class, 'uploadImage']);
-
-$app->router->get("/VehicleInfo", [CustomerController::class, 'vehicleInfo']);
-$app->router->post("/VehicleInfo", [CustomerController::class, 'vehicleInfo']);
-
-$app->router->get('/Customer/VehicleBooking', [CustomerController::class, 'VehicleBooking']);
-$app->router->post('/Customer/VehicleBooking', [CustomerController::class, 'VehicleBooking']);
-
-$app->router->get('/Customer/VehicleBookingTable', [CustomerController::class, 'vehicleBookingTable']);
-
-$app->router->get('/Customer/Settings', [CustomerController::class, 'customerSettings']);
-$app->router->post('/Customer/Settings', [CustomerController::class, 'customerSettings']);
 
 
 

@@ -8,27 +8,15 @@ use app\models\veh_Reviews;
 
 <!-- SEARCH -->
 <div class="search">
-    <label class="label-l" for="search"><i class='bx bx-search'></i>Search </label>
+    <label class="label-l" for="search">Search</label>
     <input type="search" id="search" placeholder="Type to search">
-    <div class="location-select">
-        <select id="location" name="location">
-            <option value="" disabled selected hidden>location</option>
-            <option value="Galle">Galle</option>
-            <option value="Negombo">Negombo</option>
-            <option value="Mathale">Mathale</option>
-            <option value="Kandy">Kandy</option>
-        </select>
-    </div>
-    <div class="date-select">
-        <label class="lable-sm" for="date">Date</label>
-        <input type="date" id="date" name="date">
-    </div>
-    <div id='filter'>
+    <div id='filter'>   <!-- Filter -->
         <button class='scooter'>Scooter</button>
         <button class='Car'>Cars</button>
         <button class='vans'>Vans</button>
         <button class=''>Clear</button>
     </div>
+
 </div>
 
 <!-- Table -->
@@ -42,7 +30,7 @@ use app\models\veh_Reviews;
             <div class="header__item"><a id="losses" class="filter__link filter__link--number" href="#">Location</a></div>
             <div class="header__item"><a id="total" class="filter__link filter__link--number" href="#">Rent(P/D)</a></div>
             <div class="header__item"><a id="total" class="filter__link filter__link--number" href="#"></a></div>
-            <div class="header__item"><a id="total" class="filter__link filter__link--number" href="#"></a></div>
+<!--            <div class="header__item"><a id="total" class="filter__link filter__link--number" href="#"></a></div>-->
         </div>
         <div class="table-content" >
             <?php
@@ -90,7 +78,7 @@ use app\models\veh_Reviews;
                     <div class="table-data"><?= $row->getVehLocation()?></div>
                     <div class="table-data">Rs <?= $row->getPrice().'.00' ?></div>
                     <div class="table-data"><button onclick="location.href='/VehicleInfo?id=<?=$row->getVehId()?>'" class="view-button"><i class='bx bx-show'></i> View</button></div>
-                    <div class="table-data"><button onclick="location.href='/VehicleBooking'" class="book-button"><i class='bx bx-book-add'></i> Book</button></div>
+<!--                    <div class="table-data"><button onclick="location.href='/VehicleBooking'" class="book-button"><i class='bx bx-book-add'></i> Book</button></div>-->
                 </div>
             <?php
             endforeach;

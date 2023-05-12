@@ -1,3 +1,5 @@
 @import url("components/nav.css");
 @import url("footer.css");
+@import url("components/flashMessages.css");
+@import url("./customer/components/backBtn.css");
 /*@import url("customer/components/RegisterForm.css");*/

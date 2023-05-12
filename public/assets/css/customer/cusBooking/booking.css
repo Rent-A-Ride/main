@@ -118,6 +118,15 @@
     transition: 0.4s;
 }
 
+.row input[type="text"]{
+    width: 350px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid rgb(9, 9, 9);
+    padding-left: 10px;
+    margin: 10px 0px;
+}
+
 .space-evenly {
     display: flex;
     justify-content: space-between;
