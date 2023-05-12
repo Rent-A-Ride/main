@@ -149,6 +149,10 @@ class driver_complaint_resolve_notification extends dbModel
     }
 
 
+    public function get_not(){
+        return Application::$app->db->pdo->query("SELECT * FROM driver_complaint_resolve_notification")->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     
     
 
