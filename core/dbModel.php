@@ -53,37 +53,74 @@ abstract class dbModel extends Model
     public function update($id, $Include=[], $Exclude = []): bool
     {
         $tableName = static::tableName();
+        $primaryKey = static::PrimaryKey();
         $attributes = $this->attributes();
         $params = array_map(fn($attr) => ":$attr", $attributes);
 
-        $demo = 'UPDATE ' . $tableName . ' SET ';
-        if (!empty($Include)) :
-            foreach ($Include as $attribute) {
-                $demo .= $attribute . '="' . $this->{$attribute} . '", ';
-            }
-        else :
+        $setClauses = [];
+        $setParams = [];
+
         foreach ($attributes as $attribute) {
-            if ($attribute == static::PrimaryKey()) {
+            if ($attribute == $primaryKey) {
                 continue;
             }
             if (in_array($attribute, $Exclude)) {
                 continue;
             }
-            $demo .= $attribute . '="' . $this->{$attribute} . '", ';
-        }
-        endif;
-        $demo=substr($demo,0,-2);
-        $demo.=' WHERE '.static::PrimaryKey().'="'.$id.'"';
-        $statement=self::prepare($demo);
-
-        foreach ($attributes as $attribute) {
-            $statement->bindValue(":$attribute", $this->{$attribute});
+            if (empty($Include) || in_array($attribute, $Include)) {
+                $setClauses[] = "$attribute = :$attribute";
+                $setParams[":$attribute"] = $this->{$attribute};
+            }
         }
 
-        $statement->execute();
-        return true;
+        $setClause = implode(', ', $setClauses);
 
+        $statement = self::prepare("UPDATE $tableName SET $setClause WHERE $primaryKey = :id");
+
+        $statement->bindValue(':id', $id);
+
+        foreach ($setParams as $param => $value) {
+            $statement->bindValue($param, $value);
+        }
+
+        return $statement->execute();
     }
+
+
+//    public function update($id, $Include=[], $Exclude = []): bool
+//    {
+//        $tableName = static::tableName();
+//        $attributes = $this->attributes();
+//        $params = array_map(fn($attr) => ":$attr", $attributes);
+//
+//        $demo = 'UPDATE ' . $tableName . ' SET ';
+//        if (!empty($Include)) :
+//            foreach ($Include as $attribute) {
+//                $demo .= $attribute . '="' . $this->{$attribute} . '", ';
+//            }
+//        else :
+//        foreach ($attributes as $attribute) {
+//            if ($attribute == static::PrimaryKey()) {
+//                continue;
+//            }
+//            if (in_array($attribute, $Exclude)) {
+//                continue;
+//            }
+//            $demo .= $attribute . '="' . $this->{$attribute} . '", ';
+//        }
+//        endif;
+//        $demo=substr($demo,0,-2);
+//        $demo.=' WHERE '.static::PrimaryKey().'="'.$id.'"';
+//        $statement=self::prepare($demo);
+//
+//        foreach ($attributes as $attribute) {
+//            $statement->bindValue(":$attribute", $this->{$attribute});
+//        }
+//
+//        $statement->execute();
+//        return true;
+//
+//    }
 
     public static function findOne($where)
     {

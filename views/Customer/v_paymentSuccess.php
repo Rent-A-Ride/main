@@ -10,9 +10,13 @@
         <h1>Payment Successful!</h1>
         <p>Thank you for your purchase. Your payment of <span class="amount">Rs. <?= number_format($payment_amount, 2) ?></span> was successful.</p>
 
-        <div class="success-message-footer">
-            <p>You should be automatically redirected in <span id="seconds">10</span> seconds.</p>
-        </div>
+        <form method="post" class="ok-form">
+            <button type="submit" class="ok-btn">OK</button>
+        </form>
+
+<!--        <div class="success-message-footer">-->
+<!--            <p>You should be automatically redirected in <span id="seconds">10</span> seconds.</p>-->
+<!--        </div>-->
 
     </div>
 </div>

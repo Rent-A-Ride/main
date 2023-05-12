@@ -10,6 +10,8 @@ use app\core\Response;
 use app\models\CancelBookings;
 use app\models\Customer;
 use app\models\customer_payment;
+use app\models\driver;
+use app\models\driver_requests;
 use app\models\Notification;
 use app\models\system_complaints;
 use app\models\veh_Reviews;
@@ -199,18 +201,89 @@ class CustomerController extends Controller
         $vehicle = cusVehicle::retrieveAll();
 
         $vehicleById = [];
+        $driverById = [];
+        $driverReq = [];
 
-        foreach ($vehicle as $veh) {
-            $vehicleById[$veh->getVehId()] = $veh;
+        foreach ($vehBooking as $vehBook) {
+            $vehicleById[$vehBook->getVehId()] = cusVehicle::findOne(['veh_Id' => $vehBook->getVehId()]);
+            if ($vehBook->getDriverReq() == 1 && $vehBook->getStatus() == 1) {
+                $driverReq[$vehBook->getBookingId()] = driver_requests::findOne(['reservation_id' => $vehBook->getBookingId()]);
+                $driverById[$driverReq[$vehBook->getBookingId()]->getDriverID()] = driver::findOne(['driver_ID' => $driverReq[$vehBook->getBookingId()]->getDriverID()]);
+            }
         }
 
         $params = [
             'vehBooking' => $vehBooking,
-            'vehicleById' => $vehicleById
+            'vehicleById' => $vehicleById,
+            'driverById' => $driverById,
+            'driverReq' => $driverReq,
         ];
 
         $this->setLayout('customer-dashboard');
         return $this->render('Customer/v_viewBookings', $params);
+    }
+
+    public function activeBookings(Request $request, Response $response)
+    {
+        $id=Application::$app->user->cus_Id;
+        $vehBooking = VehBooking::retrieveAll(['cus_Id' => $id, 'status' => 2]);
+
+        $vehicleById = [];
+        $driverById = [];
+        $driverReq = [];
+        $cusPayment = [];
+
+        foreach ($vehBooking as $vehBook) {
+            $vehicleById[$vehBook->getVehId()] = cusVehicle::findOne(['veh_Id' => $vehBook->getVehId()]);
+            $cusPayment[$vehBook->getBookingId()] = customer_payment::findOne(['booking_Id' => $vehBook->getBookingId()]);
+            if ($vehBook->getDriverReq() == 1 && $vehBook->getStatus() == 2) {
+                $driverReq[$vehBook->getBookingId()] = driver_requests::findOne(['reservation_id' => $vehBook->getBookingId()]);
+                $driverById[$driverReq[$vehBook->getBookingId()]->getDriverID()] = driver::findOne(['driver_ID' => $driverReq[$vehBook->getBookingId()]->getDriverID()]);
+            }
+        }
+
+
+        $params = [
+            'vehBooking' => $vehBooking,
+            'vehicleById' => $vehicleById,
+            'driverById' => $driverById,
+            'driverReq' => $driverReq,
+            'cusPayment' => $cusPayment,
+        ];
+
+        $this->setLayout('customer-dashboard');
+        return $this->render('Customer/v_activeBookings', $params);
+    }
+
+    public function completedBookings(Request $request, Response $response)
+    {
+        $id = Application::$app->user->cus_Id;
+        $vehBooking = VehBooking::retrieveAll(['cus_Id' => $id, 'status' => 3]);
+
+        $vehicleById = [];
+        $driverById = [];
+        $driverReq = [];
+        $cusPayment = [];
+
+        foreach ($vehBooking as $vehBook) {
+            $vehicleById[$vehBook->getVehId()] = cusVehicle::findOne(['veh_Id' => $vehBook->getVehId()]);
+            $cusPayment[$vehBook->getBookingId()] = customer_payment::findOne(['booking_Id' => $vehBook->getBookingId()]);
+            if ($vehBook->getDriverReq() == 1 && $vehBook->getStatus() == 3) {
+                $driverReq[$vehBook->getBookingId()] = driver_requests::findOne(['reservation_id' => $vehBook->getBookingId()]);
+                $driverById[$driverReq[$vehBook->getBookingId()]->getDriverID()] = driver::findOne(['driver_ID' => $driverReq[$vehBook->getBookingId()]->getDriverID()]);
+            }
+        }
+
+        $params = [
+            'vehBooking' => $vehBooking,
+            'vehicleById' => $vehicleById,
+            'driverById' => $driverById,
+            'driverReq' => $driverReq,
+            'cusPayment' => $cusPayment,
+        ];
+
+        $this->setLayout('customer-dashboard');
+        return $this->render('Customer/v_completedBookings', $params);
     }
 
     public function customerSettings(Request $request, Response $response)
@@ -400,12 +473,15 @@ class CustomerController extends Controller
         $customerPayment->setBookingId($bookingId);
         $customerPayment->setPaymentAmount($payment_amount);
         $customerPayment->setTotalRent($totalRent);
+        $vehBooking = VehBooking::findOne(['booking_Id' => $bookingId]);
 
 
         if ($payment_type == 'full'){
             $customerPayment->setStatusPay($customerPayment::FULL_PAYMENT);
+            $vehBooking->setPayStatus(2);
         }elseif ($payment_type == 'advance'){
             $customerPayment->setStatusPay($customerPayment::ADVANCE_PAYMENT);
+            $vehBooking->setPayStatus(1);
         }
 
 
@@ -414,10 +490,14 @@ class CustomerController extends Controller
         ];
 
         if ($customerPayment->save()) {
-            $vehBooking = VehBooking::findOne(['booking_Id' => $bookingId]);
+
             $vehBooking->setStatus(2);
-            if ($vehBooking->update($bookingId, ['status'])){
-                Application::$app->session->setFlash('success', 'Payment Successful!');
+            if ($vehBooking->update($bookingId, ['status', 'pay_status'])){
+                if ($request->isPost()) {
+                    Application::$app->session->setFlash('success', 'Payment Successful!');
+                    $response->redirect('/Customer/VehicleBookingTable');
+                    exit();
+                }
                 $this->setLayout('customer-dashboard');
                 return $this->render('Customer/v_paymentSuccess', $params);
             }

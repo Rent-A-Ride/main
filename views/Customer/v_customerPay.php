@@ -44,7 +44,7 @@
 
 
             <div class="pay-form-group">
-                <button type="submit" id="pay-button"><i class='bx bxl-stripe' ></i> Pay Now</button>
+                <button type="submit" id="pay-button" name="payment"><i class='bx bxl-stripe' ></i> Pay Now</button>
             </div>
         </form>
     </div>

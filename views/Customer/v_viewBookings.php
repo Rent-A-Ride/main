@@ -11,6 +11,12 @@ use app\models\cusVehicle;
 
 <h2 class="main-title">Vehicle Bookings</h2>
 
+<div class="button-container">
+    <button>Unpaid Bookings</button>
+    <button>Active Bookings</button>
+    <button>Completed Bookings</button>
+</div>
+
 <h3 class="sub-title">Approved Bookings</h3>
 
 <div class="table-wrapper">
@@ -79,13 +85,20 @@ use app\models\cusVehicle;
                             <div class="driver-info">
                                 <?php if ($row->getDriverReq()== 1): ?>
                                     <div class="driver-image">
-                                        <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" alt="Driver Image">
+                                        <img src="/assets/img/uploads/default.jpg" alt="Driver Image">
                                     </div>
                                     <div class="driver-details">
                                         <h3>Driver Details</h3>
-                                        <p><strong>Name:</strong> John Doe</p>
-                                        <p><strong>Phone:</strong> 123-456-7890</p>
-                                        <p><strong>Email:</strong> john.doe@example.com</p>
+                                        <p><strong>Name:</strong> <?= $driverById[$driverReq[$row->getBookingId()]->getDriverID()]->getDriverFname().' '.$driverById[$driverReq[$row->getBookingId()]->getDriverID()]->getDriverLname() ?></p>
+                                        <div class="ratings">
+                                            <span><strong>Ratings:</strong></span>
+                                            <i class='bx bxs-star' style="color: #ffc547;" ></i>
+                                            <i class='bx bxs-star' style="color: #ffc547;" ></i>
+                                            <i class='bx bxs-star' style="color: #ffc547;" ></i>
+                                            <i class='bx bxs-star' style="color: black;" ></i>
+                                            <span><small>(4)</small></span>
+
+                                        </div>
                                     </div>
                                 <?php else: ?>
                                     <div class="driver-image">
@@ -185,13 +198,10 @@ use app\models\cusVehicle;
                         <div class="driver-info">
                             <?php if ($row->getDriverReq()== 1): ?>
                                 <div class="driver-image">
-                                    <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" alt="Driver Image">
+                                    <img src="/assets/img/uploads/default.jpg" alt="Driver Image">
                                 </div>
                                 <div class="driver-details">
-                                    <h3>Driver Details</h3>
-                                    <p><strong>Name:</strong> John Doe</p>
-                                    <p><strong>Phone:</strong> 123-456-7890</p>
-                                    <p><strong>Email:</strong> john.doe@example.com</p>
+                                    <p><strong>Awaiting for a Driver...</strong></p>
                                 </div>
                             <?php else: ?>
                                 <div class="driver-image">
