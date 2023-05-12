@@ -102,23 +102,23 @@ use app\core\Application;
             <span class="tooltip">Calendar</span>
         </li>
 
-        <li>
-            <a href="/vehicleOwner/Bookings">
-                <i class='bx bx-book-content' ></i>
-                <span class="links_name">Bookings</span>
-            </a>
-            <span class="tooltip">Bookings</span>
-        </li>
+<!--        <li>-->
+<!--            <a href="/vehicleOwner/Bookings">-->
+<!--                <i class='bx bx-book-content' ></i>-->
+<!--                <span class="links_name">Bookings</span>-->
+<!--            </a>-->
+<!--            <span class="tooltip">Bookings</span>-->
+<!--        </li>-->
 
 
 
-        <li>
-            <a href="/vehicleOwner/Complaints">
-                <i class='bx bx-comment-error' ></i>
-                <span class="links_name">Complaints</span>
-            </a>
-            <span class="tooltip">Complaints</span>
-        </li>
+<!--        <li>-->
+<!--            <a href="/vehicleOwner/Complaints">-->
+<!--                <i class='bx bx-comment-error' ></i>-->
+<!--                <span class="links_name">Complaints</span>-->
+<!--            </a>-->
+<!--            <span class="tooltip">Complaints</span>-->
+<!--        </li>-->
 
         <li class="/logout">
             <a href="/logout" class="logout">

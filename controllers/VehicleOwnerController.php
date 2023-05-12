@@ -213,35 +213,125 @@ class VehicleOwnerController extends Controller
 
         $customers = [];
         $vehicles = [];
+        $driver_req = [];
         $drivers = driver::retrieveAll(['status' => 1]);
 
         foreach ($vehbookings as $vehbooking) {
             $customers[$vehbooking->getCusId()] = Customer::findOne(['cus_Id'=> $vehbooking->getCusId()]);
             $vehicles[$vehbooking->getVehId()] = vehicle::findOne(['veh_Id'=> $vehbooking->getVehId()]);
-
+            //getting the booking id of each vehbooking as the index of the driver_req array
+            $driver_req[$vehbooking-> getBookingId()] = driver_requests::findOne(['reservation_id' => $vehbooking->getBookingId()])?driver_requests::findOne(['reservation_id' => $vehbooking->getBookingId()]):false;
         }
+        $getDriverById = [];
+        foreach ($drivers as $driver){
+            $getDriverById[$driver->getDriverId()] = $driver;
+        }
+
+//        echo '<pre>';
+//        var_dump($driver_req);
+//        echo '</pre>';
+//        exit();
+
+
 
         if ($request->isPost()){
 
+//            echo '<pre>';
+//            var_dump($request->getBody());
+//            echo '</pre>';
+//            exit();
+
 
             $bookingId = $request->getBody()['booking_Id'];
-
             $booking = VehBooking::findOne(['booking_Id' => $bookingId]);
-            $booking->setStatus(1);
-            if ($booking->update($bookingId,['status'])) {
-                Application::$app->session->setFlash('success', 'Booking Accepted Successfully!');
-                return $response->redirect('/CustomerAcceptedRequest');;
-            } else {
-                $params = [
-                    "model" => $vehbookings,
-                    'customer' => $customers,
-                    'vehicle' => $vehicles,
-                    'driver' => $drivers
-                ];
-                $this->setLayout("vehicleOwner-dashboard");
-                return $this->render("/VehicleOwner/vehicleOwnerPendingCustomerReq", $params);
 
+            // if the booking is accepted redirect to the accepted request tab - - w/o driver
+            if(isset($request->getBody()['accept']))
+            {
+                $booking->setStatus(1);
+                if ($booking->update($bookingId,['status']))
+                {
+                    Application::$app->session->setFlash('success', 'Booking Accepted Successfully!');
+                    return $response->redirect('/CustomerAcceptedRequest');
+                }
+                else
+                {
+                    $params = [
+                        "model" => $vehbookings,
+                        'customer' => $customers,
+                        'vehicle' => $vehicles,
+                        'driver' => $drivers
+                    ];
+                    $this->setLayout("vehicleOwner-dashboard");
+                    return $this->render("/VehicleOwner/vehicleOwnerPendingCustomerReq", $params);
+
+                }
             }
+
+
+            // if the booking is rejected redirect to the rejected request tab
+            if(isset($request->getBody()['reject']))
+            {
+                $booking->setStatus(2);
+                if ($booking->update($bookingId,['status']))
+                {
+                    Application::$app->session->setFlash('success', 'Booking Rejected Successfully!');
+                    return $response->redirect('/CustomerRejectedRequest');
+                }
+                else
+                {
+                    $params = [
+                        "model" => $vehbookings,
+                        'customer' => $customers,
+                        'vehicle' => $vehicles,
+                        'driver' => $drivers
+                    ];
+                    $this->setLayout("vehicleOwner-dashboard");
+                    return $this->render("/VehicleOwner/vehicleOwnerPendingCustomerReq", $params);
+
+                }
+            }
+
+            if (isset($request->getBody()['ask-driver']))
+            {
+//                echo '<pre>';
+//                var_dump($request->getBody());
+//                echo '</pre>';
+//                exit();
+                $booking_id = $request->getBody()['booking_Id'];
+                $driverId = $request->getBody()['driver_Id'];
+                $driver_request = new driver_requests();
+                $booking = VehBooking::findOne(['booking_Id' => $booking_id]);
+                $driver_request->setReservationId($booking_id);
+                $driver_request->setUserID($booking->getCusId());
+                $driver_request->setVehicleID($booking->getVehId());
+                $driver_request->setDriverID($driverId);
+                $driver_request->setStartDate($booking->getStartDate());
+                $driver_request->setEndDate($booking->getEndDate());
+                $driver_request->setDestination($booking->getDestination());
+                $driver_request->setPickupLocation($booking->getPickupLocation());
+
+                if ($driver_request->save()) {
+                    Application::$app->session->setFlash('success', 'Driver Requested Successfully!');
+                    return $response->redirect('/CustomerPendingRequest');
+                }
+                else
+                {
+                    $params = [
+                        "model" => $vehbookings,
+                        'customer' => $customers,
+                        'vehicle' => $vehicles,
+                        'driver' => $drivers
+                    ];
+                    $this->setLayout("vehicleOwner-dashboard");
+                    return $this->render("/VehicleOwner/vehicleOwnerPendingCustomerReq", $params);
+                }
+            }
+
+
+
+
+
 
             $params = [
                 "model" => $vehbookings,
@@ -257,9 +347,11 @@ class VehicleOwnerController extends Controller
 
 
         $params = [
-            "model" => $vehbookings,
+            'model'=> $vehbookings,
             'customer' => $customers,
             'vehicle' => $vehicles,
+            'driver_req' => $driver_req,
+            'getDriverById' => $getDriverById,
             'drivers' => $drivers
         ];
         $this->setLayout("vehicleOwner-dashboard");
@@ -270,7 +362,7 @@ class VehicleOwnerController extends Controller
 
     public function viewCustomerAcceptedRequests(Request $request, Response $response): string
     {
-        $cusReq = viewCustomerReq::retrieveAll();
+        $cusReq = VehBooking::retrieveAll();
         $customer = Customer::retrieveAll();
         $vehicle = vehicle::retrieveAll();
         $driver = driver::retrieveAll();
@@ -283,6 +375,9 @@ class VehicleOwnerController extends Controller
         }
         foreach ($vehicle as $veh){
             $getVehicleById[$veh->getVehId()] = $veh;
+        }
+        foreach ($driver as $driv){
+            $getDriverById[$driv->getDriverId()] = $driv;
         }
 
 
@@ -298,13 +393,99 @@ class VehicleOwnerController extends Controller
 
     public function viewCustomerRejectedRequests(Request $request, Response $response): string
     {
-        $cusReq = viewCustomerReq::retrieveAll();
+        $voID = Application::$app->session->get('user');
+        $bookings = VehBooking::retrieveAll(['vo_Id'=>$voID, 'status'=>2]);
+//
+//        echo '<pre>';
+//        var_dump($cusReq);
+//        echo '</pre>';
+//        exit();
+
+        $customers = [];
+        $vehicles = [];
+
+        foreach ($bookings as $booking){
+            $customers[$booking->getCusId()]=Customer::findOne(['cus_Id'=>$booking->getCusId()]);
+            $vehicles[$booking->getVehId()]=vehicle::findOne(['veh_Id'=>$booking->getVehId()]);
+        }
+//        echo '<pre>';
+//        var_dump($vehicles[18]->getVehBrand());
+//        echo '</pre>';
+//        exit();
 
         $params = [
-            "model" => $cusReq
+            "model" => $bookings,
+            "customers" => $customers,
+            "vehicles" =>$vehicles
         ];
+
         return $response->render("/VehicleOwner/vehicleOwnerRejectedReq", "vehicleOwner-dashboard", $params);
     }
+
+
+
+    public function viewCustomerOngoingRequests(Request $request, Response $response): string
+    {
+        $voID = Application::$app->session->get('user');
+        $bookings = VehBooking::retrieveAll(['vo_Id'=>$voID, 'status'=>3]);
+//
+//        echo '<pre>';
+//        var_dump($cusReq);
+//        echo '</pre>';
+//        exit();
+
+        $customers = [];
+        $vehicles = [];
+
+        foreach ($bookings as $booking){
+            $customers[$booking->getCusId()]=Customer::findOne(['cus_Id'=>$booking->getCusId()]);
+            $vehicles[$booking->getVehId()]=vehicle::findOne(['veh_Id'=>$booking->getVehId()]);
+        }
+//        echo '<pre>';
+//        var_dump($vehicles[18]->getVehBrand());
+//        echo '</pre>';
+//        exit();
+
+        $params = [
+            "model" => $bookings,
+            "customers" => $customers,
+            "vehicles" =>$vehicles
+        ];
+
+        return $response->render("/VehicleOwner/vehicleOwnerOngoingReq", "vehicleOwner-dashboard", $params);
+    }
+
+    public function viewCustomerCompletedRequests(Request $request, Response $response): string
+    {
+        $voID = Application::$app->session->get('user');
+        $bookings = VehBooking::retrieveAll(['vo_Id'=>$voID, 'status'=>4]);
+//
+//        echo '<pre>';
+//        var_dump($cusReq);
+//        echo '</pre>';
+//        exit();
+
+        $customers = [];
+        $vehicles = [];
+
+        foreach ($bookings as $booking){
+            $customers[$booking->getCusId()]=Customer::findOne(['cus_Id'=>$booking->getCusId()]);
+            $vehicles[$booking->getVehId()]=vehicle::findOne(['veh_Id'=>$booking->getVehId()]);
+        }
+//        echo '<pre>';
+//        var_dump($vehicles[18]->getVehBrand());
+//        echo '</pre>';
+//        exit();
+
+        $params = [
+            "model" => $bookings,
+            "customers" => $customers,
+            "vehicles" =>$vehicles
+        ];
+
+        return $response->render("/VehicleOwner/vehicleOwnerCompletedReq", "vehicleOwner-dashboard", $params);
+    }
+
 
     public function acceptBooking(Request $request, Response $response): string
     {
@@ -598,11 +779,6 @@ class VehicleOwnerController extends Controller
             $vehInsurance->loadData($request->getBody());
             $vehEcoTest->loadData($request->getBody());
 
-            echo '<pre>';
-            var_dump($vehicle);
-            echo '</pre>';
-            exit();
-
             if (($vehicle->validate() && $vehicle->update()) && ($vehInfo->validate() && $vehInfo->update()) && ($vehLicense->validate() && $vehLicense->update()) && ($vehInsurance->validate() && $vehInsurance->update()) && ($vehEcoTest->validate() && $vehEcoTest->update()))
             {
                 return $response->redirect('/vehicleOwner/vehicleProfile?id='.$vehID);
@@ -671,6 +847,8 @@ class VehicleOwnerController extends Controller
         $this->setLayout("vehicleOwner-dashboard");
         return $this->render("/VehicleOwner/vehicleOwnerDisabledList", $param);
     }
+
+
 
 
 

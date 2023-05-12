@@ -217,6 +217,15 @@ $app->router->get("/CustomerAcceptedRequest", [VehicleOwnerController::class, 'v
 // view customer Rejected requests
 $app->router->get("/CustomerRejectedRequest", [VehicleOwnerController::class, 'viewCustomerRejectedRequests']);
 
+//vehicle owner ongoing vehicles
+$app->router->get("/CustomerOngoingRequest", [VehicleOwnerController::class, 'viewCustomerOngoingRequests']);
+$app->router->post("/CustomerOngoingRequest", [VehicleOwnerController::class, 'viewCustomerOngoingRequests']);
+
+//vehicle owner completed vehicles
+$app->router->get("/CustomerCompletedRequest", [VehicleOwnerController::class, 'viewCustomerCompletedRequests']);
+$app->router->post("/CustomerCompletedRequest", [VehicleOwnerController::class, 'viewCustomerCompletedRequests']);
+
+
 
 //// Vehicle Owner
 //$app->router->get("/vehicleOwner/Profile", [VehicleOwnerController::class, 'vehownerViewProfile']);
@@ -294,6 +303,8 @@ $app->router->post("/vehicleOwner/editVehicleProfile", [VehicleOwnerController::
 //vehicle owner disable vehicles
 $app->router->get("/vehicleOwner/disabledVehicles", [VehicleOwnerController::class, 'disableVehicleView']);
 $app->router->post("/vehicleOwner/disabledVehicles", [VehicleOwnerController::class, 'disableVehicleView']);
+
+
 
 $app->run();
 

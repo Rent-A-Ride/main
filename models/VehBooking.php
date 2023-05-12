@@ -19,6 +19,7 @@ class VehBooking extends dbModel
     protected string $note;
     protected bool $driverReq = false;
     protected string $status;
+    protected int $pay_status = 0;
 
     public function rules(): array
     {
@@ -32,7 +33,7 @@ class VehBooking extends dbModel
 
     public function attributes(): array
     {
-        return ['booking_Id','cus_Id','vo_Id','veh_Id','pickupLocation','startDate','endDate','Destination','rental_price','payMethod','driverReq','status'];
+        return ['booking_Id','cus_Id','vo_Id','veh_Id','pickupLocation','startDate','endDate','Destination','rental_price','payMethod','driverReq','status','pay_status'];
     }
 
     public static function primaryKey(): string
@@ -247,6 +248,26 @@ class VehBooking extends dbModel
     {
         $this->note = $note;
     }
+
+    /**
+     * @return int
+     */
+    public function getPayStatus(): int
+    {
+        return $this->pay_status;
+    }
+
+    /**
+     * @param int $pay_status
+     */
+    public function setPayStatus(int $pay_status): void
+    {
+        $this->pay_status = $pay_status;
+    }
+
+
+
+
 
 
 
