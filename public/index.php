@@ -311,6 +311,15 @@ $app->router->post("/vehicleOwner/editVehicleProfile", [VehicleOwnerController::
 $app->router->get("/vehicleOwner/disabledVehicles", [VehicleOwnerController::class, 'disableVehicleView']);
 $app->router->post("/vehicleOwner/disabledVehicles", [VehicleOwnerController::class, 'disableVehicleView']);
 
+// Vehicle Owner Notifications
+$app->router->get("/vo_notification", [VehicleOwnerController::class, 'vo_notification']);
+$app->router->post("/vo_notification", [VehicleOwnerController::class, 'vo_notification']);
+
+$app->router->get("/update-vo-notification-status", [VehicleOwnerController::class, 'updateVoNotificationStatus']);
+$app->router->post("/update-vo-notification-status", [VehicleOwnerController::class, 'updateVoNotificationStatus']);
+
+
+
 
 
 $app->router->get("/driver/availability", [DriverController::class, 'driverAvailability']);

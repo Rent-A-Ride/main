@@ -3,6 +3,9 @@
 
 @import url('../components/nav.css');
 
+/* Notificaton css */
+@import url('../components/notification.css');
+
 /* nav profile css */
 @import url('../components/navProfile.css');
 

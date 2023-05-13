@@ -272,16 +272,16 @@ class VehBooking extends dbModel
 
 
 
-    public function getpayment_forCurrentMonth(){
-        $currentMonthFirstDay = date("Y-m-01");
-        $currentMonthLastDay = date("Y-m-t");
-        $firstdate = date_create($currentMonthFirstDay);
-        $lastdate = date_create($currentMonthLastDay);
-        // var_dump($firstdate);
-        // var_dump($lastdate);
-        // die();
-        
-    // }
+//    public function getpayment_forCurrentMonth(){
+//        $currentMonthFirstDay = date("Y-m-01");
+//        $currentMonthLastDay = date("Y-m-t");
+//        $firstdate = date_create($currentMonthFirstDay);
+//        $lastdate = date_create($currentMonthLastDay);
+//        // var_dump($firstdate);
+//        // var_dump($lastdate);
+//        // die();
+//
+//    // }
 
 
     public function getBookingForMonth($vo_ID,$date){

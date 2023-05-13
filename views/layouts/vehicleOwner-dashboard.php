@@ -200,6 +200,8 @@ use app\core\Application;
 
 </body>
 <script src="/assets/javascript/component/navbar.js"></script>
+<!--Notification Js-->
+<script src="/assets/javascript/vehicleOwner/components/vo_notifications.js"></script>
 <script src="/assets/javascript/component/sidebar.js"></script>
 <script src="/assets/javascript/component/search.js"></script>
 <script src="/assets/javascript/vehicleOwner/popup.js"></script>
@@ -211,4 +213,6 @@ use app\core\Application;
 <script src="/assets/javascript/vehicleOwner/AddNewVehicle.js"></script>
 <script src="/assets/javascript/vehicleOwner/BookingCalendar.js"></script>  <!-- calendar -->
 <script src="/assets/javascript/vehicleOwner/vehProfileEdit.js"></script>
+
+
 </html>
