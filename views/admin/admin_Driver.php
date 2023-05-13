@@ -6,7 +6,7 @@
 <div class="search">
     <label class="label-l" for="search"><i class='bx bx-search'></i>Search </label>
     <input type="search" id="search" placeholder="Type to search">
-    <div class="location-select">
+    <!-- <div class="location-select">
         <select id="location" name="location">
             <option value="" disabled selected hidden>location</option>
             <option value="Ampara">Ampara</option>
@@ -36,7 +36,7 @@
             <option value="Vavuniya" >Vavuniya</option>
         </select>
     </div>
-    
+     -->
     <div class="date-select">
 
         <button onclick="location.href='/admin/add-driver'" class="book-button1"><i class="fa-solid fa-plus"></i></button>
@@ -69,7 +69,7 @@
                 ?>
                 <div class="table-row <?=$row['driver_ID']?>">
                     <?php $user_id=$row["driver_ID"];   ?>
-                    <div class="table-data"><img src="/assets/img/user_profile/<?php echo $row['profile_pic']?>" width="56px"></div>
+                    <div class="table-data"><img src="/assets/img/uploads/userProfile/<?php echo $row['profile_pic']?>" width="56px"></div>
                     <div class="table-data"></div>
                     <div class="table-data"><?php echo ($row["driver_Fname"]." ".$row["driver_Lname"]); ?></div>
                     <div class="table-data"></div>

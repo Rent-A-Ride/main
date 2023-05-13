@@ -91,6 +91,10 @@ class Customer extends dbModel
         return $this->cus_Id;
     }
 
+    public function setcus_Id(string $cus_id){
+        return $this->cus_Id=$cus_id;
+    }
+
     /**
      * @return string
      */
@@ -283,6 +287,21 @@ class Customer extends dbModel
     public function getCustomer_count(){
         return Application::$app->db->pdo->query("SELECT COUNT(cus_Id) As customer_count FROM customer")->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    public function UpdateStatus($cus_id){
+        $admin_approved=1;
+        $query1="UPDATE customer SET status=:admin_approved WHERE cus_Id=:cus_id";
+
+        $statement1= Application::$app->db->prepare($query1);
+        $statement1->bindValue(":admin_approved",$admin_approved);
+        $statement1->bindValue(":cus_id",$cus_id);
+        $statement1->execute();
+    }
+
+    public function getCustomerByuserID($user_Id){
+        return Application::$app->db->pdo->query("SELECT * FROM customer WHERE cus_Id=$user_Id")->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    
 
 
 
