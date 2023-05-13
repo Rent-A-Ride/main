@@ -18,7 +18,22 @@
     font-size: 15pt;
     text-align: center;
     display: block;
+    border: solid;
+}
 
+.admin_overView-card2{
+    width: 80% ;
+    padding: 1rem;
+    background:whitesmoke;
+    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 2rem;
+    margin-left: 10%;
+    color: black;
+    font-weight: 600;
+    font-size: 15pt;
+    text-align: center;
+    display: block;
+    border: solid;
 }
 
 /* .admin_overView-card_1{
@@ -32,3 +47,23 @@
     gap: 5%;
     margin-top: 5%;
 }
+
+.admin_overView-bottum-container1{
+    /* background-color: red; */
+    /* display: grid; */
+    /* grid-template-columns: repeat(2,1fr); */
+    gap: 5%;
+    margin-top: 5%;
+}
+
+#test1 {
+    height: 300px !important;
+  }
+  
+  
+  
+  
+  
+  
+  
+  

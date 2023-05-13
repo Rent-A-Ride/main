@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\core\Application;
 use app\core\dbModel;
 
 class driver_requests extends dbModel
@@ -195,5 +196,12 @@ class driver_requests extends dbModel
     public static function primaryKey(): string
     {
         return 'reservation_id';
+    }
+
+    public function getdriverReqforDriver($date,$driver_id){
+        return Application::$app->db->pdo->query("SELECT * FROM vehbooking INNER JOIN driver_requests on vehbooking.booking_Id=driver_requests.reservation_id
+        WHERE DATE_FORMAT(vehbooking.endDate, '%Y-%m') ='$date' AND driver_requests.driver_ID=$driver_id And driver_requests.accept=1 ")->fetchAll(\PDO::FETCH_ASSOC);
+            
+        
     }
 }

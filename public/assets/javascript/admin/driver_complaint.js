@@ -45,7 +45,7 @@ driverComplaintProofButtons.forEach(function (btn) {
                         <input type='text' name='driver_Name' id='driver_name' placeholder='' required  value='${complaint.driver}' readonly>      
                     </div>
                     <div class='form-item'>
-                        <img src="/assets/img/VehicleComplaintProof/${complaint.proof}"></img>        
+                        <img src="/assets/img/cus_complaints/${complaint.proof}"></img>        
                     </div>
                 
                 

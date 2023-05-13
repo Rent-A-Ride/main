@@ -22,7 +22,7 @@ use app\core\Application;
                 <!-- <input id="file" type="file" onchange="loadFile(event)"/> -->
 
 
-                <img src="/assets/img/user_profile/<?php echo $owner_details[0]['profile_pic']?>" id="output" width="150" />
+                <img src="/assets/img/uploads/userProfile/<?php echo $owner_details[0]['profile_pic']?>" id="output" width="150" />
             </div>
         </form>
 

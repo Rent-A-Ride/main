@@ -103,7 +103,7 @@ class vehiclereview extends dbModel
     }
 
     public function getReviews($veh_id){
-        return Application::$app->db->pdo->query("SELECT * FROM vehiclereviews WHERE veh_id=$veh_id")->fetchAll(\PDO::FETCH_ASSOC);
+        return Application::$app->db->pdo->query("SELECT * FROM veh_reviews WHERE veh_id=$veh_id")->fetchAll(\PDO::FETCH_ASSOC);
     }
 
 

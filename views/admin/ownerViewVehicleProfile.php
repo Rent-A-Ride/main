@@ -1,5 +1,21 @@
 <?php
 
+$bookedDates = [];
+
+foreach ($bookings as $booking) {
+    $startDate = strtotime($booking['startDate']);
+    $endDate = strtotime($booking['endDate']);
+    $currentDate = $startDate;
+    while ($currentDate <= $endDate) {
+        $bookedDates[] = date('Y-m-d', $currentDate);
+        $currentDate = strtotime('+1 day', $currentDate);
+    }
+}
+
+// var_dump($veh_li);
+// exit;
+
+
 ?>
 
 <!-- <div class="ownerProfile_body"> -->
@@ -30,14 +46,14 @@
         <div id="gallery">
             <div class="row">
                 <div class="large-image">
-                    <img src="assets/img/Vehicle_img/gallery/front.jpg">
+                    <img src="/assets/img/uploads/vehicle/<?= $veh_info[0]['front_view'] ?>">
                 </div>
             </div>
             <div class="row">
                 <div class="thumbnails">
-                    <img src="assets/img/Vehicle_img/gallery/front.jpg" data-large="assets/img/vehicle/gallery/front.jpg">
-                    <img src="assets/img/Vehicle_img/gallery/side.jpg" data-large="assets/img/vehicle/gallery/side.jpg">
-                    <img src="assets/img/Vehicle_img/gallery/inside.jpg" data-large="assets/img/vehicle/gallery/inside.jpg">
+                    <img src="/assets/img/uploads/vehicle/<?= $veh_info[0]['front_view'] ?>" data-large="<?= $veh_info[0]['front_view'] ?>">
+                    <img src="/assets/img/uploads/vehicle/<?= $veh_info[0]['side_view'] ?>" data-large="<?= $veh_info[0]['side_view'] ?>">
+                    <img src="/assets/img/uploads/vehicle/<?= $veh_info[0]['back_view'] ?>" data-large="<?= $veh_info[0]['back_view'] ?>">
                 </div>
             </div>
 
@@ -72,7 +88,9 @@
                             <li class="bold">Fuel:  <?php echo($veh_info[0]['fuel_type'])?></li>
                         </ul>
                     </div>
+                    
                 </div>
+                
                 <div class="vehicle-description">
                     <p class="bold">Description</p>
                     <p><?php echo($veh_info[0]['Description'])?></p>
@@ -80,6 +98,24 @@
                 <div class="vehicle-price">
                     <span>Vehicle Rent Price (Per/ Day):</span>
                     <span class="price">Rs. <?php echo($veh_info[0]['price'])?>.00 </span>
+                </div>
+                <div class="vehicle-price">
+                    <span><b> License No:</b></span>
+                    <span class="price"><?php echo($veh_li[0]['license_No'])?></span>
+                </div>
+                <div class="vehicle-price">
+                    <span><b>License Scan Copy:</b></span>
+                    <span class="price"><a href="/assets/img/uploads/vehicle/Documents/lic/<?php echo($veh_li[0]['lic_scan_copy'])?>" download>License Scan Copy</a></span>
+                    
+                </div>
+                <div class="vehicle-price">
+                    <span><b> Insuarance No:</b></span>
+                    <span class="price"><?php echo($veh_li[0]['ins_No'])?></span>
+                </div>
+                <div class="vehicle-price">
+                    <span><b> Insuarance Scan Copy:</b></span>
+                    <span class="price"><a href="/assets/img/uploads/vehicle/Documents/lic/<?php echo($veh_li[0]['ins_scan_copy'])?>" download>License Scan Copy</a></span>
+                     
                 </div>
 
             </div>
@@ -126,9 +162,9 @@
                         ?>
                         <div class="table-row">
                              
-                            <div class="table-data"><?= $row['booking_id']?></div>
-                            <div class="table-data"><?= $row['comment']?></div>
-                            <div class="table-data"><?= $row['rates']?></div>
+                            <div class="table-data"><?= $row['id']?></div>
+                            <div class="table-data"><?= $row['comments']?></div>
+                            <div class="table-data"><?= $row['rating']?></div>
                         </div>
                     <?php
                     endforeach;
@@ -146,53 +182,57 @@
 
 
 </div>
+<!-- Your HTML code here -->
 <script>
-    const daysTag = document.querySelector(".days"),
-currentDate = document.querySelector(".current-date"),
-adjecentIcons = document.querySelectorAll(".icons span");
+    const daysTag = document.querySelector(".days");
+    const currentDate = document.querySelector(".current-date");
+    const adjecentIcons = document.querySelectorAll(".icons span");
 
-let date = new Date(),
-year = date.getFullYear(),
-month = date.getMonth();
+    let date = new Date();
+    let year = date.getFullYear();
+    let month = date.getMonth();
 
-const months = ["January", "February", "March", "April", "May", "June", "July","August", "September", "October", "November", "December"];
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-const generateCalendar = () => {
-    var firstDayofMonth = new Date(year, month, 1).getDay();
-    var lastDateofMonth = new Date(year, month + 1, 0).getDate();
-    var lastDayofMonth = new Date(year, month, lastDateofMonth).getDay();
-    var lastDateofLastMonth = new Date(year, month, 0).getDate(); 
-    let liTag = "";
-    for (let i = firstDayofMonth; i > 0; i--) { 
-        liTag += `<li class="inactive">${lastDateofLastMonth - i + 1}</li>`;
-    }
-    for (let i = 1; i <= lastDateofMonth; i++) {
-        let isToday = i === date.getDate() && month === new Date().getMonth() && year === new Date().getFullYear() ? "active1" : "";
-        liTag += `<li class="${isToday}">${i}</li>`;
-    }
-    for (let i = lastDayofMonth; i < 6; i++) { 
-        liTag += `<li class="inactive">${i - lastDayofMonth + 1}</li>`
-    }
-    currentDate.innerText = `${months[month]} ${year}`; 
-    daysTag.innerHTML = liTag;
-}
-
-generateCalendar();
-
-adjecentIcons.forEach(icon => { 
-    icon.addEventListener("click", () => { 
-        month = icon.id === "prev" ? month - 1 : month + 1;
-        if(month < 0 || month > 11) {
-            date = new Date(year, month);
-            year = date.getFullYear(); 
-            month = date.getMonth(); 
-        } else {
-            date = new Date(); 
+    const generateCalendar = (bookedDates) => {
+        var firstDayofMonth = new Date(year, month, 1).getDay();
+        var lastDateofMonth = new Date(year, month + 1, 0).getDate();
+        var lastDayofMonth = new Date(year, month, lastDateofMonth).getDay();
+        var lastDateofLastMonth = new Date(year, month, 0).getDate();
+        let liTag = "";
+        for (let i = firstDayofMonth; i > 0; i--) {
+            liTag += `<li class="inactive">${lastDateofLastMonth - i + 1}</li>`;
         }
-        generateCalendar(); 
+        for (let i = 1; i <= lastDateofMonth; i++) {
+            let isBooked = bookedDates.includes(`${year}-${(month+1).toString().padStart(2, '0')}-${i.toString().padStart(2, '0')}`) ? "booked" : "";
+            let isToday = i === date.getDate() && month === new Date().getMonth() && year === new Date().getFullYear() ? "active" : "";
+            liTag += `<li class="${isToday} ${isBooked}">${i}</li>`;
+        }
+        for (let i = lastDayofMonth; i < 6; i++) {
+            liTag += `<li class="inactive">${i - lastDayofMonth + 1}</li>`
+        }
+        currentDate.innerText = `${months[month]} ${year}`;
+        daysTag.innerHTML = liTag;
+    }
+
+    // Call the function with the booked dates array
+    generateCalendar(<?php echo json_encode($bookedDates); ?>);
+
+    adjecentIcons.forEach(icon => {
+        icon.addEventListener("click", () => {
+            month = icon.id === "prev" ? month - 1 : month + 1;
+            if (month < 0 || month > 11) {
+                date = new Date(year, month);
+                year = date.getFullYear();
+                month = date.getMonth();
+            } else {
+                date = new Date();
+            }
+            generateCalendar(<?php echo json_encode($bookedDates); ?>);
+        });
     });
-});
 </script>
+
 
 
 

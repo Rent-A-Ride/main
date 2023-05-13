@@ -163,6 +163,19 @@
             </a>
             <span class="tooltip">Payment</span>
         </li>
+        
+        <li class="<?php 
+        if($function=='Invoice'){
+            echo ('active');
+        }
+        ?>">
+            <a href="/admin/vehicleownerInvoice">
+                <i class="fa-solid fa-file-invoice"></i>
+                <span class="links_name">Invoice</span>
+            </a>
+            <span class="tooltip">Invoice</span>
+        </li>
+
         <li class="<?php 
         if($function=='Settings'){
             echo ('active');
@@ -174,6 +187,7 @@
             </a>
             <span class="tooltip">Settings</span>
         </li>
+        
         
 
         <li class="profile">
@@ -200,7 +214,7 @@
             <!-- <div class="vision"><p>Mobility Without Hassel</p> </div> -->
             <div class="profile-cont">
                 <span class="profile-name"><?= Application::$app->user->displayName(); ?></span>
-                <div class="img-cont"><img src="/assets/img/user_profile/<?= Application::$app->user->userprofile('profile_pic')?>" class="profile-image"></div>
+                <div class="img-cont"><img src="/assets/img/uploads/userProfile/<?= Application::$app->user->userprofile('profile_pic')?>" class="profile-image"></div>
 
             </div>
 
@@ -223,11 +237,39 @@
             <?= Application::$app->session->getFlash('profileUpdate') ?>
         </div>
     <?php endif; ?>
+    <?php if (Application::$app->session->getFlash('success')):?>
+        <div class="flash-message success">
+            <?= Application::$app->session->getFlash('success') ?>
+        </div>
+    <?php endif; ?>
+    <?php if (Application::$app->session->getFlash('error')):?>
+        <div class="flash-message error">
+            <?= Application::$app->session->getFlash('error') ?>
+        </div>
+    <?php endif; ?>
 
     <!-- <div class="banner-msg">
         <h1>FAST AND EASY WAY TO <span class="bold yellow">RENT A VEHICLE</span></h1>
     </div> -->
     <div class="dashboardRest">
+        <?php if (Application::$app->session->getFlash('profileUpdate')):?>
+            <div class="flash-message success">
+                <?= Application::$app->session->getFlash('profileUpdate') ?>
+            </div>
+        <?php endif; ?>
+            <?php if (Application::$app->session->getFlash('success')):?>
+                <div class="flash-message success">
+                    <?= Application::$app->session->getFlash('success') ?>
+                </div>
+            <?php endif; ?>
+            <?php if (Application::$app->session->getFlash('error')):?>
+                <div class="flash-message error">
+                    <?= Application::$app->session->getFlash('error') ?>
+                </div>
+            <?php endif; ?>
+        <div class="banner-msg">
+            <h1>FAST AND EASY WAY TO <span class="bold yellow">RENT A VEHICLE</span></h1>
+        </div>
         {{content}}
     </div>
     

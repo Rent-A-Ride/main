@@ -163,9 +163,9 @@ class vehicleownerpayment extends dbModel
     public function getpayment_currentMonth(){
         
         
-        return Application::$app->db->pdo->query("SELECT vo_Id, SUM(rental_price) AS total
-        FROM vehicleownerpayment
-        WHERE endDate >= DATE_FORMAT(NOW(), '%Y-%m-01') AND endDate < DATE_FORMAT(NOW() + INTERVAL 1 MONTH, '%Y-%m-01') AND pay_status=0
+        return Application::$app->db->pdo->query("SELECT vo_Id, SUM(Total) AS total,`month`
+        FROM vehicleownerpayment 
+        WHERE `month` >= DATE_FORMAT(NOW(), '%Y-%m-01') AND `month` < DATE_FORMAT(NOW() + INTERVAL 1 MONTH, '%Y-%m-01') AND pay_status=0
         GROUP BY vo_Id; ")->fetchAll(\PDO::FETCH_ASSOC);
             
         
@@ -173,19 +173,20 @@ class vehicleownerpayment extends dbModel
 
     public function getpayment(){
         
-        return Application::$app->db->pdo->query("SELECT vo_Id, DATE_FORMAT(endDate, '%M %Y') AS month_name, SUM(rental_price) AS total_rent,SUM(pay_status)AS pay_status
+        return Application::$app->db->pdo->query("SELECT vo_Id, DATE_FORMAT(`month`, '%M %Y') AS month_name, SUM(Total) AS total_rent,SUM(pay_status)AS pay_status,`month`
         FROM vehicleownerpayment
-        GROUP BY vo_Id, DATE_FORMAT(endDate, '%M %Y'),pay_status; ")->fetchAll(\PDO::FETCH_ASSOC);
+        GROUP BY vo_Id, DATE_FORMAT(`month`, '%M %Y'),pay_status; ")->fetchAll(\PDO::FETCH_ASSOC);
             
         
     }
 
 
-    public function confirm_payment($vo_id){
+    public function confirm_payment($vo_id,$month,$img_name){
         $pay_status=1;
-        $query1="UPDATE vehicleownerpayment SET pay_status =:paystatus WHERE vo_Id=$vo_id";
+        $query1="UPDATE vehicleownerpayment SET pay_status =:paystatus, Payment_slip=:img WHERE MONTH(month) = MONTH('$month') AND YEAR(month) = YEAR('$month') AND vo_Id=$vo_id";
         $statement1= Application::$app->db->prepare($query1);
         $statement1->bindValue(":paystatus",$pay_status);
+        $statement1->bindValue(":img",$img_name);
         $statement1->execute();
     }
 

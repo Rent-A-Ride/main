@@ -37,7 +37,7 @@
 
                         <label for="vehicle_type">Type</label>
 
-                        <select id="vehicle-type" class = "select-item" name = "veh_type">
+                        <select id="vehicle-type" class = "select-item" name = "veh_type" required>
                             <option selected disabled class="item" value ="">--SELECT YOUR VEHICLE TYPE--</option>
                             <option  class="item" value ="car">Car</option>
                             <option class="item" value ="van">Van</option>
