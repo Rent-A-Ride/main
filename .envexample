@@ -2,7 +2,7 @@ DB_DSN=mysql:host=localhost;port=3306;dbname=demo
 DB_USER=root
 DB_PASSWORD=
 EMAIL_HOST=smtp.gmail.com
-EMAIL_USERNAME=hasanthakariyawasam@gmail.com
+EMAIL_USERNAME=askrentaride@gmail.com
 EMAIL_PASSWORD=
 EMAIL_FROM=askrentaride@gmail.com
 EMAIL_PORT=465

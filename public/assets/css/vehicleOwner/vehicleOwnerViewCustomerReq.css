@@ -79,6 +79,7 @@
 }
 .table th,
 .table td{
+    text-align: center;
     padding: 12px 15px;
 
 
@@ -129,12 +130,24 @@ th, td {
 
 }
 
-.reject-button {
+ .reject-button {
+     background-color: #dc3545;
     margin-left: 5px;
     border: none;
     padding: 6px;
     border-radius: 4px;
     cursor: pointer;
+     color: white;
+}
+.not-allowed  {
+    background-color: rgb(68, 67, 67);
+    margin-left: 5px;
+    border: none;
+    padding: 6px;
+    border-radius: 4px;
+    cursor: not-allowed;
+    color: white;
+    opacity: 0.5;
 }
 
 .accept-button {
@@ -151,18 +164,14 @@ th, td {
 
 }
 
-.reject-button {
-    background-color: rgb(218, 83, 83);
-    color: white;
-}
+/*.reject-button , .not-allowed{*/
+/*    background-color: rgb(218, 83, 83);*/
+/*    color: white;*/
+/*}*/
 
-.reject-button:hover {
-    background-color: rgb(213, 16, 16);
-}
 
-.reject-button.clicked {
-    background-color: rgb(213, 16, 16);
-}
+
+
 
 
 
@@ -352,24 +361,24 @@ th, td {
 }
 
   /*select button*/
- .driver-req-button {
+ .driver-req-button , .mark-completed-button {
     border: none;
     padding: 6px;
     border-radius: 4px;
     cursor: pointer;
 
 }
- .driver-req-button {
+ .driver-req-button , .mark-completed-button{
     background-color: #f7ba58;
     color:black;
 }
 
- .driver-req-button:hover {
+ .driver-req-button:hover, .mark-completed-button:hover {
     background-color: black;
     color: white;
 
 }
-.driver-req-button.clicked{
+.driver-req-button.clicked, .mark-completed-button.clicked{
     background-color: #fab84c;
 
 }
