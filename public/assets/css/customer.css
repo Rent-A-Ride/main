@@ -9,6 +9,9 @@
 /*Flash messages*/
 @import url(components/flashMessages.css);
 
+/*Back Button Css*/
+@import url(customer/components/backBtn.css);
+
 /*notification*/
 @import url(customer/components/notification.css);
 

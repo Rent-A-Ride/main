@@ -1,14 +1,14 @@
 <?php
-
-//    var_dump(password_hash('admin123',PASSWORD_DEFAULT));
-    $hasErrors = isset($errors) && !empty($errors);
-    $isemailError = $hasErrors && isset($errors['email']);
-    $isPasswordlError = $hasErrors && isset($errors['password']);
-    $isUserTypeError = $hasErrors && isset($errors['user_type']);
-
-
-
-?>
+//
+////    var_dump(password_hash('admin123',PASSWORD_DEFAULT));
+//    $hasErrors = isset($errors) && !empty($errors);
+//    $isemailError = $hasErrors && isset($errors['email']);
+//    $isPasswordlError = $hasErrors && isset($errors['password']);
+//    $isUserTypeError = $hasErrors && isset($errors['user_type']);
+//
+//
+//
+//?>
 <main class="">
     <div class="box">
         <div class="inner-box">
@@ -31,12 +31,12 @@
                                     name="email"
                                     type="email"
                                     minlength="4"
-                                    class="input-field<?php echo $isemailError? ' invalid' : ''?>"
-                                    
+                                    class="input-field<?= $model->hasError('email') ? ' invalid' : ''?>"
+                                    value="<?= $model->thereIsError() ? $model->email : ''?>"
                                      
                             />
-                            <label>Email</label>
-                            <span class="form-error"><?php echo $isemailError? "{$errors['email']}" : ""?></span>
+                            <label class="label<?= $model->hasError('email') ? ' invalid' : ''?>">Email</label>
+                            <span class="form-error"><?= $model->getFirstError('email') ?></span>
 
                         </div>
 
@@ -45,12 +45,11 @@
                                     name="password"
                                     type="password"
                                     minlength="4"
-                                    class="input-field<?php echo $isPasswordlError? ' invalid' : ''?>"
+                                    class="input-field<?= $model->hasError('password') ? ' invalid' : ''?>"
                                     autocomplete="off"
-
                             />
-                            <label>Password</label>
-                            <span class="form-error"> <?php echo $isPasswordlError? "{$errors['password']}" : ""?></span>
+                            <label class="label<?= $model->hasError('password') ? ' invalid' : ''?>" >Password</label>
+                            <span class="form-error"><?= $model->getFirstError('password') ?></span>
                         </div>
                         <div class="input-wrap">
                             <select 
@@ -58,14 +57,16 @@
                                 class="input-field"
 
                                 >
-                            
-                                <option value="owner">Admin</option>
+
+                                <option value="customer">Customer</option>
                                 <option value="vehicleowner">Vehicle Owner</option>
                                 <option value="driver">Driver</option>
-                                <option value="customer">Customer</option>
+                                <option value="owner">Admin</option>
+
                             </select>
                             <label>User Role</label>
-                            <span class="form-error"> <?php echo $isUserTypeError? "{$errors['user_type']}" : ""?></span>
+                          
+
                         </div>  
 
                         <input type="submit" value="Sign In" class="sign-btn">

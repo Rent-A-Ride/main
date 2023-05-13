@@ -6,12 +6,13 @@
             <table class="rew-show">
                 <thead>
                 <tr>
-                  <th>Document name</th>
-                  <th>Invoice number</th>
-                  <th>Date</th>
-                  <th>Period</th>
+                  <th>Year</th>
+                  <th>Month</th>
+                  <th>Invoice</th>
+                  <th>Payment Status</th>
                   <th>Amount</th>
-                  <th>Action</th>
+                  <th>Payment Slip</th>
+                  
                 </tr>
                 </thead>
 
@@ -19,19 +20,38 @@
                 <?php
               
 
-              if ($driver){
-                  foreach ($driver as $row){
+              if ($driverp){
+                  foreach ($driverp as $row){
 
-//                       print_r($row);
+                     foreach ($driverinv as $a){
+                      $payment_date_string = $row['month']; // example date string in "YYYY-MM-DD" format
+                      $Paymonth = date("m", strtotime($payment_date_string)); // get the month from the date string
+                      $payyear = date('Y', strtotime($payment_date_string)); 
+                      $inv_date_string = $a['date']; // example date string in "YYYY-MM-DD" format
+                      $invmonth = date("m", strtotime($inv_date_string)); // get the month from the date string
+                      $invyear = date('Y', strtotime($inv_date_string)); 
+                      if ($row['driver_ID']==$a['driver_ID']&& $Paymonth==$invmonth && $payyear==$invyear){
             ?>
                 <tboady>
                 <tr>
-                    <td><?php echo $row["name"] ?></td>
-                    <td><?php echo $row["invoice_no"] ?></td>
-                    <td><?php echo $row["payment_date"] ?></td>
-                    <td><?php echo $row["period"] ?></td>
-                    <td><?php echo $row["Amount"] ?></td>
-                    <td>
+                    <td><?php echo $invyear ?></td>
+                    <td><?php echo $invmonth ?></td>
+                    <td><a href="/assets/Invoice/DriverInvoice/<?= $a['invoice']  ?>" download>Invoice</a></td>
+                    <?php if ($row['pay_status']==0) {
+                      ?>
+                      <td>Pending</td>
+                    <?php
+                    }else {
+
+                    ?>
+                      <td>Paied</td>
+                    <?php
+                    }
+                    ?>
+                    
+                    <td><?php echo $row["payment"] ?></td>
+                    <td><a href="/assets/img/PaymentSlip/<?= $row['Payment_slip']  ?>" download>Payment Slip</a></td>
+                    <!-- <td>
                       <div class="invoice-item">
                           <div class="invoice-item-header">
                             Invoice #1
@@ -61,12 +81,15 @@
 
                       </script>
 
-                    </td>
+                    </td> -->
 
                 </tr>
                 </tboady>
 
               <?php
+                      }
+                     }
+                     }
                   }
                 ?>
 
@@ -76,6 +99,4 @@
         </div>
 </div>
 
-<?php
-    }
-?>
+

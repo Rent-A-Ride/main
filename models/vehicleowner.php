@@ -84,6 +84,12 @@ class vehicleowner extends dbModel
         return parent::update($id, $Include, $Exclude);
     }
 
+    // public function displayName(): string
+    // {
+    //     return $this->owner_Fname . ' ' . $this->owner_Lname;
+    // }
+
+
     public  function admindisablevehowner($vo_id){
         $availability=0;
         // var_dump($vehicle_id);
@@ -109,6 +115,11 @@ class vehicleowner extends dbModel
 
     public function getVeh_oCount(){
         return Application::$app->db->pdo->query("SELECT COUNT(vo_ID) As veho_count FROM vehicleowner")->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+
+    public function getvehOwner($vo_ID){
+        return Application::$app->db->pdo->query("SELECT * FROM vehicleowner WHERE vo_ID=$vo_ID")->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     /**
@@ -288,6 +299,7 @@ class vehicleowner extends dbModel
     {
         $this->profile_pic = $profile_pic;
     }
+
 
 
 }

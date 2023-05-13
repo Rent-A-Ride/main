@@ -28,6 +28,87 @@
     transition: 0.4s;
 }
 
+.terms-btn {
+    background-color: #fab84c;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-right: 20px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.2s ease-out;
+}
+
+/* Self Drive Terms Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content-1 {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h5 {
+    margin: 0;
+}
+
+.modal-body {
+    margin-top: 20px;
+}
+
+.modal-body ol {
+    list-style-type: decimal;
+    padding-left: 20px;
+}
+
+.modal-body li {
+    margin-bottom: 10px;
+}
+
+.modal-body p {
+    margin-bottom: 10px;
+}
+
+.modal-footer {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn-secondary {
+    width: 25% !important;
+    background-color: #fab84c;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.2s ease-out;
+}
+
 .driver-details {
     /* background-color: #ffffff; */
     border-radius: 0 0 10px 10px;
@@ -37,9 +118,23 @@
     transition: 0.4s;
 }
 
+.row input[type="text"]{
+    width: 350px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid rgb(9, 9, 9);
+    padding-left: 10px;
+    margin: 10px 0px;
+}
+
 .space-evenly {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.margin-20 {
+    margin: 20px 0;
 }
 
 .switch {
@@ -51,9 +146,39 @@
 
 .center {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    /*justify-content: space-evenly;*/
 }
-  
+
+.text-center {
+    text-align: center;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.form-group-1 {
+    width: 100%;
+}
+
+.form-group-1 label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: small;
+}
+
+.form-group-1 input {
+    display: block;
+    width: 80%;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: inherit;
+    color: #333;
+}
+
   .switch input {
     opacity: 0;
     width: 0;

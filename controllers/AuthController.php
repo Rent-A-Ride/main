@@ -11,12 +11,14 @@ use app\models\LoginForm;
 use app\models\RegisterModel;
 use app\core\Session;
 use app\models\adminCustomer;
+use app\models\customer_verification;
 use app\models\driver;
 use app\models\owner;
 use app\models\user;
 use app\models\vehicle_Owner;
 use app\models\vehicleowner;
 use app\models\vehicleOwnerRegister;
+use Exception;
 
 class AuthController extends Controller
 {
@@ -79,10 +81,6 @@ class AuthController extends Controller
             $login->loadData($body);
             if($login->validate()){
                 $user = $login->login($body['user_type']);
-
-                if(!$user){
-                    $res->redirect('/login');
-                }
                 if($user === true){
                     if($body['user_type']=='owner'){
                         $res->redirect('/owner');
@@ -123,17 +121,71 @@ class AuthController extends Controller
         $customer = new Customer();
         if ($request->isPost()){
 
-            $customer->loadData($request->getBody());
 
-            $customer->setGender($this->setGenderFromNIC($customer->getNic()));
+
+
+                $customer->loadData($request->getBody());
+
+                if ($request->getBody()['nic']){
+                    $customer->setGender($this->setGenderFromNIC($customer->getNic()));
+                }
+
+
+                if ($customer->validate() && $customer->save()){
+                    Application::$app->session->setFlash('success', 'Registration Successfully!');
+                    $response->redirect("/login");
+                    exit();
+                }
+
+
 
             if ($customer->validate() && $customer->save()){
+                $email=$customer->getEmail();
+                $name=$customer->getFirstname().''.$customer->getLastname();
+                $customer->setEmail($email);
+                $cus=$customer->findOne(['email'=>$email]);
+                
+                $cus_id=$cus->cus_Id;
+                $code = rand(100000, 999999);
+                $subject = "Verification Code";
+                $msg = "Hi".' '.$name.'<br>'.'Thanks For Register Our System <br>'.'Your verification code is:'.' '.$code;
+                
+                $emailData = [
+                    'email' => $email,
+                    'subject' => $subject,
+                    'body' => $msg
+                ];
+
+                try {
+                   Application::$app->email->sendEmail($emailData);
+                } catch ( Exception $e) {
+                    echo $e->getMessage();
+                }
+
+                $emailv=new customer_verification;
+                $emailv->setCusId($cus_id);
+                $emailv->setCode($code);
+               
+                if ($emailv->save()) {
+                    $customere =[
+                        'email'=>$email
+                    ];
+                    
+                    
+                    
+                    $this->setLayout("emailVerify");
+                    return $this->render("/component/verifyEmail",['email'=>$customere]);
+
+                }
+
+                 $response->redirect("/user/verifyEmail");
                 // ->session->setFlash('success', 'Registration Successfully!');
-                $request->session->setFlash('success', 'Registration Successfully!');
+                // Application::$app->session->setFlash('success', 'Registration Successfully!');
                 // Application::$app->response->redirect('/login');
-                $response->redirect("/login");
-                exit();
+                // $response->redirect("/login");
+                // exit();
             }
+
 
             return $response->render('Customer/v_Register','auth-reg', [
                 'model' => $customer
@@ -147,13 +199,13 @@ class AuthController extends Controller
 
     public function getDriverRegistration(Request $req, Response $res){
         // return $res->render("/driver/driver_registration","main_2");
-        $customer = new Customer();
+        $driver = new driver();
 
         if ($req->isPost()){
 
-            $customer->loadData($req->getBody());
+            $driver->loadData($req->getBody());
 
-            if ($customer->validate() && $customer->save()){
+            if ($driver->validate() && $driver->save()){
 
                     // ->session->setFlash('success', 'Registration Successfully!');
                     $req->session->setFlash('success', 'Registration Successfully!');
@@ -163,13 +215,13 @@ class AuthController extends Controller
 
             }
 
-            return $res->render('/driver/driver_registration','main_2', [
-                'model' => $customer
+            return $res->render('/driver/driver_registration','auth-reg', [
+                'model' => $driver
             ]);
         }
 
-        return $res->render('/driver/driver_registration','main_2', [
-            'model' => $customer
+        return $res->render('/driver/driver_registration','auth-reg', [
+            'model' => $driver
         ]);
     }
 
@@ -249,5 +301,56 @@ class AuthController extends Controller
                 }
             }
         }
+    }
+
+    public function verifyEmail(Request    $req, Response $res){
+        $customer = new Customer();
+        $emaiv = new customer_verification();
+        if ($req->isPost()) {
+            $body=$req->getBody();
+            $email=$body['email'];
+            $digit1=$body['digit1'];
+            $digit2=$body['digit2'];
+            $digit3=$body['digit3'];
+            $digit4=$body['digit4'];
+            $digit5=$body['digit5'];
+            $digit6=$body['digit6'];
+            $code=$digit1.$digit2.$digit3.$digit4.$digit5.$digit6;
+            $customer->setEmail($email);
+            $cus=$customer->findOne(['email'=>$email]);
+            $emaiv->setCusId($cus->cus_Id);
+            $cus_id=$cus->cus_Id;
+            $verify=$emaiv->findOne(['cus_Id'=>$cus_id]);
+            // var_dump($verify->cus_code==$code);
+            // exit;
+            if ($verify->cus_code==$code) {
+                $customer->UpdateStatus($cus_id);
+                Application::$app->session->setFlash('success', 'Registration Successfully!');
+                $res->redirect("/login");
+                // exit();
+            }
+            else {
+                
+                $a=[
+                    'email'=>$email
+                ];
+                
+                $emaiv->addError('unmatched',"Otp code does't matched!");
+                $this->setLayout("emailVerify");
+                return $this->render("/component/verifyEmail",['email'=>$a,'model'=>$emaiv]);
+            }
+
+
+            
+        }
+        // else{
+            // $cus_id=$_GET['id'];
+            // $customer->setcus_Id($cus_id);
+            // $cus=$customer->findOne(['cus_Id'=>$cus_id]);
+            // $email=$cus->email;
+            // $this->setLayout("emailVerify");
+            // return $this->render("/component/verifyEmail",['email'=>$email]);
+        // }
+
     }
 }

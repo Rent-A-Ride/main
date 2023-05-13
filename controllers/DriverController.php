@@ -6,6 +6,8 @@ use app\core\Request;
 use app\core\Response;
 use app\core\Controller;
 use app\models\driver;
+use app\models\driverInvoice;
+use app\models\driverpayment;
 use app\models\vehicle_Owner;
 
 class DriverController extends Controller
@@ -172,11 +174,28 @@ class DriverController extends Controller
         if(Application::$app->session->get('authenticated')==true && Application::$app->session->get('user_role')=="driver")
         {   
             $driverModel=new driver();
+            $driverPaymentModel = new driverpayment();
+            $driverInvoiceModel = new driverInvoice();
 
-            $driver_invoice=$driverModel->getPayments(Application::$app->session->get('user_id'));            
-           return $res->render("/driver/driver_payment","driver-dashboard", ['driver'=>$driver_invoice]);
+            $driver_payment=$driverPaymentModel->getdriverPayments(Application::$app->session->get('user'));  
+            $driver_invoice=$driverInvoiceModel->getdriverinvoice(Application::$app->session->get('user'));    
+                  
+           return $res->render("/driver/driver_payment","driver-dashboard", ['driverp'=>$driver_payment,'driverinv'=>$driver_invoice]);
         }
         return $res->redirect("/");
+    }
+
+
+    public function driverAvailability(Request $req, Response $res){
+        if(Application::$app->session->get('user_role')=="driver")
+        {   
+            // $driverModel=new driver();
+
+            // $driver_reviews=$driverModel->getReviews($req->session->get('user_id'));            
+           return $res->render("/driver/driver_availability","driver-dashboard");
+        }
+        return $res->redirect("/");
+       
     }
 }
 

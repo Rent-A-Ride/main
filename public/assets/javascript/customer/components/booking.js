@@ -131,6 +131,18 @@ checkbox.addEventListener('change', function() {
   }
 });
 
+// show/hide self drive terms
+const modal2 = document.getElementById("self-drive-modal");
+
+// Function to show the terms modal
+function showModal() {
+  modal2.style.display = "block";
+}
+
+// Function to hide the terms modal
+function hideModal() {
+  modal2.style.display = "none";
+}
 
 
 

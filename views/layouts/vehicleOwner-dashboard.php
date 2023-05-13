@@ -138,6 +138,29 @@ use app\core\Application;
             <a href=""><img class="logo" src="/assets/img/logo.png" alt="Rent a Ride Logo"></a>
         </div>
         <ul class="nav-list" id="nav-list">
+            <div class="notification-cont">
+                <div class="notification-icon">
+                    <i class='bx bxs-bell'></i>
+                    <span class="notification-count">0</span>
+                </div>
+
+                <div class="notification-panel">
+                    <div class="notification-header">
+                        <h3>Notifications</h3>
+                        <button class="close-btn">&times;</button>
+                    </div>
+
+                    <ul class="notification-list">
+                        <!--                        <li><a href="#">New message from John</a></li>-->
+                        <!--                        <li><a href="#">You have 3 new emails</a></li>-->
+                        <!--                        <li><a href="#">Today's weather forecast</a></li>-->
+                        <!--                        <li><a href="#">Upcoming event reminder</a></li>-->
+                        <!--                        <li><a href="#">New product release</a></li>-->
+                    </ul>
+                </div>
+
+
+            </div>
             <!-- <li class="list-item 1"><a href="#">Sign in</a></li>
             <li class="list-item 2"><a href="#">Register</a></li>       -->
             <!-- <div class="vision"><p>Mobility Without Hassel</p> </div> -->
@@ -177,6 +200,8 @@ use app\core\Application;
 
 </body>
 <script src="/assets/javascript/component/navbar.js"></script>
+<!--Notification Js-->
+<script src="/assets/javascript/vehicleOwner/components/vo_notifications.js"></script>
 <script src="/assets/javascript/component/sidebar.js"></script>
 <script src="/assets/javascript/component/search.js"></script>
 <script src="/assets/javascript/vehicleOwner/popup.js"></script>
@@ -188,4 +213,6 @@ use app\core\Application;
 <script src="/assets/javascript/vehicleOwner/AddNewVehicle.js"></script>
 <script src="/assets/javascript/vehicleOwner/BookingCalendar.js"></script>  <!-- calendar -->
 <script src="/assets/javascript/vehicleOwner/vehProfileEdit.js"></script>
+
+
 </html>

@@ -25,8 +25,14 @@
             <canvas id="myChart" ></canvas>
         </div>
         <div class="admin_overView-card">
-            <canvas id="test1" ></canvas>
+            <canvas id="test3" ></canvas>
         </div>
+    </div>
+    <div class="admin_overView-bottum-container1">
+        <div class="admin_overView-card2">
+            <canvas id="test1" style="height: 300px;" ></canvas>
+        </div>
+        
     </div>
     
     

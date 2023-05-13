@@ -68,13 +68,13 @@ use app\models\viewCustomerReq;
                                         <?php 
                                             foreach ($drivers as $row){
                                                 
-                                                if ($a['driver_Id']==$row['driver_ID']) {
+                                                if ($a['driver_ID']==$row['driver_ID']) {
                                                     
                                         ?>
                                                 <td><?php echo($row['driver_Fname']." ".$row['driver_Lname']); ?></td>
                                                 <td><?php echo($row['email']); ?></td>
                                                 <td><?php echo($a['total']); ?></td>
-                                                <td><button style="padding:0px 20px" class="dpayment-confirm">PAY</button></td>
+                                                <td><button style="padding:0px 20px" class="book-button dpayment-confirm" data-month="<?php echo ($a['month']) ?>" data-driver_id="<?= $row['driver_ID'] ?>">PAY</button></td>
                                             
                                     </tr>
 
@@ -116,7 +116,8 @@ use app\models\viewCustomerReq;
                         
                                 if ($rent2){
                             
-                                    
+                                    // var_dump($rent2);
+                                    // exit;
                                    foreach ($rent2 as $row){
                                     
                                     
@@ -128,7 +129,7 @@ use app\models\viewCustomerReq;
                                         <?php 
                                             foreach ($drivers as $a){
                                                 
-                                                if ($row['driver_Id']==$a['driver_ID']) {
+                                                if ($row['driver_ID']==$a['driver_ID']) {
                                                     
                                         ?>
                                                 <td><?php echo($a['driver_Fname']." ".$a['driver_Lname']); ?></td>
@@ -138,7 +139,7 @@ use app\models\viewCustomerReq;
                                                 <?php 
                                                    if ($row['pay_status']==0) {
                                                    ?>
-                                                    <td><button style="padding:0px 20px" class="dpayment-confirm">PAY</button></td>
+                                                    <td><button style="padding:0px 20px" class="book-button dpayment-confirmd" data-month="<?php echo ($row['month']) ?>" data-driver_id="<?php echo ($row['driver_ID']) ?>">PAY</button></td>
                                                 <?php
                                                    }
                                                    else{

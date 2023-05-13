@@ -23,12 +23,16 @@ class driver extends dbModel
     public string $driver_Lname;
     public string $email;
     public string $phoneNo;
+    public string $license_No;
     public string $area;
     public string $address;
     public string $gender;
+    public string $status;
     public string $admin_approved;
     public string $password;
     public string $category;
+    public string $profile_pic;
+    public int $status;
 //    public string $profile_pic;
 
 
@@ -146,6 +150,10 @@ class driver extends dbModel
         return Application::$app->db->pdo->query("SELECT * FROM driver WHERE driver.admin_approved=1")->fetchAll(\PDO::FETCH_ASSOC);
 
     }
+    public function getaddDriver(){
+        return Application::$app->db->pdo->query("SELECT * FROM driver WHERE driver.admin_approved=0")->fetchAll(\PDO::FETCH_ASSOC);
+
+    }
 
     public function acceptRequests($user_id){
         $sql="UPDATE driver_requests SET accept =1 WHERE reservation_id = $user_id";
@@ -180,7 +188,7 @@ class driver extends dbModel
 
     public function getrequest($user_id){
         // var_dump($user_id);
-        return Application::$app->db->pdo->query("SELECT * FROM driver_requests INNER JOIN driver WHERE driver_requests.user_ID=$user_id AND driver.driver_ID=$user_id ORDER BY reservation_id DESC")->fetchAll(\PDO::FETCH_ASSOC);
+        return Application::$app->db->pdo->query("SELECT * FROM driver_requests INNER JOIN driver WHERE driver_requests.driver_ID=$user_id AND driver.driver_ID=$user_id ORDER BY reservation_id DESC")->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function getReviews($user_id){
@@ -191,9 +199,9 @@ class driver extends dbModel
         return Application::$app->db->pdo->query("SELECT AVG(points) as Average FROM drivers_reviews WHERE drivers_reviews.user_ID=$user_id")->fetch(\PDO::FETCH_ASSOC);
     }
 
-    public function getPayments($user_id){
-        return Application::$app->db->pdo->query("SELECT * FROM drivers_invoice INNER JOIN users WHERE drivers_invoice.user_ID=$user_id AND users.user_ID=$user_id ORDER BY invoice_no DESC")->fetchAll(\PDO::FETCH_ASSOC);
-    }
+    // public function getPayments($user_id){
+    //     return Application::$app->db->pdo->query("SELECT * FROM  INNER JOIN users WHERE drivers_invoice.user_ID=$user_id AND users.user_ID=$user_id ORDER BY invoice_no DESC")->fetchAll(\PDO::FETCH_ASSOC);
+    // }
 
     /**
      * @return array
@@ -224,7 +232,7 @@ class driver extends dbModel
      */
     public function setDriverId(string $driver_id): void
     {
-        $this->driver_id = $driver_id;
+        $this->driver_ID = $driver_id;
     }
 
     /**
@@ -280,7 +288,7 @@ class driver extends dbModel
      */
     public function getDriverAddress(): string
     {
-        return $this->driver_address;
+        return $this->address;
     }
 
     /**
@@ -288,7 +296,7 @@ class driver extends dbModel
      */
     public function setDriverAddress(string $driver_address): void
     {
-        $this->driver_address = $driver_address;
+        $this->address = $driver_address;
     }
 
     /**
@@ -363,6 +371,7 @@ class driver extends dbModel
         return $this->password;
     }
 
+
     /**
      * @param string $password
      */
@@ -371,13 +380,47 @@ class driver extends dbModel
         $this->password = $password;
     }
 
+    /**
+     * @return string
+     */
+    public function getProfile(): string
+    {
+        return $this->profile_pic;
+    }
+
+
+    /**
+     * @param string $password
+     */
+    public function setProfile(string $profile_pic): void
+    {
+        $this->profile_pic = $profile_pic;
+    }
+
+     /**
+     * @return string
+     */
+    public function getStatus(): int
+    {
+        return $this->status;
+    }
+
+
+    /**
+     * @param string $password
+     */
+    public function setStatus(int $status): void
+    {
+        $this->status = $status;
+    }
+
     public function getdriverCount(){
         return Application::$app->db->pdo->query("SELECT COUNT(driver_ID) As driver_count FROM driver")->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function getrejectrequest($user_id){
         $user_id=intval($user_id);
-        return Application::$app->db->pdo->query("SELECT * FROM driver_requests INNER JOIN driver WHERE driver_requests.user_ID=driver.driver_ID AND driver.driver_ID=$user_id AND driver_requests.accept=2 ORDER BY driver_requests.reservation_id DESC")->fetchAll(\PDO::FETCH_ASSOC);
+        return Application::$app->db->pdo->query("SELECT * FROM driver_requests INNER JOIN driver WHERE driver_requests.driver_ID=driver.driver_ID AND driver.driver_ID=$user_id AND driver_requests.accept=2 ORDER BY driver_requests.reservation_id DESC")->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function UpdateProfile($body,$driver_id){
