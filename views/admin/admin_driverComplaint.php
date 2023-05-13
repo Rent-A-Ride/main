@@ -45,7 +45,7 @@ use app\models\viewCustomerReq;
                                 <th>Driver Name</th>
                                 <th>Complaint</th>
                                 <th>Proof</th>
-                                <th>Resolved</th>
+                                <th>Resolve</th>
                                
                             </tr>
                             </thead>
@@ -57,6 +57,10 @@ use app\models\viewCustomerReq;
                             
                                     
                                    foreach ($complaint as $row){
+
+                                        if ($row['com_status']==0) {
+                                            # code...
+                                        
                                 ?>
                                     <tr>
                                        
@@ -72,6 +76,7 @@ use app\models\viewCustomerReq;
 
                                     <?php
                                     $num = $num+1;
+                                    }
                                 
                             }
                         }
@@ -99,6 +104,7 @@ use app\models\viewCustomerReq;
                             <th>Complaint</th>
                             <th>Proof</th>
                             <th>Resolved</th>
+                            <th>Action</th>
 
                             
                         </tr>
@@ -112,7 +118,7 @@ use app\models\viewCustomerReq;
                                     
                                    foreach ($complaint as $row){
                                     
-                                    
+                                        if ($row['com_status']==1) {
                                         # code...
                                     
                 //                 
@@ -124,12 +130,13 @@ use app\models\viewCustomerReq;
                                         <td><?php echo($row['driver_Name']); ?></td>
                                         <td><?php echo($row['complaint']); ?></td>
                                         <td><button class="button_adminvehicle driver_complaintProof" data-compalintId='<?php echo($row['com_ID'])?>' data-customerId='<?php echo($row['cus_ID'])?>' data-driverId='<?php echo($row['driver_ID'])?>'  data-driverproof='<?php echo($row['proof'])?>'>Proof</button></td>
-                                        <td><button class="button_adminvehicle driver_complaintResolve" data-compalintId='<?php echo($row['com_ID'])?>' data-customerId='<?php echo($row['cus_ID'])?>' data-driverId='<?php echo($row['driver_ID'])?>'>Resolved Complaint</button></td>
-                                            
+                                        <td style="color: red;">Resolved Complaint</td>
+                                        <td><?php echo($data[$row['com_ID']]); ?></td>    
                                     </tr>
 
                                     <?php  
                                        $num=$num+1;
+                                    }
                                 
                             }
                         }

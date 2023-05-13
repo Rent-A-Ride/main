@@ -22,6 +22,7 @@ use app\models\cusVehicle;
 use app\models\driver_requests;
 use app\models\driverInvoice;
 use app\models\driverpayment;
+use app\models\Email\Email;
 use app\models\MonthlyRevenue;
 use app\models\vehicle_Owner;
 use app\models\vehiclecomplaint;
@@ -33,10 +34,12 @@ use app\models\vehicleowner;
 use app\models\vehicleownerinvoice;
 use app\models\vehicleownerpayment;
 use app\models\vehiclereview;
-
+use DateTime;
+use Exception;
 
 class OwnerController extends Controller
 {
+    
 
     public function ownerFirstPage(Request $req, Response $res){
         if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="owner"){
@@ -52,10 +55,14 @@ class OwnerController extends Controller
             $customer_count=$customer->getCustomer_count();
            
             
+            
             $this->setLayout("owner-dashboard");
             return $this->render("/admin/owner",['vehicle_count'=>$vehicle_count,'vowner_count'=>$vowner_count,'driver_count'=>$driver_count,'customer_count'=>$customer_count],['profile_img'=>$owner_img, 'function'=>'Dashboard']);
         }
-        return $res->render("HomePage","home");
+        else {
+            return $res->render("HomePage","home");
+        }
+        
     }
 
     public function test1(){
@@ -119,7 +126,10 @@ class OwnerController extends Controller
             $this->setLayout("owner-dashboard");
              return $this->render("/admin/admin-vehicle",['result'=>$vehicle],['profile_img'=>$owner_img, 'function'=>'Vehicle']);
         }
-        return $res->render("Home","home");
+        else{
+            return $res->render("Home","home");
+        }
+        
     }
     public function ownerVehicleProfile(Request $req, Response $res){
         if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="owner"){ 
@@ -139,7 +149,10 @@ class OwnerController extends Controller
             $this->setLayout("owner-dashboard");
              return $this->render("/admin/ownerViewVehicleProfile",['veh_info'=>$vehicle1,'veh_li'=>$vehicle2,'reviews'=>$reviews,'bookings'=>$vehiclebook],['profile_img'=>$owner_img, 'function'=>'Vehicle']);
         }
-        return $res->render("Home","home");
+        else{
+            return $res->render("Home","home");
+        }
+        
     }
 
     public function ownerVehicleOwner(Request $req, Response $res){
@@ -151,7 +164,10 @@ class OwnerController extends Controller
             $this->setLayout("owner-dashboard");
             return $this->render("/admin/admin_VehicleOwner",['vehicleowner'=>$vehicleownerdetails], ['profile_img'=>$owner_img, 'function'=>'Vehicle Owner']);
         }
-        return $res->render("Home","home");
+        else{
+            return $res->render("Home","home");
+        }
+        
     }
         
     public function ownerDriver(Request $req, Response $res){
@@ -163,7 +179,10 @@ class OwnerController extends Controller
             $this->setLayout("owner-dashboard"); 
             return $this->render("/admin/admin_Driver",['driver'=>$driverdetails],['profile_img'=>$owner_img, 'function'=>'Driver']);
         }
-        return $res->render("Home","home");
+        else{
+            return $res->render("Home","home");
+        }
+        
     }
 
     public function ViewVehicleOwnerProfile(Request $req, Response $res){
@@ -177,7 +196,10 @@ class OwnerController extends Controller
             $this->setLayout("owner-dashboard");
             return $res->render("/admin/adminViewVehicleOwnerProfile","owner-dashboard",['vehicleowner'=>$Vehicleownerdetails],['profile_img'=>$owner_img, 'function'=>'Vehicle Owner']);
         }
-        return $res->render("Home","home");
+        else{
+            return $res->render("Home","home");
+        }
+        
 
     }
 
@@ -190,7 +212,9 @@ class OwnerController extends Controller
             $this->setLayout("owner-dashboard");
             return $this->render("/admin/admin_customer",['adminCustomer'=>$customerdetails],['profile_img'=>$owner_img, 'function'=>'Customer']);
         }
-        return $res->render("Home","home");
+        else{
+            return $res->render("Home","home");
+        }
     }
 
 
@@ -206,7 +230,9 @@ class OwnerController extends Controller
             $this->setLayout("owner-dashboard"); 
             return $this->render("/admin/adminadd_vehicleowner",['vehicleowner'=>$vehnotApproved],['profile_img'=>$owner_img, 'function'=>'Vehicle Owner']);
         }
-        return $res->render("Home","home");
+        else{
+            return $res->render("Home","home");
+        }
     }
 
     public function ViewDriverProfile(Request $req, Response $res){
@@ -222,7 +248,9 @@ class OwnerController extends Controller
             $this->setLayout("owner-dashboard");
             return $this->render("/admin/adminView_driverProfile",['owner_details'=>$Vehicleownerdetails],['profile_img'=>$owner_img, 'function'=>'Driver']);
         }
-        return $res->render("Home","home");
+        else{
+            return $res->render("Home","home");
+        }
 
     }
 
@@ -233,11 +261,14 @@ class OwnerController extends Controller
             $vehicle = $vehicles->ownerGetVehicletoAdd($req,$res);
             $ownerprofile = new owner();
             $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
+
 //        print_r($vehicle);
             $this->setLayout("owner-dashboard");
              return $this->render("/admin/admin_addNewVehicle",['result'=>$vehicle],['profile_img'=>$owner_img, 'function'=>'Vehicle']);
         }
-        return $res->render("Home","home");
+        else{
+            return $res->render("Home","home");
+        }
     }
 
     public function adminacceptedVehicle(Request $req, Response $res){
@@ -247,24 +278,32 @@ class OwnerController extends Controller
             $vehicle = $vehicles->addVehicle($req,$res);
             $ownerprofile = new owner();
             $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
-//        print_r($vehicle);
-            // $this->setLayout("owner-dashboard");
-            //  return $this->render("/admin/admin_addNewVehicle",['result'=>$vehicle],['profile_img'=>$owner_img, 'function'=>'Vehicle']);
+//          
+
             $res->redirect('/admin/vehicle/add_vehicle');
         }
-        return $res->render("Home","home");
+        else{
+            return $res->render("Home","home");
+        }
     }
 
     public function admin_vehicleComplaint(Request $req, Response $res){
         if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="owner"){
             $vehiclecom= new vehiclecomplaint();
             $vehiclecomplaint=$vehiclecom->viewcomplaint();
-            // var_dump($vehiclecomplaint);
-            // die();
+            $resolve=new vehicle_complaint_resolve_notification();
+            $resolvenot=$resolve->get_not();
+            $data=[];
+            foreach($resolvenot as $row){
+                $data[$row['com_ID']]=$row['action'];
+            }
             $ownerprofile = new owner();
             $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
             $this->setLayout("owner-dashboard");
-            return $this->render("/admin/admin_vehicleComplaint",['complaint'=>$vehiclecomplaint],['profile_img'=>$owner_img, 'function'=>'complaint']);
+            return $this->render("/admin/admin_vehicleComplaint",['complaint'=>$vehiclecomplaint,'data'=>$data],['profile_img'=>$owner_img, 'function'=>'complaint']);
+        }
+        else{
+            return $res->render("Home","home");
         }
     }
 
@@ -274,8 +313,17 @@ class OwnerController extends Controller
             $drivercomplaint=$drivercom->viewcomplaint();
             $ownerprofile = new owner();
             $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
+            $resolve=new driver_complaint_resolve_notification();
+            $resolvenot=$resolve->get_not();
+            $data=[];
+            foreach($resolvenot as $row){
+                $data[$row['com_ID']]=$row['action'];
+            }
             $this->setLayout("owner-dashboard");
-            return $this->render("/admin/admin_driverComplaint",['complaint'=>$drivercomplaint],['profile_img'=>$owner_img, 'function'=>'complaint']);
+            return $this->render("/admin/admin_driverComplaint",['complaint'=>$drivercomplaint,'data'=>$data],['profile_img'=>$owner_img, 'function'=>'complaint']);
+        }
+        else{
+            return $res->render("Home","home");
         }
     }
     
@@ -294,6 +342,9 @@ class OwnerController extends Controller
             $this->setLayout("owner-dashboard");
             return $this->render("/admin/admin_licenseExp",['complaint'=>$veh_license,'veh_ins'=>$vehicle_ins],['profile_img'=>$owner_img, 'function'=>'licenseexpiring']);
         }
+        else{
+            return $res->render("Home","home");
+        }
     }
 
 
@@ -302,12 +353,19 @@ class OwnerController extends Controller
             $notification = new vehicle_complaint_resolve_notification();
             if ($req->isPost()){
                 $body=$req->getBody();
-                var_dump($body);
+                // var_dump($body['com_ID']);
+                // exit;
                 $notification->loadData($body);
                 $notification->save();
+                $com=new vehiclecomplaint;
+                $com->resolve(intval($body['com_ID']));
+
                 $res->redirect('/admin/vehicleComplaint');
             }
             
+        }
+        else{
+            return $res->render("Home","home");
         }
     }
 
@@ -316,12 +374,17 @@ class OwnerController extends Controller
             $notification = new driver_complaint_resolve_notification();
             if ($req->isPost()){
                 $body=$req->getBody();
-                var_dump($body);
+                // var_dump($body);
                 $notification->loadData($body);
                 $notification->save();
+                $com=new drivercomplaint();
+                $com->resolve(intval($body['com_ID']));
                 $res->redirect('/admin/driverComplaint');
             }
             
+        }
+        else{
+            return $res->render("Home","home");
         }
     }
 
@@ -330,12 +393,30 @@ class OwnerController extends Controller
             $notification = new license_expire_notification();
             if ($req->isPost()){
                 $body=$req->getBody();
-                var_dump($body);
+                // var_dump($body);
+                // exit;
                 $notification->loadData($body);
                 $notification->save();
+                $subject = "Informing License Expiering";
+                $msg = "Vehicle :".$body['plate_No']."<br><b>Please Reneave Above Vehicle License.</b> "."</b> <br>";
+                
+                $emailData = [
+                    'email' => $body['owner_email'],
+                    'subject' => $subject,
+                    'body' => $msg
+                ];
+
+                try {
+                   Application::$app->email->sendEmail($emailData);
+                } catch ( Exception $e) {
+                    echo $e->getMessage();
+                }
                 $res->redirect('/admin/license_Exp');
             }
             
+        }
+        else{
+            return $res->render("Home","home");
         }
     }
 
@@ -346,22 +427,62 @@ class OwnerController extends Controller
                 $body=$req->getBody();
                 $veh_id=$body['veh_Id'];
                 $vehicle->admindisablevehicle(intval($veh_id));
+                $vehicles = $vehicle->getvoByVehId(intval($veh_id));
+                $vo_Id=$vehicles[0]['vo_Id'];
+                $vowner=new vehicleowner();
+                $vo=$vowner->getvehOwner($vo_Id);
+                $subject = "Admin Disable Vehicle";
+                    $msg = "Your Vehicle:".' '.$vehicles[0]['plate_No']."is disabled on"."";
+                
+                $emailData = [
+                    'email' => $vo[0]['email'],
+                    'subject' => "Verify your email",
+                    'body' => $msg
+                ];
+
+                try {
+                   Application::$app->email->sendEmail($emailData);
+                } catch ( Exception $e) {
+                    echo $e->getMessage();
+                }
+
                 $res->redirect('/admin-vehicle');
             }
             
+        }
+        else{
+            return $res->render("Home","home");
         }
     }
 
     public function admin_customer_disable(Request $req, Response $res){
         if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="owner"){
-            $vehicle = new adminCustomer();
+            $customer = new adminCustomer();
             if ($req->isPost()){
                 $body=$req->getBody();
                 $cus_id=$body['cus_Id'];
-                $vehicle->admindisablecustomer(intval($cus_id));
+                $cus_mail=$customer->getcustomerbyID(intval($cus_id));
+                $customer ->admindisablecustomer(intval($cus_id));
+                $subject = "Discontinued Your Account";
+                    $msg = "Your Account has been disabled".' '."as your bad behaviour.";
+                
+                $emailData = [
+                    'email' => $cus_mail[0]['email'],
+                    'subject' => "Discontinued Your Account",
+                    'body' => $msg
+                ];
+
+                try {
+                   Application::$app->email->sendEmail($emailData);
+                } catch ( Exception $e) {
+                    echo $e->getMessage();
+                }
                 $res->redirect('/admin_customer');
             }
             
+        }
+        else{
+            return $res->render("Home","home");
         }
     }
 
@@ -370,11 +491,30 @@ class OwnerController extends Controller
             $vehicleowner = new vehicleowner();
             if ($req->isPost()){
                 $body=$req->getBody();
-                $cus_id=$body['vo_Id'];
-                $vehicleowner->admindisablevehowner(intval($cus_id));
+                $veh_id=$body['vo_Id'];
+                $vehicleowner->admindisablevehowner(intval($veh_id));
+                $vehicleowner=new vehicle_Owner();
+                $veh_owner=$vehicleowner->Vehicleowner_profile(intval($veh_id));
+                $subject = "Discontinued Your Account Temporary";
+                    $msg = "Your Account has been disabled temporary".' '."as your bad behaviour.";
+                
+                $emailData = [
+                    'email' => $veh_owner[0]['email'],
+                    'subject' => $subject,
+                    'body' => $msg
+                ];
+
+                try {
+                   Application::$app->email->sendEmail($emailData);
+                } catch ( Exception $e) {
+                    echo $e->getMessage();
+                }
                 $res->redirect('/viewVehicleowner');
             }
             
+        }
+        else{
+            return $res->render("Home","home");
         }
     }
 
@@ -383,11 +523,30 @@ class OwnerController extends Controller
             $driver = new driver();
             if ($req->isPost()){
                 $body=$req->getBody();
-                $cus_id=$body['driver_Id'];
-                $driver->admindisabledriver(intval($cus_id));
+                $driver_id=$body['driver_Id'];
+                $driver->admindisabledriver(intval($driver_id));
+                $drive=$driver->getDriverbyId(intval($driver_id));
+
+                $subject = "Discontinued Your Account Temporary";
+                    $msg = "Your Account has been disabled temporary".' '."as your bad behaviour.";
+                
+                $emailData = [
+                    'email' => $drive[0]['email'],
+                    'subject' => $subject,
+                    'body' => $msg
+                ];
+
+                try {
+                   Application::$app->email->sendEmail($emailData);
+                } catch ( Exception $e) {
+                    echo $e->getMessage();
+                }
                 $res->redirect('/viewownerDriver');
             }
             
+        }
+        else{
+            return $res->render("Home","home");
         }
     }
 
@@ -402,6 +561,9 @@ class OwnerController extends Controller
             }
             
         }
+        else{
+            return $res->render("Home","home");
+        }
     }
 
     public function admin_vehowner_accept(Request $req, Response $res){
@@ -409,11 +571,30 @@ class OwnerController extends Controller
             $vehicleowner = new vehicleowner();
             if ($req->isPost()){
                 $body=$req->getBody();
-                $cus_id=$body['vo_Id'];
-                $vehicleowner->adminacceptvehowner(intval($cus_id));
+                $vo_id=$body['vo_Id'];
+                $vehicleowner->adminacceptvehowner(intval($vo_id));
+                $vehicleowner=new vehicle_Owner();
+                $veh_owner=$vehicleowner->Vehicleowner_profile(intval($vo_id));
+                $subject = "Account Reactivated";
+                    $msg = "Your Account has been reactivated.";
+                
+                $emailData = [
+                    'email' => $veh_owner[0]['email'],
+                    'subject' => $subject,
+                    'body' => $msg
+                ];
+
+                try {
+                   Application::$app->email->sendEmail($emailData);
+                } catch ( Exception $e) {
+                    echo $e->getMessage();
+                }
                 $res->redirect('/adminadd_vowner');
             }
             
+        }
+        else{
+            return $res->render("Home","home");
         }
     }
 
@@ -441,6 +622,9 @@ class OwnerController extends Controller
                 return $res->render('/admin/vehicleUpdate',"owner-dashboard",['ren_lin'=>$reneve_license,'ren_ins'=>$reneve_ins],['profile_img'=>$owner_img,'function'=>'Vehicle']);
             }
             
+        }
+        else{
+            return $res->render("Home","home");
         }
     }
 
@@ -479,6 +663,9 @@ class OwnerController extends Controller
             }
             
         }
+        else{
+            return $res->render("Home","home");
+        }
 
     }
 
@@ -511,11 +698,31 @@ class OwnerController extends Controller
                 }
                 // var_dump($_FILES);
                 $body=$req->getBody();
+                
                 $vo_id=(int)$body['vo_Id'];
+                $date_obj = DateTime::createFromFormat('Y-m-d', $body['month']);  // parse string to DateTime object
+                $month_name = $date_obj->format('F');
+                $current_datetime = date('Y-m-d H:i:s');
                 $booking = new vehicleownerpayment();
                 $booking->confirm_payment($vo_id,$body['month'],$img_new_name);
                 $invoi=new vehicleownerinvoice();
                 $invoi->confirm_invoice($vo_id,$body['month'],$pdf_new_name);
+                $vehicleowner=new vehicle_Owner();
+                $veh_owner=$vehicleowner->Vehicleowner_profile(intval($vo_id));
+                $subject = "Payment Successfully Complete";
+                    $msg = "Your".' '.$month_name."payment successfully completed on".' '.$current_datetime;
+                
+                $emailData = [
+                    'email' => $veh_owner[0]['email'],
+                    'subject' => $subject,
+                    'body' => $msg
+                ];
+
+                try {
+                   Application::$app->email->sendEmail($emailData);
+                } catch ( Exception $e) {
+                    echo $e->getMessage();
+                }
                 $res->redirect("/admin/managepayment");
             }
             else {
@@ -534,7 +741,10 @@ class OwnerController extends Controller
                 return $this->render("/admin/manage_payment",['vehicleowners'=>$vehicleowners, 'rent'=>$payment,'rent2'=>$allpayment,'invoice'=>$invoice],['profile_img'=>$owner_img, 'function'=>'Payment']);
             }
             
-        }    
+        }  
+        else{
+            return $res->render("Home","home");
+        }  
     }
 
     public function manage_driverPayment(Request $req, Response $res){
@@ -571,6 +781,26 @@ class OwnerController extends Controller
                 $booking->confirm_payment($driver_id,$body['month'],$img_new_name);
                 $inv= new driverInvoice();
                 $inv->confirm_invoice($driver_id,$body['month'],$pdf_new_name);
+                $driver= new driver();
+                $drive=$driver->getDriverbyId(intval($driver_id));
+                $date_obj = DateTime::createFromFormat('Y-m-d', $body['month']);  // parse string to DateTime object
+                $month_name = $date_obj->format('F');
+                $current_datetime = date('Y-m-d H:i:s');
+
+                $subject = "Payment Successfully Complete";
+                    $msg = "Your".' '.$month_name."payment successfully completed on".' '.$current_datetime;
+                
+                $emailData = [
+                    'email' => $drive[0]['email'],
+                    'subject' => $subject,
+                    'body' => $msg
+                ];
+
+                try {
+                   Application::$app->email->sendEmail($emailData);
+                } catch ( Exception $e) {
+                    echo $e->getMessage();
+                }
                 $res->redirect("/admin/managedriverpayment");
             }else{
                 $ownerprofile = new owner();
@@ -585,6 +815,9 @@ class OwnerController extends Controller
 
             }
             
+        }
+        else{
+            return $res->render("Home","home");
         }    
     }
 
@@ -606,6 +839,9 @@ class OwnerController extends Controller
             $this->setLayout("owner-dashboard");
             return $this->render("/admin/adminadd_driver",['driver'=>$driverdetails],['profile_img'=>$owner_img, 'function'=>'Driver']);
         }
+        else{
+            return $res->render("Home","home");
+        }
 
     }
 
@@ -616,8 +852,28 @@ class OwnerController extends Controller
 
             if ($req->isPost()){
                 $body=$req->getBody();
+                
                 $notification = new cus_notification();
                 $notification->insertmsg($body);
+                $cus_id=$body['cus_Id'];
+                $customer=new adminCustomer();
+                $cus_mail=$customer->getcustomerbyID(intval($cus_id));
+                
+
+                $subject = "Payment Successfully Complete";
+                    $msg = "Dear".' '.$body['cus_name']."<br>".$body['msg'];
+                
+                $emailData = [
+                    'email' => $cus_mail[0]['email'],
+                    'subject' => $subject,
+                    'body' => $msg
+                ];
+
+                try {
+                   Application::$app->email->sendEmail($emailData);
+                } catch ( Exception $e) {
+                    echo $e->getMessage();
+                }
                 $res->redirect('/admin/manageCustomerPayment');
 
             }
@@ -632,6 +888,9 @@ class OwnerController extends Controller
                 return $this->render("/admin/manage_cusPayment",['payment'=>$payment],['profile_img'=>$owner_img, 'function'=>'Payment']);
             }
             
+        }
+        else{
+            return $res->render("Home","home");
         }
     }
 
@@ -666,6 +925,9 @@ class OwnerController extends Controller
                 return $this->render("/admin/admin_settings",['owner'=>$owner],['profile_img'=>$owner_img, 'function'=>'Setting']);
             
             }
+        }
+        else{
+            return $res->render("Home","home");
         }
     }
 
@@ -708,6 +970,9 @@ class OwnerController extends Controller
             }
             
         }
+        else{
+            return $res->render("Home","home");
+        }
 
     }
 
@@ -738,6 +1003,9 @@ class OwnerController extends Controller
             }
             
         }
+        else{
+            return $res->render("Home","home");
+        }
 
     }
 
@@ -758,6 +1026,9 @@ class OwnerController extends Controller
 
             
             
+        }
+        else{
+            return $res->render("Home","home");
         }
 
     }

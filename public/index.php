@@ -11,6 +11,7 @@ use app\controllers\DriverController;
 use app\core\Application;
 use app\models\Customer;
 use app\models\driver;
+use app\models\Email\Email;
 use app\models\owner;
 use app\models\vehicle;
 use app\models\vehicle_Owner;
@@ -42,6 +43,8 @@ $config = [
 ];
 
 $app = new Application(dirname(__DIR__),$config);
+
+
 
 $app->router->get('/', [SiteController::class, 'home']);
 
