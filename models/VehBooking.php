@@ -301,6 +301,16 @@ class VehBooking extends dbModel
     }
 
 
+    public function getMonthlyBooking(){
+        return Application::$app->db->pdo->query("SELECT YEAR(endDate) AS year, MONTH(endDate) AS month, COUNT(booking_Id) AS total
+        FROM vehbooking
+        WHERE status = 1
+        GROUP BY YEAR(endDate), MONTH(endDate)")->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+
+
+
 
 
 }

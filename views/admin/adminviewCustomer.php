@@ -1,6 +1,6 @@
 <?php
 use app\core\Application;
-
+// var_dump($customer_details[0]['profile_pic'])
 /* @var $vehicleowner \app\models\vehicle_Owner */
 ?>
 <h2 class="page-name">Profile</h2>
@@ -22,13 +22,13 @@ use app\core\Application;
                 <!-- <input id="file" type="file" onchange="loadFile(event)"/> -->
 
 
-                <img src="/assets/img/uploads/userProfile/<?php echo $owner_details[0]['profile_pic']?>" id="output" width="150" />
+                <img src="/assets/img/uploads/userProfile/<?php echo $customer_details[0]['profile_pic']?>" id="output" width="150" />
             </div>
         </form>
 
         <h4></h4>
         <p>
-            Driver
+            Customer
         </p>
     </div>
     <div class="right">
@@ -38,32 +38,32 @@ use app\core\Application;
             <div class="info_data">
                 <div class="data">
                     <h6>NIC</h6>
-                    <p><?php echo $owner_details[0]['Nic'] ?></p>
+                    <p><?php echo $customer_details[0]['nic'] ?></p>
                 </div>
                 <div class="data">
                     <h6>First Name</h6>
-                    <p><?php echo $owner_details[0]['driver_Fname'] ?></p>
+                    <p><?php echo $customer_details[0]['firstname'] ?></p>
                 </div>
                 <div class="data">
                     <h6>Last Name</h6>
-                    <p><?php echo $owner_details[0]['driver_Lname'] ?></p>
+                    <p><?php echo $customer_details[0]['lastname'] ?></p>
                 </div>
 
                 <div class="data">
                     <h6>Email</h6>
-                    <p><?php echo $owner_details[0]['email'] ?></p>
+                    <p><?php echo $customer_details[0]['email'] ?></p>
                 </div>
                 <div class="data">
                     <h6>Phone No</h6>
-                    <p><?php echo $owner_details[0]['phoneNo'] ?></p>
+                    <p><?php echo $customer_details[0]['phoneno'] ?></p>
                 </div>
                 <div class="data">
                     <h6>Address</h6>
-                    <p><?php echo $owner_details[0]['area'] ?></p>
+                    <p><?php echo $customer_details[0]['address'] ?></p>
                 </div>
                 <div class="data">
                     <h6>Gender</h6>
-                    <p><?php echo $owner_details[0]['gender'] ?></p>
+                    <p><?php echo $customer_details[0]['gender'] ?></p>
                 </div>
                 <!-- <div class="data">
                     <h6>License Number</h6>

@@ -32,7 +32,7 @@ vehicleComplaintProofButtons.forEach(function (btn) {
                             <input type='text' name='cus_Name' id='customer_name' placeholder='' required  value='${complaint.customer}' readonly>
                         </div>
                         <div class='form-item'>
-                            <img src="/assets/img/VehicleComplaintProof/${complaint.proof}"></img>        
+                            <img src="/assets/img/cus_complaints/${complaint.proof}"></img>        
                         </div>
             
             

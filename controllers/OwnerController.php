@@ -83,6 +83,14 @@ class OwnerController extends Controller
         // print_r($result);
     }
 
+    public function test3(){
+        $monthlFee=new VehBooking();
+        $data1=$monthlFee->getMonthlyBooking();
+        $result1= json_encode($data1);
+        echo($result1);
+        // print_r($result);
+    }
+
     public function ownerProfile(Request $req, Response $res){
         
         if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="owner"){
@@ -91,7 +99,7 @@ class OwnerController extends Controller
                 $body=$req->getBody();
                 $ownerprofile = new owner();
                 $ownerprofile->update_profile($body,Application::$app->session->get("user"));
-                // Application::$app->session->setFlash('profileUpdate', 'Profile Updated Successfully!');
+                Application::$app->session->setFlash('profileUpdate', 'Profile Updated Successfully!');
                 $res->redirect("/ownerProfile");
 
 
@@ -723,6 +731,7 @@ class OwnerController extends Controller
                 } catch ( Exception $e) {
                     echo $e->getMessage();
                 }
+                Application::$app->session->setFlash('success', 'Vehicle Owner Payment Successfully!');
                 $res->redirect("/admin/managepayment");
             }
             else {
@@ -801,6 +810,7 @@ class OwnerController extends Controller
                 } catch ( Exception $e) {
                     echo $e->getMessage();
                 }
+                Application::$app->session->setFlash('success', 'Driver Payment Successfully!');
                 $res->redirect("/admin/managedriverpayment");
             }else{
                 $ownerprofile = new owner();
@@ -835,7 +845,7 @@ class OwnerController extends Controller
             $ownerprofile = new owner();
             $owner_img  = $ownerprofile->owner_img(Application::$app->session->get("user"));
             $driver = new driver();
-            $driverdetails = $driver->getDriver(); 
+            $driverdetails = $driver->getaddDriver(); 
             $this->setLayout("owner-dashboard");
             return $this->render("/admin/adminadd_driver",['driver'=>$driverdetails],['profile_img'=>$owner_img, 'function'=>'Driver']);
         }
@@ -1031,6 +1041,41 @@ class OwnerController extends Controller
             return $res->render("Home","home");
         }
 
+    }
+
+
+    public function uploadImage(Request  $request, Response $response)
+    {
+        $image=$_FILES['image'];
+        var_dump($image);
+        $owner=owner::findOne(['user_Id'=>Application::$app->session->get('user')]);
+        $image['name']='profile'.Application::$app->session->get('user').'.jpg';
+
+        if (!empty($image)){
+            move_uploaded_file($image['tmp_name'],Application::$ROOT_DIR.'/public/assets/img/uploads/userProfile/'.$image['name']);
+        }
+        $owner->profile_pic=$image['name'];
+        $owner->update(Application::$app->session->get('user'),['profile_pic'=>$owner->profile_pic]);
+        Application::$app->session->setFlash('profileUpdate', 'Profile picture Updated Successfully!');
+        Application::$app->response->redirect('/ownerProfile');
+
+
+        return json_encode(['status'=>true]);
+
+    }
+
+    public function viewCusProfile(Request  $request, Response $response){
+        if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="owner"){
+            $query=$request->query();
+            $customer=new Customer();
+            $cus=$customer->getCustomerByuserID((int)$query["id"]);
+            
+            $this->setLayout("owner-dashboard");
+            return $this->render("/admin/adminviewCustomer",['customer_details'=>$cus]);
+        }
+        else{
+            return $response->render("Home","home"); 
+        }
     }
 
 }
