@@ -42,14 +42,14 @@ use app\models\Customer;
 <hr class="hr">
 <!--    Change Email -->
 
-<div class="settings-container">
-    <h2>Change Email</h2>
-    <form>
-        <label for="current-password">New Email:</label>
-        <input type="password" id="" name="current-password" required>
-
-        <button type="submit">Send Link</button>
-    </form>
-</div>
+<!--<div class="settings-container">-->
+<!--    <h2>Change Email</h2>-->
+<!--    <form>-->
+<!--        <label for="current-password">New Email:</label>-->
+<!--        <input type="password" id="" name="current-password" required>-->
+<!---->
+<!--        <button type="submit">Send Link</button>-->
+<!--    </form>-->
+<!--</div>-->
 
 

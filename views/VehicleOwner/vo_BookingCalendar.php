@@ -10,6 +10,20 @@
     </form>
 </div>
 
+<!-- Date Search when start and End date select-->
+
+
+<!--<div class="date-search-container">-->
+<!--    <form class="date-search" method="post">-->
+<!--        <label class="date-label" for="search-date">Search by Date:</label>-->
+<!--        <div class="date-input-container">-->
+<!--            <input type="date" id="search-date" name="search-date" required>-->
+<!--            <button type="submit"><i class='bx bx-search-alt bx-sm'></i></button>-->
+<!--        </div>-->
+<!--    </form>-->
+<!--</div>-->
+
+
 
 
 

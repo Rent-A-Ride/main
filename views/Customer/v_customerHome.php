@@ -11,7 +11,7 @@ use app\models\veh_Reviews;
     <label class="label-l" for="search">Search</label>
     <input type="search" id="search" placeholder="Type to search">
     <div id='filter'>   <!-- Filter -->
-        <button class='scooter'>Scooter</button>
+        <button class='Scooter'>Bikes</button>
         <button class='Car'>Cars</button>
         <button class='vans'>Vans</button>
         <button class=''>Clear</button>

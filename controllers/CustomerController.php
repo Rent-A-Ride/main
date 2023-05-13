@@ -23,6 +23,7 @@ use app\models\vehiclecomplaint;
 use app\models\vehicleowner;
 use app\models\VehInfo;
 use app\models\vehOwner_complaints;
+use app\models\voNotifications;
 use Stripe\Checkout\Session;
 use Stripe\Stripe;
 use Stripe\StripeClient;
@@ -78,6 +79,7 @@ class CustomerController extends Controller
 
         if ($request->isPost()){
             $customer->loadData($request->getBody());
+            $customer->setAddress(trim($request->getBody()['address'],true));
             if ($customer->validateWith(['firstname','lastname','address']) && $customer->update($id,['firstname','lastname', 'phoneno', 'address'])){
                 Application::$app->session->setFlash('profileUpdate', 'Profile Updated Successfully!');
                 Notification::sendNotification($id, 'Profile Updated', 'Your profile has been updated successfully!', '/Customer/Profile');
@@ -139,6 +141,7 @@ class CustomerController extends Controller
             $vehBooking->setVoId($request->getBody()['veh_Id']);
 
             if ($vehBooking->saveAs(['booking_Id','status'])){
+                voNotifications::sendNotification($vehBooking->getVoId(),'New Vehicle Booking','You have a new booking','/CustomerPendingRequest');
                 Application::$app->session->setFlash('success', 'Booking Request send successfully!');
                 $response->redirect('/Customer/VehicleBookingTable');
             }else{
@@ -386,6 +389,7 @@ class CustomerController extends Controller
 
 
                 if ($customer->validateWith(['password']) && $customer->update($id,['password'])){
+                    Notification::sendNotification($customer->cus_Id,'Password Updated Successfully!','Your password has been updated successfully!','#');
                     Application::$app->session->setFlash('success', 'Password Updated Successfully!');
                     $response->redirect('/Customer/Settings');
                     return;
@@ -422,6 +426,7 @@ class CustomerController extends Controller
 
         if ($cancellation->save()) {
             $vehBooking->deleteOne($bookingId);
+            voNotifications::sendNotification($vehBooking->getVoId(),'Booking Cancellation','Vehicle booking #'.$bookingId.' is cancel by customer ','/CustomerPendingRequest');
             Application::$app->session->setFlash('success', 'Booking cancellation completed!');
             Application::$app->response->redirect('/Customer/VehicleBookingTable');
 
@@ -433,6 +438,7 @@ class CustomerController extends Controller
         return $response->redirect('/Customer/VehicleBookingTable');
     }
 
+//    Make Full payment or Advance payment for the booking
     public function customerPayment(Request $request, Response $response)
     {
         // get the booking id from the request body
@@ -496,6 +502,67 @@ class CustomerController extends Controller
         }
     }
 
+    // Make Remaining payment for the booking
+    public function customerPaymentComplete(Request $request, Response $response)
+    {
+        // get the booking id from the request body
+        if ($request->isGet()){
+            $bookingId = $request->getBody()['booking'];
+            $vehBooking = VehBooking::findOne(['booking_Id' => $bookingId]);
+            $customer_payment = customer_payment::findOne(['booking_Id' => $bookingId]);
+
+            if ($vehBooking->getStatus() != 1 && $customer_payment->getStatusPay() != 1){
+                Application::$app->session->setFlash('error', 'You cannot pay for this booking!');
+                Application::$app->response->redirect('/Customer/VehicleBookingTable/Active');
+            }
+
+            $total = $customer_payment->getTotalRent();
+            $paid = $customer_payment->getPaymentAmount();
+
+            $params = [
+                'bookingId' => $bookingId,
+                'total' => $total,
+                'paid' => $paid
+            ];
+
+
+            $this->setLayout('customer-dashboard');
+            return $this->render('Customer/v_customerPay2', $params);
+        }
+
+        if ($request->isPost()){
+
+            $Stripe = new StripeClient($_ENV['STRIPE_SECRET_KEY']);
+            $bookingId = $request->getBody()['bookingId'];
+            $totalPay = $request->getBody()['total_pay'];
+
+
+            $name = "Remaining Payment for #".$bookingId." Booking LKR ".$totalPay;
+
+            $item[] = [
+                'price_data' => [
+                    'currency' => 'lkr',
+                    'unit_amount' => floatval($totalPay) * 100,
+                    'product_data' => [
+                        'name' => $name,
+                    ],
+                ],
+                'quantity' => 1,
+            ];
+            Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
+            $checkout_session = Session::create([
+                'payment_method_types' => ['card'],
+                'line_items' => $item,
+                'mode' => 'payment',
+                'success_url' => 'http://localhost:8080/Customer/PaymentComplete?bookingId='.$request->getBody()['bookingId'].'&payment_amount='.$totalPay.'&session_id={CHECKOUT_SESSION_ID}',
+                'cancel_url' => 'http://localhost:8080/Customer/PaymentCancel',
+            ]);
+
+            $response->redirect($checkout_session->url);
+
+        }
+    }
+
     public function paymentSuccess(Request $request, Response $response)
     {
 
@@ -515,9 +582,11 @@ class CustomerController extends Controller
 
         if ($payment_type == 'full') {
             $customerPayment->setStatusPay($customerPayment::FULL_PAYMENT);
+            voNotifications::sendNotification($vehBooking->getVoId(),'#'.$bookingId.' Booking Payment','Payment for booking #'.$bookingId.' is successful!','/CustomerAcceptedRequest');
             $vehBooking->setPayStatus(2);
         } elseif ($payment_type == 'advance') {
             $customerPayment->setStatusPay($customerPayment::ADVANCE_PAYMENT);
+            voNotifications::sendNotification($vehBooking->getVoId(),'#'.$bookingId.' Booking Payment','Advance Payment for booking #'.$bookingId,'/CustomerAcceptedRequest');
             $vehBooking->setPayStatus(1);
         }
 
@@ -544,6 +613,45 @@ class CustomerController extends Controller
         Application::$app->session->setFlash('error', 'Payment Failed!');
         $response->redirect('/Customer/VehicleBookingTable');
         exit();
+
+        }
+
+        if ($request->isPost()) {
+            Application::$app->session->setFlash('success', 'Payment Successful!');
+            $response->redirect('/Customer/VehicleBookingTable/Active');
+            return;
+        }
+    }
+
+    public function paymentComplete(Request $request, Response $response)
+    {
+
+        if ($request->isGet()) {
+
+            $bookingId = $request->getBody()['bookingId'];
+            $payment = $request->getBody()['payment_amount'];
+
+            $customerPayment = customer_payment::findOne(['booking_Id' => $bookingId]);
+            $customerPayment->setStatusPay($customerPayment::FULL_PAYMENT);
+            voNotifications::sendNotification($vehBooking->getVoId(),'Booking Payment','Payment for booking #'.$bookingId.' is Completed!','/CustomerOngoingRequest');
+            $vehBooking = VehBooking::findOne(['booking_Id' => $bookingId]);
+            $vehBooking->setPayStatus(2);
+
+
+            $params = [
+                'payment_amount' => $payment,
+            ];
+
+            if ($vehBooking->update($bookingId, ['status', 'pay_status']) && $customerPayment->update($bookingId, ['status_pay'])) {
+                $this->setLayout('customer-dashboard');
+                return $this->render('Customer/v_paymentSuccess', $params);
+            }
+
+
+
+            Application::$app->session->setFlash('error', 'Payment Failed!');
+            $response->redirect('/Customer/VehicleBookingTable');
+            exit();
 
         }
 

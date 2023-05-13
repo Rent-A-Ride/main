@@ -9,7 +9,7 @@ use app\models\cusVehicle;
 
 ?>
 
-<h2 class="main-title">Vehicle Bookings</h2>
+<h2 class="main-title">Customer Vehicle Bookings</h2>
 
 <div class="button-container">
     <button onclick="location.href='/Customer/VehicleBookingTable'">Unpaid Bookings</button>
@@ -61,7 +61,11 @@ use app\models\cusVehicle;
                                 <?php endif; ?>
                             </strong></td>
                         <td><span class="status confirmed"><i class='bx bxs-circle bx-flashing' ></i> Ongoing</span></td>
-                        <td><button onclick="location.href='/Customer/Payment?booking=<?=$row->getBookingId()?>'" id="cancelBookingBtn" class="pay-btn" data-booking-id="<?= $row->getBookingId();?>"><i class='bx bxs-wallet'></i>&nbsp;Pay</button></td>
+                        <?php if ($cusPayment[$row->getBookingId()]->getStatusPay() == 1): ?>
+                        <td><button onclick="location.href='/Customer/CompletePayment?booking=<?=$row->getBookingId()?>'" id="cancelBookingBtn" class="pay-btn" data-booking-id="<?= $row->getBookingId();?>"><i class='bx bxs-wallet'></i>&nbsp;Pay</button></td>
+                        <?php else: ?>
+                            <td><span style="font-size: 25px; color: #28a745 "><i class='bx bxs-check-circle'></i></span></td>
+                        <?php endif; ?>
 <!--                        <td><button id="cancelBookingBtn" class="cancel-btn" data-booking-id="--><?php //= $row->getBookingId();?><!--"><i class='bx bxs-trash'></i> Cancel</button></td>-->
                     </tr>
                     <tr class="child tr1" style="display: none;">
@@ -179,7 +183,7 @@ use app\models\cusVehicle;
                             <?php endif; ?>
                         </strong></td>
                     <td><span class="status booked">Upcoming</span></td>
-                    <td><button onclick="location.href='/Customer/Payment?booking=<?=$row->getBookingId()?>'" id="cancelBookingBtn" class="pay-btn" data-booking-id="<?= $row->getBookingId();?>"><i class='bx bxs-wallet'></i>&nbsp;Pay</button></td>
+                    <td><button onclick="location.href='/Customer/CompletePayment?booking=<?=$row->getBookingId()?>'" id="cancelBookingBtn" class="pay-btn" data-booking-id="<?= $row->getBookingId();?>"><i class='bx bxs-wallet'></i>&nbsp;Pay</button></td>
                     <!--                        <td><button id="cancelBookingBtn" class="cancel-btn" data-booking-id="--><?php //= $row->getBookingId();?><!--"><i class='bx bxs-trash'></i> Cancel</button></td>-->
                 </tr>
                 <tr class="child tr2" style="display: none;">

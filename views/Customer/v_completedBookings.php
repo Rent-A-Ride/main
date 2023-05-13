@@ -9,7 +9,7 @@ use app\models\cusVehicle;
 
 ?>
 
-<h2 class="main-title">Vehicle Bookings</h2>
+<h2 class="main-title">Customer Vehicle Bookings</h2>
 
 <div class="button-container">
     <button onclick="location.href='/Customer/VehicleBookingTable'">Unpaid Bookings</button>
