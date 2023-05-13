@@ -1,3 +1,10 @@
+<?php  
+    // var_dump($ren_lin);
+    // var_dump($ren_ins);
+    // exit;
+
+
+?>
 <div class="body">       
     <section id="rest">        
         <div class="complaintlist-table">

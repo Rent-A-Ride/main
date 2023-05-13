@@ -3,6 +3,7 @@
 import "./component/search.js"
 import "./adminOverview.js"
 import "./adminoverviewx.js"
+import "./adminOvewiew2.js"
 
 import "./adminaddVehicle.js"
 // import "./admin-dashboard.js"
@@ -26,6 +27,8 @@ import "./payment_confirm.js"
 import "./inform_payment.js"
 
 import "./driverPaymentConfirm.js"
+
+import "./adminOvewiew2.js"
 // import "./update_vehiclelin.js"
 // import "./update_vehicleins.js"
 // import "../component/calender.js"

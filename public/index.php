@@ -56,6 +56,7 @@ $app->router->get('/login', [AuthController::class, 'login']);
 $app->router->post('/login', [AuthController::class, 'login']);
 $app->router->get('/register', [AuthController::class, 'register']);
 $app->router->post('/register', [AuthController::class, 'register']);
+$app->router->post('/user/verifyEmail', [AuthController::class, 'verifyEmail']);
 
 //admin functionalities
 $app->router->get("/owner", [OwnerController::class, "ownerFirstPage"]);
@@ -135,12 +136,19 @@ $app->router->post("/admin/Settings", [OwnerController::class, "setting"]);
 
 $app->router->get("/admin/chart", [OwnerController::class, "test1"]);
 $app->router->get("/admin/charts", [OwnerController::class, "test2"]);
+$app->router->get("/admin/chart2", [OwnerController::class, "test3"]);
 
 $app->router->get("/admin/vehicleownerInvoice", [OwnerController::class, "vehowerInvoice"]);
 $app->router->post("/admin/vehicleownerInvoice", [OwnerController::class, "vehowerInvoice"]);
 
 $app->router->get("/admin/driverInvoice", [OwnerController::class, "driverInvoice"]);
 $app->router->post("/admin/driverInvoice", [OwnerController::class, "driverInvoice"]);
+
+$app->router->post("/adminprofile_pic", [OwnerController::class, "uploadImage"]);
+
+$app->router->get("/admin/viewCustomerProfile", [OwnerController::class, "viewCusProfile"]);
+
+
 
 
 //Hasantha

@@ -65,6 +65,7 @@ class Router
 
     public function renderView($view, $params = [],$layoutparams=[])
     {
+        
         $layoutContent = $this->layoutContent($layoutparams);
         $viewContent = $this->renderOnlyView($view, $params);
         return str_replace('{{content}}', $viewContent, $layoutContent);
@@ -78,6 +79,7 @@ class Router
 
     protected function layoutContent($params)
     {
+        
         $layout = Application::$app->layout;
         if (Application::$app->controller){
             $layout = Application::$app->controller->layout;

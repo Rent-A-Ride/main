@@ -6,7 +6,7 @@
 <div class="search">
     <label class="label-l" for="search"><i class='bx bx-search'></i>Search </label>
     <input type="search" id="search" placeholder="Type to search">
-    <div class="location-select">
+    <!-- <div class="location-select">
         <select id="location" name="location">
             <option value="" disabled selected hidden>location</option>
             <option value="Ampara">Ampara</option>
@@ -35,7 +35,7 @@
             <option value="Trincomalee">Trincomalee</option>
             <option value="Vavuniya" >Vavuniya</option>
         </select>
-    </div>
+    </div> -->
     
     <div id='filter'>
         <button class='scooter'>Scooter</button>
