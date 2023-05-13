@@ -215,6 +215,29 @@ abstract class dbModel extends Model
          return true;
      }
 
+    public static function calculateAverage($columnName, $where = [])
+    {
+        $tableName = static::tableName();
+        $statement = '';
+
+        if (empty($where)) {
+            $statement = self::prepare("SELECT AVG($columnName) AS average_value FROM $tableName");
+        } else {
+            $attributes = array_keys($where);
+            $sql = implode(" AND ", array_map(fn($attr) => "$attr = :$attr", $attributes));
+            $statement = self::prepare("SELECT AVG($columnName) AS average_value FROM $tableName WHERE $sql");
+            foreach ($where as $key => $item) {
+                $statement->bindValue(":$key", $item);
+            }
+        }
+
+        $statement->execute();
+        $result = $statement->fetch(\PDO::FETCH_ASSOC);
+        $averageValue = $result['average_value'];
+
+        return $averageValue;
+    }
+
     public static function sumColumn($column, $where = [])
     {
         $tableName = static::tableName();

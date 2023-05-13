@@ -218,14 +218,15 @@
 
             </div>
 
-            <!-- This is corrected! -->
-            <div class="profile-menu" style="display: none;">
-                <a href="/ownerProfile">My Profile</a>
-                <a href="/admin/Settings">Settings</a>
-                <a href="/logout">Logout</a>
-            </div>
+
 
         </ul>
+        <!-- This is corrected! -->
+        <div class="profile-menu" style="display: none;">
+            <a href="/ownerProfile">My Profile</a>
+            <a href="/admin/Settings">Settings</a>
+            <a href="/logout">Logout</a>
+        </div>
         <div id="toggle-btn" class="menu-container" onclick="myFunction(this)">
             <div class="bar1"></div>
             <div class="bar2"></div>

@@ -50,13 +50,13 @@ use app\models\cusVehicle;
                                 </div>
                             </div>
                         </td>
-                        <td><strong> <?= 'Rs. '.$cusPayment[$row->getBookingId()]->getPaymentAmount() ?></strong></td>
+                        <td><strong> <?= 'Rs. '.number_format($cusPayment[$row->getBookingId()]->getPaymentAmount(),2) ?></strong></td>
                         <td><strong> <?= 'Rs. '.$cusPayment[$row->getBookingId()]->getTotalRent().'.00' ?></strong></td>
                         <td><strong>
                                 <?php if ($cusPayment[$row->getBookingId()]->getStatusPay() == 2): ?>
                                     <span class="pay-type">Full Payment Done</span>
                                 <?php elseif ($cusPayment[$row->getBookingId()]->getStatusPay() == 1): ?>
-                                    <span class="pay-type">Advance Only</span>
+                                    <span class="pay-type">Rs. <?= number_format($cusPayment[$row->getBookingId()]->getTotalRent() - $cusPayment[$row->getBookingId()]->getPaymentAmount(),2)?> <br> Remaining</span>
 
                                 <?php endif; ?>
                             </strong></td>
@@ -168,13 +168,13 @@ use app\models\cusVehicle;
                             </div>
                         </div>
                     </td>
-                    <td><strong> <?= 'Rs. '.$cusPayment[$row->getBookingId()]->getPaymentAmount().'.00' ?></strong></td>
+                    <td><strong> <?= 'Rs. '.number_format($cusPayment[$row->getBookingId()]->getPaymentAmount(),2) ?></strong></td>
                     <td><strong> <?= 'Rs. '.$cusPayment[$row->getBookingId()]->getTotalRent().'.00' ?></strong></td>
                     <td><strong>
                             <?php if ($cusPayment[$row->getBookingId()]->getStatusPay() == 2): ?>
-                                <span class="pay-type">Full Payment Done</span>
+                                <span class="pay-type">Completed</span>
                             <?php elseif ($cusPayment[$row->getBookingId()]->getStatusPay() == 1): ?>
-                                <span class="pay-type">Advance Only</span>
+                                <span class="pay-type">Rs. <?= number_format($cusPayment[$row->getBookingId()]->getTotalRent() - $cusPayment[$row->getBookingId()]->getPaymentAmount(),2)?> <br> Remaining</span>
 
                             <?php endif; ?>
                         </strong></td>

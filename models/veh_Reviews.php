@@ -3,15 +3,16 @@
 namespace app\models;
 
 use app\core\dbModel;
+use Cassandra\Date;
 
 class veh_Reviews extends dbModel
 {
-    protected int $id;
     protected int $veh_Id;
     protected int $cus_Id;
+    protected int $booking_Id;
     protected float $rating;
     protected string $comments;
-    protected string $created_at;
+
 
 
     public function rules(): array
@@ -30,7 +31,7 @@ class veh_Reviews extends dbModel
 
     public function attributes(): array
     {
-        return ['id', 'veh_Id', 'cus_Id', 'rating', 'comments', 'createdAt'];
+        return ['veh_Id', 'cus_Id', 'booking_Id', 'rating', 'comments'];
     }
 
     public static function primaryKey(): string
@@ -85,6 +86,23 @@ class veh_Reviews extends dbModel
     {
         $this->cus_Id = $cus_Id;
     }
+
+    /**
+     * @return int
+     */
+    public function getBookingId(): int
+    {
+        return $this->booking_Id;
+    }
+
+    /**
+     * @param int $booking_Id
+     */
+    public function setBookingId(int $booking_Id): void
+    {
+        $this->booking_Id = $booking_Id;
+    }
+
 
     /**
      * @return float

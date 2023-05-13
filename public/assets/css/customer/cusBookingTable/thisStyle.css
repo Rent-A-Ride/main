@@ -161,6 +161,11 @@
   background-color: #f8d7da;
 }
 
+.status.completed {
+  color: #6c757d;
+  background-color: #f8f9fa;
+}
+
 .pay-type {
   color: #dc3545;
 }
@@ -297,6 +302,192 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+/* Styles for Completed Bookings */
+
+.actions {
+  text-align: right;
+}
+
+.review-button,
+.reorder-button {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border: 2px solid #343434;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color: #262626;
+  background-color: #ffffff;
+
+}
+
+.review-button {
+  margin-right: 10px;
+}
+
+.review-button:hover,
+.reorder-button:hover {
+  background-color: #262626;
+  color: #fff;
+
+}
+
+.review-button:focus,
+.reorder-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #ec9844;
+}
+
+/* Styles for the modal */
+.review-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.review-modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  max-width: 600px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.close-modal {
+  color: #888;
+  float: right;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+  color: #333;
+}
+
+.reviews-container {
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+}
+
+.reviews-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.review {
+  margin-bottom: 2em;
+  padding-bottom: 1em;
+  border-bottom: 1px solid #ccc;
+}
+
+.review:last-child {
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+.rating {
+  font-size: 2em;
+  color: orange;
+}
+
+.review-text {
+  font-size: 1.2em;
+  line-height: 1.5;
+  margin-bottom: 1em;
+  color: #555;
+}
+
+.reviewer {
+  font-size: 1.2em;
+  font-style: italic;
+  color: #888;
+}
+
+#review-form {
+  margin-top: 2em;
+  text-align: left;
+}
+
+.reviews-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.review {
+  margin-bottom: 2em;
+  padding-bottom: 1em;
+  border-bottom: 1px solid #ccc;
+}
+
+.review:last-child {
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+.rating {
+  font-size: 2em;
+  color: orange;
+}
+
+.review-text {
+  font-size: 1.2em;
+  line-height: 1.5;
+  margin-bottom: 1em;
+  color: #555;
+}
+
+
+.review-modal-content label {
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+.review-modal-content select,
+.review-modal-content textarea,
+.review-modal-content input[type="text"] {
+  width: 100%;
+  padding: 0.5em;
+  margin-bottom: 1em;
+  border: 1px solid #ccc;
+}
+
+.review-modal-content select {
+  border-radius: 12px;
+}
+
+.review-modal-content textarea {
+  font-size: 14px;
+}
+
+.review-modal-content button[type="submit"] {
+  display: block;
+  margin: 0 auto;
+  padding: 0.5em 1em;
+  background-color: #fab84c;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+
 
 
 /* Responsive */

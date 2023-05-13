@@ -178,6 +178,7 @@ $app->router->get('/Customer/VehicleBookingTable/Active', [CustomerController::c
 $app->router->post('/Customer/VehicleBookingTable/Active', [CustomerController::class, 'activeBookings']);
 
 $app->router->get('/Customer/VehicleBookingTable/Complete', [CustomerController::class, 'completedBookings']);
+$app->router->post('/Customer/VehicleBookingTable/Complete', [CustomerController::class, 'completedBookings']);
 
 $app->router->get('/Customer/Settings', [CustomerController::class, 'customerSettings']);
 $app->router->post('/Customer/Settings', [CustomerController::class, 'customerSettings']);

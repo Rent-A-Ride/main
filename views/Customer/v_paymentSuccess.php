@@ -11,7 +11,7 @@
         <p>Thank you for your purchase. Your payment of <span class="amount">Rs. <?= number_format($payment_amount, 2) ?></span> was successful.</p>
 
         <form method="post" class="ok-form">
-            <button type="submit" class="ok-btn">OK</button>
+            <button type="submit" class="ok-btn" onclick="location.href='/VehicleBookingTable/Active'">OK</button>
         </form>
 
 <!--        <div class="success-message-footer">-->

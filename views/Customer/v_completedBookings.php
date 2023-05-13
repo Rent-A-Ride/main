@@ -17,7 +17,7 @@ use app\models\cusVehicle;
     <button>Completed Bookings</button>
 </div>
 
-<h3 class="sub-title">Ongoing Bookings</h3>
+<h3 class="sub-title">Completed Bookings</h3>
 
 <div class="table-wrapper">
     <table id="myTable" class="bookingTable">
@@ -25,17 +25,16 @@ use app\models\cusVehicle;
         <tr>
             <th>Booking ID</th>
             <th>Vehicle</th>
-            <th>Paid Amount</th>
             <th>Total Rent</th>
             <th>Payment</th>
             <th>Status</th>
-            <th>Action</th>
+            <th colspan="2">Action</th>
         </tr>
         </thead>
         <?php
         if (isset($vehBooking)):
             foreach ($vehBooking as $row):
-                if ($row->getStatus() == 2 && date('Y-m-d') >= $row->getStartDate() && date('Y-m-d') <= $row->getEndDate()):
+
                     ?>
                     <tbody>
 
@@ -50,18 +49,22 @@ use app\models\cusVehicle;
                                 </div>
                             </div>
                         </td>
-                        <td><strong> <?= 'Rs. '.$cusPayment[$row->getBookingId()]->getPaymentAmount() ?></strong></td>
                         <td><strong> <?= 'Rs. '.$cusPayment[$row->getBookingId()]->getTotalRent().'.00' ?></strong></td>
                         <td><strong>
                                 <?php if ($cusPayment[$row->getBookingId()]->getStatusPay() == 2): ?>
-                                    <span class="pay-type">Full Payment Done</span>
+                                    <span class="pay-type">Paid</span>
                                 <?php elseif ($cusPayment[$row->getBookingId()]->getStatusPay() == 1): ?>
                                     <span class="pay-type">Advance Only</span>
 
                                 <?php endif; ?>
                             </strong></td>
-                        <td><span class="status confirmed"><i class='bx bxs-circle bx-flashing' ></i> Ongoing</span></td>
-                        <td><button onclick="location.href='/Customer/Payment?booking=<?=$row->getBookingId()?>'" id="cancelBookingBtn" class="pay-btn" data-booking-id="<?= $row->getBookingId();?>"><i class='bx bxs-wallet'></i>&nbsp;Pay</button></td>
+                        <td><span class="status completed"> COmpleted</span></td>
+                        <td colspan="2">
+                            <div class="actions">
+                                <button class="review-button" onclick="openReviewModal()">Write a Review</button>
+                                <button class="reorder-button" onclick="location.href='/VehicleInfo?id=<?=$row->getVehId()?>'">Reorder</button>
+                            </div>
+                        </td>
                         <!--                        <td><button id="cancelBookingBtn" class="cancel-btn" data-booking-id="--><?php //= $row->getBookingId();?><!--"><i class='bx bxs-trash'></i> Cancel</button></td>-->
                     </tr>
                     <tr class="child tr1" style="display: none;">
@@ -83,7 +86,7 @@ use app\models\cusVehicle;
                                                 <p><strong>Destination:</strong> <?= $row->getDestination()?></p>
                                             </div>
                                             <div class="cell">
-                                                <p><strong>Status:</strong> <?= (strtotime($row->getEndDate())-strtotime(date('Y-m-d')))/(60 * 60 * 24) ?> Days Remaining</p>
+                                                <p><strong>Status:</strong> Completed</p>
                                             </div>
                                         </div>
                                     </div>
@@ -121,7 +124,7 @@ use app\models\cusVehicle;
                     </tr>
 
                     </tbody>
-                <?php endif;
+                <?php
             endforeach;
         else:
             echo '<tbody>
@@ -137,159 +140,82 @@ use app\models\cusVehicle;
 </div>
 
 
-<h3 class="sub-title">Upcoming Bookings</h3>
-<div class="table-wrapper">
-    <table id="myTable2" class="bookingTable">
 
-        <thead>
-        <tr>
-            <th>Booking ID</th>
-            <th>Vehicle</th>
-            <th>Paid Amount</th>
-            <th>Total Rent</th>
-            <th>Payment</th>
-            <th>Status</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <?php foreach ($vehBooking as $row):
-            if ($row->getStatus() == 2 && $row->getStartDate() > date('Y-m-d')):
-                ?>
-                <tbody>
+<!-- The popup review modal -->
+<div id="review-modal" class="review-modal">
+    <div class="review-modal-content">
+        <span class="close-modal" onclick="closeReviewModal()">&times;</span>
 
-                <tr class="parent tr2">
-                    <td><?= $row->getBookingId()?></td>
-                    <td>
-                        <div class="parent-info">
-                            <img src=" /assets/img/vehicle/<?= $vehicleById[$row->getVehId()]->getFrontView() ?>" alt="">
-                            <div class="info">
-                                <p><strong><?= $vehicleById[$row->getVehId()]->getVehBrand().' '.$vehicleById[$row->getVehId()]->getVehModel() ?></strong></p>
-                                <p class="small">RR Vehicle Rent</p>
+        <!-- Reviews content goes here -->
+        <div class="reviews-container">
+            <h2>Reviews</h2>
+            <?php
+                if (isset($vehReview[$row->getBookingId()])):
+            ?>
+
+                <div class="review">
+                    <div class="review-header">
+                        <div class="review-details">
+
+                            <div class="ratings">
+                                <span><strong>Ratings:</strong></span>
+                                <?php
+                                    for ($i = 0; $i < $vehReview[$row->getBookingId()]->getRating(); $i++):
+                                ?>
+                                    <i class='bx bxs-star' style="color: #ffc547;" ></i>
+                                <?php
+                                    endfor;
+                                    for ($i = 0; $i < 5 - $vehReview[$row->getBookingId()]->getRating(); $i++):
+                                ?>
+                                    <i class='bx bxs-star' style="color: black;" ></i>
+                                <?php
+                                    endfor;
+                                ?>
                             </div>
                         </div>
-                    </td>
-                    <td><strong> <?= 'Rs. '.$cusPayment[$row->getBookingId()]->getPaymentAmount().'.00' ?></strong></td>
-                    <td><strong> <?= 'Rs. '.$cusPayment[$row->getBookingId()]->getTotalRent().'.00' ?></strong></td>
-                    <td><strong>
-                            <?php if ($cusPayment[$row->getBookingId()]->getStatusPay() == 2): ?>
-                                <span class="pay-type">Full Payment Done</span>
-                            <?php elseif ($cusPayment[$row->getBookingId()]->getStatusPay() == 1): ?>
-                                <span class="pay-type">Advance Only</span>
-
-                            <?php endif; ?>
-                        </strong></td>
-                    <td><span class="status booked">Upcoming</span></td>
-                    <td><button onclick="location.href='/Customer/Payment?booking=<?=$row->getBookingId()?>'" id="cancelBookingBtn" class="pay-btn" data-booking-id="<?= $row->getBookingId();?>"><i class='bx bxs-wallet'></i>&nbsp;Pay</button></td>
-                    <!--                        <td><button id="cancelBookingBtn" class="cancel-btn" data-booking-id="--><?php //= $row->getBookingId();?><!--"><i class='bx bxs-trash'></i> Cancel</button></td>-->
-                </tr>
-                <tr class="child tr2" style="display: none;">
-                    <td colspan="7" class="child-td">
-                        <div class="child-info">
-                            <div class="booking-info">
-                                <h3>Booking Info</h3>
-                                <div class="booking-data">
-                                    <div class="row">
-                                        <div class="cell">
-                                            <p><strong>Start Date:</strong>  <?= $row->getStartDate() ?></p>
-                                        </div>
-                                        <div class="cell">
-                                            <p><strong>End Date:</strong> <?= $row->getEndDate() ?></p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="cell">
-                                            <p><strong>Destination:</strong> <?= $row->getDestination()?></p>
-                                        </div>
-                                        <div class="cell">
-                                            <p><strong>Status:</strong> <?= (strtotime($row->getStartDate())-strtotime(date('Y-m-d')))/(60 * 60 * 24)?> Days more</p>
-                                        </div>
-                                    </div>
-                                </div>
+                    </div>
+                    <div class="review-body" style="border: 1px solid black">
+                        <p><?= $vehReview[$row->getBookingId()]->getComments() ?></p>
+                    </div>
 
 
-                            </div>
-                            <div class="driver-info">
-                                <?php if ($row->getDriverReq()== 1): ?>
-                                    <div class="driver-image">
-                                        <img src="/assets/img/uploads/default.jpg" alt="Driver Image">
-                                    </div>
-                                    <div class="driver-details">
-                                        <h3>Driver Details</h3>
-                                        <p><strong>Name:</strong> <?= $driverById[$driverReq[$row->getBookingId()]->getDriverID()]->getDriverFname().' '.$driverById[$driverReq[$row->getBookingId()]->getDriverID()]->getDriverLname() ?></p>
-                                        <div class="ratings">
-                                            <span><strong>Ratings:</strong></span>
-                                            <i class='bx bxs-star' style="color: #ffc547;" ></i>
-                                            <i class='bx bxs-star' style="color: #ffc547;" ></i>
-                                            <i class='bx bxs-star' style="color: #ffc547;" ></i>
-                                            <i class='bx bxs-star' style="color: black;" ></i>
-                                            <span><small>(4)</small></span>
-
-                                        </div>
-                                    </div>
-                                <?php else: ?>
-                                    <div class="driver-image">
-                                        <img src="/assets/img/uploads/default.jpg" alt="Driver Image">
-                                    </div>
-                                    <p style="text-align: center">
-                                        No Driver Requested!</p>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-
-                </tbody>
-            <?php endif;
-        endforeach; ?>
-
-    </table>
-</div>
+            <?php
+                else:
+            ?>
+            <form id="review-form" method="post">
+                <input hidden name="veh_Id" value="<?=$row->getVehId()?>">
+                <input hidden name="booking_Id" value="<?=$row->getBookingId()?>">
+                <label for="rating">Rating:</label>
+                <select id="rating" name="rating" required>
+                    <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733;</option>
+                    <option value="4">&#9733;&#9733;&#9733;&#9733;&#9734;</option>
+                    <option value="3">&#9733;&#9733;&#9733;&#9734;&#9734;</option>
+                    <option value="2">&#9733;&#9733;&#9734;&#9734;&#9734;</option>
+                    <option value="1">&#9733;&#9734;&#9734;&#9734;&#9734;</option>
+                </select>
+                <label for="review-text">Review:</label>
+                <textarea rows="5" required id="review-text" name="comments" class="myTextArea"></textarea>
+                <button type="submit" name="review">Submit</button>
+            </form>
+            <?php
+                endif;
+            ?>
+        </div>
 
 
-
-
-
-
-
-
-
-
-<!--Cancel Booking Popup with reason-->
-<div id="cancelModal" class="cancelModal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Reason for Cancellation</h2>
-        <form method="post" id="booking-cancel-form">
-            <input type="hidden" name="bookingId" id="bookingId">
-            <div class="radio-group">
-                <label class="radio">
-                    <input type="radio" name="reason" value="change_of_plans">
-                    <span class="radio-label">Change of my mind</span>
-                </label>
-                <label class="radio">
-                    <input type="radio" name="reason" value="vehicle_issue">
-                    <span class="radio-label">Cancel my trip</span>
-                </label>
-                <label class="radio">
-                    <input type="radio" name="reason" value="personal_emergency">
-                    <span class="radio-label">Found another deal</span>
-                </label>
-                <label class="radio">
-                    <input type="radio" name="reason" value="other">
-                    <span class="radio-label">Other</span>
-                </label>
-            </div>
-            <div class="form-group">
-                <label for="comments">Additional comments (optional):</label>
-                <textarea cols="6" id="comments" name="comment"></textarea>
-            </div>
-            <div class="form-group">
-                <!--                <button class="submit" type="submit">Submit</button>-->
-                <input type="submit" class="submit">
-            </div>
-        </form>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
 
 
 <script>
@@ -325,6 +251,18 @@ use app\models\cusVehicle;
                 }
             }
         });
+    }
+
+    // Function to open the review modal
+    function openReviewModal() {
+        var review = document.getElementById('review-modal');
+        review.style.display = 'block';
+    }
+
+    // Function to close the review modal
+    function closeReviewModal() {
+        var review = document.getElementById('review-modal');
+        review.style.display = 'none';
     }
 </script>
 
