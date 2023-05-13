@@ -22,7 +22,7 @@ class Customer extends dbModel
     public string $address = '';
     public string $password;
     public string $passwordConfirm = '';
-    public string $profile_pic='';
+    public string $profile_pic='default.jpg';
     public int $status = self::STATUS_INACTIVE;
 
 

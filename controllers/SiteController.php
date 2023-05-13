@@ -36,12 +36,21 @@ class SiteController extends Controller
             move_uploaded_file($image['tmp_name'],Application::$ROOT_DIR.'/public/assets/img/uploads/userProfile/'.$image['name']);
         }
         $Customer->profile_pic=$image['name'];
-        $Customer->update(Application::$app->user->cus_Id,['profile_pic']);
-        Application::$app->session->setFlash('profileUpdate', 'Profile picture Updated Successfully!');
+
+        if ($Customer->updateOne(Application::$app->user->cus_Id,['profile_pic'])){
+            Application::$app->session->setFlash('success', 'Profile picture Updated Successfully!');
+            Application::$app->response->redirect('/Customer/Profile');
+
+            return json_encode(['status'=>true]);
+        }
+        Application::$app->session->setFlash('error', 'Profile picture not Updated');
         Application::$app->response->redirect('/Customer/Profile');
 
+        return json_encode(['status'=>false]);
 
-        return json_encode(['status'=>true]);
+
+
+
 
     }
 

@@ -175,6 +175,7 @@ $app->router->post("/Customer/Home", [CustomerController::class, 'home']);
 $app->router->get("/Customer/Profile", [CustomerController::class, 'profile']);
 $app->router->post("/Customer/Profile", [CustomerController::class, 'profile']);
 
+$app->router->get("/upload", [SiteController::class, 'uploadImage']);
 $app->router->post("/upload", [SiteController::class, 'uploadImage']);
 
 $app->router->get("/VehicleInfo", [CustomerController::class, 'vehicleInfo']);

@@ -15,7 +15,6 @@ const loadFile = function (event) {
             }
         });
 
-    console.log(image.src);
     location.reload();
 };
 

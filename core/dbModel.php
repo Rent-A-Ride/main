@@ -88,40 +88,40 @@ abstract class dbModel extends Model
     }
 
 
-//    public function update($id, $Include=[], $Exclude = []): bool
-//    {
-//        $tableName = static::tableName();
-//        $attributes = $this->attributes();
-//        $params = array_map(fn($attr) => ":$attr", $attributes);
-//
-//        $demo = 'UPDATE ' . $tableName . ' SET ';
-//        if (!empty($Include)) :
-//            foreach ($Include as $attribute) {
-//                $demo .= $attribute . '="' . $this->{$attribute} . '", ';
-//            }
-//        else :
-//        foreach ($attributes as $attribute) {
-//            if ($attribute == static::PrimaryKey()) {
-//                continue;
-//            }
-//            if (in_array($attribute, $Exclude)) {
-//                continue;
-//            }
-//            $demo .= $attribute . '="' . $this->{$attribute} . '", ';
-//        }
-//        endif;
-//        $demo=substr($demo,0,-2);
-//        $demo.=' WHERE '.static::PrimaryKey().'="'.$id.'"';
-//        $statement=self::prepare($demo);
-//
-//        foreach ($attributes as $attribute) {
-//            $statement->bindValue(":$attribute", $this->{$attribute});
-//        }
-//
-//        $statement->execute();
-//        return true;
-//
-//    }
+    public function updateOne($id, $Include=[], $Exclude = []): bool
+    {
+        $tableName = static::tableName();
+        $attributes = $this->attributes();
+        $params = array_map(fn($attr) => ":$attr", $attributes);
+
+        $demo = 'UPDATE ' . $tableName . ' SET ';
+        if (!empty($Include)) :
+            foreach ($Include as $attribute) {
+                $demo .= $attribute . '="' . $this->{$attribute} . '", ';
+            }
+        else :
+        foreach ($attributes as $attribute) {
+            if ($attribute == static::PrimaryKey()) {
+                continue;
+            }
+            if (in_array($attribute, $Exclude)) {
+                continue;
+            }
+            $demo .= $attribute . '="' . $this->{$attribute} . '", ';
+        }
+        endif;
+        $demo=substr($demo,0,-2);
+        $demo.=' WHERE '.static::PrimaryKey().'="'.$id.'"';
+        $statement=self::prepare($demo);
+
+        foreach ($attributes as $attribute) {
+            $statement->bindValue(":$attribute", $this->{$attribute});
+        }
+
+        $statement->execute();
+        return true;
+
+    }
 
     //find a particular row from a specified table
     public static function findOne($where)

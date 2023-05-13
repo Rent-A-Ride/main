@@ -187,9 +187,6 @@ use app\core\Application;
 
 
 </body>
-<script>
-   console.log('This loaded');
-</script>
 
 <script src="/assets/javascript/component/navbar.js"></script>
 <script src="/assets/javascript/customer/components/notifications.js"></script>

@@ -27,11 +27,9 @@ class driver extends dbModel
     public string $area;
     public string $address;
     public string $gender;
-    public string $status;
     public string $admin_approved;
     public string $password;
-    public string $license_No;
-    public string $profile_pic;
+    public ?string $profile_pic = '';
     public int $status;
 //    public string $profile_pic;
 
