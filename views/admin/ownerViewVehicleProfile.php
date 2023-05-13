@@ -12,6 +12,8 @@ foreach ($bookings as $booking) {
     }
 }
 
+// var_dump($veh_li);
+// exit;
 
 
 ?>
@@ -44,14 +46,14 @@ foreach ($bookings as $booking) {
         <div id="gallery">
             <div class="row">
                 <div class="large-image">
-                    <img src="assets/img/Vehicle_img/gallery/front.jpg">
+                    <img src="/assets/img/uploads/vehicle/<?= $veh_info[0]['front_view'] ?>">
                 </div>
             </div>
             <div class="row">
                 <div class="thumbnails">
-                    <img src="assets/img/Vehicle_img/gallery/front.jpg" data-large="assets/img/vehicle/gallery/front.jpg">
-                    <img src="assets/img/Vehicle_img/gallery/side.jpg" data-large="assets/img/vehicle/gallery/side.jpg">
-                    <img src="assets/img/Vehicle_img/gallery/inside.jpg" data-large="assets/img/vehicle/gallery/inside.jpg">
+                    <img src="/assets/img/uploads/vehicle/<?= $veh_info[0]['front_view'] ?>" data-large="<?= $veh_info[0]['front_view'] ?>">
+                    <img src="/assets/img/uploads/vehicle/<?= $veh_info[0]['side_view'] ?>" data-large="<?= $veh_info[0]['side_view'] ?>">
+                    <img src="/assets/img/uploads/vehicle/<?= $veh_info[0]['back_view'] ?>" data-large="<?= $veh_info[0]['back_view'] ?>">
                 </div>
             </div>
 
@@ -86,7 +88,9 @@ foreach ($bookings as $booking) {
                             <li class="bold">Fuel:  <?php echo($veh_info[0]['fuel_type'])?></li>
                         </ul>
                     </div>
+                    
                 </div>
+                
                 <div class="vehicle-description">
                     <p class="bold">Description</p>
                     <p><?php echo($veh_info[0]['Description'])?></p>
@@ -94,6 +98,24 @@ foreach ($bookings as $booking) {
                 <div class="vehicle-price">
                     <span>Vehicle Rent Price (Per/ Day):</span>
                     <span class="price">Rs. <?php echo($veh_info[0]['price'])?>.00 </span>
+                </div>
+                <div class="vehicle-price">
+                    <span><b> License No:</b></span>
+                    <span class="price"><?php echo($veh_li[0]['license_No'])?></span>
+                </div>
+                <div class="vehicle-price">
+                    <span><b>License Scan Copy:</b></span>
+                    <span class="price"><a href="/assets/img/uploads/vehicle/Documents/lic/<?php echo($veh_li[0]['lic_scan_copy'])?>" download>License Scan Copy</a></span>
+                    
+                </div>
+                <div class="vehicle-price">
+                    <span><b> Insuarance No:</b></span>
+                    <span class="price"><?php echo($veh_li[0]['ins_No'])?></span>
+                </div>
+                <div class="vehicle-price">
+                    <span><b> Insuarance Scan Copy:</b></span>
+                    <span class="price"><a href="/assets/img/uploads/vehicle/Documents/lic/<?php echo($veh_li[0]['ins_scan_copy'])?>" download>License Scan Copy</a></span>
+                     
                 </div>
 
             </div>

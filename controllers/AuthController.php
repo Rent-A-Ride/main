@@ -79,10 +79,6 @@ class AuthController extends Controller
             $login->loadData($body);
             if($login->validate()){
                 $user = $login->login($body['user_type']);
-                
-                if(!$user){
-                    $res->redirect('/login');
-                }
                 if($user === true){
                     if($body['user_type']=='owner'){
                         $res->redirect('/owner');
@@ -123,17 +119,22 @@ class AuthController extends Controller
         $customer = new Customer();
         if ($request->isPost()){
 
-            $customer->loadData($request->getBody());
 
-            $customer->setGender($this->setGenderFromNIC($customer->getNic()));
+                $customer->loadData($request->getBody());
 
-            if ($customer->validate() && $customer->save()){
-                // ->session->setFlash('success', 'Registration Successfully!');
-                $request->session->setFlash('success', 'Registration Successfully!');
-                // Application::$app->response->redirect('/login');
-                $response->redirect("/login");
-                exit();
-            }
+                if ($request->getBody()['nic']){
+                    $customer->setGender($this->setGenderFromNIC($customer->getNic()));
+                }
+
+
+                if ($customer->validate() && $customer->save()){
+                    Application::$app->session->setFlash('success', 'Registration Successfully!');
+                    $response->redirect("/login");
+                    exit();
+                }
+
+
+
 
             return $response->render('Customer/v_Register','auth-reg', [
                 'model' => $customer

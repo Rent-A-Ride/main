@@ -45,7 +45,7 @@ use app\models\viewCustomerReq;
                                 <th>Vehicle No</th>
                                 <th>Complaint</th>
                                 <th>Proof</th>
-                                <th>Resolved</th>
+                                <th>Resolve</th>
                                
                             </tr>
                             </thead>
@@ -57,6 +57,10 @@ use app\models\viewCustomerReq;
                             
                                     
                                    foreach ($complaint as $row){
+
+                                        if ($row['status']==0) {
+                                            # code...
+                                        
                                 ?>
                                     <tr>
                                        
@@ -72,7 +76,7 @@ use app\models\viewCustomerReq;
 
                                     <?php
                                     $num = $num+1;
-                                
+                                        }
                             }
                         }
                                 ?>
@@ -99,6 +103,7 @@ use app\models\viewCustomerReq;
                             <th>Complaint</th>
                             <th>Proof</th>
                             <th>Resolved</th>
+                            <th>Action</th>
 
                             
                         </tr>
@@ -112,7 +117,9 @@ use app\models\viewCustomerReq;
                                     
                                    foreach ($complaint as $row){
                                     
-                                    
+                                        if ($row['status']==1) {
+                                            # code...
+                                        
                                         # code...
                                     
                 //                 
@@ -124,13 +131,13 @@ use app\models\viewCustomerReq;
                                         <td><?php echo($row['Vehicle_No']); ?></td>
                                         <td><?php echo($row['complaint']); ?></td>
                                         <td><button class="button_adminvehicle vehicleComplaintproof" data-compalintId='<?php echo($row['com_ID'])?>' data-customerId='<?php echo($row['cus_ID'])?>' data-vehId='<?php echo($row['veh_id'])?>' data-vehNo='<?php echo($row['Vehicle_No'])?>' data-proof='<?php echo($row['proof'])?>'>Proof</button></td>
-                                        <td><button class="button_adminvehicle vehicleComplaintresolve" data-compalintId='<?php echo($row['com_ID'])?>' data-customerId='<?php echo($row['cus_ID'])?>' data-vehId='<?php echo($row['veh_id'])?>' data-vehNo='<?php echo($row['Vehicle_No'])?>'>Resolved Complaint</button></td>
-                                            
+                                        <td style="color: red;">Complaint Resolved</td>
+                                        <td><?php echo($data[$row['com_ID']]); ?></td>   
                                     </tr>
 
                                     <?php  
                                        $num=$num+1;
-                                
+                                        }
                             }
                         }
                                 ?>

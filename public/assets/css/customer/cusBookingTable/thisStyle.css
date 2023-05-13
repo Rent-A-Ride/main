@@ -9,6 +9,13 @@
   overflow-y: scroll;
 }
 
+/* #3 button container */
+.button-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+
 .bookingTable {
   font-weight: 500;
   width: 100%;
@@ -140,7 +147,7 @@
 }
 
 .status.booked {
-  color: #007bff;
+  color:#008080;
   background-color: #cde9ff;
 }
 
@@ -152,6 +159,10 @@
 .status.cancelled {
   color: #dc3545;
   background-color: #f8d7da;
+}
+
+.pay-type {
+  color: #dc3545;
 }
 
 .cancel-btn {

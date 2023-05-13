@@ -56,4 +56,12 @@ class drivercomplaint extends dbModel
 
     }
 
+    public function resolve($com_Id){
+        $admin_approved=1;
+        $query1="UPDATE drivercomplaint  SET com_status =:admin_approved WHERE com_ID=$com_Id";
+        $statement1= Application::$app->db->prepare($query1);
+        $statement1->bindValue(":admin_approved",$admin_approved);
+        $statement1->execute();
+    }
+
 }

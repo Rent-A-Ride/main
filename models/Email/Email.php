@@ -5,9 +5,6 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
-require 'PHPMailer/src/Exception.php';
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
 
 class Email
 {
@@ -27,10 +24,14 @@ class Email
         $this->mailer->SMTPAuth = true;
         $this->mailer->Username = $config['username'];
         $this->mailer->Password = $config['password'];
-        $this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $this->mailer->Port = $config['port'];
         $this->mailer->isHTML(true);
         $this->mailer->CharSet = 'UTF-8';
+        
+        // echo "<pre>";
+        // print_r( $this->mailer);
+        // exit;
     }
 
 
