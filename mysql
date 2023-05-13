@@ -48,3 +48,27 @@ CREATE TABLE system_complaints (
   FOREIGN KEY (cus_ID) REFERENCES customer(cus_ID)
 );
 
+
+create a table for notification mysql
+
+CREATE TABLE notification (
+  id INT NOT NULL AUTO_INCREMENT,
+  user_Id INT NOT NULL,
+  message VARCHAR(255),
+  status VARCHAR(50) DEFAULT 'Unread',
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  FOREIGN KEY (cus_ID) REFERENCES customer(cus_ID)
+);
+
+
+Full texts
+notification_Id
+user_id
+title
+message
+link
+status
+created_at
+
+CREATE TABLE vo_notifications ( notification_id INT AUTO_INCREMENT PRIMARY KEY, user_id INT NOT NULL, title VARCHAR(255) NOT NULL, message TEXT NOT NULL, link VARCHAR(255), status VARCHAR(20) NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP );

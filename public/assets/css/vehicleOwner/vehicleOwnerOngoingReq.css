@@ -3,6 +3,14 @@
 /*  import google fonts */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
+body{
+    font-family: 'Poppins', sans-serif;
+}
+
+.ongoing-box-name{
+    text-align: center;
+
+}
 .search-container {
     display: flex;
     justify-content:center;
@@ -33,15 +41,27 @@
     background: #2e0c72;
 }
 
+.ongoing-clr-box , .ongoing-pay-box{
+    /* background-color:#fcba50c4;
+    text-align: center; */
 
-.requests{
+    background-color: #FAB84C;
+    color: black;
+    border: none;
+    border-radius: 3px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+}
+
+.ongoing-bookings{
     margin-top: 20px;
     margin-left: 50px;
     margin-right: 50px;
 
     text-transform: capitalize;
 }
-.requests-list{
+.ongoing-booking-list{
 
     overflow: overlay;
     max-height: 800px;
@@ -53,7 +73,7 @@
     box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
 
 }
-.table{
+.ongoing-booking-details-table{
     font-size: 0.8rem;
     border-collapse: collapse;
     margin: 25px 0;
@@ -65,20 +85,20 @@
     transition: 0.4s;
 }
 
-.table thead {
+.ongoing-booking-details-table thead {
     border-radius: 10px;
 }
 
 
-.table thead tr{
+.ongoing-booking-details-table thead tr{
     color: #fff;
     background: #373636;
     text-align: left;
     font-weight: bold;
     border-radius: 5px;
 }
-.table th,
-.table td{
+.ongoing-booking-details-table th,
+.ongoing-booking-details-table td{
     padding: 12px 15px;
 
 
@@ -86,94 +106,36 @@
 /* .table td{
   border-radius: 10px 0px;
 } */
-.table tbody tr{
+.ongoing-booking-details-table tbody tr{
     border-bottom: 1px solid #29282847;
     border-radius: 10px;
 }
-.table tbody tr:nth-of-type(odd){
+.ongoing-booking-details-table tbody tr:nth-of-type(odd){
     /* background: #eaeaeb; */
     width: 1000px;
     border-radius: 5px;
 }
 
-/* .table button{
-  padding: 6px 20px;
-  border-radius: 10px;
-  cursor: pointer;
-  background: transparent;
-  border: 1px solid #080808;
-}
-.table button:hover{
-  background: #f3bb21;
-  color: #fff;
-  transition: 0.5rem;
-} */
-
-
-/* table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-th, td {
-  border: 1px solid black;
-  padding: 8px;
-  text-align: left;
-} */
-
-.accept-button {
-    border: none;
-    padding: 6px;
-    border-radius: 4px;
-    cursor: pointer;
-
-}
-
-.reject-button {
-    margin-left: 5px;
-    border: none;
-    padding: 6px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.accept-button {
-    background-color: #f7ba58;
-    color:black;
-}
-
-.accept-button:hover {
-    background-color: #fab84c;
-
-}
-.accept-button.clicked{
-    background-color: #fab84c;
-
-}
-
-.reject-button {
-    background-color: rgb(218, 83, 83);
-    color: white;
-}
-
-.reject-button:hover {
-    background-color: rgb(213, 16, 16);
-}
-
-.reject-button.clicked {
-    background-color: rgb(213, 16, 16);
-}
 
 
 
+/*
 .status {
     display: flex;
     justify-content:space-evenly;
-}
+} */
 
 
 .table tbody tr:hover, tr:focus {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.thead_tnp{
+
+    background-color: #565555;
+    text-align: left;
+    font-weight: bold;
+    border-radius: 5px;
 }
 
 /* selection navbar */
@@ -202,7 +164,7 @@ th, td {
 }
 
 .topnav a:hover {
-     background-color: rgba(255, 215, 139, 0.48);
+    background-color: rgba(255, 215, 139, 0.48);
     border-bottom: 2px solid grey;
 }
 
@@ -265,49 +227,7 @@ th, td {
     }
 }
 
-/* Switching between w/o and w/ Driver */
-.pending-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.req-switch {
-    display: flex;
-    margin-bottom: 20px;
-}
-
-.req-switch input[type="radio"] {
-    display: none;
-}
-
-.req-switch label {
-    cursor: pointer;
-    margin-right: 10px;
-    padding: 5px 10px;
-    border: 1px solid #000000;
-    border-radius: 5px;
-    background-color: #ffffff;
-}
-
-.req-switch input[type="radio"]:checked + label {
-    background-color: #9d9d9d;
-}
-
-.content {
-    width: 100%;
-}
-
-.with-driver-container {
-    display: none;
-}
-
-.without-driver-container {
-    display: block;
-}
-
-.status-txt {
+.tour-status {
     display: inline-block;
     padding: 6px 12px;
     font-size: 14px;
@@ -317,65 +237,124 @@ th, td {
     letter-spacing: 0.5px;
 }
 
-.status-txt.pending {
+.tour-status.upcoming {
     color: #f39c12;
     background-color: #fff3cd;
 }
 
-.status-txt.booked {
+.tour-status.ongoing {
     color: #007bff;
     background-color: #cde9ff;
 }
 
-.status-txt.confirmed {
+.tour-status.completed {
     color: #28a745;
     background-color: #c3e6cb;
 }
 
-.status.cancelled {
+.tour-status.cancelled {
     color: #dc3545;
     background-color: #f8d7da;
 }
 
 
 
-/* For small screens, change the display property to flex for the content */
-@media (max-width: 600px) {
-    .content {
-        display: flex;
-        flex-direction: column;
-    }
 
-    .with-driver-container, .without-driver-container {
-        display: block;
-    }
-}
 
-  /*select button*/
- .driver-req-button {
-    border: none;
-    padding: 6px;
+
+
+
+
+
+
+
+.cash-status {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
     border-radius: 4px;
+    letter-spacing: 0.5px;
+}
+
+.cash-status.pending {
+    color: #f39c12;
+    background-color: #fff3cd;
+}
+
+.cash-status.halfdone {
+    color: #007bff;
+    background-color: #cde9ff;
+}
+
+.cash-status.fulldone {
+    color: #28a745;
+    background-color: #c3e6cb;
+}
+
+/* .cash-status.cancelled {
+  color: #dc3545;
+  background-color: #f8d7da;
+} */
+
+
+
+
+
+
+
+.ongoing-tour-status-checkbox {
+    margin-left: 10px;
+}
+
+.ongoing-tour-status-text.completed {
+    color: green;
+}
+
+.ongoing-tour-status-complete-button {
+    background-color: #9b9c9d;
+    color: rgb(16, 16, 16);
+    border: none;
+    border-radius: 3px;
+    padding: 5px 10px;
     cursor: pointer;
-
-}
- .driver-req-button {
-    background-color: #f7ba58;
-    color:black;
 }
 
- .driver-req-button:hover {
-    background-color: black;
+.ongoing-tour-status-complete-button:hover {
+    background-color: #6e6e6e;
     color: white;
-
-}
-.driver-req-button.clicked{
-    background-color: #fab84c;
-
 }
 
-.driver-selection{
-    padding: 10px;
-    height: 100%;
-    width: 80%;
+
+.ongoing-pay-status-checkbox {
+    margin-left: 10px;
+}
+
+.ongoing-pay-status-text.completed {
+    color: green;
+}
+
+.ongoing-pay-status-complete-button {
+    background-color:#9b9c9d;
+    color: rgb(30, 30, 30);
+    border: none;
+    border-radius: 3px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.ongoing-pay-status-complete-button:hover {
+    background-color: #6e6e6e;
+    color: white;
+}
+
+
+.sending-to-completed{
+    background-color: #FAB84C;
+    color: black;
+    border: none;
+    border-radius: 3px;
+    padding: 5px 10px;
+    cursor: pointer;
 }
