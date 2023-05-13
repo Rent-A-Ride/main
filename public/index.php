@@ -78,6 +78,7 @@ $app->router->get("/viewownerDriver", [OwnerController::class, "ownerDriver"]);
 
 
 $app->router->get("/vehicleowner/vehicles", [VehicleOwnerController::class, "VehicleOwnerVehicle"]);
+$app->router->post("/vehicleowner/vehicles", [VehicleOwnerController::class, "VehicleOwnerVehicle"]);
 
 $app->router->get("/ownerProfile", [OwnerController::class, "ownerProfile"]);
 $app->router->post("/ownerProfile", [OwnerController::class, "ownerProfile"]);
@@ -224,9 +225,20 @@ $app->router->post("/CustomerPendingRequest", [VehicleOwnerController::class, 'v
 
 // view customer Accepted requests
 $app->router->get("/CustomerAcceptedRequest", [VehicleOwnerController::class, 'viewCustomerAcceptedRequests']);
+$app->router->post("/CustomerAcceptedRequest", [VehicleOwnerController::class, 'viewCustomerAcceptedRequests']);
+
 
 // view customer Rejected requests
 $app->router->get("/CustomerRejectedRequest", [VehicleOwnerController::class, 'viewCustomerRejectedRequests']);
+
+//vehicle owner ongoing vehicles
+$app->router->get("/CustomerOngoingRequest", [VehicleOwnerController::class, 'viewCustomerOngoingRequests']);
+$app->router->post("/CustomerOngoingRequest", [VehicleOwnerController::class, 'viewCustomerOngoingRequests']);
+
+//vehicle owner completed vehicles
+$app->router->get("/CustomerCompletedRequest", [VehicleOwnerController::class, 'viewCustomerCompletedRequests']);
+$app->router->post("/CustomerCompletedRequest", [VehicleOwnerController::class, 'viewCustomerCompletedRequests']);
+
 
 
 //// Vehicle Owner
@@ -301,6 +313,21 @@ $app->router->get("/vehicleOwner/viewVehicleProfile", [VehicleOwnerController::c
 //vehicle owner edit vehicle profile details
 $app->router->get("/vehicleOwner/editVehicleProfile", [VehicleOwnerController::class, 'editVehicleProfile']);
 $app->router->post("/vehicleOwner/editVehicleProfile", [VehicleOwnerController::class, 'editVehicleProfile']);
+
+//vehicle owner disable vehicles
+$app->router->get("/vehicleOwner/disabledVehicles", [VehicleOwnerController::class, 'disableVehicleView']);
+$app->router->post("/vehicleOwner/disabledVehicles", [VehicleOwnerController::class, 'disableVehicleView']);
+
+// Vehicle Owner Notifications
+$app->router->get("/vo_notification", [VehicleOwnerController::class, 'vo_notification']);
+$app->router->post("/vo_notification", [VehicleOwnerController::class, 'vo_notification']);
+
+$app->router->get("/update-vo-notification-status", [VehicleOwnerController::class, 'updateVoNotificationStatus']);
+$app->router->post("/update-vo-notification-status", [VehicleOwnerController::class, 'updateVoNotificationStatus']);
+
+
+
+
 
 $app->router->get("/driver/availability", [DriverController::class, 'driverAvailability']);
 

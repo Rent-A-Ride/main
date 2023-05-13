@@ -15,7 +15,7 @@ class driver_requests extends dbModel
     protected string $end_date;
     protected string $Destination;
     protected string $pickup_location;
-    protected bool $accept;
+    protected bool $accept = false;
 
     /**
      * @return bool

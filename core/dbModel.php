@@ -14,7 +14,7 @@ abstract class dbModel extends Model
     abstract public function attributes():array;
     abstract public static function primaryKey(): string;
 
-
+    //insert into database table
     public function save(): bool
     {
         $tableName = static::tableName();
@@ -33,6 +33,7 @@ abstract class dbModel extends Model
 
     }
 
+    //insert into particular columns in given database table
     public function saveAs($excludeAttributes = []): bool
     {
         $tableName = static::tableName();
@@ -122,6 +123,7 @@ abstract class dbModel extends Model
 //
 //    }
 
+    //find a particular row from a specified table
     public static function findOne($where)
     {
         $tableName = static::tableName();
@@ -137,6 +139,7 @@ abstract class dbModel extends Model
         return $statement->fetchObject(static::class);
     }
 
+    //retrieve all the data from given database table
     public static function retrieveAll($where = [])
     {
         $tableName = static::tableName();
@@ -147,6 +150,7 @@ abstract class dbModel extends Model
             $attributes = array_keys($where);
             $sql = implode(" AND ", array_map(fn($attr) => "$attr = :$attr", $attributes));
             $statement = self::prepare("SELECT * FROM $tableName WHERE $sql");
+
             foreach ($where as $key => $item) {
                 $statement->bindValue(":$key", $item);
             }

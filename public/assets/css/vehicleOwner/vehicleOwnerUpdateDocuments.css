@@ -14,7 +14,7 @@ body
 } */
 .renew-page-name{
     text-align: center;
-    margin-top: 40px;
+    margin-top: 5px;
 }
 .doc-update-container {
 
@@ -23,13 +23,14 @@ body
     background-color: #fff;
     /* padding: 20px; */
     width: 1000px;
-    height: 600px;
+    height: 590px;
     /* margin: 30px 0; */
-    margin-top: 40px;
+    margin-top: 10px;
     margin-bottom: 5px;
     margin-right: 200px;
     margin-left: 200px;
     border-radius: 5px;
+
 
 }
 
@@ -48,7 +49,7 @@ body
     padding: 10px 15px;
     text-align: center;
     text-decoration: none;
-    margin-top: 50px;
+    margin-top: 15px;
     /* margin-left: 100px;
     width:600px; */
     height:40px;
@@ -146,7 +147,8 @@ input {
 }
 
 .btn:hover {
-    background-color: #e2d14d;
+    background-color: black;
+    color: white;
 }
 .panels-container {
     position: absolute;
@@ -156,6 +158,8 @@ input {
     left: 0;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+
+
 }
 
 
@@ -189,8 +193,8 @@ input {
     max-width: 500px;
     width: 100%;
     box-shadow: 0 0 5px rgba(0,0,0, .10);
-    margin: auto;
-    height: max-content;
+   margin-top: -10px;
+    /*height: max-content;*/
     border-radius: 4px;
     padding: 2rem;
     position: relative;
@@ -199,6 +203,7 @@ input {
     box-shadow: 7px 10px 65px -19px rgba(0,0,0,0.6);
     -webkit-box-shadow: 7px 10px 65px -19px rgba(0,0,0,0.6);
     -moz-box-shadow: 7px 10px 65px -19px rgba(0,0,0,0.6);
+
 }
 
 .wrapper-container {

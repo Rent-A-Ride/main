@@ -1,5 +1,5 @@
 <?php
-/* @var $row viewCustomerReq */
+/* @var $row VehBooking */
 /* @var $customer Customer */
 /* @var $vehicle vehicle */
 /* @var $drow driver */
@@ -7,6 +7,7 @@
 
 use app\models\Customer;
 use app\models\driver;
+use app\models\VehBooking;
 use app\models\vehicle;
 use app\models\viewCustomerReq;
 
@@ -19,6 +20,9 @@ use app\models\viewCustomerReq;
         <a href="/CustomerAcceptedRequest">Accepted Requests</a>
         <!--        <a href="#ongoing">Completed Requests</a>-->
         <a href="/CustomerRejectedRequest">Rejected Requests</a>
+        <a href="/CustomerOngoingRequest">Ongoing Requests</a>
+        <a href="/CustomerCompletedRequest">Completed Requests</a>
+
 
         <!-- <div class="search-container">
           <form action="/action_page.php">
@@ -31,17 +35,20 @@ use app\models\viewCustomerReq;
     </div>
 
 
+
     <div class="requests-list">
         <div class="pending-container">
             <div class="req-switch">
                 <input type="radio" class="with-driver" name="switch" id="with-driver" >
-                <label for="with-driver">W/ Driver</label>
-                <input type="radio" class="without-driver" name="switch" id="without-driver" checked>
-                <label for="without-driver">W/O Driver</label>
-
+                <label for="with-driver">With Driver</label>
+                <input type="radio" class="without-driver" name="switch" id="without-driver" checked >
+                <label for="without-driver">With-out Driver</label>
             </div>
+
             <div class="content">
                 <div class="with-driver-container">
+
+
                     <!-- content for with driver container -->
 
                     <div class="requests-list">
@@ -50,41 +57,105 @@ use app\models\viewCustomerReq;
                         <table class="table">
 
                             <thead>
-                            <tr>
-                                <th>Request ID</th>
-                                <th>Customer Name</th>
-                                <th>Telephone No.</th>
-                                <!-- <th>Address</th> -->
-                                <th>Vehicle Name</th>
+                            <tr  style="text-align: center">
+
+
+                                <th>Request<br>
+                                    ID</th>
+                                <th colspan="2">Vehicle</th>
+                                <th>Customer </th>
+                                <th>Duration</th>
                                 <th>Pickup Location</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                                <th>Payment Method</th>
+                                <th>Destination</th>
+                                <th>Payment Amount</th>
+                                <th>Note</th>
                                 <th>Select Driver</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
                                 <?php
-                                $location = array();
                                 foreach ($model as $row):
                                 if ($row->getStatus() == 0 && $row->getDriverReq() == 1):
-                                $location[$row->getBookingId()] = $row->getPickupLocation();
                                 ?>
                                 <td><?= $row->getBookingId()?></td>
+                                <td><img src="/assets/img/uploads/vehicle/<?= $vehicle[$row->getVehId()]->getFrontView()?>" width="56px"></td>
+                                <td><?= $vehicle[$row->getVehId()]->getVehBrand().' '.$vehicle[$row->getVehId()]->getVehModel()."<br>".$vehicle[$row->getVehId()]->getPlateNo()?></td>
                                 <td><?= $customer[$row->getCusId()]->firstname.' '.$customer[$row->getCusId()]->lastname?></td>
-                                <td><?=$customer[$row->getCusId()]->phoneno?></td>
-                                <!-- <td>Kandy</td> -->
-                                <td><?= $vehicle[$row->getVehId()]->getVehBrand().' '.$vehicle[$row->getVehId()]->getVehModel()?></td>
-                                <td><?= $row->getPickupLocation()?></td>
-                                <td><?php echo $row->getStartDate() ?></td>
-                                <td><?php echo $row->getEndDate() ?></td>
-                                <td><?php echo $row->getPayMethod() ?></td>
+                                <td><?php echo $row->getStartDate() ."<br>". "To"."<br>".$row->getEndDate()?></td>
+                                <td><?php echo $row->getPickupLocation() ?></td>
+                                <td><?php echo $row->getDestination() ?></td>
+                                <td><?php echo $row->getRentalPrice() ?></td>
+                                <td><?php echo $row->getNote() ?></td>
+
+
+                                <?php if($driver_req[$row->getBookingId()]): ?>
+                                <td colspan="2">
+                                    <p>Driver request sent to </p>
+                                    <?php
+                                        $driverId = $driver_req[$row->getBookingId()]->getDriverId();
+                                       echo $getDriverById[$driverId]->getDriverFname().' '.$getDriverById[$driverId]->getDriverLname();
+
+
+                                    ?>
+                                </td>
+
+
+                                <?php else: ?>
+
+
+
+
                                 <td>
-                                    <div class="status">
-                                        <button class="select-button " onclick="openModal(<?= $row->getBookingId()?>)">Select </button>
+<!--                                    <div class="status">-->
+<!--                                        <button class="select-button " onclick="openModal(--><?php //= $row->getBookingId()?><!--)">Select </button>-->
+<!--                                    </div>-->
+
+                                    <div class="driver-select">
+                                        <select class="driver-selection" name="driver" >
+                                            <option value="">Select a driver</option>
+                                            <?php
+                                            foreach ($drivers as $driver):
+                                                // if the requested vehicle transmission is manual then show  only the drivers who  has a manual license
+                                                if($vehicleInfo[$row->getVehId()]->getTransmission() == 'Manual' && $driver->getCategory() == 'Manual'):
+                                            ?>
+                                                    <option value="<?= $driver->getDriverId()?>">
+                                                        <?= $driver->getDriverFname().' '.$driver->getDriverLname().' -- '.$driver->getArea()?>
+                                                    </option>
+                                                    <?php
+                                                        elseif ($vehicleInfo[$row->getVehId()]->getTransmission() == 'Auto' && ($driver->getCategory() == 'Auto'|| $driver->getCategory() == 'Manual') ):
+                                                    ?>
+                                            <option value="<?= $driver->getDriverId()?>">
+                                                <?= $driver->getDriverFname().' '.$driver->getDriverLname().' -- '.$driver->getArea()?>
+                                            </option>
+                                            <?php
+                                                endif;
+                                            endforeach;
+                                            ?>
+
+                                        </select>
                                     </div>
                                 </td>
+                                <td>
+
+
+                                    <form method="post" onsubmit="return driverRequest()" >
+                                        <input hidden name="ask-driver">
+                                        <input hidden name="driver_Id" value="" id="driver_Id">
+                                        <input type="hidden" name="booking_Id" value="<?php echo $row->getBookingId()?>" >
+                                        <input type="submit" class="driver-req-button" value=" Request Driver" id="send-driver">
+                                    </form>
+                                    <br>
+                                    <form method="post" onsubmit="return confirm('Are you sure you want to reject this request?');">
+                                        <input type="hidden" name="booking_Id" value="<?= $row->getBookingId() ?>">
+                                        <input type="submit" class="reject-button" name="reject" value="Reject">
+                                    </form>
+                                </td>
+
+
+
+                                <?php endif; ?>
                             </tr>
                             <?php
                             endif;
@@ -99,54 +170,61 @@ use app\models\viewCustomerReq;
 
 
                 <div class="without-driver-container">
+
                     <!-- content for without driver container -->
+
+
                     <table class="table">
 
                         <thead>
-                        <tr>
+                        <tr  style="text-align: center">
+
+
                             <th>Request ID</th>
-                            <th>Customer Name</th>
-                            <!-- Removed phone no cause veh owner don't want to know the customer contact no in this process -->
-<!--                            <th>Telephone No.</th>-->
-                            <!-- <th>Address</th> -->
-                            <th>Vehicle</th>
-                            <th>Pickup Location</th>
+                            <th colspan="2">Vehicle</th>
+                            <th>Customer </th>
                             <th>Start Date</th>
                             <th>End Date</th>
-                            <th>Payment Method</th>
-                            <th>Special Note</th>
-                            <th>Status</th>
+                            <th>Payment Amount</th>
+                            <th>Note</th>
+                            <th>Action</th>
+
+
                         </tr>
                         </thead>
                         <tbody>
                         <?php
-
+                        $total = 0;
                         foreach ($model as $row):
-                            if ($row->getStatus() == 0 && $row->getDriverReq() == 0):
+                            if ((int)$row->getDriverReq() ==0 && (int)$row->getStatus() == 0):
 
                                 ?>
                                 <tr>
                                     <td><?php echo $row->getBookingId() ?></td>
-                                    <td><?php echo $customer[$row->getCusId()]->firstname.' '.$customer[$row->getCusId()]->lastname?></td>
-<!--                                    Removed phone no cause veh owner don't want to know the customer contact no in this process -->
-<!--                                    <td>--><?php //echo $customer[$row->getCusId()]->phoneno?><!--</td>-->
-                                    <!-- <td>Kandy</td> -->
+                                    <td><img src="/assets/img/uploads/vehicle/<?= $vehicle[$row->getVehId()]->getFrontView()?>" width="56px"></td>
                                     <td><?php echo $vehicle[$row->getVehId()]->getVehBrand().' '.$vehicle[$row->getVehId()]->getVehModel()."<br>".$vehicle[$row->getVehId()]->getPlateNo() ?></td>
-                                    <td><?php echo $row->getPickupLocation() ?></td>
+                                    <td><?php echo $customer[$row->getCusId()]->firstname.' '.$customer[$row->getCusId()]->lastname?></td>
                                     <td><?php echo $row->getStartDate() ?></td>
                                     <td><?php echo $row->getEndDate() ?></td>
-                                    <td><?php echo $row->getPayMethod() ?></td>
+
+                                    <td><?php echo $row->getRentalPrice() ?></td>
+                                    <?php //append to $total
+                                    $total += $row->getRentalPrice();
+                                    ?>
+
+
                                     <td><?php echo $row->getNote() ?></td>
 
                                     <td><div class="status" style="display: flex">
                                             <form method="post" onsubmit="return confirm('Are you sure you want to confirm this request?');">
                                                 <input type="hidden" name="booking_Id" value="<?= $row->getBookingId() ?>">
-                                                <input type="submit" class="accept-button" value="Accept">
+                                                <input type="submit" class="accept-button" name="accept" value="Accept">
                                             </form>
-
-<!--                                            <button onclick="openPopup(<?php //= $row->getBookingId() ?>)" class="accept-button">Accept </button> -->
-                                            <button onclick="displayRejectPopup()" class="reject-button">Reject</button>
-
+                                            <br>
+                                            <form method="post" onsubmit="return confirm('Are you sure you want to reject this request?');">
+                                                <input type="hidden" name="booking_Id" value="<?= $row->getBookingId() ?>">
+                                                <input type="submit" class="reject-button" name="reject" value="Reject">
+                                            </form>
                                         </div></td>
                                 </tr>
 
@@ -156,66 +234,8 @@ use app\models\viewCustomerReq;
                         ?>
                         </tbody>
                     </table>
-                </div>
-            </div>
-        </div>
 
-
-        <!-- Driver Pop-up -->
-        <div id="popup-driver" class="popup-container">
-            <div class="popup-box">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <div class="drivers-list">
-
-
-                    <table class="table">
-                        <input type="hidden" id="pickupLocation" value="">
-
-                        <thead>
-                        <tr>
-
-                            <th>Driver Name</th>
-                            <th>Telephone No.</th>
-                            <th>Location</th>
-                            <th>Reviews</th>
-                            <th>Assign Driver</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                        // $booking_ID =
-
-                                ?>
-                                <tr>
-                                    <input type="hidden" id="bookingId" value="<?= $row->getBookingId() ?>">
-<!--                                    <td>--><?php //= $drow->getDriverFname().' '.$drow->getDriverLname()?><!--</td>-->
-<!--                                    <td>--><?php //= $drow->getPhoneNo()?><!--</td>-->
-<!--                                    <td>--><?php //= $drow->getArea()?><!--</td>-->
-
-
-                                    <td>10 reviews</td>
-
-
-                                    <td>
-                                        <div class="status">
-<!--                                            <button class="assign-button">Assign </button>-->
-                                            <form method="post">
-                                                <input name="type" value="driver" hidden>
-                                                <input id="booking-id" type="hidden" name="booking_Id" value="">
-                                                <input type="hidden" name="driver_ID" value="">
-                                                <input type="hidden" name="status" value="1">
-                                                <input type="submit" class="accept-button" value="Send request">
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                            <?php
-
-                        ?>
-
-                        </tbody>
-                    </table>
+<!--                    <p>--><?php //echo $total ?><!--</p>-->
                 </div>
             </div>
         </div>
@@ -224,32 +244,11 @@ use app\models\viewCustomerReq;
 
 
 
-
-
-
-
-    </div>
 </section>
 </section>
 </div>
 
-<!-- Pop up confirmation -->
 
-<div id="accept" class="popup-container">
-    <div class="popup-box">
-        <p>Are you sure you want to confirm this request?</p>
-        <button onclick="window.location.href='/vehicleOwner/acceptBooking';" id="yes-button">Yes</button>
-        <button onclick="closePopup()" id="no-button">No</button>
-    </div>
-</div>
-
-<div id="reject" class="popup-container">
-    <div class="popup-box">
-        <p>Are you sure you want to reject this request?</p>
-        <button onclick="window.location.href='/CustomerRejectedRequest';" id="yes-button">Yes</button>
-        <button onclick="closePopup()" id="no-button">No</button>
-    </div>
-</div>
 
 
 
@@ -269,4 +268,24 @@ use app\models\viewCustomerReq;
         bookingId.value = $id;
 
     }
+
+
+    const driverSelection = document.querySelector(".driver-selection");
+    const driverId = document.querySelector("#driver_Id");
+    sendDriver = document.getElementById("send-driver");
+
+    driverSelection.addEventListener("change", function () {
+        driverId.value = driverSelection.value;
+    });
+
+
+    function driverRequest() {
+        if (driverId.value === "") {
+            event.preventDefault();
+            return alert("Please select a driver");
+        }
+        return confirm("Are you sure you want to send the request to the driver?");
+    }
+
+
 </script>

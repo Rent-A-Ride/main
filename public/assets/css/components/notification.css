@@ -27,8 +27,8 @@
 
 .notification-panel {
     position: absolute;
-    top: 85px;
-    right: 10px;
+    top: 84px;
+    right: 87px;
     width: 350px;
     background-color: white;
     border-radius: 4px;
@@ -40,8 +40,8 @@
     z-index: 1;
 }
 
-.notification-panel.activeAB {
-    transform: translateY(0);
+.notification-panel.activeY {
+    transform: translate(0);
     opacity: 1;
 }
 
