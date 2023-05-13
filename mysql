@@ -72,3 +72,35 @@ status
 created_at
 
 CREATE TABLE vo_notifications ( notification_id INT AUTO_INCREMENT PRIMARY KEY, user_id INT NOT NULL, title VARCHAR(255) NOT NULL, message TEXT NOT NULL, link VARCHAR(255), status VARCHAR(20) NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP );
+
+
+const form = document.getElementById('date-search');
+
+form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const startDate = document.getElementById('start-date').value;
+    const endDate = document.getElementById('end-date').value;
+
+    const searchData = {
+        'start-date': startDate,
+        'end-date': endDate
+    };
+
+    fetch('/your-endpoint-url', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(searchData)
+    })
+        .then(response => response.json())
+        .then(data => {
+            // Process the fetched data and update the UI
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+});
+

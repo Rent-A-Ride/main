@@ -54,13 +54,13 @@ use app\core\Application;
             </a>
             <span class="tooltip">Home</span>
         </li>
-        <li>
-            <a href="/Customer/Home">
-                <i class='bx bx-car' ></i>
-                <span class="links_name">View Vehicles</span>
-            </a>
-            <span class="tooltip">view vehicles</span>
-        </li>
+<!--        <li>-->
+<!--            <a href="/Customer/Home">-->
+<!--                <i class='bx bx-car' ></i>-->
+<!--                <span class="links_name">View Vehicles</span>-->
+<!--            </a>-->
+<!--            <span class="tooltip">view vehicles</span>-->
+<!--        </li>-->
         <li>
             <a href="/Customer/Profile">
                 <i class='bx bx-user-pin'></i>
@@ -82,13 +82,13 @@ use app\core\Application;
             </a>
             <span class="tooltip">Complaints</span>
         </li>
-        <li>
-            <a href="/Customer/Payment">
-                <i class='bx bx-wallet' ></i>
-                <span class="links_name">Payment</span>
-            </a>
-            <span class="tooltip">Payment</span>
-        </li>
+<!--        <li>-->
+<!--            <a href="/Customer/Payment">-->
+<!--                <i class='bx bx-wallet' ></i>-->
+<!--                <span class="links_name">Payment</span>-->
+<!--            </a>-->
+<!--            <span class="tooltip">Payment</span>-->
+<!--        </li>-->
         <li>
             <a href="/Customer/Settings">
                 <i class='bx bx-cog'></i>
