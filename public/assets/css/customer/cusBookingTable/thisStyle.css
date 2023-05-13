@@ -13,7 +13,34 @@
 .button-container {
   display: flex;
   justify-content: space-evenly;
+  margin: 20px;
 }
+
+.button-container {
+  display: flex;
+
+  gap: 10px;
+}
+
+.button-container button {
+  background-color: #ffffff;
+  color: #ec9844;
+  padding: 10px 20px;
+  border: 2px solid #ec9844;
+  border-radius: 15px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  box-shadow: 0 2px 4px rgba(129, 129, 129, 0.2);
+}
+
+.button-container button.selected {
+  border: none;
+  color: #ffffff;
+  background-color: #fab84c;
+}
+
 
 
 .bookingTable {
@@ -514,7 +541,20 @@
   }
 
   .parent-info img {
-    margin: 0 0 10px;
-    margin-right: 10px;
+    margin: 0 10px 10px 0;
   }
 }
+
+
+/* 3 buttons media query */
+@media (max-width: 768px) {
+  .button-container {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .button-container button {
+    margin-bottom: 10px;
+  }
+}
+

@@ -12,9 +12,9 @@ use app\models\cusVehicle;
 <h2 class="main-title">Vehicle Bookings</h2>
 
 <div class="button-container">
-    <button>Unpaid Bookings</button>
-    <button>Active Bookings</button>
-    <button>Completed Bookings</button>
+    <button onclick="location.href='/Customer/VehicleBookingTable'">Unpaid Bookings</button>
+    <button class="selected">Active Bookings</button>
+    <button onclick="location.href='/Customer/VehicleBookingTable/Complete'">Completed Bookings</button>
 </div>
 
 <h3 class="sub-title">Ongoing Bookings</h3>
