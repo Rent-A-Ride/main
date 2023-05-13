@@ -120,11 +120,24 @@ class AuthController extends Controller
     {
         $customer = new Customer();
         if ($request->isPost()){
-           
-            
-            $customer->loadData($request->getBody());
 
-            $customer->setGender($this->setGenderFromNIC($customer->getNic()));
+
+
+
+                $customer->loadData($request->getBody());
+
+                if ($request->getBody()['nic']){
+                    $customer->setGender($this->setGenderFromNIC($customer->getNic()));
+                }
+
+
+                if ($customer->validate() && $customer->save()){
+                    Application::$app->session->setFlash('success', 'Registration Successfully!');
+                    $response->redirect("/login");
+                    exit();
+                }
+
+
 
             if ($customer->validate() && $customer->save()){
                 $email=$customer->getEmail();
@@ -172,6 +185,7 @@ class AuthController extends Controller
                 // $response->redirect("/login");
                 // exit();
             }
+
 
             return $response->render('Customer/v_Register','auth-reg', [
                 'model' => $customer

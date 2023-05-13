@@ -102,12 +102,8 @@ use app\models\cusVehicle;
                 <div class="center">
 
                         <div class="form-group-1 ">
-                            <label for="licenseNumber">Enter your driving license number:</label>
-                            <input type="text" name="licenseNumber" id="licenseNumber" class="form-control">
-                        </div>
-                        <div class="form-group-1">
-                            <label for="expireDate">Enter the expiration date:</label>
-                            <input type="date" name="expireDate" id="expireDate" class="form-control">
+                            <label for="driving-license">Upload your Driving License ()</label>
+                            <input type="file" name="drivingLicense" id="driving-license" class="form-control">
                         </div>
 
 

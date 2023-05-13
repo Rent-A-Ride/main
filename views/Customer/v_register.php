@@ -5,7 +5,8 @@ use app\models\Customer;
 
 ?>
 
-<h1>Register</h1>
+
+<!--<button type="backBtn" id="backBtn">← Back</button>-->
 
 <main class="sign-up-mode">
     <div class="box-1">
@@ -119,7 +120,6 @@ use app\models\Customer;
                             <label>Address</label>
                             <span class="form-error"> <?= $model->getFirstError('address') ?></span>
                         </div>
-
 
 
                         <div class="input-wrap">

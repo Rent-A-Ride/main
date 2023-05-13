@@ -9,6 +9,9 @@ use app\core\Request;
 use app\core\Response;
 use app\models\CancelBookings;
 use app\models\Customer;
+use app\models\customer_payment;
+use app\models\driver;
+use app\models\driver_requests;
 use app\models\Notification;
 use app\models\system_complaints;
 use app\models\veh_Reviews;
@@ -20,6 +23,9 @@ use app\models\vehiclecomplaint;
 use app\models\vehicleowner;
 use app\models\VehInfo;
 use app\models\vehOwner_complaints;
+use Stripe\Checkout\Session;
+use Stripe\Stripe;
+use Stripe\StripeClient;
 
 class CustomerController extends Controller
 {
@@ -120,10 +126,6 @@ class CustomerController extends Controller
 
     public function vehicleInfo(Request $request, Response $response)
     {
-        $id=$request->getBody()['id'] ?? '';
-        $vehInfo = VehInfo::findOne(['veh_Id' => $id]);
-        $vehicle = cusVehicle::findOne(['veh_Id' => $id]);
-        $vehOwner = vehicleowner::findOne(['vo_Id' => $vehicle->getVoId()]);
         $vehBooking = new VehBooking();
         $cus_Id = Application::$app->user->cus_Id;
 
@@ -134,20 +136,26 @@ class CustomerController extends Controller
 //            $ve);hBooking->setCusId(Application::$app->user::primaryKey());
 //            $vehBooking->setVoId($vehicle->getVoId()
 
-            if($vehBooking->saveAs(['booking_Id','status'])){
+            if ($vehBooking->saveAs(['booking_Id','status'])){
                 Application::$app->session->setFlash('success', 'Booking Request send successfully!');
-                $response->redirect('/VehicleBookingTable');
+                $response->redirect('/Customer/VehicleBookingTable');
             }else{
                 Application::$app->session->setFlash('error', 'There was some error in booking your vehicle!');
                 $response->redirect('/Customer/Home');
-                //                $this->setLayout('customer-dashboard');
-//                return $this->render('Customer/cusBooking',[
-//                    'model'=>$vehBooking,
-//                ]);
             }
             return;
 
+
         }
+
+        $id=$request->getBody()['id'] ?? '';
+        $vehInfo = VehInfo::findOne(['veh_Id' => $id]);
+        $vehicle = vehicle::findOne(['veh_Id' => $id]);
+        $vehOwner = vehicleowner::findOne(['vo_Id' => $vehicle->getVoId()]);
+
+
+
+
         if($request->isGet()){
             $vehInfo = VehInfo::findOne(['veh_Id' => $id]);
             $vehicle = cusVehicle::findOne(['veh_Id' => $id]);
@@ -173,9 +181,6 @@ class CustomerController extends Controller
                 ];
                 $this->setLayout('customer-dashboard');
                 return $this->render('Customer/v_customerBooking', $params);
-
-
-
             }else{
                 $params = [
                     'vehInfo' => $vehInfo,
@@ -196,18 +201,89 @@ class CustomerController extends Controller
         $vehicle = cusVehicle::retrieveAll();
 
         $vehicleById = [];
+        $driverById = [];
+        $driverReq = [];
 
-        foreach ($vehicle as $veh) {
-            $vehicleById[$veh->getVehId()] = $veh;
+        foreach ($vehBooking as $vehBook) {
+            $vehicleById[$vehBook->getVehId()] = cusVehicle::findOne(['veh_Id' => $vehBook->getVehId()]);
+            if ($vehBook->getDriverReq() == 1 && $vehBook->getStatus() == 1) {
+                $driverReq[$vehBook->getBookingId()] = driver_requests::findOne(['reservation_id' => $vehBook->getBookingId()]);
+                $driverById[$driverReq[$vehBook->getBookingId()]->getDriverID()] = driver::findOne(['driver_ID' => $driverReq[$vehBook->getBookingId()]->getDriverID()]);
+            }
         }
 
         $params = [
             'vehBooking' => $vehBooking,
-            'vehicleById' => $vehicleById
+            'vehicleById' => $vehicleById,
+            'driverById' => $driverById,
+            'driverReq' => $driverReq,
         ];
 
         $this->setLayout('customer-dashboard');
         return $this->render('Customer/v_viewBookings', $params);
+    }
+
+    public function activeBookings(Request $request, Response $response)
+    {
+        $id=Application::$app->user->cus_Id;
+        $vehBooking = VehBooking::retrieveAll(['cus_Id' => $id, 'status' => 2]);
+
+        $vehicleById = [];
+        $driverById = [];
+        $driverReq = [];
+        $cusPayment = [];
+
+        foreach ($vehBooking as $vehBook) {
+            $vehicleById[$vehBook->getVehId()] = cusVehicle::findOne(['veh_Id' => $vehBook->getVehId()]);
+            $cusPayment[$vehBook->getBookingId()] = customer_payment::findOne(['booking_Id' => $vehBook->getBookingId()]);
+            if ($vehBook->getDriverReq() == 1 && $vehBook->getStatus() == 2) {
+                $driverReq[$vehBook->getBookingId()] = driver_requests::findOne(['reservation_id' => $vehBook->getBookingId()]);
+                $driverById[$driverReq[$vehBook->getBookingId()]->getDriverID()] = driver::findOne(['driver_ID' => $driverReq[$vehBook->getBookingId()]->getDriverID()]);
+            }
+        }
+
+
+        $params = [
+            'vehBooking' => $vehBooking,
+            'vehicleById' => $vehicleById,
+            'driverById' => $driverById,
+            'driverReq' => $driverReq,
+            'cusPayment' => $cusPayment,
+        ];
+
+        $this->setLayout('customer-dashboard');
+        return $this->render('Customer/v_activeBookings', $params);
+    }
+
+    public function completedBookings(Request $request, Response $response)
+    {
+        $id = Application::$app->user->cus_Id;
+        $vehBooking = VehBooking::retrieveAll(['cus_Id' => $id, 'status' => 3]);
+
+        $vehicleById = [];
+        $driverById = [];
+        $driverReq = [];
+        $cusPayment = [];
+
+        foreach ($vehBooking as $vehBook) {
+            $vehicleById[$vehBook->getVehId()] = cusVehicle::findOne(['veh_Id' => $vehBook->getVehId()]);
+            $cusPayment[$vehBook->getBookingId()] = customer_payment::findOne(['booking_Id' => $vehBook->getBookingId()]);
+            if ($vehBook->getDriverReq() == 1 && $vehBook->getStatus() == 3) {
+                $driverReq[$vehBook->getBookingId()] = driver_requests::findOne(['reservation_id' => $vehBook->getBookingId()]);
+                $driverById[$driverReq[$vehBook->getBookingId()]->getDriverID()] = driver::findOne(['driver_ID' => $driverReq[$vehBook->getBookingId()]->getDriverID()]);
+            }
+        }
+
+        $params = [
+            'vehBooking' => $vehBooking,
+            'vehicleById' => $vehicleById,
+            'driverById' => $driverById,
+            'driverReq' => $driverReq,
+            'cusPayment' => $cusPayment,
+        ];
+
+        $this->setLayout('customer-dashboard');
+        return $this->render('Customer/v_completedBookings', $params);
     }
 
     public function customerSettings(Request $request, Response $response)
@@ -323,9 +399,116 @@ class CustomerController extends Controller
 
     public function customerPayment(Request $request, Response $response)
     {
-        $this->setLayout('customer-dashboard');
-        return $this->render('Customer/v_customerPay');
+        // get the booking id from the request body
+        if ($request->isGet()){
+            $bookingId = $request->getBody()['booking'];
+            $vehBooking = VehBooking::findOne(['booking_Id' => $bookingId]);
+
+            if ($vehBooking->getStatus() != 1 ){
+                Application::$app->session->setFlash('error', 'You cannot pay for this booking!');
+                Application::$app->response->redirect('/Customer/VehicleBookingTable');
+            }
+
+            $total = $vehBooking->getRentalPrice();
+
+            $params = [
+                'bookingId' => $bookingId,
+                'total' => $total
+            ];
+
+
+            $this->setLayout('customer-dashboard');
+            return $this->render('Customer/v_customerPay', $params);
+        }
+
+        if ($request->isPost()){
+
+            $Stripe = new StripeClient($_ENV['STRIPE_SECRET_KEY']);
+            $bookingId = $request->getBody()['bookingId'];
+            $totalPay = $request->getBody()['total_pay'];
+            $payment_type = $request->getBody()['payment-type'];
+            $totalRent = $request->getBody()['total-rent'];
+
+            if ($payment_type == 'full'){
+                $name = 'Full Payment for #'.$bookingId.' Booking';
+            }
+            if ($payment_type == 'advance'){
+                $name = 'Advance Payment for #'.$bookingId.' Booking';
+            }
+
+            $item[] = [
+                'price_data' => [
+                    'currency' => 'lkr',
+                    'unit_amount' => $totalPay * 100,
+                    'product_data' => [
+                        'name' => $name,
+                    ],
+                ],
+                'quantity' => 1,
+            ];
+            Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
+            $checkout_session = Session::create([
+                'payment_method_types' => ['card'],
+                'line_items' => $item,
+                'mode' => 'payment',
+                'success_url' => 'http://localhost:8080/Customer/PaymentSuccess?bookingId='.$request->getBody()['bookingId'].'&payment_amount='.$totalPay.'&session_id={CHECKOUT_SESSION_ID}'. '&payment_type='.$payment_type.'&total_rent='.$totalRent,
+                'cancel_url' => 'http://localhost:8080/Customer/PaymentCancel',
+            ]);
+
+            $response->redirect($checkout_session->url);
+
+        }
     }
+
+    public function paymentSuccess(Request $request, Response $response)
+    {
+
+
+        $bookingId = $request->getBody()['bookingId'];
+        $payment_amount = $request->getBody()['payment_amount'];
+        $payment_type = $request->getBody()['payment_type'];
+        $totalRent = $request->getBody()['total_rent'];
+
+        $customerPayment = new Customer_payment();
+        $customerPayment->setBookingId($bookingId);
+        $customerPayment->setPaymentAmount($payment_amount);
+        $customerPayment->setTotalRent($totalRent);
+        $vehBooking = VehBooking::findOne(['booking_Id' => $bookingId]);
+
+
+        if ($payment_type == 'full'){
+            $customerPayment->setStatusPay($customerPayment::FULL_PAYMENT);
+            $vehBooking->setPayStatus(2);
+        }elseif ($payment_type == 'advance'){
+            $customerPayment->setStatusPay($customerPayment::ADVANCE_PAYMENT);
+            $vehBooking->setPayStatus(1);
+        }
+
+
+        $params = [
+            'payment_amount' => $payment_amount,
+        ];
+
+        if ($customerPayment->save()) {
+
+            $vehBooking->setStatus(2);
+            if ($vehBooking->update($bookingId, ['status', 'pay_status'])){
+                if ($request->isPost()) {
+                    Application::$app->session->setFlash('success', 'Payment Successful!');
+                    $response->redirect('/Customer/VehicleBookingTable');
+                    exit();
+                }
+                $this->setLayout('customer-dashboard');
+                return $this->render('Customer/v_paymentSuccess', $params);
+            }
+
+        }
+
+        Application::$app->session->setFlash('error', 'Payment Failed!');
+        $response->redirect('/Customer/VehicleBookingTable');
+        exit();
+    }
+
 
     public function customerComplaint(Request $request, Response $response)
     {
@@ -354,35 +537,11 @@ class CustomerController extends Controller
         });
 
 
-
-//        $drivers = [];
-//        foreach ($bookings as $booking) {
-//            if ($booking->getDriverId() != null){
-//                $drivers[$booking->getDriverId()] = Driver::findOne(['driver_Id' => $booking->getDriverId()]);
-//            }
-//
-//        }
-
-
-
-//        echo '<pre>';
-//        var_dump($vehicles);
-//        echo '</pre>';
-//        exit();
-
-
         if ($request->isPost()){
             if ($request->getBody()["complaint-about"] === 'vehicle-owner') {
                 $complaint = new vehOwner_complaints();
                 $complaint->setCid(uniqid(true));
                 $this->cusComplaint($complaint, $cusId, $request);
-
-                echo '<pre>';
-                var_dump($complaint);
-                echo '</pre>';
-                exit();
-
-
 
                 if ($complaint->save()) {
                     Application::$app->session->setFlash('success', 'Complaint sent successfully!');
@@ -424,10 +583,6 @@ class CustomerController extends Controller
                         $response->redirect('/Customer/Complaints');
                         return;
                     }else {
-                        echo '<pre>';
-                        var_dump($complaint->errors);
-                        echo '</pre>';
-                        exit();
                         $params = [
                             'bookings' => $bookings,
                             'vehOwners' => $vehOwners,

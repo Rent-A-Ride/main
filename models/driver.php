@@ -23,9 +23,11 @@ class driver extends dbModel
     public string $driver_Lname;
     public string $email;
     public string $phoneNo;
+    public string $license_No;
     public string $area;
     public string $address;
     public string $gender;
+    public string $status;
     public string $admin_approved;
     public string $password;
     public string $license_No;
