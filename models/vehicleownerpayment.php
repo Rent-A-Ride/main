@@ -190,6 +190,11 @@ class vehicleownerpayment extends dbModel
         $statement1->execute();
     }
 
+
+    public function getvownerPayments($user_id){
+        return Application::$app->db->pdo->query("SELECT * FROM vehicleownerpayment  WHERE vo_Id=$user_id  ORDER BY `month` DESC")->fetchAll(\PDO::FETCH_ASSOC);
+}
+
     
 
 
