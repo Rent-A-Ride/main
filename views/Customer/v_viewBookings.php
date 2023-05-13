@@ -11,6 +11,12 @@ use app\models\cusVehicle;
 
 <h2 class="main-title">Vehicle Bookings</h2>
 
+<div class="button-container">
+    <button>Unpaid Bookings</button>
+    <button>Active Bookings</button>
+    <button>Completed Bookings</button>
+</div>
+
 <h3 class="sub-title">Approved Bookings</h3>
 
 <div class="table-wrapper">
@@ -34,7 +40,7 @@ use app\models\cusVehicle;
                 ?>
                 <tbody>
 
-                <tr class="parent">
+                <tr class="parent tr1">
                     <td><?= $row->getBookingId()?></td>
                     <td>
                         <div class="parent-info">
@@ -47,11 +53,11 @@ use app\models\cusVehicle;
                     </td>
                     <td><strong> <?= 'Rs. '.$row->getRentalPrice().'.00' ?></strong></td>
                     <td><span class="status pending">Pending</span></td>
-                    <td><button id="cancelBookingBtn" class="pay-btn" data-booking-id="<?= $row->getBookingId();?>"><i class='bx bxs-wallet'></i>&nbsp;Pay</button></td>
+                    <td><button onclick="location.href='/Customer/Payment?booking=<?=$row->getBookingId()?>'" id="cancelBookingBtn" class="pay-btn" data-booking-id="<?= $row->getBookingId();?>"><i class='bx bxs-wallet'></i>&nbsp;Pay</button></td>
                     <td><button id="cancelBookingBtn" class="cancel-btn" data-booking-id="<?= $row->getBookingId();?>"><i class='bx bxs-trash'></i> Cancel</button></td>
                 </tr>
-                <tr class="child" style="display: none;">
-                    <td colspan="5" class="child-td">
+                <tr class="child tr1" style="display: none;">
+                    <td colspan="6" class="child-td">
                         <div class="child-info">
                             <div class="booking-info">
                                 <h3>Booking Info</h3>
@@ -79,13 +85,20 @@ use app\models\cusVehicle;
                             <div class="driver-info">
                                 <?php if ($row->getDriverReq()== 1): ?>
                                     <div class="driver-image">
-                                        <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" alt="Driver Image">
+                                        <img src="/assets/img/uploads/default.jpg" alt="Driver Image">
                                     </div>
                                     <div class="driver-details">
                                         <h3>Driver Details</h3>
-                                        <p><strong>Name:</strong> John Doe</p>
-                                        <p><strong>Phone:</strong> 123-456-7890</p>
-                                        <p><strong>Email:</strong> john.doe@example.com</p>
+                                        <p><strong>Name:</strong> <?= $driverById[$driverReq[$row->getBookingId()]->getDriverID()]->getDriverFname().' '.$driverById[$driverReq[$row->getBookingId()]->getDriverID()]->getDriverLname() ?></p>
+                                        <div class="ratings">
+                                            <span><strong>Ratings:</strong></span>
+                                            <i class='bx bxs-star' style="color: #ffc547;" ></i>
+                                            <i class='bx bxs-star' style="color: #ffc547;" ></i>
+                                            <i class='bx bxs-star' style="color: #ffc547;" ></i>
+                                            <i class='bx bxs-star' style="color: black;" ></i>
+                                            <span><small>(4)</small></span>
+
+                                        </div>
                                     </div>
                                 <?php else: ?>
                                     <div class="driver-image">
@@ -111,7 +124,7 @@ use app\models\cusVehicle;
         endforeach;
          else:
          echo '<tbody>
-        <tr>
+        <tr class="tr1">
             <p style="text-align: center; color: #3B3B3B">--- No data to shown ---</p>
         </tr>
         </tbody>';
@@ -123,9 +136,9 @@ use app\models\cusVehicle;
 </div>
 
 
-<h3 class="sub-title">Ongoing Bookings</h3>
+<h3 class="sub-title">Pending Bookings</h3>
 <div class="table-wrapper">
-    <table id="myTable" class="bookingTable">
+    <table id="myTable2" class="bookingTable">
 
         <thead>
         <tr>
@@ -141,7 +154,7 @@ use app\models\cusVehicle;
             ?>
             <tbody>
 
-            <tr class="parent">
+            <tr class="parent tr2">
                 <td><?= $row->getBookingId()?></td>
                 <td>
                     <div class="parent-info">
@@ -156,7 +169,7 @@ use app\models\cusVehicle;
                 <td><span class="status pending">Pending</span></td>
                 <td><button id="cancelBookingBtn" class="cancel-btn" data-booking-id="<?= $row->getBookingId();?>"><i class='bx bx-trash'></i> Cancel</button></td>
             </tr>
-            <tr class="child" style="display: none;">
+            <tr class="child tr2" style="display: none;">
                 <td colspan="5" class="child-td">
                     <div class="child-info">
                         <div class="booking-info">
@@ -185,13 +198,10 @@ use app\models\cusVehicle;
                         <div class="driver-info">
                             <?php if ($row->getDriverReq()== 1): ?>
                                 <div class="driver-image">
-                                    <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" alt="Driver Image">
+                                    <img src="/assets/img/uploads/default.jpg" alt="Driver Image">
                                 </div>
                                 <div class="driver-details">
-                                    <h3>Driver Details</h3>
-                                    <p><strong>Name:</strong> John Doe</p>
-                                    <p><strong>Phone:</strong> 123-456-7890</p>
-                                    <p><strong>Email:</strong> john.doe@example.com</p>
+                                    <p><strong>Awaiting for a Driver...</strong></p>
                                 </div>
                             <?php else: ?>
                                 <div class="driver-image">
@@ -266,6 +276,23 @@ use app\models\cusVehicle;
     for (let i = 0; i < rows.length; i++) {
         let row = rows[i];
         row.addEventListener("click", function() {
+            let sibling = this.nextElementSibling;
+            if (sibling.classList.contains("child")) {
+                if (sibling.style.display === "table-row") {
+                    sibling.style.display = "none";
+                } else {
+                    sibling.style.display = "table-row";
+                }
+            }
+        });
+    }
+
+    const table2 = document.getElementById("myTable2");
+    const rows2 = table2.getElementsByClassName("tr2");
+
+    for (let i = 0; i < rows2.length; i++) {
+        let row2 = rows2[i];
+        row2.addEventListener("click", function() {
             let sibling = this.nextElementSibling;
             if (sibling.classList.contains("child")) {
                 if (sibling.style.display === "table-row") {

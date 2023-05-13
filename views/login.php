@@ -57,14 +57,16 @@
                                 class="input-field"
 
                                 >
-                            
-                                <option value="owner">Admin</option>
+
+                                <option value="customer">Customer</option>
                                 <option value="vehicleowner">Vehicle Owner</option>
                                 <option value="driver">Driver</option>
-                                <option value="customer">Customer</option>
+                                <option value="owner">Admin</option>
+
                             </select>
                             <label>User Role</label>
-                           
+                          
+
                         </div>  
 
                         <input type="submit" value="Sign In" class="sign-btn">

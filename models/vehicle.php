@@ -18,7 +18,7 @@ class vehicle extends dbModel
     protected string $veh_location;
     protected string $price;
 
-    protected string $availability;
+    protected int $availability = 1;
     protected string $vo_Id;
     protected ?string $front_view;
     protected ?string $back_view;
@@ -157,17 +157,17 @@ class vehicle extends dbModel
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getAvailability(): string
+    public function getAvailability(): int
     {
         return $this->availability;
     }
 
     /**
-     * @param string $availability
+     * @param int $availability
      */
-    public function setAvailability(string $availability): void
+    public function setAvailability(int $availability): void
     {
         $this->availability = $availability;
     }

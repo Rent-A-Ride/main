@@ -3,6 +3,7 @@ use app\core\Application;
 ?>
 
 <!DOCTYPE html>
+<!--Vehicle Owner Dashboard-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,7 +20,7 @@ use app\core\Application;
 
 
     <!-- JQUERY -->
-    <script src="assets/javascript/jquery-3.6.3.min.js"></script>
+    <script src="/assets/javascript/jquery-3.6.3.min.js"></script>
 
     <!-- ajax -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
@@ -101,23 +102,23 @@ use app\core\Application;
             <span class="tooltip">Calendar</span>
         </li>
 
-        <li>
-            <a href="/vehicleOwner/Bookings">
-                <i class='bx bx-book-content' ></i>
-                <span class="links_name">Bookings</span>
-            </a>
-            <span class="tooltip">Bookings</span>
-        </li>
+<!--        <li>-->
+<!--            <a href="/vehicleOwner/Bookings">-->
+<!--                <i class='bx bx-book-content' ></i>-->
+<!--                <span class="links_name">Bookings</span>-->
+<!--            </a>-->
+<!--            <span class="tooltip">Bookings</span>-->
+<!--        </li>-->
 
 
 
-        <li>
-            <a href="/vehicleOwner/Complaints">
-                <i class='bx bx-comment-error' ></i>
-                <span class="links_name">Complaints</span>
-            </a>
-            <span class="tooltip">Complaints</span>
-        </li>
+<!--        <li>-->
+<!--            <a href="/vehicleOwner/Complaints">-->
+<!--                <i class='bx bx-comment-error' ></i>-->
+<!--                <span class="links_name">Complaints</span>-->
+<!--            </a>-->
+<!--            <span class="tooltip">Complaints</span>-->
+<!--        </li>-->
 
         <li class="/logout">
             <a href="/logout" class="logout">
@@ -137,6 +138,29 @@ use app\core\Application;
             <a href=""><img class="logo" src="/assets/img/logo.png" alt="Rent a Ride Logo"></a>
         </div>
         <ul class="nav-list" id="nav-list">
+            <div class="notification-cont">
+                <div class="notification-icon">
+                    <i class='bx bxs-bell'></i>
+                    <span class="notification-count">0</span>
+                </div>
+
+                <div class="notification-panel">
+                    <div class="notification-header">
+                        <h3>Notifications</h3>
+                        <button class="close-btn">&times;</button>
+                    </div>
+
+                    <ul class="notification-list">
+                        <!--                        <li><a href="#">New message from John</a></li>-->
+                        <!--                        <li><a href="#">You have 3 new emails</a></li>-->
+                        <!--                        <li><a href="#">Today's weather forecast</a></li>-->
+                        <!--                        <li><a href="#">Upcoming event reminder</a></li>-->
+                        <!--                        <li><a href="#">New product release</a></li>-->
+                    </ul>
+                </div>
+
+
+            </div>
             <!-- <li class="list-item 1"><a href="#">Sign in</a></li>
             <li class="list-item 2"><a href="#">Register</a></li>       -->
             <!-- <div class="vision"><p>Mobility Without Hassel</p> </div> -->
@@ -176,6 +200,8 @@ use app\core\Application;
 
 </body>
 <script src="/assets/javascript/component/navbar.js"></script>
+<!--Notification Js-->
+<script src="/assets/javascript/vehicleOwner/components/vo_notifications.js"></script>
 <script src="/assets/javascript/component/sidebar.js"></script>
 <script src="/assets/javascript/component/search.js"></script>
 <script src="/assets/javascript/vehicleOwner/popup.js"></script>
@@ -187,4 +213,6 @@ use app\core\Application;
 <script src="/assets/javascript/vehicleOwner/AddNewVehicle.js"></script>
 <script src="/assets/javascript/vehicleOwner/BookingCalendar.js"></script>  <!-- calendar -->
 <script src="/assets/javascript/vehicleOwner/vehProfileEdit.js"></script>
+
+
 </html>

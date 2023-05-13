@@ -14,15 +14,8 @@ class vehiclecomplaint extends dbModel
     protected int $veh_Id;
     protected string $Vehicle_No;
     protected string $complaint;
-    protected string $proof;
-    protected string $status = 'Pending';
-
-
-
-
-
-
-
+    protected ?string $proof = null;
+    protected int $status = 0;
 
     public static function tableName(): string
     {
@@ -180,17 +173,17 @@ class vehiclecomplaint extends dbModel
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getStatus(): string
+    public function getStatus(): int
     {
         return $this->status;
     }
 
     /**
-     * @param string $status
+     * @param int $status
      */
-    public function setStatus(string $status): void
+    public function setStatus(int $status): void
     {
         $this->status = $status;
     }

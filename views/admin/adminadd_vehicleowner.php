@@ -6,36 +6,7 @@
 <div class="search">
     <label class="label-l" for="search"><i class='bx bx-search'></i>Search </label>
     <input type="search" id="search" placeholder="Type to search">
-    <div class="location-select">
-        <select id="location" name="location">
-            <option value="" disabled selected hidden>location</option>
-            <option value="Ampara">Ampara</option>
-            <option value="Anuradhapura">Anuradhapura</option>
-            <option value="Badulla">Badulla</option>
-            <option value="Batticaloa">Batticaloa</option>
-            <option value="Colombo">Colombo</option>
-            <option value="Galle">Galle</option>
-            <option value="Gampaha">Gampaha</option>
-            <option value="Hambatota">Hambatota</option>
-            <option value="Jaffna">Jaffna</option>
-            <option value="Kaluthara">Kaluthara</option>
-            <option value="Kandy">Kandy</option>
-            <option value="Kegalle">Kegalle</option>
-            <option value="Kilinochchi">Kilinochchi</option>
-            <option value="Kurunegala">Kurunegala</option>
-            <option value="Mannar">Mannar</option>
-            <option value="Matale">Matale</option>
-            <option value="Matara">Matara</option>
-            <option value="Moneragala">Moneragala</option>
-            <option value="Mullaitivu">Mullaitivu</option>
-            <option value="Nuwara Eliya">Nuwara Eliya</option>
-            <option value="Polonnaruwa">Polonnaruwa</option>
-            <option value="Puttalama">Puttalama</option>
-            <option value="Ratnapura">Ratnapura</option>
-            <option value="Trincomalee">Trincomalee</option>
-            <option value="Vavuniya" >Vavuniya</option>
-        </select>
-    </div>
+    
     
     <!-- <div class="date-select">
 

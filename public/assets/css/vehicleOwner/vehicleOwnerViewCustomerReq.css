@@ -352,23 +352,30 @@ th, td {
 }
 
   /*select button*/
-.select-button {
+ .driver-req-button {
     border: none;
     padding: 6px;
     border-radius: 4px;
     cursor: pointer;
 
 }
-.select-button {
+ .driver-req-button {
     background-color: #f7ba58;
     color:black;
 }
 
-.select-button:hover {
+ .driver-req-button:hover {
+    background-color: black;
+    color: white;
+
+}
+.driver-req-button.clicked{
     background-color: #fab84c;
 
 }
-.select-button.clicked{
-    background-color: #fab84c;
 
+.driver-selection{
+    padding: 10px;
+    height: 100%;
+    width: 80%;
 }

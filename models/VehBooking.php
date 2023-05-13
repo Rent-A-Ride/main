@@ -20,6 +20,7 @@ class VehBooking extends dbModel
     protected string $note;
     protected bool $driverReq = false;
     protected string $status;
+    protected int $pay_status = 0;
 
     public function rules(): array
     {
@@ -33,7 +34,7 @@ class VehBooking extends dbModel
 
     public function attributes(): array
     {
-        return ['booking_Id','cus_Id','vo_Id','veh_Id','pickupLocation','startDate','endDate','Destination','rental_price','payMethod','driverReq','status'];
+        return ['booking_Id','cus_Id','vo_Id','veh_Id','pickupLocation','startDate','endDate','Destination','rental_price','payMethod','driverReq','status','pay_status'];
     }
 
     public static function primaryKey(): string
@@ -249,18 +250,38 @@ class VehBooking extends dbModel
         $this->note = $note;
     }
 
+    /**
+     * @return int
+     */
+    public function getPayStatus(): int
+    {
+        return $this->pay_status;
+    }
+
+    /**
+     * @param int $pay_status
+     */
+    public function setPayStatus(int $pay_status): void
+    {
+        $this->pay_status = $pay_status;
+    }
 
 
-    // public function getpayment_forCurrentMonth(){
-    //     $currentMonthFirstDay = date("Y-m-01"); 
-    //     $currentMonthLastDay = date("Y-m-t");
-    //     $firstdate = date_create($currentMonthFirstDay);
-    //     $lastdate = date_create($currentMonthLastDay);
-    //     var_dump($firstdate);
-    //     var_dump($lastdate);
-    //     die();
-        
-    // }
+
+
+
+
+
+//    public function getpayment_forCurrentMonth(){
+//        $currentMonthFirstDay = date("Y-m-01");
+//        $currentMonthLastDay = date("Y-m-t");
+//        $firstdate = date_create($currentMonthFirstDay);
+//        $lastdate = date_create($currentMonthLastDay);
+//        // var_dump($firstdate);
+//        // var_dump($lastdate);
+//        // die();
+//
+//    // }
 
 
     public function getBookingForMonth($vo_ID,$date){
@@ -269,7 +290,7 @@ class VehBooking extends dbModel
 
         return Application::$app->db->pdo->query("SELECT * FROM vehbooking
         WHERE DATE_FORMAT(endDate, '%Y-%m') ='$date' AND vo_Id=$vo_ID;")->fetchAll(\PDO::FETCH_ASSOC);
-        
+
     }
 
     public function getvehBooking($veh_Id){
@@ -278,8 +299,18 @@ class VehBooking extends dbModel
 
         return Application::$app->db->pdo->query("SELECT * FROM vehbooking
         WHERE veh_Id=$veh_Id;")->fetchAll(\PDO::FETCH_ASSOC);
-        
+
     }
+
+
+    public function getMonthlyBooking(){
+        return Application::$app->db->pdo->query("SELECT YEAR(endDate) AS year, MONTH(endDate) AS month, COUNT(booking_Id) AS total
+        FROM vehbooking
+        WHERE status = 1
+        GROUP BY YEAR(endDate), MONTH(endDate)")->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+
 
 
 

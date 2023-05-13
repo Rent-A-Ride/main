@@ -31,7 +31,7 @@ use app\models\vehicle;
         <i class='bx bx-plus bx-sm'></i> Add New
         <i class='bx bx-car bx-sm'></i>
     </button>
-    <button class="disabled-veh-button">
+    <button class="disabled-veh-button" onclick="location.href='/vehicleOwner/disabledVehicles'" >
         <i class='bx bx-low-vision bx-sm'></i> Disabled List
         <i class='bx bx-list-ul bx-sm' ></i>
     </button>
@@ -70,7 +70,16 @@ use app\models\vehicle;
 
                     <div class="table-data"><button onclick="location.href='/vehicleOwner/UpdateVehicle?id=<?= $vehicle->getVehId()?>'" class="update-doc-button"><i class='bx bx-edit bx-sm'></i> Renew</button></div>
 
-                    <div class="table-data"><button onclick="location.href='/Vehicledisable'" class="disable-button"><i class='bx bx-low-vision bx-sm'></i> Disable</button></div>
+<!--                    <div class="table-data"><button onclick="confirm('Are you sure you want to disable this vehicle?')"  class="disable-button"><i class='bx bx-low-vision bx-sm'></i> Disable</button></div>-->
+
+                    <div class="table-data">
+                        <form method="post" onsubmit="return confirm('Are you sure you want to disable this vehicle?');" >
+                            <input type="hidden" name="id" value="<?= $vehicle->getVehId() ?>">
+                            <button type="submit" name="disable" class="disable-button" value="true"><i class='bx bx-low-vision bx-sm'></i> Disable</button>
+                        </form>
+                    </div>
+
+
                 </div>
             <?php
             endforeach;
