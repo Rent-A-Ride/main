@@ -27,22 +27,21 @@ class driver extends dbModel
     public string $area;
     public string $address;
     public string $gender;
-    public string $status;
     public string $admin_approved;
     public string $password;
     public string $category;
-    public string $profile_pic;
+    public ?string $profile_pic = "";
     public int $status;
 //    public string $profile_pic;
 
 
-    public function __construct(array $registerBody=[])
-    {
-        
-        $this->body= $registerBody;
-
-
-    }
+//    public function __construct(array $registerBody=[])
+//    {
+//
+//        $this->body= $registerBody;
+//
+//
+//    }
     public static function tableName(): string
     {
         return 'driver';

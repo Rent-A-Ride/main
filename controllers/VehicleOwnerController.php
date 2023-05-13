@@ -209,7 +209,10 @@ class VehicleOwnerController extends Controller
         //retrieveAll-retrieve all the details of database table
         $vehbookings = VehBooking::retrieveAll(['vo_id' => $voId]);
 
-
+//        echo '<pre>';
+//        var_dump($vehbookings);
+//        echo '</pre>';
+//        exit();
 
         $customers = [];
         $vehicles = [];
