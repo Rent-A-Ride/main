@@ -111,9 +111,14 @@
     <?php 
     $total= array_sum($data);
     ?>
-  <div>
-    
-  Total = <?= $total ?>
+  <div class="voinvoiceTotal">
+      <div class="voinvoiceTotaltotal">
+        <b> Total : </b>
+      </div>
+      <div class="voinvoiceTotalValue">
+        <b> <?= $total ?></b>
+      </div>
+   
   </div>
   <div>
     <button class="book-button createPdf">PDF</button>

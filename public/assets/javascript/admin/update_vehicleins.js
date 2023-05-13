@@ -1,8 +1,9 @@
 import {Modal} from "../component/Modal.js";
 import {htmlToElement} from "../utils/index.js"
+console.log("kalana");
 const vehiclelinscanCopyButton = document.querySelector(".vehicle-ins-update");
 
-// console.log(vehiclelinscanCopyButton);
+console.log(vehiclelinscanCopyButton);
 vehiclelinscanCopyButton.addEventListener("click", function () {
        
         const veh_id=vehiclelinscanCopyButton.dataset.vehid;

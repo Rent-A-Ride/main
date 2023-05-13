@@ -28,6 +28,9 @@ class driver extends dbModel
     public string $gender;
     public string $admin_approved;
     public string $password;
+    public string $license_No;
+    public string $profile_pic;
+    public int $status;
 //    public string $profile_pic;
 
 
@@ -128,6 +131,10 @@ class driver extends dbModel
         return Application::$app->db->pdo->query("SELECT * FROM driver WHERE driver.admin_approved=1")->fetchAll(\PDO::FETCH_ASSOC);
 
     }
+    public function getaddDriver(){
+        return Application::$app->db->pdo->query("SELECT * FROM driver WHERE driver.admin_approved=0")->fetchAll(\PDO::FETCH_ASSOC);
+
+    }
 
     public function acceptRequests($user_id){
         $sql="UPDATE driver_requests SET accept =1 WHERE reservation_id = $user_id";
@@ -206,7 +213,7 @@ class driver extends dbModel
      */
     public function setDriverId(string $driver_id): void
     {
-        $this->driver_id = $driver_id;
+        $this->driver_ID = $driver_id;
     }
 
     /**
@@ -262,7 +269,7 @@ class driver extends dbModel
      */
     public function getDriverAddress(): string
     {
-        return $this->driver_address;
+        return $this->address;
     }
 
     /**
@@ -270,7 +277,7 @@ class driver extends dbModel
      */
     public function setDriverAddress(string $driver_address): void
     {
-        $this->driver_address = $driver_address;
+        $this->address = $driver_address;
     }
 
     /**
@@ -344,6 +351,7 @@ class driver extends dbModel
     {
         return $this->password;
     }
+    
 
     /**
      * @param string $password
@@ -351,6 +359,40 @@ class driver extends dbModel
     public function setPassword(string $password): void
     {
         $this->password = $password;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProfile(): string
+    {
+        return $this->profile_pic;
+    }
+    
+
+    /**
+     * @param string $password
+     */
+    public function setProfile(string $profile_pic): void
+    {
+        $this->profile_pic = $profile_pic;
+    }
+
+     /**
+     * @return string
+     */
+    public function getStatus(): int
+    {
+        return $this->status;
+    }
+    
+
+    /**
+     * @param string $password
+     */
+    public function setStatus(int $status): void
+    {
+        $this->status = $status;
     }
 
     public function getdriverCount(){

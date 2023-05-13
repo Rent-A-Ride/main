@@ -162,9 +162,9 @@ foreach ($bookings as $booking) {
                         ?>
                         <div class="table-row">
                              
-                            <div class="table-data"><?= $row['booking_id']?></div>
-                            <div class="table-data"><?= $row['comment']?></div>
-                            <div class="table-data"><?= $row['rates']?></div>
+                            <div class="table-data"><?= $row['id']?></div>
+                            <div class="table-data"><?= $row['comments']?></div>
+                            <div class="table-data"><?= $row['rating']?></div>
                         </div>
                     <?php
                     endforeach;
