@@ -1,72 +1,56 @@
+
 .date-search-container {
     display: flex;
+    text-align: center;
+    margin-top: 20px;
     justify-content: center;
-    margin-top: 50px;
-    align_items: center;
-}
-.date-search {
-    width: 50%;
-    height: 10%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 10px;
-    background-color: #fff;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
 }
 
-.date-label {
-    font-size: 22px;
-    font-weight: 600;
-    text-align: center;
+.date-search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    background-color: #f2f2f2;
+    border-radius: 25px;
+    padding: 5px;
+    overflow: hidden;
 }
 
 .date-input-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
+    margin: 0 10px;
 }
 
 .date-input-container input[type="date"] {
-    width: 70%;
+    padding: 5px;
     border: 1px solid black;
     border-radius: 15px;
-    padding: 10px 15px;
-    margin-right: 10px;
-    font-size: 16px;
-    font-weight: 600;
-    color: #333;
+    font-size: 14px;
 }
 
-.date-input-container button[type="submit"] {
-    cursor: pointer;
-    text-align: center;
-    background-color: #f3bb21;
+.search-date {
+    background-color: #fab84c;
+    color: white;
     border: none;
-    border-radius: 50%;
-    padding:10px 12px;
-    color: #fff;
+    padding: 8px 16px;
     font-size: 16px;
-    font-weight: 600;
-    transition: background-color 0.3s ease-in-out;
+    border-radius: 25px;
+    cursor: pointer;
 }
 
-.date-input-container button[type="submit"]:hover {
-    background-color: #1abc9c;
+.search-date i {
+    margin-right: 5px;
 }
 
+/* Responsive Styles */
 @media (max-width: 768px) {
     .date-search {
+        flex-direction: column;
         padding: 10px;
     }
 
-    .date-input-container input[type="date"] {
-        width: 60%;
-    }
-
-    .date-input-container button[type="submit"] {
-        padding: 10px 15px;
+    .date-input-container {
+        margin: 10px 0;
     }
 }
+

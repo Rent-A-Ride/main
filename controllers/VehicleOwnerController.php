@@ -665,12 +665,15 @@ class VehicleOwnerController extends Controller
 //vehicle owner booking calendar
     public function bookingCalendar(Request $request,Response $response)
     {
+        // get the logged in Vehicle Owner Id
         $voId = Application::$app->session->get('user');
 
         if ($request->isPost()){
-            if (isset($request->getBody()['search-date'])) {
-                $date = $request->getBody()['search-date'];
-                $bookings = VehBooking::findBetweenDates($date, $voId);
+
+            if ($request->getBody()) {
+                $startDate = $request->getBody()['start-date'];
+                $endDate = $request->getBody()['end-date'];
+                $bookings = VehBooking::findBetweenDates($startDate,$endDate, $voId);
 
                 // Create an array to store the data
                 $bookingData = [];
@@ -848,7 +851,7 @@ class VehicleOwnerController extends Controller
         return $this->render("/VehicleOwner/vehicleOwnerDisabledList", $param);
     }
 
-    //    create notification for vehicle Owner
+    // create notification for vehicle Owner
     public function vo_notification()
     {
         $user = Application::$app->user;
