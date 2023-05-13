@@ -215,10 +215,12 @@ class VehicleOwnerController extends Controller
         $vehicles = [];
         $driver_req = [];
         $drivers = driver::retrieveAll(['status' => 1]);
+        $vehicle_info = [];
 
         foreach ($vehbookings as $vehbooking) {
             $customers[$vehbooking->getCusId()] = Customer::findOne(['cus_Id'=> $vehbooking->getCusId()]);
             $vehicles[$vehbooking->getVehId()] = vehicle::findOne(['veh_Id'=> $vehbooking->getVehId()]);
+            $vehicle_info[$vehbooking->getVehId()] = VehInfo::findOne(['veh_Id'=> $vehbooking->getVehId()]);
             //getting the booking id of each vehbooking as the index of the driver_req array
             $driver_req[$vehbooking-> getBookingId()] = driver_requests::findOne(['reservation_id' => $vehbooking->getBookingId()])?driver_requests::findOne(['reservation_id' => $vehbooking->getBookingId()]):false;
         }
@@ -226,9 +228,9 @@ class VehicleOwnerController extends Controller
         foreach ($drivers as $driver){
             $getDriverById[$driver->getDriverId()] = $driver;
         }
-
+//
 //        echo '<pre>';
-//        var_dump($driver_req);
+//        var_dump($vehicle_info[15]->getTransmission());
 //        echo '</pre>';
 //        exit();
 
@@ -260,6 +262,9 @@ class VehicleOwnerController extends Controller
                         "model" => $vehbookings,
                         'customer' => $customers,
                         'vehicle' => $vehicles,
+                        'driver_req' => $driver_req,
+                        'getDriverById' => $getDriverById,
+                        'vehicleInfo' => $vehicle_info,
                         'driver' => $drivers
                     ];
                     $this->setLayout("vehicleOwner-dashboard");
@@ -284,6 +289,9 @@ class VehicleOwnerController extends Controller
                         "model" => $vehbookings,
                         'customer' => $customers,
                         'vehicle' => $vehicles,
+                        'driver_req' => $driver_req,
+                        'getDriverById' => $getDriverById,
+                        'vehicleInfo' => $vehicle_info,
                         'driver' => $drivers
                     ];
                     $this->setLayout("vehicleOwner-dashboard");
@@ -321,6 +329,9 @@ class VehicleOwnerController extends Controller
                         "model" => $vehbookings,
                         'customer' => $customers,
                         'vehicle' => $vehicles,
+                        'driver_req' => $driver_req,
+                        'getDriverById' => $getDriverById,
+                        'vehicleInfo' => $vehicle_info,
                         'driver' => $drivers
                     ];
                     $this->setLayout("vehicleOwner-dashboard");
@@ -337,6 +348,9 @@ class VehicleOwnerController extends Controller
                 "model" => $vehbookings,
                 'customer' => $customers,
                 'vehicle' => $vehicles,
+                'driver_req' => $driver_req,
+                'getDriverById' => $getDriverById,
+                'vehicleInfo' => $vehicle_info,
                 'drivers' => $drivers
             ];
 
@@ -352,6 +366,7 @@ class VehicleOwnerController extends Controller
             'vehicle' => $vehicles,
             'driver_req' => $driver_req,
             'getDriverById' => $getDriverById,
+            'vehicleInfo' => $vehicle_info,
             'drivers' => $drivers
         ];
         $this->setLayout("vehicleOwner-dashboard");
@@ -380,6 +395,35 @@ class VehicleOwnerController extends Controller
             $getDriverById[$driv->getDriverId()] = $driv;
         }
 
+//post request for cancelling accepted requests before advance payment done by customer
+
+        if ($request->isPost())
+        {
+
+            // if the booking is rejected redirect to the rejected request tab
+            if(isset($request->getBody()['reject']))
+            {
+                $bookingId = $request->getBody()['booking_Id'];
+                $booking = VehBooking::findOne(['booking_Id' => $bookingId]);
+                $booking->setStatus(2);
+                if ($booking->update($bookingId,['status']))
+                {
+                    Application::$app->session->setFlash('success', 'Booking Rejected Successfully!');
+                    $response->redirect('/CustomerRejectedRequest');
+                    exit();
+                }
+
+            }
+            $params = [
+                "model" => $cusReq,
+                'customer' => $getCustomerById,
+                'vehicle' => $getVehicleById,
+                'driver' => $driver
+            ];
+            $this->setLayout("vehicleOwner-dashboard");
+            return $this->render("/VehicleOwner/vehicleOwnerAcceptedCustomerReq",  $params);
+        }
+
 
 
         $params = [
@@ -388,8 +432,18 @@ class VehicleOwnerController extends Controller
             'vehicle' => $getVehicleById,
             'driver' => $driver
         ];
+
+
         return $response->render("/VehicleOwner/vehicleOwnerAcceptedReq", "vehicleOwner-dashboard", $params);
     }
+
+
+
+
+
+
+
+
 
     public function viewCustomerRejectedRequests(Request $request, Response $response): string
     {
@@ -419,15 +473,17 @@ class VehicleOwnerController extends Controller
             "vehicles" =>$vehicles
         ];
 
+
+
         return $response->render("/VehicleOwner/vehicleOwnerRejectedReq", "vehicleOwner-dashboard", $params);
     }
 
 
-
+    //ongoing requests
     public function viewCustomerOngoingRequests(Request $request, Response $response): string
     {
         $voID = Application::$app->session->get('user');
-        $bookings = VehBooking::retrieveAll(['vo_Id'=>$voID, 'status'=>3]);
+        $bookings = VehBooking::retrieveAll(['vo_Id'=>$voID]);
 //
 //        echo '<pre>';
 //        var_dump($cusReq);
@@ -436,20 +492,57 @@ class VehicleOwnerController extends Controller
 
         $customers = [];
         $vehicles = [];
+        $drivers = [];
 
         foreach ($bookings as $booking){
             $customers[$booking->getCusId()]=Customer::findOne(['cus_Id'=>$booking->getCusId()]);
             $vehicles[$booking->getVehId()]=vehicle::findOne(['veh_Id'=>$booking->getVehId()]);
+
+            if($booking->getDriverReq()==1 && $booking->getStatus() == 1){
+               $driver_req = driver_requests::findOne(['reservation_id'=>$booking->getBookingId()]);
+               //getting the driver id by driver_req - driver_req is an instance of driver_requests model including an row
+               $get_driver_id=$driver_req->getDriverID();
+               $drivers[$booking->getBookingId()]=driver::findOne(['driver_ID'=>$get_driver_id]);
+            }
         }
 //        echo '<pre>';
-//        var_dump($vehicles[18]->getVehBrand());
+//        var_dump($drivers);
 //        echo '</pre>';
 //        exit();
+
+        //post request for mark ongoing requests as completed requests after full payment done by customer
+
+        if ($request->isPost())
+        {
+
+            // if the booking is rejected redirect to the rejected request tab
+            if(isset($request->getBody()['complete']))
+            {
+                $bookingId = $request->getBody()['booking_Id'];
+                $booking = VehBooking::findOne(['booking_Id' => $bookingId]);
+                $booking->setStatus(3);
+                if ($booking->update($bookingId,['status']))
+                {
+                    Application::$app->session->setFlash('success', 'Booking Rejected Successfully!');
+                    $response->redirect('/CustomerCompletedRequest');
+                    exit();
+                }
+
+            }
+
+        }
+
+
+
+
+
+
 
         $params = [
             "model" => $bookings,
             "customers" => $customers,
-            "vehicles" =>$vehicles
+            "vehicles" =>$vehicles,
+            "drivers" =>$drivers
         ];
 
         return $response->render("/VehicleOwner/vehicleOwnerOngoingReq", "vehicleOwner-dashboard", $params);
@@ -458,7 +551,7 @@ class VehicleOwnerController extends Controller
     public function viewCustomerCompletedRequests(Request $request, Response $response): string
     {
         $voID = Application::$app->session->get('user');
-        $bookings = VehBooking::retrieveAll(['vo_Id'=>$voID, 'status'=>4]);
+        $bookings = VehBooking::retrieveAll(['vo_Id'=>$voID, 'status'=>3]);
 //
 //        echo '<pre>';
 //        var_dump($cusReq);

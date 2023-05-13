@@ -213,6 +213,8 @@ $app->router->post("/CustomerPendingRequest", [VehicleOwnerController::class, 'v
 
 // view customer Accepted requests
 $app->router->get("/CustomerAcceptedRequest", [VehicleOwnerController::class, 'viewCustomerAcceptedRequests']);
+$app->router->post("/CustomerAcceptedRequest", [VehicleOwnerController::class, 'viewCustomerAcceptedRequests']);
+
 
 // view customer Rejected requests
 $app->router->get("/CustomerRejectedRequest", [VehicleOwnerController::class, 'viewCustomerRejectedRequests']);

@@ -29,9 +29,9 @@ use app\models\viewCustomerReq;
         <div class="pending-container">
             <div class="req-switch">
                 <input type="radio" class="with-driver" name="switch" onclick="showWithDriver()" id="with-driver" checked>
-                <label for="with-driver">W/ Driver</label>
+                <label for="with-driver">With Driver</label>
                 <input type="radio" class="without-driver" name="switch" onclick="showWithoutDriver()" id="without-driver">
-                <label for="without-driver">W/O Driver</label>
+                <label for="without-driver">With-Out Driver</label>
             </div>
 
 
@@ -50,9 +50,8 @@ use app\models\viewCustomerReq;
 
                                 <tr>
                                     <th>Request ID</th>
-                                    <th colspan="2">Vehicle</th>
+                                    <th colspan="2">Vehicle</th colspan="2">
                                     <th>Customer Name</th>
-                                    <th>Telephone No.</th>
                                     <!-- <th>Address</th> -->
 
                                     <th>Pickup Location</th>
@@ -75,22 +74,24 @@ use app\models\viewCustomerReq;
                                         ?>
                                         <tr>
                                             <td><?php echo $row->getBookingId() ?></td>
-                                            td><img src="/assets/img/uploads/vehicle/<?= $vehicles[$row->getVehId()]->getFrontView()?>" width="56px"></td>
-                                            <td><?= $vehicles[$row->getVehId()]->getVehBrand().' '.$vehicles[$row->getVehId()]->getVehModel()."<br>".$vehicles[$row->getVehId()]->getPlateNo()?></td>
+                                            <td><img src="/assets/img/uploads/vehicle/<?= $vehicle[$row->getVehId()]->getFrontView()?>" width="56px"></td>
+                                            <td><?= $vehicle[$row->getVehId()]->getVehBrand().' '.$vehicle[$row->getVehId()]->getVehModel()."<br>".$vehicle[$row->getVehId()]->getPlateNo()?></td>
                                             <td><?php echo $customer[$row->getCusId()]->firstname.' '.$customer[$row->getCusId()]->lastname?></td>
-                                            <td><?php echo $customer[$row->getCusId()]->phoneno?></td>
 
                                             <td><?php echo $row->getPickupLocation() ?></td>
                                             <td><?php echo $row->getStartDate() ?></td>
                                             <td><?php echo $row->getEndDate() ?></td>
+
                                             <td>driver name</td>
 <!--                                            <td>--><?php //echo $driver[$row->getDriverbyId()]->getDriverFname(). ' ' .$driver[$row->getDriverbyId()]->getDriverLname()?><!--</td>-->
                                             <td><?php echo $row->getPayMethod() ?></td>
                                             <td><div class="status">
-                                                    <?php if ($row->getStatus() == 1): ?>
-                                                        <span class="status-txt pending">Payment Pending</span>
-                                                    <?php elseif ($row->getStatus() == 2): ?>
-                                                        <span class="status-txt pending">Driver Pending</span>
+                                                    <?php if ($row->getPayStatus() == 0): ?>
+                                                        <span class="status-txt pending">Advance Pending</span>
+                                                    <?php elseif ($row->getPayStatus() == 1): ?>
+                                                        <span class="status-txt booked">Advance Done!</span>
+                                                    <?php elseif ($row->getPayStatus() == 2): ?>
+                                                        <span class="status-txt confirmed">Completed!</span>
                                                     <?php endif; ?>
 
 
@@ -99,11 +100,19 @@ use app\models\viewCustomerReq;
                                             <td><?php echo $row->getNote() ?></td>
 
 
-                                            <td>
-                                                <form method="post" onsubmit="return confirm('Are you sure you want to cancel this accepted request?');">
-                                                    <input type="hidden" name="booking_Id" value="<?= $row->getBookingId() ?>">
-                                                    <input type="submit" class="reject-button" value="Cancel">
-                                                </form>
+                                            <td colspan="2">
+                                                <?php
+                                                if ($row->getPayStatus() == 0): ?>
+
+                                                    <form method="post" onsubmit="return confirm('Are you sure you want to cancel this accepted request?');">
+                                                        <input type="hidden" name="booking_Id" value="<?= $row->getBookingId() ?>">
+                                                        <input type="submit" class="reject-button" name="reject" value="Cancel Request">
+                                                    </form>
+
+                                                <?php elseif ($row->getPayStatus() == 1 || $row->getPayStatus() == 2): ?>
+                                                    <span class="not-allowed">Not Allowed!</span>
+                                                <?php endif; ?>
+
                                             </td>
 
 
@@ -133,7 +142,7 @@ use app\models\viewCustomerReq;
                                     <th>Request ID</th>
                                     <th colspan="2">Vehicle</th>
                                     <th>Customer Name</th>
-                                    <th>Telephone No.</th>
+<!--                                    <th>Telephone No.</th>-->
                                     <!-- <th>Address</th> -->
 
                                     <th>Pickup Location</th>
@@ -154,31 +163,49 @@ use app\models\viewCustomerReq;
                                         ?>
                                         <tr>
                                             <td><?php echo $row->getBookingId() ?></td>
-                                            <td><?php echo $vehicle[$row->getVehId()]->getVehBrand().' '.$vehicle[$row->getVehId()]->getVehModel()?></td>
-                                            <td><?php echo $customer[$row->getCusId()]->firstname.' '.$customer[$row->getCusId()]->lastname?></td>
-                                            <td><?php echo $customer[$row->getCusId()]->phoneno?></td>
+
+                                            <td><img src="/assets/img/uploads/vehicle/<?= $vehicle[$row->getVehId()]->getFrontView()?>" width="56px"></td>
+                                            <td><?= $vehicle[$row->getVehId()]->getVehBrand().' '.$vehicle[$row->getVehId()]->getVehModel()."<br>".$vehicle[$row->getVehId()]->getPlateNo()?></td>
+                                            <td><?= $customer[$row->getCusId()]->firstname.' '.$customer[$row->getCusId()]->lastname?></td>
+
+<!--                                            <td>--><?php //echo $customer[$row->getCusId()]->phoneno?><!--</td>-->
                                             <!-- <td>Kandy</td> -->
 
                                             <td><?php echo $row->getPickupLocation() ?></td>
                                             <td><?php echo $row->getStartDate() ?></td>
                                             <td><?php echo $row->getEndDate() ?></td>
                                             <td><?php echo $row->getPayMethod() ?></td>
-                                            <td><?php echo $row->getNote() ?></td>
+
 
                                             <td><div class="status">
-                                                    <?php if ($row->getStatus() == 1): ?>
-                                                        <span class="status-txt pending">Payment Pending</span>
-<!--                                                    --><?php //elseif ($row->getStatus() == 2): ?>
-<!--                                                        <span class="status-txt pending">Driver Pending</span>-->
+                                                    <?php if ($row->getPayStatus() == 0): ?>
+                                                        <span class="status-txt pending">Advance Pending</span>
+                                                    <?php elseif ($row->getPayStatus() == 1): ?>
+                                                        <span class="status-txt booked">Advance Done!</span>
+                                                    <?php elseif ($row->getPayStatus() == 2): ?>
+                                                        <span class="status-txt confirmed">Completed!</span>
                                                     <?php endif; ?>
 
 
 
                                                 </div></td>
-                                            <td><form method="post" onsubmit="return confirm('Are you sure you want to cancel this accepted request?');">
+                                            <td><?php echo $row->getNote() ?></td>
+
+
+                                            <td>
+                                                <?php
+                                                if ($row->getPayStatus() == 0): ?>
+
+                                                <form method="post" onsubmit="return confirm('Are you sure you want to cancel this accepted request?');">
                                                     <input type="hidden" name="booking_Id" value="<?= $row->getBookingId() ?>">
-                                                    <input type="submit" class="reject-button" value="Cancel">
-                                                </form></td>
+                                                    <input type="submit" class="reject-button" name="reject" value="Cancel Request">
+                                                </form>
+
+                                                <?php elseif ($row->getPayStatus() == 1 || $row->getPayStatus() == 2): ?>
+                                                    <span class="not-allowed">Not Allowed!</span>
+                                                <?php endif; ?>
+
+                                            </td>
 
 
                                         </tr>
@@ -207,7 +234,7 @@ use app\models\viewCustomerReq;
 
 
 
-/* Popup JS */
+<!--/* Popup JS */-->
 <script>
     const modal = document.getElementById("popup-driver");
 
