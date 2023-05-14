@@ -378,32 +378,120 @@ class VehicleOwnerController extends Controller
 
     }
 
+//    public function viewCustomerAcceptedRequests(Request $request, Response $response): string
+//    {
+//        $cusReq = VehBooking::retrieveAll();
+//        $customer = Customer::retrieveAll();
+//        $vehicle = vehicle::retrieveAll();
+//        $driver = driver::retrieveAll();
+//
+//
+//        $getCustomerById = [];
+//        $getVehicleById = [];
+//        foreach ($customer as $cus){
+//            $getCustomerById[$cus->cus_Id] = $cus;
+//        }
+//        foreach ($vehicle as $veh){
+//            $getVehicleById[$veh->getVehId()] = $veh;
+//        }
+//        foreach ($driver as $driv){
+//            $getDriverById[$driv->getDriverId()] = $driv;
+//        }
+
+//post request for cancelling accepted requests before advance payment done by customer
+
+//        if ($request->isPost())
+//        {
+//
+//             //if the booking is rejected redirect to the rejected request tab
+//            if(isset($request->getBody()['reject']))
+//            {
+//                $bookingId = $request->getBody()['booking_Id'];
+//                $booking = VehBooking::findOne(['booking_Id' => $bookingId]);
+//                $booking->setStatus(2);
+//                if ($booking->update($bookingId,['status']))
+//                {
+//                    Application::$app->session->setFlash('success', 'Booking Rejected Successfully!');
+//                    $response->redirect('/CustomerRejectedRequest');
+//                    exit();
+//                }
+//
+//            }
+//            $params = [
+//                "model" => $cusReq,
+//                'customer' => $getCustomerById,
+//                'vehicle' => $getVehicleById,
+//                'driver' => $driver
+//            ];
+//            $this->setLayout("vehicleOwner-dashboard");
+//            return $this->render("/VehicleOwner/vehicleOwnerAcceptedCustomerReq",  $params);
+//        }
+//
+//
+//
+//        $params = [
+//            "model" => $cusReq,
+//            'customer' => $getCustomerById,
+//            'vehicle' => $getVehicleById,
+//            'driver' => $driver
+//        ];
+//
+//
+//        return $response->render("/VehicleOwner/vehicleOwnerAcceptedReq", "vehicleOwner-dashboard", $params);
+//    }
+
+
+
+
+
+    //new accepted request function
     public function viewCustomerAcceptedRequests(Request $request, Response $response): string
     {
-        $cusReq = VehBooking::retrieveAll();
-        $customer = Customer::retrieveAll();
-        $vehicle = vehicle::retrieveAll();
-        $driver = driver::retrieveAll();
+        $voID = Application::$app->session->get('user');
+        $bookings = VehBooking::retrieveAll(['vo_Id'=>$voID]);
+//        $cusReq = VehBooking::retrieveAll();
+//        $customer = Customer::retrieveAll();
+//        $vehicle = vehicle::retrieveAll();
+//        $driver = driver::retrieveAll();
+
+        $customers = [];
+        $vehicles = [];
+        $drivers = [];
+//
+//        $getCustomerById = [];
+//        $getVehicleById = [];
+//        foreach ($customer as $cus){
+//            $getCustomerById[$cus->cus_Id] = $cus;
+//        }
+//        foreach ($vehicle as $veh){
+//            $getVehicleById[$veh->getVehId()] = $veh;
+//        }
+//        foreach ($driver as $driv){
+//            $getDriverById[$driv->getDriverId()] = $driv;
+//        }
+
+        foreach ($bookings as $booking){
+            $customers[$booking->getCusId()]=Customer::findOne(['cus_Id'=>$booking->getCusId()]);
+            $vehicles[$booking->getVehId()]=vehicle::findOne(['veh_Id'=>$booking->getVehId()]);
+
+            if($booking->getDriverReq()==1 && $booking->getStatus() == 1){
+                $driver_req = driver_requests::findOne(['reservation_id'=>$booking->getBookingId()]);
+                //getting the driver id by driver_req - driver_req is an instance of driver_requests model including an row
+                $get_driver_id=$driver_req->getDriverID();
+                $drivers[$booking->getBookingId()]=driver::findOne(['driver_ID'=>$get_driver_id]);
+            }
+        }
 
 
-        $getCustomerById = [];
-        $getVehicleById = [];
-        foreach ($customer as $cus){
-            $getCustomerById[$cus->cus_Id] = $cus;
-        }
-        foreach ($vehicle as $veh){
-            $getVehicleById[$veh->getVehId()] = $veh;
-        }
-        foreach ($driver as $driv){
-            $getDriverById[$driv->getDriverId()] = $driv;
-        }
+
+
 
 //post request for cancelling accepted requests before advance payment done by customer
 
         if ($request->isPost())
         {
 
-            // if the booking is rejected redirect to the rejected request tab
+            //if the booking is rejected redirect to the rejected request tab
             if(isset($request->getBody()['reject']))
             {
                 $bookingId = $request->getBody()['booking_Id'];
@@ -412,37 +500,28 @@ class VehicleOwnerController extends Controller
                 if ($booking->update($bookingId,['status']))
                 {
                     Application::$app->session->setFlash('success', 'Booking Rejected Successfully!');
-                    $response->redirect('/CustomerRejectedRequest');
+                    $response->redirect('/CustomerAcceptedRequest');
                     exit();
                 }
 
             }
-            $params = [
-                "model" => $cusReq,
-                'customer' => $getCustomerById,
-                'vehicle' => $getVehicleById,
-                'driver' => $driver
-            ];
-            $this->setLayout("vehicleOwner-dashboard");
-            return $this->render("/VehicleOwner/vehicleOwnerAcceptedCustomerReq",  $params);
+
         }
 
 
 
         $params = [
-            "model" => $cusReq,
-            'customer' => $getCustomerById,
-            'vehicle' => $getVehicleById,
-            'driver' => $driver
+
+                "model" => $bookings,
+                "customers" => $customers,
+                "vehicles" =>$vehicles,
+                "drivers" =>$drivers
+
         ];
 
 
         return $response->render("/VehicleOwner/vehicleOwnerAcceptedReq", "vehicleOwner-dashboard", $params);
     }
-
-
-
-
 
 
 
@@ -563,10 +642,18 @@ class VehicleOwnerController extends Controller
 
         $customers = [];
         $vehicles = [];
+        $drivers = [];
 
         foreach ($bookings as $booking){
             $customers[$booking->getCusId()]=Customer::findOne(['cus_Id'=>$booking->getCusId()]);
             $vehicles[$booking->getVehId()]=vehicle::findOne(['veh_Id'=>$booking->getVehId()]);
+
+            if($booking->getDriverReq()==1 && $booking->getStatus() == 3){
+                $driver_req = driver_requests::findOne(['reservation_id'=>$booking->getBookingId()]);
+                //getting the driver id by driver_req - driver_req is an instance of driver_requests model including an row
+                $get_driver_id=$driver_req->getDriverID();
+                $drivers[$booking->getBookingId()]=driver::findOne(['driver_ID'=>$get_driver_id]);
+            }
         }
 //        echo '<pre>';
 //        var_dump($vehicles[18]->getVehBrand());
@@ -576,7 +663,9 @@ class VehicleOwnerController extends Controller
         $params = [
             "model" => $bookings,
             "customers" => $customers,
-            "vehicles" =>$vehicles
+            "vehicles" =>$vehicles,
+            "drivers" =>$drivers
+
         ];
 
         return $response->render("/VehicleOwner/vehicleOwnerCompletedReq", "vehicleOwner-dashboard", $params);
@@ -951,7 +1040,7 @@ class VehicleOwnerController extends Controller
         $primaryKey = $user->primaryKey();
         $userId = $user->{$primaryKey};
         $notifications = voNotifications::retrieveAll(['user_id' => $userId, 'status' => 'unread']);
-
+        
         if ($notifications === false) {
             // There was an error retrieving the notifications
             $error = [
@@ -974,7 +1063,6 @@ class VehicleOwnerController extends Controller
         $data[] = $params;
 
         return json_encode($data);
-
     }
 
     public function updateVoNotificationStatus(Request $request, Response $response)

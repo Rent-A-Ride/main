@@ -19,9 +19,10 @@ use app\models\viewCustomerReq;
         <a  href="/CustomerPendingRequest">Pending Requests</a>
         <a href="/CustomerAcceptedRequest">Accepted Requests</a>
         <!--        <a href="#ongoing">Completed Requests</a>-->
-        <a href="/CustomerRejectedRequest">Rejected Requests</a>
         <a id="active" href="/CustomerOngoingRequest">Ongoing Requests</a>
         <a href="/CustomerCompletedRequest">Completed Requests</a>
+        <a href="/CustomerRejectedRequest">Rejected Requests</a>
+
 
 
         <!-- <div class="search-container">
@@ -40,9 +41,9 @@ use app\models\viewCustomerReq;
         <div class="pending-container">
             <div class="req-switch">
                 <br>
-                <input type="radio" class="with-driver" name="switch" id="with-driver" >
+                <input type="radio" class="with-driver" name="switch" id="with-driver" checked>
                 <label for="with-driver">With Driver</label>
-                <input type="radio" class="without-driver" name="switch" id="without-driver" checked >
+                <input type="radio" class="without-driver" name="switch" id="without-driver"  >
                 <label for="without-driver">With-Out Driver</label>
 
             </div>

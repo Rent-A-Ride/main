@@ -300,3 +300,11 @@ input[type="file"] {
 }
 
 
+
+
+label .required::before {
+    content: "*";
+    color: red;
+    margin-right: 5px;
+}
+
