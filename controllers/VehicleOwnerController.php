@@ -307,10 +307,10 @@ class VehicleOwnerController extends Controller
 
             if (isset($request->getBody()['ask-driver']))
             {
-//                echo '<pre>';
-//                var_dump($request->getBody());
-//                echo '</pre>';
-//                exit();
+               echo '<pre>';
+               var_dump($request->getBody());
+               echo '</pre>';
+               exit();
                 $booking_id = $request->getBody()['booking_Id'];
                 $driverId = $request->getBody()['driver_Id'];
                 $driver_request = new driver_requests();

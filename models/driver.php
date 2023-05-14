@@ -23,7 +23,7 @@ class driver extends dbModel
     public string $driver_Lname;
     public string $email;
     public string $phoneNo;
-    // public string $license_No;
+    public string $license_No;
     public string $area;
     public string $address;
     public string $gender;
@@ -31,7 +31,7 @@ class driver extends dbModel
     public string $password;
     public string $category;
     public ?string $profile_pic = "";
-    public int $status = '';
+    public int $status = 0;
     public string $license_scan_copy;
 
 //    public string $profile_pic;
@@ -85,18 +85,18 @@ class driver extends dbModel
     /**
      * @return string
      */
-    public function getCategory(): string
-    {
-        return $this->category;
-    }
+    // public function getCategory(): string
+    // {
+    //     return $this->category;
+    // }
 
     /**
      * @param string $category
      */
-    public function setCategory(string $category): void
-    {
-        $this->category = $category;
-    }
+    // public function setCategory(string $category): void
+    // {
+    //     $this->category = $category;
+    // }
 
 
 
@@ -168,7 +168,7 @@ class driver extends dbModel
     public function acceptRequests($user_id){
         $sql="UPDATE driver_request SET accept =1 WHERE reservation_id = $user_id";
         Application::$app->db->pdo->query($sql)->execute();
-        $sql1="UPDATE vehbooking SET status=2 WHERE booking_Id=$user_id";
+        $sql1="UPDATE vehbooking SET status=1 WHERE booking_Id=$user_id";
         Application::$app->db->pdo->query($sql1)->execute();
     }
 
@@ -445,7 +445,7 @@ class driver extends dbModel
      /**
      * @return string
      */
-    public function getCategory(): int
+    public function getCategory(): string
     {
         return $this->category;
     }
