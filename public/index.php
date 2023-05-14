@@ -44,8 +44,6 @@ $config = [
 
 $app = new Application(dirname(__DIR__),$config);
 
-
-
 $app->router->get('/', [SiteController::class, 'home']);
 
 $app->router->get('/contact', [SiteController::class, 'contact']);
@@ -218,14 +216,9 @@ $app->router->post("/Customer/PaymentComplete", [CustomerController::class, 'pay
 $app->router->get("/Customer/Complaints", [CustomerController::class, 'customerComplaint']);
 $app->router->post("/Customer/Complaints", [CustomerController::class, 'customerComplaint']);
 
-
-
-
-
-
-
-
-
+// Search By Date
+$app->router->get("/customerSearchByDate", [CustomerController::class, 'searchByDate']);
+$app->router->post("/customerSearchByDate", [CustomerController::class, 'searchByDate']);
 
 // view customer Pending requests
 $app->router->get("/CustomerPendingRequest", [VehicleOwnerController::class, 'viewCustomerPendingRequests']);
@@ -246,6 +239,8 @@ $app->router->post("/CustomerOngoingRequest", [VehicleOwnerController::class, 'v
 //vehicle owner completed vehicles
 $app->router->get("/CustomerCompletedRequest", [VehicleOwnerController::class, 'viewCustomerCompletedRequests']);
 $app->router->post("/CustomerCompletedRequest", [VehicleOwnerController::class, 'viewCustomerCompletedRequests']);
+
+
 
 
 

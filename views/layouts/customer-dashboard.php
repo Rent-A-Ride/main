@@ -198,4 +198,5 @@ use app\core\Application;
 <script src="/assets/javascript/customer/components/date-validation.js"></script>
 <script src="/assets/javascript/customer/components/ratings.js"></script>
 <script src="/assets/javascript/customer/components/complaints.js"></script>
+<script src="/assets/javascript/customer/components/dateSearch.js"></script>
 </html>

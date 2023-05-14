@@ -71,6 +71,56 @@ class CustomerController extends Controller
         return $this->render('Customer/v_customerHome', $params);
     }
 
+    public function searchByDate(Request $request, Response $response)
+    {
+        if ($request->isPost()){
+            $data = [];
+            if ($request->getBody()){
+                $startDate = $request->getBody()['start-date'];
+                $endDate = $request->getBody()['end-date'];
+                $bookings = VehBooking::findBetweenDates($startDate, $endDate);
+
+                //Find the vehicles which are not booked in between $satrtDate and $endDate
+                $vehicle = vehicle::retrieveAll(['availability' => 1]);
+                $vehicles = array_filter($vehicle, function ($veh) use ($bookings) {
+                    foreach ($bookings as $booking) {
+                        if ($booking->getVehId() == $veh->getVehId()) {
+                            return false;
+                        }
+                    }
+                    return true;
+                });
+
+                foreach ($vehicles as $veh) {
+                    $vo = vehicle_Owner::findOne(['vo_Id' => $veh->getVoId()]);
+                    $ratings = ceil(veh_Reviews::calculateAverage('rating', ['veh_Id' => $veh->getVehId()]))%5;;
+
+                    $vehicleData =[
+                        'veh_Id' => $veh->getVehId(),
+                        'veh_PlateNo' => $veh->getPlateNo(),
+                        'veh_Type' => $veh->getVehType(),
+                        'veh_brand' => $veh->getVehBrand(),
+                        'veh_Model' => $veh->getVehModel(),
+                        'veh_Img' => $veh->getFrontView(),
+                        'veh_Price' => $veh->getPrice(),
+                        'veh_Availability' => $veh->getAvailability(),
+                        'veh_location' => $veh->getVehLocation(),
+                        'vo_Id' => $vo->getOwnerFname().' '.$vo->getOwnerLname(),
+                        'rating' => $ratings,
+                    ];
+
+                    $data[] = $vehicleData;
+                }
+
+                return json_encode($data);
+
+            }
+
+
+
+        }
+    }
+
     public function profile(Request $request, Response $response)
     {
 
@@ -328,6 +378,10 @@ class CustomerController extends Controller
 
     public function customerSettings(Request $request, Response $response)
     {
+        echo '<pre>';
+        var_dump(Application::$ROOT_DIR);
+        echo '</pre>';
+        exit();
         $id=Application::$app->user->cus_Id;
         $customer = new Customer();
         $customer=Customer::findOne(['cus_Id'=>$id]);

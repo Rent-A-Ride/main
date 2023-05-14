@@ -15,12 +15,14 @@
 
 <div class="date-search-container">
     <form id="date-search" class="date-search" method="post">
-        <label class="date-label" for="start-date">Start Date:</label>
+
         <div class="date-input-container">
+            <label class="date-label" for="start-date">Start Date:</label>
             <input type="date" id="start-date" name="start-date" required>
         </div>
-        <label class="date-label" for="end-date">End Date:</label>
+
         <div class="date-input-container">
+            <label class="date-label" for="end-date">End Date:</label>
             <input type="date" id="end-date" name="end-date" required>
         </div>
         <button id="date-search" class="search-date" type="submit" name="search-date"><i class='bx bx-search-alt bx-sm'></i></button>
@@ -31,7 +33,7 @@
 
 
 
-<h2 id="bookings-heading">Scheduled Bookings for Today </h2>
+<h2 id="bookings-heading">Search For Scheduled Bookings</h2>
 
 
 

@@ -12,7 +12,7 @@ vehicleComplaintResolveButtons.forEach(function (btn) {
         const vehicleNo=tableRow.querySelector('td:nth-child(3)');
         const veh_no=vehicleNo.textContent;
         // const proof = btn.dataset.proof;
-       
+        console.log(comid);
         const complaint ={
             comid,
             customer,

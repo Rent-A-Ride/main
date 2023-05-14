@@ -31,13 +31,13 @@ use app\models\veh_Reviews;
     <form id="date-search" class="date-search" method="post">
         <div class="search-input-container">
             <label class="label-l" for="start-date">Start Date:</label>
-            <input type="date" id="start-date" name="start-date">
+            <input type="date" id="start-date" name="start-date" required>
         </div>
         <div class="search-input-container">
             <label class="label-l" for="end-date">End Date:</label>
-            <input type="date" id="end-date" name="end-date">
+            <input type="date" id="end-date" name="end-date" required>
         </div>
-        <button class="search-icon">
+        <button class="search-icon" type="submit">
             <i class='bx bx-search'></i>
         </button>
     </form>
@@ -58,7 +58,7 @@ use app\models\veh_Reviews;
             <div class="header__item"><a id="total" class="filter__link filter__link--number" href="#"></a></div>
 <!--            <div class="header__item"><a id="total" class="filter__link filter__link--number" href="#"></a></div>-->
         </div>
-        <div class="table-content" >
+        <div class="table-content" id="table-content" >
             <?php
             foreach ($model as $row):
 

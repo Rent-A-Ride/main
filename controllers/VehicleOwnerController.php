@@ -809,7 +809,7 @@ class VehicleOwnerController extends Controller
                         'pay_Method' => $payMethod,
                         'note' => $note,
                         'status' => $status
-                        // Add other values as needed
+
                     ];
 
                     // Add the booking data to the array
