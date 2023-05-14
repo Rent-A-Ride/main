@@ -40,9 +40,9 @@ use app\models\viewCustomerReq;
         <div class="pending-container">
             <div class="req-switch">
                 <input type="radio" class="with-driver" name="switch" id="with-driver" >
-                <label for="with-driver">W/ Driver</label>
+                <label for="with-driver">With Driver</label>
                 <input type="radio" class="without-driver" name="switch" id="without-driver" checked >
-                <label for="without-driver">W/O Driver</label>
+                <label for="without-driver">With-out Driver</label>
             </div>
 
             <div class="content">
@@ -65,7 +65,7 @@ use app\models\viewCustomerReq;
                                 <th colspan="2">Vehicle</th>
                                 <th>Customer </th>
                                 <th>Duration</th>
-
+                                <th>Pickup Location</th>
                                 <th>Destination</th>
                                 <th>Payment Amount</th>
                                 <th>Note</th>
@@ -84,6 +84,7 @@ use app\models\viewCustomerReq;
                                 <td><?= $vehicle[$row->getVehId()]->getVehBrand().' '.$vehicle[$row->getVehId()]->getVehModel()."<br>".$vehicle[$row->getVehId()]->getPlateNo()?></td>
                                 <td><?= $customer[$row->getCusId()]->firstname.' '.$customer[$row->getCusId()]->lastname?></td>
                                 <td><?php echo $row->getStartDate() ."<br>". "To"."<br>".$row->getEndDate()?></td>
+                                <td><?php echo $row->getPickupLocation() ?></td>
                                 <td><?php echo $row->getDestination() ?></td>
                                 <td><?php echo $row->getRentalPrice() ?></td>
                                 <td><?php echo $row->getNote() ?></td>
@@ -116,11 +117,20 @@ use app\models\viewCustomerReq;
                                             <option value="">Select a driver</option>
                                             <?php
                                             foreach ($drivers as $driver):
+                                                // if the requested vehicle transmission is manual then show  only the drivers who  has a manual license
+                                                if($vehicleInfo[$row->getVehId()]->getTransmission() == 'Manual' && $driver->getCategory() == 'Manual'):
                                             ?>
+                                                    <option value="<?= $driver->getDriverId()?>">
+                                                        <?= $driver->getDriverFname().' '.$driver->getDriverLname().' -- '.$driver->getArea()?>
+                                                    </option>
+                                                    <?php
+                                                        elseif ($vehicleInfo[$row->getVehId()]->getTransmission() == 'Auto' && ($driver->getCategory() == 'Auto'|| $driver->getCategory() == 'Manual') ):
+                                                    ?>
                                             <option value="<?= $driver->getDriverId()?>">
-                                                <?= $driver->getDriverFname().' '.$driver->getDriverLname()?>
+                                                <?= $driver->getDriverFname().' '.$driver->getDriverLname().' -- '.$driver->getArea()?>
                                             </option>
                                             <?php
+                                                endif;
                                             endforeach;
                                             ?>
 
@@ -134,14 +144,17 @@ use app\models\viewCustomerReq;
                                         <input hidden name="ask-driver">
                                         <input hidden name="driver_Id" value="" id="driver_Id">
                                         <input type="hidden" name="booking_Id" value="<?php echo $row->getBookingId()?>" >
-                                        <input type="submit" class="driver-req-button" value="Send Request" id="send-driver">
+                                        <input type="submit" class="driver-req-button" value=" Request Driver" id="send-driver">
                                     </form>
                                     <br>
                                     <form method="post" onsubmit="return confirm('Are you sure you want to reject this request?');">
                                         <input type="hidden" name="booking_Id" value="<?= $row->getBookingId() ?>">
-                                        <input type="submit" class="reject-button" value="Reject" id="">
+                                        <input type="submit" class="reject-button" name="reject" value="Reject">
                                     </form>
                                 </td>
+
+
+
                                 <?php endif; ?>
                             </tr>
                             <?php

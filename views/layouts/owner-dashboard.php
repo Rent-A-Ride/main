@@ -209,24 +209,44 @@
             <a href=""><img class="logo" src="/assets/img/logo.png" alt="Rent a Ride Logo"></a>
         </div>
         <ul class="nav-list" id="nav-list">
-            <!-- <li class="list-item 1"><a href="#">Sign in</a></li>
-            <li class="list-item 2"><a href="#">Register</a></li>       -->
-            <!-- <div class="vision"><p>Mobility Without Hassel</p> </div> -->
+        <div class="notification-cont">
+                <div class="notification-icon">
+                    <i class='bx bx-bell'></i>
+                    <span class="notification-count">0</span>
+                </div>
+
+                <div class="notification-panel">
+                    <div class="notification-header">
+                        <h3>Notifications</h3>
+                        <button class="close-btn">&times;</button>
+                    </div>
+
+                    <ul class="notification-list">
+                        <li><a href="#">New message from John</a></li>
+<!--                        <li><a href="#">You have 3 new emails</a></li>-->
+<!--                        <li><a href="#">Today's weather forecast</a></li>-->
+<!--                        <li><a href="#">Upcoming event reminder</a></li>-->
+<!--                        <li><a href="#">New product release</a></li>-->
+                    </ul>
+                </div>
+
+
+            </div>
             <div class="profile-cont">
                 <span class="profile-name"><?= Application::$app->user->displayName(); ?></span>
                 <div class="img-cont"><img src="/assets/img/uploads/userProfile/<?= Application::$app->user->userprofile('profile_pic')?>" class="profile-image"></div>
 
             </div>
 
-
+            
 
         </ul>
-        <!-- This is corrected! -->
         <div class="profile-menu" style="display: none;">
             <a href="/ownerProfile">My Profile</a>
             <a href="/admin/Settings">Settings</a>
             <a href="/logout">Logout</a>
         </div>
+
         <div id="toggle-btn" class="menu-container" onclick="myFunction(this)">
             <div class="bar1"></div>
             <div class="bar2"></div>
@@ -289,6 +309,7 @@
 <script src="/assets/javascript/admin/vehicle_complaint.js"></script> -->
 <script type="module" src="/assets/javascript/index.js"></script>
 <script type="module" src="/assets/javascript/admin/profile.js"></script>
+<script src="/assets/javascript/admin/component/notification.js"></script>
 
 
 </html>

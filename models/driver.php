@@ -23,24 +23,25 @@ class driver extends dbModel
     public string $driver_Lname;
     public string $email;
     public string $phoneNo;
-    public string $license_No;
+    // public string $license_No;
     public string $area;
     public string $address;
     public string $gender;
     public string $admin_approved;
     public string $password;
-    public ?string $profile_pic = '';
+    public string $category;
+    public ?string $profile_pic = "";
     public int $status;
 //    public string $profile_pic;
 
 
-    public function __construct(array $registerBody=[])
-    {
-        
-        $this->body= $registerBody;
-
-
-    }
+//    public function __construct(array $registerBody=[])
+//    {
+//
+//        $this->body= $registerBody;
+//
+//
+//    }
     public static function tableName(): string
     {
         return 'driver';
@@ -57,7 +58,7 @@ class driver extends dbModel
     }
     public function attributes(): array
     {
-        return ['Nic','driver_Fname','driver_Lname','email','phoneNo','area','address','gender','admin_approved','password', 'profile_pic', 'license_No', 'status'];
+        return ['Nic','driver_Fname','driver_Lname','email','phoneNo','area','address','gender','admin_approved','password', 'profile_pic', 'license_No', 'status','category'];
     }
 
     public function displayName(): string
@@ -69,6 +70,23 @@ class driver extends dbModel
     {
         return $this->$data;
     }
+
+    /**
+     * @return string
+     */
+    public function getCategory(): string
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param string $category
+     */
+    public function setCategory(string $category): void
+    {
+        $this->category = $category;
+    }
+
 
 
 
