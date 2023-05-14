@@ -1,3 +1,4 @@
+console.log("vehicle lin");
 import {Modal} from "../component/Modal.js";
 import {htmlToElement} from "../utils/index.js"
 const vehiclelinscanCopyButton = document.querySelector(".vehiclelin_scan_copy");

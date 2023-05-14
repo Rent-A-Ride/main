@@ -5,19 +5,22 @@ const vehicleComplaintResolveButtons = document.querySelectorAll(".vehicleCompla
 vehicleComplaintResolveButtons.forEach(function (btn) {
     btn.addEventListener("click", function () {
         const comid=btn.dataset.compalintid;
+        const cusid=btn.dataset.customerid;
         const tableRow=btn.parentElement.parentElement;
         const customerName=tableRow.querySelector('td:nth-child(2)');
         const customer=customerName.textContent;
         const vehicleNo=tableRow.querySelector('td:nth-child(3)');
         const veh_no=vehicleNo.textContent;
         // const proof = btn.dataset.proof;
-
+       
         const complaint ={
             comid,
             customer,
-            veh_no
+            veh_no,
+            cusid
             
         };
+
 
         const viewcomplaintResolve = htmlToElement(
             `<div class="modal-body">
@@ -36,9 +39,9 @@ vehicleComplaintResolveButtons.forEach(function (btn) {
             
             <div class='form-item'>
                     <label for='com_ID'>Complaint No:</label>
-                    <input type="number" name='com_ID' id='com_no' placeholder='' required  value='${complaint.comid}' readonly />
+                    <input type="text" name='com_ID' id='com_no' placeholder='' required  value='${complaint.comid}' readonly />
             </div>
-            <div> <input type="number" style="display:none" name='cus_ID' placeholder='' required  value='${complaint.comid}' /> </div>
+            <div> <input type="number" style="display:none" name='cus_ID' placeholder='' required  value='${complaint.cusid}' /> </div>
 
             <div class='form-item'>
                     <label for='cus_Name'>Customer Name:</label>

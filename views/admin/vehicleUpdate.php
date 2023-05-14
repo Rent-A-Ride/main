@@ -1,7 +1,5 @@
 <?php  
-    // var_dump($ren_lin);
-    // var_dump($ren_ins);
-    // exit;
+   
 
 
 ?>
@@ -71,5 +69,5 @@
     </section>
 </div>
 
-<script src="../../public/assets/javascript/admin/update_vehicleins.js"></script>
-<script src="../../public/assets/javascript/admin/update_vehiclelin.js"></script>
+<!-- <script src="/assets/javascript/admin/update_vehicleins.js"></script> -->
+<!-- <script src="/assets/javascript/admin/update_vehiclelin.js"></script> -->
