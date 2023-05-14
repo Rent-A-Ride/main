@@ -199,8 +199,8 @@ class driver_requests extends dbModel
     }
 
     public function getdriverReqforDriver($date,$driver_id){
-        return Application::$app->db->pdo->query("SELECT * FROM vehbooking INNER JOIN driver_requests on vehbooking.booking_Id=driver_requests.reservation_id
-        WHERE DATE_FORMAT(vehbooking.endDate, '%Y-%m') ='$date' AND driver_requests.driver_ID=$driver_id And driver_requests.accept=1 ")->fetchAll(\PDO::FETCH_ASSOC);
+        return Application::$app->db->pdo->query("SELECT * FROM vehbooking INNER JOIN driver_request on vehbooking.booking_Id=driver_request.reservation_id
+        WHERE DATE_FORMAT(vehbooking.endDate, '%Y-%m') ='$date' AND driver_request.driver_ID=$driver_id And driver_request.accept=1 ")->fetchAll(\PDO::FETCH_ASSOC);
             
         
     }

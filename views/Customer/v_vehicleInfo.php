@@ -106,6 +106,8 @@ use app\models\VehInfo;
 
 </div>
 
+
+<!--Vehicle Review added -->
 <div class="reviews-container-2">
     <h2>Ratings and Reviews</h2>
     <div class="rating" id="overall-rating">

@@ -1,6 +1,7 @@
 <?php
     use app\models\VehBooking;
 /* @var $booking VehBooking */
+
 ?>
 
     <div class="complaint-wrapper-container">
@@ -33,7 +34,7 @@
 <!--                                <label class="custom-file-label" for="images">Choose files</label>-->
                             </div>
 <!--                            Add an error-->
-<!--                            <span class="error">--><?php //echo $complaint->errors; ?><!--</span>-->
+
                         </div>
 
                         <div class="output"></div>

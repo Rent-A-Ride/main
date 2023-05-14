@@ -23,7 +23,7 @@
         <div class="date-input-container">
             <input type="date" id="end-date" name="end-date" required>
         </div>
-        <button class="search-date" type="submit" name="search-date"><i class='bx bx-search-alt bx-sm'></i></button>
+        <button id="date-search" class="search-date" type="submit" name="search-date"><i class='bx bx-search-alt bx-sm'></i></button>
     </form>
 </div>
 

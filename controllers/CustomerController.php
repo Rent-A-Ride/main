@@ -164,6 +164,7 @@ class CustomerController extends Controller
             $customerById[$customer->cus_Id] = $customer;
         }
 
+//        Vehicle Review & Rating Section
         $avgReview = veh_Reviews::calculateAverage('rating', ['veh_Id' => $id]);
         $vehReviews = veh_Reviews::retrieveAll(['veh_Id' => $id]);
 
@@ -675,6 +676,7 @@ class CustomerController extends Controller
             $vehOwners[$booking->getVoId()] = vehicle_Owner::findOne(['vo_Id' => $booking->getVoId()]);
         }
 
+        // Remove null values from array
         $vehOwners = array_filter($vehOwners, function($value) {
             return !is_bool($value);
         });
@@ -690,6 +692,9 @@ class CustomerController extends Controller
         });
 
 
+
+
+
         if ($request->isPost()){
             if ($request->getBody()["complaint-about"] === 'vehicle-owner') {
                 $complaint = new vehOwner_complaints();
@@ -697,6 +702,7 @@ class CustomerController extends Controller
                 $this->cusComplaint($complaint, $cusId, $request);
 
                 if ($complaint->save()) {
+
                     Application::$app->session->setFlash('success', 'Complaint sent successfully!');
                     $response->redirect('/Customer/Complaints');
                     return;
@@ -781,10 +787,14 @@ class CustomerController extends Controller
         }
 
 //        if ($request->isGet()){
-//            echo '<pre>';
-//            var_dump($request->getBody());
-//            echo '</pre>';
-//            exit();
+//            $params = [
+//                'bookings' => $bookings,
+//                'vehOwners' => $vehOwners,
+//                'vehicles' => $vehicles
+//            ];
+//
+//            $this->setLayout('customer-dashboard');
+//            return $this->render('Customer/v_customerComplaints', $params);
 //        }
 
         $params = [

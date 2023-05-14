@@ -4,6 +4,7 @@
     text-align: center;
     margin-top: 20px;
     justify-content: center;
+    z-index: 1;
 }
 
 .date-search {
@@ -36,6 +37,7 @@
     font-size: 16px;
     border-radius: 25px;
     cursor: pointer;
+    z-index: auto;
 }
 
 .search-date i {
