@@ -124,21 +124,11 @@ class AuthController extends Controller
 
 
 
-                $customer->loadData($request->getBody());
+            $customer->loadData($request->getBody());
 
-                if ($request->getBody()['nic']){
+            if ($request->getBody()['nic']){
                     $customer->setGender($this->setGenderFromNIC($customer->getNic()));
-                }
-
-
-                if ($customer->validate() && $customer->save()){
-                    Application::$app->session->setFlash('success', 'Registration Successfully!');
-                    $response->redirect("/login");
-                    exit();
-                }
-
-
-
+            }
             if ($customer->validate() && $customer->save()){
                 $email=$customer->getEmail();
                 $name=$customer->getFirstname().''.$customer->getLastname();
@@ -174,7 +164,7 @@ class AuthController extends Controller
                     
                     
                     $this->setLayout("emailVerify");
-                    return $this->render("/component/verifyEmail",['email'=>$customere]);
+                    return $this->render("/component/verifyEmail",['email'=>$customere,'model'=>$emailv]);
 
                 }
 

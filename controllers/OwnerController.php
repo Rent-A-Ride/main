@@ -24,6 +24,7 @@ use app\models\driverInvoice;
 use app\models\driverpayment;
 use app\models\Email\Email;
 use app\models\MonthlyRevenue;
+use app\models\Notification;
 use app\models\vehicle_Owner;
 use app\models\vehiclecomplaint;
 use app\models\veh_license;
@@ -361,13 +362,13 @@ class OwnerController extends Controller
             $notification = new vehicle_complaint_resolve_notification();
             if ($req->isPost()){
                 $body=$req->getBody();
-                // var_dump($body['com_ID']);
-                // exit;
-                $notification->loadData($body);
+                $cus_id=$body['cus_ID'];
+                $notification->loadData($body); 
                 $notification->save();
+                Notification::sendNotification(intval($cus_id),"Solve Notification",$body['action']);
                 $com=new vehiclecomplaint;
-                $com->resolve(intval($body['com_ID']));
-
+                $com->resolve($body['com_ID']);
+                
                 $res->redirect('/admin/vehicleComplaint');
             }
             

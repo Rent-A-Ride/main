@@ -1,6 +1,7 @@
+console.log("vehicle ins");
 import {Modal} from "../component/Modal.js";
 import {htmlToElement} from "../utils/index.js"
-console.log("kalana");
+
 const vehiclelinscanCopyButton = document.querySelector(".vehicle-ins-update");
 
 console.log(vehiclelinscanCopyButton);

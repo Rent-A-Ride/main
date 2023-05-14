@@ -65,10 +65,10 @@ use app\core\Application;
                     <h6>Gender</h6>
                     <p><?php echo $vehicleowner[0]['gender'] ?></p>
                 </div>
-                <div class="data">
+                <!-- <div class="data">
                     <h6>License Number</h6>
                     <p><?php echo $vehicleowner[0]["license_No"] ?></p>
-                </div>
+                </div> -->
 
             </div>
             <!-- <div class="editProfileBtn">
