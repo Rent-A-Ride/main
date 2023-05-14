@@ -378,10 +378,6 @@ class CustomerController extends Controller
 
     public function customerSettings(Request $request, Response $response)
     {
-        echo '<pre>';
-        var_dump(Application::$ROOT_DIR);
-        echo '</pre>';
-        exit();
         $id=Application::$app->user->cus_Id;
         $customer = new Customer();
         $customer=Customer::findOne(['cus_Id'=>$id]);
@@ -609,8 +605,8 @@ class CustomerController extends Controller
                 'payment_method_types' => ['card'],
                 'line_items' => $item,
                 'mode' => 'payment',
-                'success_url' => 'http://localhost:8080/Customer/PaymentComplete?bookingId='.$request->getBody()['bookingId'].'&payment_amount='.$totalPay.'&session_id={CHECKOUT_SESSION_ID}',
-                'cancel_url' => 'http://localhost:8080/Customer/PaymentCancel',
+                'success_url' => SITE_URL.'/Customer/PaymentComplete?bookingId='.$request->getBody()['bookingId'].'&payment_amount='.$totalPay.'&session_id={CHECKOUT_SESSION_ID}',
+                'cancel_url' => SITE_URL.'/Customer/PaymentCancel',
             ]);
 
             $response->redirect($checkout_session->url);
@@ -688,8 +684,8 @@ class CustomerController extends Controller
 
             $customerPayment = customer_payment::findOne(['booking_Id' => $bookingId]);
             $customerPayment->setStatusPay($customerPayment::FULL_PAYMENT);
-            voNotifications::sendNotification($vehBooking->getVoId(),'Booking Payment','Payment for booking #'.$bookingId.' is Completed!','/CustomerOngoingRequest');
             $vehBooking = VehBooking::findOne(['booking_Id' => $bookingId]);
+            voNotifications::sendNotification($vehBooking->getVoId(),'Booking Payment','Payment for booking #'.$bookingId.' is Completed!','/CustomerOngoingRequest');
             $vehBooking->setPayStatus(2);
 
 
