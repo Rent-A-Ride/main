@@ -64,10 +64,10 @@ use app\core\Application;
                     <h6>Address</h6>
                     <p><?php echo($owner_details[0]['Owner_area'])  ?></p>
                 </div>
-                <div class="data">
+                <!-- <div class="data">
                     <h6>License Number</h6>
                     <p><?php echo(" ".$owner_details[0]['license_No'])  ?></p>
-                </div>
+                </div> -->
 
             </div>
             <div class="editProfileBtn">

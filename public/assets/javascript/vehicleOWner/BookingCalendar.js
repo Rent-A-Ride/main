@@ -36,9 +36,7 @@ form.addEventListener('submit', function(event) {
         .then(data => {
             displaySearchResults(data);
         })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+
 });
 
 window.addEventListener('DOMContentLoaded', function() {
@@ -73,7 +71,7 @@ function displaySearchResults(results) {
       <td>${result.booking_Id}</td>
       <td>
         <div class="parent-info">
-          <img src="/assets/img/vehicle/${result.veh_Image}" alt="Vehicle Image">
+          <img src="/assets/img/uploads/vehicle/${result.veh_Image}" alt="Vehicle Image">
           <div class="info">
             <p><strong>${result.veh_Name}</strong></p>
             <p class="small">${result.veh_Plate_No}</p>

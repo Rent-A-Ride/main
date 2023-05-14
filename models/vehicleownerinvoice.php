@@ -113,4 +113,8 @@ class vehicleownerinvoice extends dbModel
         $statement1->bindValue(":invoice",$invoice);
         $statement1->execute();
     }
+
+    public function getVownerinvoice($user_id){
+        return Application::$app->db->pdo->query("SELECT * FROM vehicleownerinvoice  WHERE vo_ID=$user_id  ORDER BY `date` DESC")->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }

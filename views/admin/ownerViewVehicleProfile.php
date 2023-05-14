@@ -12,8 +12,7 @@ foreach ($bookings as $booking) {
     }
 }
 
-// var_dump($veh_li);
-// exit;
+
 
 
 ?>

@@ -1,9 +1,15 @@
 <?php
-/* @var $row viewCustomerReq */
+/* @var $customers Customer*/
+/* @var $row VehBooking */
 
+use app\models\Customer;
+use app\models\VehBooking;
 use app\models\viewCustomerReq;
 
 ?>
+
+
+
     <section class="requests">
 
         <div class="topnav">
@@ -12,6 +18,8 @@ use app\models\viewCustomerReq;
             <a href="/CustomerAcceptedRequest">Accepted Requests</a>
             <!--        <a href="#ongoing">Completed Requests</a>-->
             <a id="active" href="/CustomerRejectedRequest">Rejected Requests</a>
+            <a href="/CustomerOngoingRequest">Ongoing Requests</a>
+            <a href="/CustomerCompletedRequest">Completed Requests</a>
 
 
             <!-- <div class="search-container">
@@ -31,35 +39,35 @@ use app\models\viewCustomerReq;
             <table class="table">
 
                 <thead>
+                <tr  style="text-align: center">
+
                 <tr>
                     <th>Request ID</th>
+                    <th colspan="2">Vehicle</th>
                     <th>Customer Name</th>
                     <th>Telephone No.</th>
-                    <!-- <th>Address</th> -->
-                    <th>Vehicle Name</th>
                     <th>Pickup Location</th>
                     <th>Start Date</th>
                     <th>End Date</th>
-                    <th>Payment Method</th>
                     <th>Special Note</th>
-                    <th>Status</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php
                 foreach ($model as $row):
-                if ($row->getStatus() == 2 && $row->getDriverReq() == 0):
+
                     ?>
                     <tr>
                         <td><?php echo $row->getBookingId() ?></td>
-                        <td>Sam David</td>
-                        <td>076-6848398</td>
-                        <!-- <td>Kandy</td> -->
-                        <td>Honda Fit</td>
+                        <td><img src="/assets/img/uploads/vehicle/<?= $vehicles[$row->getVehId()]->getFrontView()?>" width="56px"></td>
+                        <td><?php echo $vehicles[$row->getVehId()]->getVehBrand().' '.$vehicles[$row->getVehId()]->getVehModel()."<br>".$vehicles[$row->getVehId()]->getPlateNo()?></td>
+
+                        <td><?php echo $customers[$row->getCusId()]->getFirstname().' '.$customers[$row->getCusId()]->getLastname()?></td>
+
+                        <td><?php echo $customers[$row->getCusId()]-> getPhoneno()?></td>
                         <td><?php echo $row->getPickupLocation() ?></td>
                         <td><?php echo $row->getStartDate() ?></td>
                         <td><?php echo $row->getEndDate() ?></td>
-                        <td><?php echo $row->getPayMethod() ?></td>
                         <td><?php echo $row->getNote() ?></td>
 
                         <!--                        <td><div class="status">-->
@@ -69,7 +77,7 @@ use app\models\viewCustomerReq;
                         <!--                            </div></td>-->
                     </tr>
                 <?php
-                endif;
+
                 endforeach;
                 ?>
 

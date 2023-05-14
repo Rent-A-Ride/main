@@ -1,3 +1,6 @@
+const addNewForm = document.querySelector("#add-new-form");
+
+
 var form_1 = document.querySelector(".form_1");
 var form_2 = document.querySelector(".form_2");
 var form_3 = document.querySelector(".form_3");
@@ -60,7 +63,8 @@ form_3_back_btn.addEventListener("click", function(){
     form_3_progessbar.classList.remove("active");
 });
 
-btn_done.addEventListener("click", function(){
+// pop up successfully completed box when form is submitted
+addNewForm.addEventListener("submit", function(){
     modal_wrapper.classList.add("active");
 })
 
@@ -119,6 +123,20 @@ rangeSlider.value = rangeSlider.value;
 console.log(rangeSlider.value);
 
 
+const yearInput = document.querySelector("#year-input");
+
+
+
+
+const currentYear = new Date().getFullYear();
+const minYear = currentYear - 50;
+const maxYear = currentYear;
+for (let year = maxYear; year >= minYear; year--) {
+  const option = document.createElement("option");
+  option.value = year;
+  option.textContent = year;
+  yearInput.appendChild(option);
+}
 
 
 
