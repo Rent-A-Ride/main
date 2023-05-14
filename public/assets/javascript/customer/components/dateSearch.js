@@ -37,7 +37,7 @@ function displaySearchResults(results) {
 
         divRow.innerHTML = `
       <div class="table-data">
-        <img src="/assets/img/vehicle/${row.veh_Img}" width="56px">
+        <img src="/assets/img/uploads/vehicle/${row.veh_Img}" width="56px">
       </div>
       <div class="table-data">${row.veh_brand} ${row.veh_Model}</div>
       <div class="table-data">

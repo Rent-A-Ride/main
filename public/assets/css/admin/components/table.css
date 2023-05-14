@@ -301,11 +301,11 @@ th, td {
 }
 
 .with-driver-container {
-    display: none;
+    display: block;
 }
 
 .without-driver-container {
-    display: block;
+    display: none;
 }
 
 

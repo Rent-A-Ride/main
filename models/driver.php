@@ -32,7 +32,7 @@ class driver extends dbModel
     public string $category;
     public ?string $profile_pic = "";
     public int $status = 0;
-    public string $license_scan_copy;
+    public ?string $license_scan_copy = '';
 
 //    public string $profile_pic;
 

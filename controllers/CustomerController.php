@@ -648,7 +648,7 @@ class CustomerController extends Controller
 
         if ($customerPayment->save()) {
 
-            $vehBooking->setStatus(2);
+            $vehBooking->setStatus(3);
             if ($vehBooking->update($bookingId, ['status', 'pay_status'])) {
                 if ($request->isPost()) {
                     Application::$app->session->setFlash('success', 'Payment Successful!');

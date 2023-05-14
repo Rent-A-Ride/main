@@ -16,7 +16,7 @@ use app\models\cusVehicle;
                 <div id="gallery2">
                     <div class="row">
                         <div class="large-image small">
-                            <img class="small" src="/assets/img/vehicle/<?= $vehicle->getFrontView() ?>">
+                            <img class="small" src="/assets/img/uploads/vehicle/<?= $vehicle->getFrontView() ?>">
                         </div>
                     </div>
                 </div>
@@ -99,15 +99,15 @@ use app\models\cusVehicle;
 
             <section class="add-driver" id="self-drive-terms" style="display: none">
                 <h4>Self Drive Terms</h4>
-                <div class="center">
-
-                        <div class="form-group-1 ">
-                            <label for="driving-license">Upload your Driving License ()</label>
-                            <input type="file" name="drivingLicense" id="driving-license" class="form-control">
-                        </div>
-
-
-                </div>
+<!--                <div class="center">-->
+<!---->
+<!--                        <div class="form-group-1 ">-->
+<!--                            <label for="driving-license">Upload your Driving License ()</label>-->
+<!--                            <input type="file" name="drivingLicense" id="driving-license" class="form-control">-->
+<!--                        </div>-->
+<!---->
+<!---->
+<!--                </div>-->
 
                 <div class="center margin-20">
                     <button type="button" class="terms-btn" onclick="showModal()">
@@ -193,7 +193,7 @@ use app\models\cusVehicle;
                     <p>What's your preferred payment method? </p>
                     <select id="paymentMethod" name="payMethod">
                         <option value="Cash">Cash</option>
-                        <option value="Credit Card">Credit Card</option>
+                        <option value="Credit Card" selected>Credit Card</option>
                         <option value="Bank Transfer">Bank Transfer</option>
                         <option value="HelaPay QR">Helapay</option>
                     </select>

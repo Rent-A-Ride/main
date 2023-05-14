@@ -40,9 +40,9 @@ use app\models\viewCustomerReq;
     <div class="requests-list">
         <div class="pending-container">
             <div class="req-switch">
-                <input type="radio" class="with-driver" name="switch" id="with-driver" checked>
+                <input type="radio" class="with-driver" name="switch" id="with-driver" >
                 <label for="with-driver">With Driver</label>
-                <input type="radio" class="without-driver" name="switch" id="without-driver"  >
+                <input type="radio" class="without-driver" name="switch" id="without-driver"  checked>
                 <label for="without-driver">With-out Driver</label>
             </div>
 

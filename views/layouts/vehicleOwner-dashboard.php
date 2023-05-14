@@ -183,11 +183,18 @@ use app\core\Application;
             <div class="bar3"></div>
         </div>
     </nav>
-<!--    --><?php //if (Application::$app->session->getFlash('profileUpdate')):?>
-<!--        <div class="flash-message success">-->
-<!--            --><?php //= Application::$app->session->getFlash('profileUpdate') ?>
-<!--        </div>-->
-<!--    --><?php //endif; ?>
+
+<!--    Flash Messages-->
+    <?php if (Application::$app->session->getFlash('success')):?>
+        <div class="flash-message success">
+            <?= Application::$app->session->getFlash('success') ?>
+        </div>
+    <?php endif; ?>
+    <?php if (Application::$app->session->getFlash('error')):?>
+        <div class="flash-message error">
+            <?= Application::$app->session->getFlash('error') ?>
+        </div>
+    <?php endif; ?>
 
     <div class="dashboardRest">
         {{content}}

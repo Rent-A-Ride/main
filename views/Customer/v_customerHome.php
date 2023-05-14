@@ -65,7 +65,7 @@ use app\models\veh_Reviews;
                 ?>
                 <div class="table-row <?=$row->getVehType()?>">
 
-                    <div class="table-data"><img src="/assets/img/vehicle/<?= $row->getFrontView()?>" width="56px"></div>
+                    <div class="table-data"><img src="/assets/img/uploads/vehicle/<?= $row->getFrontView()?>" width="56px"></div>
                     <div class="table-data"><?= $row->getVehBrand().' '.$row->getVehModel() ?></div>
                     <div class="table-data">
                         <form class="rating-widget" data-rating="<?= $row->getTotalRatings($row->getVehId())?>">

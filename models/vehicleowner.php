@@ -24,7 +24,7 @@ class vehicleowner extends dbModel
     public string $gender = '';
      public string $password;
      public string $passwordConfirm;
-    public ?string $profile_pic = '';
+    public ?string $profile_pic = 'default.jpg';
 
 
 
@@ -69,7 +69,7 @@ class vehicleowner extends dbModel
 
     public function attributes(): array
     {
-        return ['Nic', 'vo_ID', 'owner_Fname', 'owner_Lname', 'owner_address', 'phone_No','email','gender','password'];
+        return ['Nic','owner_Fname', 'owner_Lname', 'owner_address', 'phone_No','email','gender','password'];
     }
 
 //    display name

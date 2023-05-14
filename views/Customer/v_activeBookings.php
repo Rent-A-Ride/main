@@ -43,7 +43,7 @@ use app\models\cusVehicle;
                         <td><?= $row->getBookingId()?></td>
                         <td>
                             <div class="parent-info">
-                                <img src=" /assets/img/vehicle/<?= $vehicleById[$row->getVehId()]->getFrontView() ?>" alt="">
+                                <img src=" /assets/img/uploads/vehicle/<?= $vehicleById[$row->getVehId()]->getFrontView() ?>" alt="">
                                 <div class="info">
                                     <p><strong><?= $vehicleById[$row->getVehId()]->getVehBrand().' '.$vehicleById[$row->getVehId()]->getVehModel() ?></strong></p>
                                     <p class="small">RR Vehicle Rent</p>
@@ -165,7 +165,7 @@ use app\models\cusVehicle;
                     <td><?= $row->getBookingId()?></td>
                     <td>
                         <div class="parent-info">
-                            <img src=" /assets/img/vehicle/<?= $vehicleById[$row->getVehId()]->getFrontView() ?>" alt="">
+                            <img src=" /assets/img/uploads/vehicle/<?= $vehicleById[$row->getVehId()]->getFrontView() ?>" alt="">
                             <div class="info">
                                 <p><strong><?= $vehicleById[$row->getVehId()]->getVehBrand().' '.$vehicleById[$row->getVehId()]->getVehModel() ?></strong></p>
                                 <p class="small">RR Vehicle Rent</p>

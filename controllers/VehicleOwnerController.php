@@ -10,6 +10,7 @@ use app\models\Customer;
 use app\models\driver;
 use app\models\driver_requests;
 use app\models\license_expire_notification;
+use app\models\Notification;
 use app\models\owner;
 use app\models\ren_ecotest;
 use app\models\ren_insurance;
@@ -265,6 +266,7 @@ class VehicleOwnerController extends Controller
                 $booking->setStatus(1);
                 if ($booking->update($bookingId,['status']))
                 {
+                    Notification::sendNotification($booking->getCusId(),'Booking Accepted','Your #'.$bookingId.' booking has accepted!','/Customer/VehicleBookingTable');
                     Application::$app->session->setFlash('success', 'Booking Accepted Successfully!');
                     return $response->redirect('/CustomerAcceptedRequest');
                 }
@@ -292,6 +294,7 @@ class VehicleOwnerController extends Controller
                 $booking->setStatus(2);
                 if ($booking->update($bookingId,['status']))
                 {
+                    Notification::sendNotification($booking->getCusId(),'Booking Rejected','Your #'.$bookingId.' booking has rejected!','/Customer/VehicleBookingTable');
                     Application::$app->session->setFlash('success', 'Booking Rejected Successfully!');
                     return $response->redirect('/CustomerRejectedRequest');
                 }
@@ -332,6 +335,7 @@ class VehicleOwnerController extends Controller
                 $driver_request->setPickupLocation($booking->getPickupLocation());
 
                 if ($driver_request->save()) {
+
                     Application::$app->session->setFlash('success', 'Driver Requested Successfully!');
                     return $response->redirect('/CustomerPendingRequest');
                 }
@@ -723,7 +727,6 @@ class VehicleOwnerController extends Controller
             $vehLicense->loadData($request->getBody());
             $vehInsurance->loadData($request->getBody());
             $vehEcoTest->loadData($request->getBody());
-
             $vehicle->setAvailability(1);
             $vehicle->setVoId($vo_Id);
 
@@ -824,7 +827,7 @@ class VehicleOwnerController extends Controller
                 $vehEcoTest->setVehId($veh->getVehId());
 
                 if (($vehinfo->validate() && $vehinfo->save()) && ($vehLicense->validate() && $vehLicense->save()) && ($vehInsurance->validate() && $vehInsurance->save()) && ($vehEcoTest->validate() && $vehEcoTest->save())){
-//                Application::$app->session->setFlash('success', 'Vehicle Added Successfully!');
+                    Application::$app->session->setFlash('success', 'Vehicle Added Successfully!');
                     return $response->redirect('/vehicleOwner/addNewVehicle');
                 }
             }

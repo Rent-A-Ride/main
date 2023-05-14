@@ -131,7 +131,7 @@ class AuthController extends Controller
             }
             if ($customer->validate() && $customer->save()){
                 $email=$customer->getEmail();
-                $name=$customer->getFirstname().''.$customer->getLastname();
+                $name=$customer->getFirstname().' '.$customer->getLastname();
                 $customer->setEmail($email);
                 $cus=$customer->findOne(['email'=>$email]);
                 

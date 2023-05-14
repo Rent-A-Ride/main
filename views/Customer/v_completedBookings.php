@@ -42,7 +42,7 @@ use app\models\cusVehicle;
                         <td><?= $row->getBookingId()?></td>
                         <td>
                             <div class="parent-info">
-                                <img src=" /assets/img/vehicle/<?= $vehicleById[$row->getVehId()]->getFrontView() ?>" alt="">
+                                <img src=" /assets/img/uploads/vehicle/<?= $vehicleById[$row->getVehId()]->getFrontView() ?>" alt="">
                                 <div class="info">
                                     <p><strong><?= $vehicleById[$row->getVehId()]->getVehBrand().' '.$vehicleById[$row->getVehId()]->getVehModel() ?></strong></p>
                                     <p class="small">RR Vehicle Rent</p>
@@ -124,7 +124,71 @@ use app\models\cusVehicle;
                     </tr>
 
                     </tbody>
-                <?php
+        <div id="review-modal" class="review-modal">
+            <div class="review-modal-content">
+                <span class="close-modal" onclick="closeReviewModal()">&times;</span>
+
+                <!-- Reviews content goes here -->
+                <div class="reviews-container">
+                    <h2>Reviews</h2>
+                    <?php
+                    if ($vehReview[$row->getBookingId()]!=null):
+                    ?>
+
+                    <div class="review">
+                        <div class="review-header">
+                            <div class="review-details">
+
+                                <div class="ratings">
+                                    <span><strong>Ratings:</strong></span>
+                                    <?php
+                                    for ($i = 0; $i < $vehReview[$row->getBookingId()]->getRating(); $i++):
+                                        ?>
+                                        <i class='bx bxs-star' style="color: #ffc547;" ></i>
+                                    <?php
+                                    endfor;
+                                    for ($i = 0; $i < 5 - $vehReview[$row->getBookingId()]->getRating(); $i++):
+                                        ?>
+                                        <i class='bx bxs-star' style="color: black;" ></i>
+                                    <?php
+                                    endfor;
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-body" style="border: 1px solid black">
+                            <p><?= $vehReview[$row->getBookingId()]->getComments() ?></p>
+                        </div>
+
+
+                        <?php
+                        else:
+                            ?>
+                            <form id="review-form" method="post">
+                                <input hidden name="veh_Id" value="<?=$row->getVehId()?>">
+                                <input hidden name="booking_Id" value="<?=$row->getBookingId()?>">
+                                <label for="rating">Rating:</label>
+                                <select id="rating" name="rating" required>
+                                    <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733;</option>
+                                    <option value="4">&#9733;&#9733;&#9733;&#9733;&#9734;</option>
+                                    <option value="3">&#9733;&#9733;&#9733;&#9734;&#9734;</option>
+                                    <option value="2">&#9733;&#9733;&#9734;&#9734;&#9734;</option>
+                                    <option value="1">&#9733;&#9734;&#9734;&#9734;&#9734;</option>
+                                </select>
+                                <label for="review-text">Review:</label>
+                                <textarea rows="5" required id="review-text" name="comments" class="myTextArea"></textarea>
+                                <button type="submit" name="review">Submit</button>
+                            </form>
+                        <?php
+                        endif;
+                        ?>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <?php
             endforeach;
         else:
             echo '<tbody>
@@ -140,71 +204,6 @@ use app\models\cusVehicle;
 </div>
 
 
-
-<!-- The popup review modal -->
-<div id="review-modal" class="review-modal">
-    <div class="review-modal-content">
-        <span class="close-modal" onclick="closeReviewModal()">&times;</span>
-
-        <!-- Reviews content goes here -->
-        <div class="reviews-container">
-            <h2>Reviews</h2>
-            <?php
-                if (isset($vehReview[$row->getBookingId()])):
-            ?>
-
-                <div class="review">
-                    <div class="review-header">
-                        <div class="review-details">
-
-                            <div class="ratings">
-                                <span><strong>Ratings:</strong></span>
-                                <?php
-                                    for ($i = 0; $i < $vehReview[$row->getBookingId()]->getRating(); $i++):
-                                ?>
-                                    <i class='bx bxs-star' style="color: #ffc547;" ></i>
-                                <?php
-                                    endfor;
-                                    for ($i = 0; $i < 5 - $vehReview[$row->getBookingId()]->getRating(); $i++):
-                                ?>
-                                    <i class='bx bxs-star' style="color: black;" ></i>
-                                <?php
-                                    endfor;
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="review-body" style="border: 1px solid black">
-                        <p><?= $vehReview[$row->getBookingId()]->getComments() ?></p>
-                    </div>
-
-
-            <?php
-                else:
-            ?>
-            <form id="review-form" method="post">
-                <input hidden name="veh_Id" value="<?=$row->getVehId()?>">
-                <input hidden name="booking_Id" value="<?=$row->getBookingId()?>">
-                <label for="rating">Rating:</label>
-                <select id="rating" name="rating" required>
-                    <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733;</option>
-                    <option value="4">&#9733;&#9733;&#9733;&#9733;&#9734;</option>
-                    <option value="3">&#9733;&#9733;&#9733;&#9734;&#9734;</option>
-                    <option value="2">&#9733;&#9733;&#9734;&#9734;&#9734;</option>
-                    <option value="1">&#9733;&#9734;&#9734;&#9734;&#9734;</option>
-                </select>
-                <label for="review-text">Review:</label>
-                <textarea rows="5" required id="review-text" name="comments" class="myTextArea"></textarea>
-                <button type="submit" name="review">Submit</button>
-            </form>
-            <?php
-                endif;
-            ?>
-        </div>
-
-
-    </div>
-</div>
 
 
 

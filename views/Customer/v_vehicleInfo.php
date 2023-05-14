@@ -15,14 +15,14 @@ use app\models\VehInfo;
         <div id="gallery">
             <div class="row">
                 <div class="large-image">
-                    <img src="/assets/img/vehicle/<?= $vehicle->getFrontView() ?>">
+                    <img src="/assets/img/uploads/vehicle/<?= $vehicle->getFrontView() ?>">
                 </div>
             </div>
             <div class="row">
                 <div class="thumbnails">
-                    <img src="/assets/img/vehicle/<?= $vehicle->getFrontView() ?>" data-large="/assets/img/vehicle/<?= $vehicle->getFrontView() ?>">
-                    <img src="/assets/img/vehicle/<?= $vehicle->getSideView() ?>" data-large="/assets/img/vehicle/<?= $vehicle->getSideView() ?>">
-                    <img src="/assets/img/vehicle/<?= $vehicle->getBackView() ?>" data-large="/assets/img/vehicle/<?= $vehicle->getBackView() ?>">
+                    <img src="/assets/img/uploads/vehicle/<?= $vehicle->getFrontView() ?>" data-large="/assets/img/uploads/vehicle/<?= $vehicle->getFrontView() ?>">
+                    <img src="/assets/img/uploads/vehicle/<?= $vehicle->getSideView() ?>" data-large="/assets/img/uploads/vehicle/<?= $vehicle->getSideView() ?>">
+                    <img src="/assets/img/uploads/vehicle/<?= $vehicle->getBackView() ?>" data-large="/assets/img/uploads/vehicle/<?= $vehicle->getBackView() ?>">
                 </div>
             </div>
 

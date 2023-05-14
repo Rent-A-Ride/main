@@ -22,7 +22,7 @@ use app\core\Application;
                 <input id="file" type="file" onchange="loadFile(event)"/>
 
 
-                <img src="/assets/img/driver.jpg" id="output" width="150" />
+                <img src="/assets/img/uploads/userProfile/<?php echo $vehicleowner->getProfilePic() ?>" id="output" width="150" />
             </div>
         </form>
 
