@@ -7,9 +7,13 @@ use app\core\Response;
 use app\core\Controller;
 use app\models\Customer;
 use app\models\driver;
+use app\models\driver_requests;
 use app\models\driverInvoice;
 use app\models\driverpayment;
+use app\models\Notification;
+use app\models\VehBooking;
 use app\models\vehicle_Owner;
+use app\models\voNotifications;
 
 class DriverController extends Controller
 {
@@ -76,9 +80,30 @@ class DriverController extends Controller
                 if($action==='Accept'){
     
                     $driverModel->acceptRequests($_POST['res_id']);
+                    $dr_req=new driver_requests();
+                    $vehbooking=new VehBooking();
+                    $booking=$dr_req->getbookingByResId($_POST['res_id']);
+                    $dr=$driverModel->getDriverbyId($booking[0]['driver_ID']);
+                    $drivername=$dr[0]['driver_Fname'].$dr[0]['driver_Lname'];
+                    $vo=$vehbooking->getbookingByResId($_POST['res_id']);
+                    $drver_id=$booking[0]['driver_ID'];
+                    $cus_id=$booking[0]['user_ID'];
+                    Notification::sendNotification($cus_id,"Booking Confirmation","Your booking ".$_POST['res_id']." is confirmed.",'/Customer/VehicleBookingTable/Active - Driver Accept');
+                    voNotifications::sendNotification($vo[0]['vo_Id'],"Booking Accepted","Booking".$_POST['res_id']."is accepted by ".$drivername,'/CustomerAcceptedRequest');
 
                 }else if($action==='Reject'){
                     $driverModel->rejectRequests($_POST['res_id']);
+
+                    $dr_req=new driver_requests();
+                    $vehbooking=new VehBooking();
+                    $booking=$dr_req->getbookingByResId($_POST['res_id']);
+                    $dr=$driverModel->getDriverbyId($booking[0]['driver_ID']);
+                    $drivername=$dr[0]['driver_Fname'].$dr[0]['driver_Lname'];
+                    $vo=$vehbooking->getbookingByResId($_POST['res_id']);
+                    $drver_id=$booking[0]['driver_ID'];
+                    $cus_id=$booking[0]['user_ID'];
+                    Notification::sendNotification($cus_id,"Booking Rejection","Your booking ".$_POST['res_id']." is rejected.",'/Customer/VehicleBookingTable/Active - Driver Accept');
+                    voNotifications::sendNotification($vo[0]['vo_Id'],"Booking Rejected","Booking".$_POST['res_id']."is rejected by ".$drivername,'/CustomerAcceptedRequest');
                 }
             }
         }
@@ -109,12 +134,35 @@ class DriverController extends Controller
         if($req->isPost()){
             if(!empty($_POST)){
                 $action=$_POST['action'];
+                var_dump($_POST);
                 if($action==='Accept'){
-    
+                    
+                    
                     $driverModel->acceptRequests($_POST['res_id']);
+                    $dr_req=new driver_requests();
+                    $vehbooking=new VehBooking();
+                    $booking=$dr_req->getbookingByResId($_POST['res_id']);
+                    $dr=$driverModel->getDriverbyId($booking['driver_ID']);
+                    $drivername=$dr['driver_Fname'].$dr['driver_Lname'];
+                    $vo=$vehbooking->getbookingByResId($_POST['res_id']);
+                    $drver_id=$booking['driver_ID'];
+                    $cus_id=$booking['user_ID'];
+                    Notification::sendNotification($cus_id,"Booking Confirmation","Your booking ".$_POST['res_id']." is confirmed.",'/Customer/VehicleBookingTable/Active - Driver Accept');
+                    voNotifications::sendNotification($vo['vo_Id'],"Booking Accepted","Booking".$_POST['res_id']."is accepted by ".$drivername,'/CustomerAcceptedRequest');
+
 
                 }else if($action==='Reject'){
                     $driverModel->rejectRequests($_POST['res_id']);
+                    $dr_req=new driver_requests();
+                    $vehbooking=new VehBooking();
+                    $booking=$dr_req->getbookingByResId($_POST['res_id']);
+                    $dr=$driverModel->getDriverbyId($booking[0]['driver_ID']);
+                    $drivername=$dr[0]['driver_Fname'].$dr[0]['driver_Lname'];
+                    $vo=$vehbooking->getbookingByResId($_POST['res_id']);
+                    $drver_id=$booking[0]['driver_ID'];
+                    $cus_id=$booking[0]['user_ID'];
+                    Notification::sendNotification($cus_id,"Booking Rejection","Your booking ".$_POST['res_id']." is rejected.",'/Customer/VehicleBookingTable/Active - Driver Accept');
+                    voNotifications::sendNotification($vo[0]['vo_Id'],"Booking Rejected","Booking".$_POST['res_id']."is rejected by ".$drivername,'/CustomerAcceptedRequest');
                 }
             }
         }
@@ -148,9 +196,30 @@ class DriverController extends Controller
                     if($action==='Accept'){
     
                         $driverModel->acceptRequests($_POST['res_id']);
+                        $driverModel->acceptRequests($_POST['res_id']);
+                        $dr_req=new driver_requests();
+                        $vehbooking=new VehBooking();
+                        $booking=$dr_req->getbookingByResId($_POST['res_id']);
+                        $dr=$driverModel->getDriverbyId($booking['driver_ID']);
+                        $drivername=$dr['driver_Fname'].$dr['driver_Lname'];
+                        $vo=$vehbooking->getbookingByResId($_POST['res_id']);
+                        $drver_id=$booking['driver_ID'];
+                        $cus_id=$booking['user_ID'];
+                        Notification::sendNotification($cus_id,"Booking Confirmation","Your booking ".$_POST['res_id']." is confirmed.",'/Customer/VehicleBookingTable/Active - Driver Accept');
+                        voNotifications::sendNotification($vo['vo_Id'],"Booking Accepted","Booking".$_POST['res_id']."is accepted by ".$drivername,'/CustomerAcceptedRequest'); 
 
                     }else if($action==='Reject'){
                         $driverModel->rejectRequests($_POST['res_id']);
+                        $dr_req=new driver_requests();
+                        $vehbooking=new VehBooking();
+                        $booking=$dr_req->getbookingByResId($_POST['res_id']);
+                        $dr=$driverModel->getDriverbyId($booking[0]['driver_ID']);
+                        $drivername=$dr[0]['driver_Fname'].$dr[0]['driver_Lname'];
+                        $vo=$vehbooking->getbookingByResId($_POST['res_id']);
+                        $drver_id=$booking[0]['driver_ID'];
+                        $cus_id=$booking[0]['user_ID'];
+                        Notification::sendNotification($cus_id,"Booking Rejection","Your booking ".$_POST['res_id']." is rejected.",'/Customer/VehicleBookingTable/Active - Driver Accept');
+                        voNotifications::sendNotification($vo[0]['vo_Id'],"Booking Rejected","Booking".$_POST['res_id']."is rejected by ".$drivername,'/CustomerAcceptedRequest');
                     }
                 }   
             }
