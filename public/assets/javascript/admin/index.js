@@ -1,5 +1,3 @@
-// import "./details.js"
-// import "./profile.js"
 import "./component/search.js"
 import "./adminOverview.js"
 import "./adminoverviewx.js"
@@ -29,9 +27,7 @@ import "./inform_payment.js"
 import "./driverPaymentConfirm.js"
 
 import "./adminOvewiew2.js"
-// import "./update_vehiclelin.js"
-// import "./update_vehicleins.js"
-// import "../component/calender.js"
+
 
 
 // import "./enable vehicle.js"

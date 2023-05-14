@@ -2,6 +2,7 @@
 use app\core\Application;
 // var_dump($customer_details[0]['profile_pic'])
 /* @var $vehicleowner \app\models\vehicle_Owner */
+
 ?>
 <h2 class="page-name">Profile</h2>
 
