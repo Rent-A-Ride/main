@@ -192,25 +192,35 @@ class AuthController extends Controller
         $driver = new driver();
 
         if ($req->isPost()){
-
-            $driver->loadData($req->getBody());
+            $body=$req->getBody();
+            
+            $img_name = $_FILES['license']['name'];
+            $unique_id = 'd'.uniqid().$body['driver_Fname'];
+            $destination_image = Application::$ROOT_DIR.'/public/assets/img/driver/';
+            if($img_name) {
+                $img_ext = pathinfo($img_name, PATHINFO_EXTENSION);
+                $img_new_name = $unique_id . '.' . $img_ext;
+                move_uploaded_file($_FILES['license']['tmp_name'], $destination_image . $img_new_name);
+                $body['license_scan_copy']=$img_new_name;
+            }
+            $driver->loadData($body);
 
             if ($driver->validate() && $driver->save()){
 
                     // ->session->setFlash('success', 'Registration Successfully!');
-                    $req->session->setFlash('success', 'Registration Successfully!');
+                    Application::$app->session->setFlash('success', 'Registration Successfully!');
                     // Application::$app->response->redirect('/login');
                     $res->redirect("/login");
                     exit();
 
             }
 
-            return $res->render('/driver/driver_registration','auth-reg', [
+            return $res->render('/driver/driver_registration','main_2', [
                 'model' => $driver
             ]);
         }
 
-        return $res->render('/driver/driver_registration','auth-reg', [
+        return $res->render('/driver/driver_registration','main_2', [
             'model' => $driver
         ]);
     }

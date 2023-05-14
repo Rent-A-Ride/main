@@ -11,7 +11,7 @@ use app\models\Customer;
     <div class="box-1">
         <div class="inner-box">
             <div class="forms-wrap">
-                <form action="" method="post" autocomplete="off" class="sign-up-form">
+                <form action="" method="post" autocomplete="off" class="sign-up-form" enctype="multipart/form-data">
                     <div class="logo">
 
                         <!-- <h4>Rent-A-Ride</h4> -->
@@ -154,6 +154,29 @@ use app\models\Customer;
                             />
                             <label>License No</label>
                             <span class="form-error"> <?= $model->getFirstError('license_No') ?></span>
+                        </div>
+
+                        <div class="input-wrap">
+                            <select class="input-field" name="category">
+                                <option class="input-field label" value="" disabled selected>Select your Vehicle Type</option>
+                                <option class="input-field" value="Manual">Manual</option>
+                                <option class="input-field" value="Auto">Auto</option>
+                            </select>
+                            <span class="form-error"> <?= $model->getFirstError('category') ?></span>
+
+                        </div>
+
+                        <div class="input-wrap">
+                            <input
+                                name="license"
+                                type="file"
+                                class="input-field<?= $model->hasError('license_scan_copy') ? ' invalid' : ''?>"
+                                autocomplete="off"
+                                id="password"
+
+                            />
+                            <label>License Scan Copy</label>
+                            <span class="form-error"> <?= $model->getFirstError('license_scan_copy') ?></span>
                         </div>
 
                         <div class="input-wrap">

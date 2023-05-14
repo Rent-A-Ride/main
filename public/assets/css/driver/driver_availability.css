@@ -1,0 +1,308 @@
+/* body{
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.cal-main{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    
+}
+
+.cal{
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+      
+}
+
+.cal-header{
+    
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #F8F8F8;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        font-size: 1.2rem;
+        color: #555;
+        padding: 0.8rem;
+
+      
+
+}
+
+
+.icons span {
+    cursor: pointer;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    color: #555;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+  }
+  .icons span:hover {
+    background-color: #F8F8F8;
+    color: #333;
+  }
+
+
+.cal .header{
+    display: flex;
+    align-items: center;
+    padding: 4px 22px 1px;
+    justify-content: space-between;
+}
+
+.header .icons{
+    display: flex;
+}
+.header .icons span{
+    height: 38px;
+    width: 38px;
+    margin: 0 1px;
+    cursor: pointer;
+    color: #878787;
+    text-align: center;
+    line-height: 38px;
+    font-size: 1.9rem;
+    user-select: none;
+    border-radius: 50%;
+}
+
+.weeks {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem;
+    background-color: #F8F8F8;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  .weeks li {
+    flex-basis: calc(100% / 7);
+    text-align: center;
+    font-size: 0.9rem;
+    color: #555;
+  }
+
+  
+  .days li.active {
+    background-color: #2A9D8F;
+    border-radius: 50%;
+    color: #fff;
+  }
+  .days li.booked {
+    background-color: #F4A261;
+    color: #fff;
+  }
+
+  .days li{
+    padding: 5px 5px;
+  }
+  
+
+.icons span:last-child{
+    margin-right: -10px;
+}
+.header .icons span:hover{
+    background: #f2f2f2;
+}
+.header .current-date{
+    font-size: 1rem;
+    font-weight: 500;
+}
+.calendar{
+padding: 1rem;
+}
+.calendar ul{
+display: flex;
+flex-wrap: wrap;
+list-style: none;
+text-align: center;
+}
+.calendar .days{
+margin-bottom: 10px;
+}
+.calendar li{
+color: #333;
+width: calc(100% / 7);
+font-size: 0.9rem;
+}
+.calendar .weeks li{
+font-weight: 500;
+cursor: default;
+}
+.calendar .days li{
+z-index: 1;
+cursor: pointer;
+position: relative;
+margin-top: 19px;
+}
+.days li.inactive{
+color: #aaa;
+}
+.days li.active1{
+color: #fff;
+}
+.days li::before{
+position: absolute;
+content: "";
+left: 50%;
+top: 50%;
+height: 40px;
+width: 40px;
+z-index: -1;
+border-radius: 50%;
+transform: translate(-50%, -50%);
+}
+.days li.active1::before{
+background: #44585e;
+}
+.days li:not(.active1):hover::before{
+background: #f2f2f2;
+}
+
+
+.booked{
+    background-color: red;
+} */
+
+body{
+    font-family: 'Poppins', sans-serif;
+}
+
+.cal-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.cal {
+    width: 1000px;
+    height: 500px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+}
+
+.cal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #ddd;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.MonthName {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icons span {
+    cursor: pointer;
+    font-size: 18px;
+    color: #333;
+    margin: 0 5px;
+}
+
+.calendar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.weeks {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+}
+
+.weeks li {
+    width: calc(100% / 7);
+}
+
+.days {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.days li {
+    width: calc(100% / 7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    /* padding: 10px; */
+    font-size: 14px;
+    color: #333;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.days li .date-block{
+    width: 50px;
+    height: 100%;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.days li.inactive {
+    color: #ddd;
+}
+
+.days .booked .date-block {
+    background-color: #f5342a;
+
+}
+
+.days .active .date-block {
+    background-color: #333;
+
+
+}
+
+.days li.active {
+    background-color: #fff;
+    color: #fff;
+}
+
+.days li:hover:not(.inactive) {
+    background-color: #ddd;
+    cursor: pointer;
+}
