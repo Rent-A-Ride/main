@@ -157,11 +157,15 @@ class driver extends dbModel
     public function acceptRequests($user_id){
         $sql="UPDATE driver_requests SET accept =1 WHERE reservation_id = $user_id";
         Application::$app->db->pdo->query($sql)->execute();
+        $sql1="UPDATE vehbooking SET status=2 WHERE booking_Id=$user_id";
+        Application::$app->db->pdo->query($sql1)->execute();
     }
 
     public function rejectRequests($user_id){
         $sql="UPDATE driver_requests SET accept =2 WHERE reservation_id = $user_id";
         Application::$app->db->pdo->query($sql)->execute();
+        $sql1="UPDATE vehbooking SET status=0 WHERE booking_Id=$user_id";
+        Application::$app->db->pdo->query($sql1)->execute();
     }
 
     public function getDriverbyId($user_id){
