@@ -1,114 +1,94 @@
+<!--new view-->
+
 <?php
+
+/* @var $vehicle vehicle */
+
+use app\models\vehicle;
+
 ?>
-<h2 class="name">Manage Payments</h2>
 
-<div class="pay-body">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 
-    <div class="pay-details">
+<!--<button class="add-new-veh-button" onclick="location.href='/vehicleOwner/addNewVehicle'"> <i class='bx bx-plus  ' ></i> Add New <i class='bx bx-car'></i></button>-->
 
 
-        <div class="earnings">
-            <div class="totalearnings">
-                <h5 class="tot-ear-name">Total Earnings</h5>
-            </div>
-            <div class="totalearningsvalue">
-                <h5 class="tot-ear-value">24,000</h5>
-            </div>
+
+
+
+
+<!-- Table -->
+<h2 class="page-name">Payments</h2>
+
+
+<div class="table-container">
+    <div id="table" class="table">
+        <div class="table-header">
+<!--            <div class="header__item"><a id="name" class="filter__link" href="#"></a></div>-->
+            <div class="header__item"><a id="draws" class="filter__link filter__link--number" href="#"> Year</a></div>
+
+            <div class="header__item"><a id="wins" class="filter__link filter__link--number" href="#">Month</a></div>
+            <!--             <div class="header__item"><a id="draws" class="filter__link filter__link--number" href="#"></a></div>-->
+            <!--            <div class="header__item"><a id="draws" class="filter__link filter__link--number" href="#">Status</a></div>-->
+
+            <div class="header__item"><a id="total" class="filter__link filter__link--number" href="#">Invoice</a></div>
+            <div class="header__item"><a id="total" class="filter__link filter__link--number" href="#">Payment Status</a></div>
+            <div class="header__item"><a id="total" class="filter__link filter__link--number" href="#">Amount</a></div>
+            <div class="header__item"><a id="total" class="filter__link filter__link--number" href="#">Payment Slip</a></div>
+
+
+
         </div>
+        <div class="table-content" >
+            <?php
 
 
-        <div class="holds">
-            <div class="onhold">
-                <h5 class="on-hold-name">On Hold</h5>
-            </div>
-            <div class="onholdvalue">
-                <h5 class="on-hold-value">4,000</h5>
-            </div>
+            if ($vownerp){
+                foreach ($vownerp as $row){
+
+                    foreach ($vownerinv as $a){
+                        $payment_date_string = $row['month']; // example date string in "YYYY-MM-DD" format
+                        $Paymonth = date("m", strtotime($payment_date_string)); // get the month from the date string
+                        $payyear = date('Y', strtotime($payment_date_string));
+                        $inv_date_string = $a['date']; // example date string in "YYYY-MM-DD" format
+                        $invmonth = date("m", strtotime($inv_date_string)); // get the month from the date string
+                        $invyear = date('Y', strtotime($inv_date_string));
+                        if ($row['vo_Id']==$a['vo_ID']&& $Paymonth==$invmonth && $payyear==$invyear){
+                            ?>
+            <div class="table-row">
+
+                <div class="table-data"><?php echo $invyear ?></div>
+                <div class="table-data"><?php echo $invmonth ?></div>
+                <div class="table-data"><a href="/assets/Invoice/DriverInvoice/<?= $a['invoice']  ?>" download>Invoice</a></div>
+                                    <?php if ($row['pay_status']==0) {
+                                        ?>
+                                        <div class="table-data"><span class="status-txt pending">Pending!</span></div>
+                                        <?php
+                                    }else {
+
+                                        ?>
+                                        <div class="table-data"><span class="status-txt confirmed">Completed!</span></div>
+                                        <?php
+                                    }
+                                    ?>
+                                    <div class="table-data"><?php echo $row["vownerAmount"] ?></div>
+                                    <div class="table-data"><a href="/assets/img/PaymentSlip/<?= $row['Payment_slip']  ?>" download>Payment Slip</a></div>
+
+
+
+
+
+                                </tr>
+                            </tboady>
+
+                            <?php
+                        }
+                    }
+                }
+            }
+            ?>
+
         </div>
-
     </div>
-
-
-    <div class="completed-journeys">
-        <div class="journeys">
-            <h3 class="journey-box-name">Completed Journeys</h3>
-            <div class="card">
-
-                <div class="image">
-                    <img src="/assets/img/vehicleOwner_img/car.jpeg">
-                </div>
-                <div class="title">
-                    <h1 class="plate-no">
-                        WP-KX-8710</h1>
-                </div>
-                <div class="des">
-                    <p> Add Journey Details...</p>
-                    <!-- <button>Read More...</button> -->
-                </div>
-            </div>
-
-            <div class="card">
-
-                <div class="image">
-                    <img src="/assets/img/vehicleOwner_img/car.jpeg">
-                </div>
-                <div class="title">
-                    <h1 class="plate-no">
-                        WP-KX-8710</h1>
-                </div>
-                <div class="des">
-                    <p> Add Journey Details...</p>
-                    <!-- <button>Read More...</button> -->
-                </div>
-            </div>
-
-            <div class="card">
-
-                <div class="image">
-                    <img src="/assets/img/vehicleOwner_img/car.jpeg">
-                </div>
-                <div class="title">
-                    <h1 class="plate-no">
-                        WP-KX-8710</h1>
-                </div>
-                <div class="des">
-                    <p> Add Journey Details...</p>
-                    <!-- <button>Read More...</button> -->
-                </div>
-            </div>
-
-
-<!--            <div class="card">-->
-<!---->
-<!--                <div class="image">-->
-<!--                    <img src="car.jpeg">-->
-<!--                </div>-->
-<!--                <div class="title">-->
-<!--                    <h1>-->
-<!--                        WP-KX-8710</h1>-->
-<!--                </div>-->
-<!--                <div class="des">-->
-<!--                    <p> Add Journey Details...</p>-->
-<!--                    <button>Read More...</button> -->
-<!--                </div>-->
-<!--            </div>-->
-
-        </div>
-        <div>
-
-        </div>
-
-    </div>
-
-    <div class="PAY-BUTTONS">
-        <button class="report-button">Generate Report</button>
-        <button class="veh-rates">Edit Vehicle Rates</button>
-    </div>
-
-
-
-
-
-
-
 </div>
+

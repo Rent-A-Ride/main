@@ -3,6 +3,10 @@
 
 @import url('../components/nav.css');
 
+@import url("../components/navProfile.css");
+
+@import url("../components/notification.css");
+
 @import url('../components/sidebar.css');
 
 @import url('../components/style.css');

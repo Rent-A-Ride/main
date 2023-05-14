@@ -2,6 +2,9 @@
 /* @var $row viewCustomerReq */
 
 use app\models\viewCustomerReq;
+// var_dump($complaint);
+// exit;
+
 
 ?>
 <section class="requests">
@@ -58,7 +61,7 @@ use app\models\viewCustomerReq;
                                     
                                    foreach ($complaint as $row){
 
-                                        if ($row['status']==0) {
+                                        if ($row['status']=='Pending') {
                                             # code...
                                         
                                 ?>

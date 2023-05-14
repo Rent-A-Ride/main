@@ -27,6 +27,7 @@
     <div class="form_wrap">
         <div class="form_1 data_info">
             <h2>Basic Details</h2>
+            <label for="user_name"><span class="required"></span>Indicates Required Field</label>
 
                 <div class="form_container">
 
@@ -34,8 +35,8 @@
 
                     <div class="input_wrap">
 
-
-                        <label for="vehicle_type">Type</label>
+                        <br>
+                        <label for="vehicle_type">Type<span class="required"></span></label>
 
                         <select id="vehicle-type" class = "select-item" name = "veh_type" required>
                             <option selected disabled class="item" value ="">--SELECT YOUR VEHICLE TYPE--</option>
@@ -48,41 +49,41 @@
 
                     </div>
                     <div class="input_wrap">
-                        <label for="user_name">Vehicle Brand</label>
+                        <label for="user_name">Vehicle Brand<span class="required"></span></label>
                         <input type="text" name="veh_brand" required class="input" id="brand" placeholder="ex: Toyota" required>
                     </div>
                     <div class="input_wrap">
-                        <label for="user_name">Vehicle Model</label>
+                        <label for="user_name">Vehicle Model<span class="required"></span></label>
                         <input type="text" name="veh_model" class="input" id="model"  placeholder="ex: Corolla" required>
                     </div>
                     <div class="input_wrap">
-                        <label for="user_name">Plate No.</label>
+                        <label for="user_name">Plate No.<span class="required"></span></label>
                         <input type="text" name="plate_No" class="input" id="plateno" placeholder="ex: wp KX 7890" required>
                     </div>
 
                     <div class="input_wrap">
-                        <label for="user_name">Location</label>
+                        <label for="user_name">Location<span class="required"></span></label>
                         <input type="text" name="veh_location" class="input" id="location" required>
                     </div>
 
                     <div class="input_wrap">
-                        <label for="range-slider">Vehicle Rent Price Rate:</label>
+                        <label for="range-slider">Vehicle Rent Price Rate:<span class="required"></span></label>
                         <input id="range-slider" type="range" step="50" name="price" required>
                         <span id="range-value"></span>
                     </div>
 
                     <div class="input_wrap">
-                        <label for="user_name">Front View</label>
+                        <label for="user_name">Front View<span class="required"></span></label>
                         <input type="file" name="front_view" class="input" id="front_view" max="1000000" required>
                     </div>
 
                     <div class="input_wrap">
-                        <label for="user_name">Back View</label>
+                        <label for="user_name">Back View<span class="required"></span></label>
                         <input type="file" name="back_view" class="input" id="back_view" max="1000000" required>
                     </div>
 
                     <div class="input_wrap">
-                        <label for="user_name">Side View</label>
+                        <label for="user_name">Side View<span class="required"></span></label>
                         <input type="file" name="side_view" class="input" id="side_view" max="1000000" required>
                     </div>
 
@@ -93,11 +94,13 @@
         </div>
         <div class="form_2 data_info" style="display: none;">
             <h2>Vehicle Info</h2>
+            <label for="user_name"><span class="required"></span>Indicates Required Field</label>
 
-                <div class="form_container">
+
+            <div class="form_container">
                     <div class="input_wrap">
-
-                        <label for="year-input">Manufactured Year:</label>
+                        <br>
+                        <label for="year-input">Manufactured Year:<span class="required"></span></label>
 
                         <select class = "select-item" id="year-input" name="year" required>
 <!--                            <select class = "select-item" name = "transmission" required>-->
@@ -111,11 +114,11 @@
 
 
                     <div class="input_wrap">
-                        <label for="first_name">Capacity (CC)</label>
+                        <label for="first_name">Capacity (CC)<span class="required"></span></label>
                         <input type="number" name="capacity" class="input" min="80" required>
                     </div>
                     <div class="input_wrap">
-                        <label for="last_name">Transmission</label>
+                        <label for="last_name">Transmission<span class="required"></span></label>
 
                         <select class = "select-item" name = "transmission" required>
                             <option class="item" value = "Auto" >Auto</option>
@@ -125,7 +128,7 @@
 
                     </div>
                     <div class="input_wrap">
-                        <label for="last_name">Fuel Type</label>
+                        <label for="last_name">Fuel Type<span class="required"></span></label>
 
                         <select class ="select-item" name = "fuel_type" required>
                             <option value = "Petrol" >Petrol</option>
@@ -135,15 +138,15 @@
 
                     </div>
                     <div class="input_wrap">
-                        <label for="vehColor">Color</label>
+                        <label for="vehColor">Color<span class="required"></span></label>
                         <input type="text" name="vehColor" class="input" required>
                     </div>
                     <div class="input_wrap">
-                        <label for="seatsCount">No of Seats</label>
+                        <label for="seatsCount">No of Seats<span class="required"></span></label>
                         <input type="number" name="seatsCount" class="input" min="1" required>
                     </div>
                     <div class="input_wrap">
-                        <label for="avgfuel">Average Fuel Consumption (km/l) </label>
+                        <label for="avgfuel">Average Fuel Consumption (km/l)<span class="required"></span> </label>
                         <input type="number" name="avgfuel" class="input" id="first_name" step="0.01" min="1" required>
                     </div>
                     <div class="input_wrap">
@@ -156,28 +159,31 @@
         </div>
         <div class="form_3 data_info" style="display: none;">
             <h2>Docs</h2>
+            <label for="user_name"><span class="required"></span>Indicates Required Field</label>
 
-                <div class="form_container">
+
+            <div class="form_container">
 
 
                     <div class="column">
+                        <br>
                         <h3>License Details</h3>
                         <div class="form-group input_wrap">
-                            <label for="license-no">License Number:</label>
+                            <label for="license-no">License Number:<span class="required"></span></label>
                             <input type="text" id="license-no" name="license_No" class="input" required>
                         </div>
 
 
                         <div class="form-group input_wrap">
-                            <label for="valid-from">Valid From:</label>
+                            <label for="valid-from">Valid From:<span class="required"></span></label>
                             <input type="date" id="valid-from" name="lic_from_date" class="input" required>
                         </div>
                         <div class="form-group input_wrap">
-                            <label for="valid-to">Valid To:</label>
+                            <label for="valid-to">Valid To:<span class="required"></span></label>
                             <input type="date" id="valid-to" name="lic_ex_date" class="input" required>
                         </div>
                         <div class="form-group input_wrap">
-                            <label for="license-scan">Scanned Copy:</label>
+                            <label for="license-scan">Scanned Copy:<span class="required"></span></label>
                             <input type="file" accept="image/png,image/jpeg" id="license-scan" name="lic_scan_copy" class="input" required>
                         </div>
                     </div>
@@ -185,34 +191,34 @@
                     <div class="column">
                         <h3>Insurance Details</h3>
                         <div class="form-group input_wrap">
-                            <label for="insurance-no">Insurance Number:</label>
+                            <label for="insurance-no">Insurance Number:<span class="required"></span></label>
                             <input type="text" id="insurance-no" name="ins_No" class="input" required>
                         </div>
                         <div class="form-group input_wrap">
-                            <label for="insurance-valid-from">Valid From:</label>
+                            <label for="insurance-valid-from">Valid From:<span class="required"></span></label>
                             <input type="date" id="insurance-valid-from" name="ins_from_date" class="input" required>
                         </div>
                         <div class="form-group input_wrap">
-                            <label for="insurance-valid-to">Valid To:</label>
+                            <label for="insurance-valid-to">Valid To:<span class="required"></span></label>
                             <input type="date" id="insurance-valid-to" name="ins_ex_date" class="input" required>
                         </div>
                         <div class="form-group input_wrap">
-                            <label for="insurance-company">Insurance Company:</label>
+                            <label for="insurance-company">Insurance Company:<span class="required"></span></label>
                             <input type="text" id="insurance-company" name="insure_com" class="input"required>
                         </div>
                         <div class="form-group input_wrap">
-                            <label for="insurance-type">Insurance Type:</label>
+                            <label for="insurance-type">Insurance Type:<span class="required"></span></label>
                             <input type="text" id="insurance-type" name="insure_type" class="input" required>
                         </div>
                         <div class="form-group input_wrap">
-                            <label for="insurance-scan">Scanned Copy:</label>
+                            <label for="insurance-scan">Scanned Copy:<span class="required"></span></label>
                             <input type="file" id="insurance-scan" name="ins_scan_copy" class="input" required>
                         </div>
                     </div>
                     <div class="column">
                         <h3>Eco Test Details</h3>
                         <div class="form-group input_wrap">
-                            <label for="eco-test-scan">Scanned Copy:</label>
+                            <label for="eco-test-scan">Scanned Copy:<span class="required"></span></label>
                             <input type="file" id="eco-test-scan" name="eco_scan_copy" class="input" required>
                         </div>
                     </div>
@@ -221,6 +227,7 @@
     </div>
     <div class="btns_wrap">
         <div class="common_btns form_1_btns">
+
             <button type="button" class="btn_next">Next <span class="icon"><ion-icon name="arrow-forward-sharp"></ion-icon></span></button>
         </div>
         <div class="common_btns form_2_btns" style="display: none;">

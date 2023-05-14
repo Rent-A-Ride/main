@@ -149,7 +149,12 @@ $app->router->post("/adminprofile_pic", [OwnerController::class, "uploadImage"])
 
 $app->router->get("/admin/viewCustomerProfile", [OwnerController::class, "viewCusProfile"]);
 
+$app->router->post('/adminnotifications', [notificationController::class, 'adminnotification']);
+$app->router->get('/adminnotifications', [notificationController::class, 'adminnotification']);
 
+//update notification status
+$app->router->get('/update-Adminnotification-status', [notificationController::class, 'updateAdminnotificationStatus']);
+$app->router->post('/update-Adminnotification-status', [notificationController::class, 'updateAdminnotificationStatus']);
 
 
 //Hasantha
@@ -220,6 +225,8 @@ $app->router->post("/CustomerPendingRequest", [VehicleOwnerController::class, 'v
 
 // view customer Accepted requests
 $app->router->get("/CustomerAcceptedRequest", [VehicleOwnerController::class, 'viewCustomerAcceptedRequests']);
+$app->router->post("/CustomerAcceptedRequest", [VehicleOwnerController::class, 'viewCustomerAcceptedRequests']);
+
 
 // view customer Rejected requests
 $app->router->get("/CustomerRejectedRequest", [VehicleOwnerController::class, 'viewCustomerRejectedRequests']);
@@ -271,7 +278,7 @@ $app->router->post("/vehicleOwner/Profile", [VehicleOwnerController::class, 'veh
 
 $app->router->get("/vehicleOwner/editProfile", [VehicleOwnerController::class, 'getEditProfile']);
 
-$app->router->get("/vehicleOwner/Payments", [VehicleOwnerController::class, 'getPayments']);
+$app->router->get("/vehicleOwner/Payments", [VehicleOwnerController::class, 'vownerViewPayments']);
 
 $app->router->get("/vehicleOwner/completeAddNewVehicle", [VehicleOwnerController::class, 'completeAddNewVehicle']);
 

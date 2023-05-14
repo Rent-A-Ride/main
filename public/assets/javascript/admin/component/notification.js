@@ -27,19 +27,21 @@ setInterval(fetchNotifications, 10000);
 console.log("notifications.js loaded");
 
 function fetchNotifications() {
-    fetch('/vo_notification',{
+    fetch('/adminnotifications',{
         method: 'GET',
         headers: {
             contentType: 'application/json'
         }
-    })
+    }) // Assuming the endpoint is set to '/notification'
         .then(response => response.json())
         .then(data => {
-        console.log(data[0].output);
+            console.log(data);
             if (data.error) {
                 console.error(data.error);
                 return;
             }
+
+
             if (data[0].output) {
                 notificationList.innerHTML = data[0].output;
                 notificationCount.textContent = data[0].count;
@@ -48,15 +50,15 @@ function fetchNotifications() {
                 notificationCount.textContent = '0';
             }
         })
-    // .catch(error => {
-    //     console.error(error)
-    // });
+        // .catch(error => {
+        //     console.error(error)
+        // });
 }
 
 function markAsRead(notificationId) {
     const formdata = new FormData();
     formdata.append('notificationId', notificationId);
-    fetch('/update-vo-notification-status', {
+    fetch('/update-Adminnotification-status', {
         method: 'POST',
         body: formdata
     })
