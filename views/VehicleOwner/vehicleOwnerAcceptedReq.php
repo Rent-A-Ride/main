@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 <?php
 /* @var $row viewCustomerReq */
 
@@ -17,9 +10,10 @@ use app\models\viewCustomerReq;
         <a href="/CustomerPendingRequest">Pending Requests</a>
         <a id="active" href="/CustomerAcceptedRequest">Accepted Requests</a>
         <!--        <a href="#ongoing">Completed Requests</a>-->
-        <a href="/CustomerRejectedRequest">Rejected Requests</a>
         <a href="/CustomerOngoingRequest">Ongoing Requests</a>
         <a href="/CustomerCompletedRequest">Completed Requests</a>
+        <a href="/CustomerRejectedRequest">Rejected Requests</a>
+
 
     </div>
 
@@ -74,16 +68,15 @@ use app\models\viewCustomerReq;
                                         ?>
                                         <tr>
                                             <td><?php echo $row->getBookingId() ?></td>
-                                            <td><img src="/assets/img/uploads/vehicle/<?= $vehicle[$row->getVehId()]->getFrontView()?>" width="56px"></td>
-                                            <td><?= $vehicle[$row->getVehId()]->getVehBrand().' '.$vehicle[$row->getVehId()]->getVehModel()."<br>".$vehicle[$row->getVehId()]->getPlateNo()?></td>
-                                            <td><?php echo $customer[$row->getCusId()]->firstname.' '.$customer[$row->getCusId()]->lastname?></td>
+                                            <td><img src="/assets/img/uploads/vehicle/<?= $vehicles[$row->getVehId()]->getFrontView()?>" width="56px"></td>
+                                            <td><?= $vehicles[$row->getVehId()]->getVehBrand().' '.$vehicles[$row->getVehId()]->getVehModel()."<br>".$vehicles[$row->getVehId()]->getPlateNo()?></td>
+                                            <td><?php echo $customers[$row->getCusId()]->firstname.' '.$customers[$row->getCusId()]->lastname?></td>
 
                                             <td><?php echo $row->getPickupLocation() ?></td>
                                             <td><?php echo $row->getStartDate() ?></td>
                                             <td><?php echo $row->getEndDate() ?></td>
 
-                                            <td>driver name</td>
-<!--                                            <td>--><?php //echo $driver[$row->getDriverbyId()]->getDriverFname(). ' ' .$driver[$row->getDriverbyId()]->getDriverLname()?><!--</td>-->
+                                            <td><?php echo $drivers[$row->getBookingId()]->getDriverFname().' '.$drivers[$row->getBookingId()]->getDriverLname()."<br>".$drivers[$row->getBookingId()]->getPhoneNo()?></td>
                                             <td><?php echo $row->getPayMethod() ?></td>
                                             <td><div class="status">
                                                     <?php if ($row->getPayStatus() == 0): ?>
@@ -158,15 +151,15 @@ use app\models\viewCustomerReq;
                                 <tbody>
                                 <?php
                                 foreach ($model as $row):
-                                    if ((int)$row->getDriverReq()== 0 && $row->getStatus() == 1 ):
+                                    if ((int)$row->getDriverReq()== 0  && $row->getStatus() == 1 ):
 
                                         ?>
                                         <tr>
                                             <td><?php echo $row->getBookingId() ?></td>
 
-                                            <td><img src="/assets/img/uploads/vehicle/<?= $vehicle[$row->getVehId()]->getFrontView()?>" width="56px"></td>
-                                            <td><?= $vehicle[$row->getVehId()]->getVehBrand().' '.$vehicle[$row->getVehId()]->getVehModel()."<br>".$vehicle[$row->getVehId()]->getPlateNo()?></td>
-                                            <td><?= $customer[$row->getCusId()]->firstname.' '.$customer[$row->getCusId()]->lastname?></td>
+                                            <td><img src="/assets/img/uploads/vehicle/<?= $vehicles[$row->getVehId()]->getFrontView()?>" width="56px"></td>
+                                            <td><?= $vehicles[$row->getVehId()]->getVehBrand().' '.$vehicles[$row->getVehId()]->getVehModel()."<br>".$vehicles[$row->getVehId()]->getPlateNo()?></td>
+                                            <td><?= $customers[$row->getCusId()]->firstname.' '.$customers[$row->getCusId()]->lastname?></td>
 
 <!--                                            <td>--><?php //echo $customer[$row->getCusId()]->phoneno?><!--</td>-->
                                             <!-- <td>Kandy</td> -->

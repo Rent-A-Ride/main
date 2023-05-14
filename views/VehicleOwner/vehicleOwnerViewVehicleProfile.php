@@ -8,8 +8,7 @@ use app\models\cusVehicle;
 use app\models\VehInfo;
 
 ?>
-<!--<link rel="stylesheet" type="text/css" href="cus_vehview.css">-->
-<!--<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>-->
+
 
 
 
@@ -96,10 +95,73 @@ use app\models\VehInfo;
 
         </div>
 
-    </div>
+
 
 
     
+
+
+
+<!--Vehicle Review added -->
+<div class="reviews-container-2">
+    <h2>Ratings and Reviews</h2>
+    <div class="rating" id="overall-rating">
+        <div class="stars-container">
+            <div class="star">&#9733;</div>
+            <div class="star">&#9733;</div>
+            <div class="star">&#9733;</div>
+            <div class="star">&#9733;</div>
+            <div class="star">&#9733;</div>
+<!--            --><?php
+//            for ($i = 1; $i <= 5; $i++) {
+//                if ($i <= $avgReview%5) {
+//                    echo '<div class="star">&#9733;</div>';
+//                } else {
+//                    echo '<div class="star">&#9734;</div>';
+//                }
+//            }
+//            ?>
+        </div>
+        <div class="rating-text">
+            <span class="average"></span>
+            <span class="out-of">out of 5</span>
+        </div>
+    </div>
+    <ul class="reviews-list" id="reviews-list" style="display:none">
+<!--        --><?php //foreach ($vehReviews as $review): ?>
+            <li class="review">
+                <div class="review-header">
+                    <span class="reviewer-name">buddhi</span>
+                    <span class="review-date">55555</span>
+                </div>
+                <div class="rating">
+                    <div class="stars-container">
+                        <div class="star">&#9733;</div>
+                        <div class="star">&#9733;</div>
+                        <div class="star">&#9733;</div>
+                        <div class="star">&#9733;</div>
+                        <div class="star">&#9733;</div>
+<!--                        --><?php
+//                        for ($i = 1; $i <= 5; $i++) {
+//                            if ($i <= $review->getRating()%5) {
+//                                echo '<div class="star">&#9733;</div>';
+//                            } else {
+//                                echo '<div class="star">&#9734;</div>';
+//                            }
+//                        }
+//                        ?>
+                    </div>
+                    <div class="rating-text">
+                        <span class="rating-value"></span>
+                        <span class="out-of">out of 5</span>
+                    </div>
+                </div>
+                <p class="review-text"></p>
+            </li>
+
+<!--        --><?php //endforeach; ?>
+
+            </ul>
 </div>
 
 
@@ -108,20 +170,21 @@ use app\models\VehInfo;
 
 
 
-<!--<script>-->
-<!--    // const bookBtn = document.querySelector('.book-btns');-->
-<!--    //-->
-<!--    // bookBtn.addEventListener('click', function() {-->
-<!--    //     confirm('Are you sure you want to book this vehicle?');-->
-<!--    // });-->
-<!--    //-->
-<!--    // $(document).ready(function() {-->
-<!--    //     $('.thumbnails img').click(function() {-->
-<!--    //         var largeImage = $(this).data('large');-->
-<!--    //         $('.large-image img').attr('src', largeImage);-->
-<!--    //     });-->
-<!--    // });-->
-<!---->
-<!---->
-<!--</script>-->
+<script>
+    // Get the overall rating element and the reviews list element
+    const overallRating = document.getElementById('overall-rating');
+    const reviewsList = document.getElementById('reviews-list');
+
+    // Add a click event listener to the overall rating element
+    overallRating.addEventListener('click', function() {
+        // Toggle the display of the reviews list element
+        if (reviewsList.style.display === 'none') {
+            reviewsList.style.display = 'block';
+        } else {
+            reviewsList.style.display = 'none';
+        }
+    });
+
+
+</script>
 

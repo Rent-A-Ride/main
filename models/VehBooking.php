@@ -310,6 +310,10 @@ class VehBooking extends dbModel
         GROUP BY YEAR(endDate), MONTH(endDate)")->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function getbookingByResId($id){
+        return Application::$app->db->pdo->query("SELECT * FROM vehbooking WHERE booking_Id=$id")->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
 
 
 

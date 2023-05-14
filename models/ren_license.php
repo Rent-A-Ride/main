@@ -14,9 +14,9 @@ class ren_license extends dbModel
     protected string $license_No;
     protected string $from_date;
     protected string $ex_date;
-    protected string $owner;
+//    protected string $owner;
     protected string $scan_copy;
-    protected string $admin_approved;
+//    protected string $admin_approved;
     
     private array $body;
 
@@ -34,7 +34,7 @@ class ren_license extends dbModel
 
     public function attributes(): array
     {
-       return ['veh_Id','license_No','$from_date','$ex_date','$owner','scan_copy','$admin_approved'];
+       return ['veh_Id','license_No','from_date','ex_date','scan_copy'];
     }
 
     public static function primaryKey(): string
@@ -153,6 +153,8 @@ class ren_license extends dbModel
     {
         $this->admin_approved = $admin_approved;
     }
+
+
 
 
     public function __construct(array $registerBody=[])

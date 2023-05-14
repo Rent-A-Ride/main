@@ -204,4 +204,8 @@ class driver_requests extends dbModel
             
         
     }
+
+    public function getbookingByResId($id){
+        return Application::$app->db->pdo->query("SELECT * FROM driver_request WHERE reservation_id=$id")->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }

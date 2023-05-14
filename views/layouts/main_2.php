@@ -16,11 +16,16 @@
 
     <link rel="stylesheet" href="/assets/css/main_driver.css">
 
+    <!-- <link rel="stylesheet" href="/assets/css/main.css"> -->
+    <!-- Nav CSS -->
+    <link rel="stylesheet" href="/assets/css/driver/components/RegisterForm.css">
+
 </head>
 <body>
 
 {{content}}
 
 </body>
+<script src="/assets/javascript/customer/components/RegisterForm.js"></script>
 
 </html>

@@ -42,16 +42,8 @@ $hasConfirmPasswordError = $hasErrors && isset($errors['confirm_password']);
 </div>
 
 <hr class="hr">
-<!--    Change Email -->
 
-<div class="settings-container">
-    <h2>Change Email</h2>
-    <form>
-        <label for="current-password">New Email:</label>
-        <input type="password" id="current-password" name="current-password" required>
 
-        <button type="submit">Send Link</button>
-    </form>
-</div>
+
 
 

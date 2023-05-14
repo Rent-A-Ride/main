@@ -17,9 +17,10 @@ use app\models\viewCustomerReq;
             <a  href="/CustomerPendingRequest">Pending Requests</a>
             <a href="/CustomerAcceptedRequest">Accepted Requests</a>
             <!--        <a href="#ongoing">Completed Requests</a>-->
-            <a id="active" href="/CustomerRejectedRequest">Rejected Requests</a>
             <a href="/CustomerOngoingRequest">Ongoing Requests</a>
             <a href="/CustomerCompletedRequest">Completed Requests</a>
+            <a id="active" href="/CustomerRejectedRequest">Rejected Requests</a>
+
 
 
             <!-- <div class="search-container">
