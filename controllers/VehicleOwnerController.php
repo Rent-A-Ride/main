@@ -20,6 +20,8 @@ use app\models\VehBooking;
 use app\models\vehicle;
 use app\models\vehicle_Owner;
 use app\models\vehicleowner;
+use app\models\vehicleownerinvoice;
+use app\models\vehicleownerpayment;
 use app\models\VehInfo;
 use app\models\VehRates;
 use app\models\viewCustomerReq;
@@ -129,7 +131,7 @@ class VehicleOwnerController extends Controller
 //}
 
     public function getPayments(Request $req,Response $res){
-        if ($req->session->get("authenticated")&&$req->session->get("user_role")==="vehicleowner"){
+        if (Application::$app->session->get("authenticated")&&Application::$app->session->get("user_role")==="vehicleowner"){
             return $res->render("/VehicleOwner/vehicleOwnerPayments","vehicleOwner-dashboard");
         }
     }
@@ -983,6 +985,27 @@ class VehicleOwnerController extends Controller
         $this->setLayout("vehicleOwner-dashboard");
         return $this->render("/VehicleOwner/VOEditVehDetails", $param);
     }
+//vehicle owner payment
+
+public function vownerViewPayments(Request $req, Response $res){
+     
+    if(Application::$app->session->get('authenticated')==true && Application::$app->session->get('user_role')=="vehicleowner")
+    {   
+        
+        $driverModel=new vehicleowner();
+        $VownerPaymentModel = new vehicleownerpayment();
+        $VownerInvoiceModel = new vehicleownerinvoice();
+
+        $Vowner_payment=$VownerPaymentModel->getvownerPayments(Application::$app->session->get('user'));  
+        $Vowner_invoice=$VownerInvoiceModel->getVownerinvoice(Application::$app->session->get('user'));    
+        $this->setLayout("vehicleOwner-dashboard");    
+        // var_dump($Vowner_invoice);
+        // var_dump($Vowner_payment);
+        // exit;  
+       return $this->render("/VehicleOwner/vehicleOwnerPayments",['vownerp'=>$Vowner_payment,'vownerinv'=>$Vowner_invoice]);
+    }
+    return $res->redirect("/");
+}
 
 
 
