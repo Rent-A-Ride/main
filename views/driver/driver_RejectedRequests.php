@@ -25,9 +25,10 @@
                 <th>Customer Name</th>
                 <th>Contact Number</th>
                 <th>Pick-up</th>
+                <th>Start Date</th>
+                <th>End Date</th>
                 <th>Destination</th>
-                <th>Total Distance(Two way)</th>
-                <th></th>
+                <th>Status</th>
             </tr>
             </thead>
             <tbody>
@@ -44,11 +45,12 @@
 
             <tr>
                     <td><?php echo $row["reservation_id"] ?></td>
-                    <td><?php echo $row["customer_name"] ?></td>
-                    <td><?php echo $row["contact_no"] ?></td>
-                    <td><?php echo $row["pick_up"] ?></td>
-                    <td><?php echo $row["Destination"] ?></td>
-                    <td><?php echo $row["TotalDistance"] ?></td>
+                    <td><?php echo $customer[$row['user_ID']]->getFirstname().' '.$customer[$row['user_ID']]->getLastname() ?></td>
+                    <td><?php echo $customer[$row['user_ID']]->getPhoneno() ?></td>
+                    <td><?php echo $row["pickup_location"] ?></td>
+                    <td><?php echo $row["start_date"] ?></td>
+                    <td><?php echo $row["end_date"] ?></td>
+                    <td><?php echo $row["destination"] ?></td>
                     <td class="req-btnName">
                     <?php
                     $status= $row["accept"];

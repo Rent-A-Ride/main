@@ -27,11 +27,13 @@ class driver extends dbModel
     public string $area;
     public string $address;
     public string $gender;
-    public string $admin_approved;
+    public string $admin_approved = "";
     public string $password;
     public string $category;
     public ?string $profile_pic = "";
-    public int $status;
+    public int $status = '';
+    public string $license_scan_copy;
+
 //    public string $profile_pic;
 
 
@@ -58,7 +60,9 @@ class driver extends dbModel
     }
     public function attributes(): array
     {
-        return ['Nic','driver_Fname','driver_Lname','email','phoneNo','area','address','gender','admin_approved','password', 'profile_pic', 'license_No', 'status','category'];
+
+        return ['Nic','driver_Fname','driver_Lname','email','phoneNo','area','address','gender','admin_approved','password', 'profile_pic', 'license_No', 'status','category','license_scan_copy'];
+
     }
 
     public function displayName(): string
@@ -69,6 +73,13 @@ class driver extends dbModel
     public function userProfile(string $data)
     {
         return $this->$data;
+    }
+
+    public function save(): bool
+    {
+        $this->status = self::STATUS_INACTIVE;
+        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+        return parent::save();
     }
 
     /**
@@ -155,14 +166,14 @@ class driver extends dbModel
     }
 
     public function acceptRequests($user_id){
-        $sql="UPDATE driver_requests SET accept =1 WHERE reservation_id = $user_id";
+        $sql="UPDATE driver_request SET accept =1 WHERE reservation_id = $user_id";
         Application::$app->db->pdo->query($sql)->execute();
         $sql1="UPDATE vehbooking SET status=2 WHERE booking_Id=$user_id";
         Application::$app->db->pdo->query($sql1)->execute();
     }
 
     public function rejectRequests($user_id){
-        $sql="UPDATE driver_requests SET accept =2 WHERE reservation_id = $user_id";
+        $sql="UPDATE driver_request SET accept =2 WHERE reservation_id = $user_id";
         Application::$app->db->pdo->query($sql)->execute();
         $sql1="UPDATE vehbooking SET status=0 WHERE booking_Id=$user_id";
         Application::$app->db->pdo->query($sql1)->execute();
@@ -187,11 +198,24 @@ class driver extends dbModel
     }
     
 
+
+
+    public function getBookings($user_id){
+
+        return Application::$app->db->pdo->query("SELECT * FROM driver_request INNER JOIN vehbooking WHERE driver_request.reservation_id = vehbooking.booking_Id AND driver_request.driver_ID = $user_id AND driver_request.accept=1")->fetchAll(\PDO::FETCH_ASSOC);
+
+    }
+
+    public function getrejectrequest($user_id){
+        $user_id=intval($user_id);
+        return Application::$app->db->pdo->query("SELECT * FROM driver_request INNER JOIN driver WHERE driver_request.driver_ID=driver.driver_ID AND driver.driver_ID=$user_id AND driver_request.accept=2 ORDER BY driver_request.reservation_id DESC")->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     
 
     public function getrequest($user_id){
         // var_dump($user_id);
-        return Application::$app->db->pdo->query("SELECT * FROM driver_requests INNER JOIN driver WHERE driver_requests.driver_ID=$user_id AND driver.driver_ID=$user_id ORDER BY reservation_id DESC")->fetchAll(\PDO::FETCH_ASSOC);
+        return Application::$app->db->pdo->query("SELECT * FROM driver_request INNER JOIN driver WHERE driver_request.driver_ID=$user_id AND driver.driver_ID=$user_id ORDER BY reservation_id DESC")->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function getReviews($user_id){
@@ -417,15 +441,46 @@ class driver extends dbModel
         $this->status = $status;
     }
 
+
+     /**
+     * @return string
+     */
+    public function getCategory(): int
+    {
+        return $this->category;
+    }
+    
+
+    /**
+     * @param string $password
+     */
+    public function setCategory(string $category): void
+    {
+        $this->category = $category;
+    }
+
+
+     /**
+     * @return string
+     */
+    public function getLicenseScanCopy(): int
+    {
+        return $this->category;
+    }
+    
+
+    /**
+     * @param string $password
+     */
+    public function setLicenseScanCopy(string $copy): void
+    {
+        $this->license_scan_copy = $copy;
+    }
     public function getdriverCount(){
         return Application::$app->db->pdo->query("SELECT COUNT(driver_ID) As driver_count FROM driver")->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function getrejectrequest($user_id){
-        $user_id=intval($user_id);
-        return Application::$app->db->pdo->query("SELECT * FROM driver_requests INNER JOIN driver WHERE driver_requests.driver_ID=driver.driver_ID AND driver.driver_ID=$user_id AND driver_requests.accept=2 ORDER BY driver_requests.reservation_id DESC")->fetchAll(\PDO::FETCH_ASSOC);
-    }
-
+   
     public function UpdateProfile($body,$driver_id){
         
         $fname=$body['firstname'];
