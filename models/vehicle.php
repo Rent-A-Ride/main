@@ -24,6 +24,7 @@ class vehicle extends dbModel
     protected ?string $back_view;
     protected ?string $side_view;
 
+    protected int $admin_approved = 0;
     public function rules(): array
     {
         return [];
@@ -36,7 +37,7 @@ class vehicle extends dbModel
 
     public function attributes(): array
     {
-       return ['veh_Id','plate_No','veh_brand','veh_model','veh_type','veh_location','price','availability','vo_Id','front_view','back_view','side_view'];
+       return ['veh_Id','plate_No','veh_brand','veh_model','veh_type','veh_location','price','availability','vo_Id','front_view','back_view','side_view','admin_approved'];
     }
 
     public static function primaryKey(): string
@@ -235,6 +236,24 @@ class vehicle extends dbModel
     {
         $this->side_view = $side_view;
     }
+
+    /**
+     * @return int
+     */
+    public function getAdminApproved(): int
+    {
+        return $this->admin_approved;
+    }
+
+    /**
+     * @param int $admin_approved
+     */
+    public function setAdminApproved(int $admin_approved): void
+    {
+        $this->admin_approved = $admin_approved;
+    }
+
+
 
     private \PDO $pdo;
     private array $body;

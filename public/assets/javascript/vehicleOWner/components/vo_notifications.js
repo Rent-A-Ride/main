@@ -35,6 +35,7 @@ function fetchNotifications() {
     })
         .then(response => response.json())
         .then(data => {
+        console.log(data[0].output);
             if (data.error) {
                 console.error(data.error);
                 return;

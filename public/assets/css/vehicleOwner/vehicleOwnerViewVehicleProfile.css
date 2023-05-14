@@ -218,3 +218,79 @@ img.small{
     box-shadow: none;
     transform: translateY(0);
 }
+
+
+/* Vehicle reviews */
+.reviews-container-2 {
+    background: #fafafa;
+    width: 90%;
+    margin: 50px;
+    border-radius: 10px;
+    text-align: center;
+    padding: 20px;
+}
+
+.reviews-container-2 h2 {
+    text-align: left;
+    font-size: 1.4em;
+    margin-bottom: 1em;
+}
+
+.rating {
+    display: inline-block;
+    margin-bottom: 1em;
+    cursor: pointer;
+}
+
+.stars-container {
+    display: inline-block;
+    font-size: 1em;
+    color: orange;
+}
+
+.star {
+    display: inline;
+}
+
+.rating-text {
+    display: inline-block;
+    font-size: 0.6em;
+    margin-left: 1em;
+}
+
+.average {
+    font-weight: bold;
+}
+
+.out-of {
+    font-size: 0.8em;
+}
+
+.reviews-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+.review {
+    margin-bottom: 0.5em;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5em;
+}
+
+.reviewer-name {
+    font-weight: bold;
+}
+
+.review-date {
+    font-size: 0.8em;
+}
+
+.review-text {
+    margin-top: 0.5em;
+}
