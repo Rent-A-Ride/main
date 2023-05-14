@@ -991,13 +991,15 @@ public function vownerViewPayments(Request $req, Response $res){
      
     if(Application::$app->session->get('authenticated')==true && Application::$app->session->get('user_role')=="vehicleowner")
     {   
-        
-        $driverModel=new vehicleowner();
+
+        $vownerModel=new vehicleowner();
         $VownerPaymentModel = new vehicleownerpayment();
         $VownerInvoiceModel = new vehicleownerinvoice();
 
         $Vowner_payment=$VownerPaymentModel->getvownerPayments(Application::$app->session->get('user'));  
-        $Vowner_invoice=$VownerInvoiceModel->getVownerinvoice(Application::$app->session->get('user'));    
+        $Vowner_invoice=$VownerInvoiceModel->getVownerinvoice(Application::$app->session->get('user'));
+
+
         $this->setLayout("vehicleOwner-dashboard");    
         // var_dump($Vowner_invoice);
         // var_dump($Vowner_payment);
