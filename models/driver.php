@@ -27,12 +27,17 @@ class driver extends dbModel
     public string $area;
     public string $address;
     public string $gender;
-    public string $status;
-    public string $admin_approved;
+    public string $status="";
+    public string $admin_approved="";
     public string $password;
-    public string $license_No;
-    public string $profile_pic;
-    public int $status;
+   
+    public string $profile_pic="";
+
+    public string $category;
+
+    public string $license_scan_copy;
+
+
 //    public string $profile_pic;
 
 
@@ -59,7 +64,7 @@ class driver extends dbModel
     }
     public function attributes(): array
     {
-        return ['Nic','driver_Fname','driver_Lname','email','phoneNo','area','address','gender','admin_approved','password', 'profile_pic', 'license_No', 'status'];
+        return ['Nic','driver_Fname','driver_Lname','email','phoneNo','area','address','gender','admin_approved','password', 'profile_pic', 'license_No', 'status','category','license_scan_copy'];
     }
 
     public function displayName(): string
@@ -70,6 +75,13 @@ class driver extends dbModel
     public function userProfile(string $data)
     {
         return $this->$data;
+    }
+
+    public function save(): bool
+    {
+        $this->status = self::STATUS_INACTIVE;
+        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+        return parent::save();
     }
 
 
@@ -410,6 +422,41 @@ class driver extends dbModel
         $this->status = $status;
     }
 
+
+     /**
+     * @return string
+     */
+    public function getCategory(): int
+    {
+        return $this->category;
+    }
+    
+
+    /**
+     * @param string $password
+     */
+    public function setCategory(string $category): void
+    {
+        $this->category = $category;
+    }
+
+
+     /**
+     * @return string
+     */
+    public function getLicenseScanCopy(): int
+    {
+        return $this->category;
+    }
+    
+
+    /**
+     * @param string $password
+     */
+    public function setLicenseScanCopy(string $copy): void
+    {
+        $this->license_scan_copy = $copy;
+    }
     public function getdriverCount(){
         return Application::$app->db->pdo->query("SELECT COUNT(driver_ID) As driver_count FROM driver")->fetchAll(\PDO::FETCH_ASSOC);
     }
