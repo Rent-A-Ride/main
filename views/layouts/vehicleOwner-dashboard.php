@@ -79,13 +79,13 @@ use app\core\Application;
             </a>
             <span class="tooltip">Requests</span>
         </li>
-        <li>
-            <a href="/Customer/ExpieringNotification">
-                <i class="fa-regular fa-bell"></i>
-                <span class="links_name">Notification</span>
-            </a>
-            <span class="tooltip">Notification</span>
-        </li>
+<!--        <li>-->
+<!--            <a href="/Customer/ExpieringNotification">-->
+<!--                <i class="fa-regular fa-bell"></i>-->
+<!--                <span class="links_name">Notification</span>-->
+<!--            </a>-->
+<!--            <span class="tooltip">Notification</span>-->
+<!--        </li>-->
         <li>
             <a href="/vehicleOwner/Payments">
                 <i class='bx bx-wallet' ></i>
@@ -202,6 +202,7 @@ use app\core\Application;
 <script src="/assets/javascript/component/navbar.js"></script>
 <!--Notification Js-->
 <script src="/assets/javascript/vehicleOwner/components/vo_notifications.js"></script>
+
 <script src="/assets/javascript/component/sidebar.js"></script>
 <script src="/assets/javascript/component/search.js"></script>
 <script src="/assets/javascript/vehicleOwner/popup.js"></script>

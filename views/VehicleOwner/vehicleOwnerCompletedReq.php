@@ -19,9 +19,10 @@ use app\models\viewCustomerReq;
         <a  href="/CustomerPendingRequest">Pending Requests</a>
         <a href="/CustomerAcceptedRequest">Accepted Requests</a>
         <!--        <a href="#ongoing">Completed Requests</a>-->
-        <a href="/CustomerRejectedRequest">Rejected Requests</a>
+
         <a  href="/CustomerOngoingRequest">Ongoing Requests</a>
         <a id="active" href="/CustomerCompletedRequest">Completed Requests</a>
+        <a href="/CustomerRejectedRequest">Rejected Requests</a>
 
 
         <!-- <div class="search-container">
@@ -40,9 +41,9 @@ use app\models\viewCustomerReq;
         <div class="pending-container">
             <div class="req-switch">
                 <br>
-                <input type="radio" class="with-driver" name="switch" id="with-driver" >
+                <input type="radio" class="with-driver" name="switch" id="with-driver" checked>
                 <label for="with-driver">With Driver</label>
-                <input type="radio" class="without-driver" name="switch" id="without-driver" checked >
+                <input type="radio" class="without-driver" name="switch" id="without-driver" >
                 <label for="without-driver">With-Out Driver</label>
 
             </div>
@@ -87,7 +88,10 @@ use app\models\viewCustomerReq;
                                 <td><?= $customers[$row->getCusId()]->firstname.' '.$customers[$row->getCusId()]->lastname?></td>
                                 <td><?php echo $row->getStartDate() ?></td>
                                 <td><?php echo  $row->getEndDate() ?></td>
-                                <td>Driver Name</td>
+<!--                                <td>Driver Name</td>-->
+                                <td><?php echo $drivers[$row->getBookingId()]->getDriverFname().' '.$drivers[$row->getBookingId()]->getDriverLname()."<br>".$drivers[$row->getBookingId()]->getPhoneNo()?></td>
+
+
 
                                 <td><?php echo $row->getRentalPrice() ?></td>
 

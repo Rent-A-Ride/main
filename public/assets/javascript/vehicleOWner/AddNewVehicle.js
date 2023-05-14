@@ -82,20 +82,20 @@ vehicleType.addEventListener("input", () => {
   let min, max;
   switch(vehicleType.value.toLowerCase()) {
     case "car":
-      min = 1000;
-      max = 5000;
+      min = 8000;
+      max = 12000;
       break;
     case "van":
-      min = 2000;
-      max = 6000;
+      min = 20000;
+      max = 25000;
       break;
     case "bike":
-      min = 400;
-      max = 1000;
+      min = 1200;
+      max = 2500;
       break;
     case "scooter":
-      min = 500;
-      max = 1500;
+      min = 1200;
+      max = 2500;
       break;
     default:
       min = 0;
