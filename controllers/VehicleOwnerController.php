@@ -13,9 +13,11 @@ use app\models\license_expire_notification;
 use app\models\owner;
 use app\models\ren_ecotest;
 use app\models\ren_insurance;
+use app\models\ren_license;
 use app\models\veh_ecotest;
 use app\models\veh_insurance;
 use app\models\veh_license;
+use app\models\veh_Reviews;
 use app\models\VehBooking;
 use app\models\vehicle;
 use app\models\vehicle_Owner;
@@ -32,7 +34,7 @@ class VehicleOwnerController extends Controller
 {
     public function VehicleOwnerVehicle(Request $request, Response $response){
             $voId = Application::$app->session->get('user');
-            $vehicles = vehicle::retrieveAll(['vo_ID'=>$voId,'availability' => 1]);
+            $vehicles = vehicle::retrieveAll(['vo_ID'=>$voId,'availability' => 1,'admin_approved'=>1]);
 
             $param = [
                 'vehicles'=>$vehicles
@@ -147,9 +149,7 @@ class VehicleOwnerController extends Controller
 
     public function vehownerUpdateVehicle(Request $req, Response $res){
         if (Application::$app->session->get("user_role")==="vehicleowner"){
-            $veh_ecotest = new ren_ecotest();
-//            $veh_insurance = new veh_insurance();
-//            $veh_license = new veh_license();
+            $veh_license = new ren_license();
             $id = $req->getBody()['id']??'';
             $vehicle = vehicle::findOne(['veh_Id' => $id]);
             $params = [
@@ -158,35 +158,41 @@ class VehicleOwnerController extends Controller
 
 
 
-             if ($req->isPost()) {
+             if ($req->isPost())
+             {
                  $veh_Id = $req->getBody()['veh_Id'];
+                 $veh_license->setVehId($veh_Id);
+                 $veh_license->setlicense_No($req->getBody()['license_No']);
 
                  // Handle the scan copy upload
                  if (isset($_FILES['scan_copy'])) {
                      $file = $_FILES['scan_copy'];
-                     $file['name'] = 'vehEco'.$veh_Id.'.'.$file['type'];
-//                     $file['name'] = 'vehIns'.$veh_Id.'.'.$file['type'];
+                     $path_parts = pathinfo($file['name']);
+                     $extension = $path_parts['extension'];
+                     $file['name'] = 'vehLicense'.$veh_Id.'.'.$extension;
                      $filename = $file['name'];
                      $tmp_name = $file['tmp_name'];
-                     $path = Application::$ROOT_DIR.'/public/assets/img/uploads/renewal/eco/' . $filename;
+                     $path = Application::$ROOT_DIR.'/public/assets/img/uploads/renewal/license/' .$filename;
 
                      if (!empty($file)){
                          move_uploaded_file($tmp_name, $path);
-                         $veh_ecotest->setScanCopy($filename);
+                         $veh_license->setscan_copy($filename);
                      } else {
-                         $veh_ecotest->setScanCopy("dull.jpg");
+                         $veh_license->setscan_copy("dull.jpg");
                      }
 
                  }
 
-                    $veh_ecotest->setVehId($veh_Id);
-                    $veh_ecotest->setExDate($req->getBody()['ex_date']);
+
+                 $veh_license->setfrom_date($req->getBody()['from_date']);
+
+                 $veh_license->setex_date($req->getBody()['ex_date']);
 
 
 
-                 if ($veh_ecotest->save()) {
-//                     $req->session->setFlash('success', 'Vehicle Updated Successfully!');
-                     $res->redirect('/vehicleowner_vehicle');
+                 if ( $veh_license->save() || $veh_license->update($veh_Id,['license_No','scan_copy','from_date','ex_date'])) {
+                    Application::$app->session->setFlash('success', 'Vehicle License Updated Successfully!');
+                     $res->redirect('/vehicleowner/vehicles');
                      return;
                  } else {
                      echo '<pre>';
@@ -209,7 +215,8 @@ class VehicleOwnerController extends Controller
         $voId = Application::$app->session->get('user');
         //calling retriveall function through vehbooking model
         //retrieveAll-retrieve all the details of database table
-        $vehbookings = VehBooking::retrieveAll(['vo_id' => $voId]);
+        $vehbookings = VehBooking::retrieveAll(['vo_id' => $voId, 'status' => 0, ]);
+
 
 //        echo '<pre>';
 //        var_dump($vehbookings);
@@ -567,7 +574,7 @@ class VehicleOwnerController extends Controller
     public function viewCustomerOngoingRequests(Request $request, Response $response): string
     {
         $voID = Application::$app->session->get('user');
-        $bookings = VehBooking::retrieveAll(['vo_Id'=>$voID]);
+        $bookings = VehBooking::retrieveAll(['vo_Id'=>$voID, 'status'=>1]);
 //
 //        echo '<pre>';
 //        var_dump($cusReq);
@@ -911,7 +918,7 @@ class VehicleOwnerController extends Controller
         return $this->render("/VehicleOwner/vo_bookingCalendar");
     }
 
-
+    //vehicle profile
     public function VehicleProfile(Request $request,Response $response)
     {
         $vehID = $request->getBody()['id'];
@@ -920,6 +927,9 @@ class VehicleOwnerController extends Controller
         $vehLicense = veh_license::findOne(['veh_Id' => $vehID]);
         $vehInsurance = veh_insurance::findOne(['veh_Id' => $vehID]);
         $vehEcoTest = veh_ecotest::findOne(['veh_Id' => $vehID]);
+//        $avgReview = veh_Reviews::calculateAverage('rating',['veh_Id' => $id]);
+//        $vehReviews = veh_Reviews::retrieveAll(['veh_Id' => $id]);
+
 
 //        echo '<pre>';
 //        var_dump($vehEcoTest);

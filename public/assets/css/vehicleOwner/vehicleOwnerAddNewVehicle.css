@@ -276,6 +276,8 @@
 label {
     flex-basis: 40%;
     font-weight: bold;
+    font-size: 12px;
+
 }
 
 input[type="text"],
