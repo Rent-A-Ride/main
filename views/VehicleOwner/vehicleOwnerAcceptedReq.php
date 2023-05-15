@@ -63,7 +63,7 @@ use app\models\viewCustomerReq;
                                 <tbody>
                                 <?php
                                 foreach ($model as $row):
-                                        if ($row->getDriverReq()== 1 && $row->getStatus() == 1  ):
+                                        if ($row->getDriverReq()== 1 && $row->getStatus() == 1 && date('Y-m-d') < $row->getStartDate()):
 
                                         ?>
                                         <tr>
@@ -151,7 +151,7 @@ use app\models\viewCustomerReq;
                                 <tbody>
                                 <?php
                                 foreach ($model as $row):
-                                    if ((int)$row->getDriverReq()== 0  && $row->getStatus() == 1 ):
+                                    if ((int)$row->getDriverReq()== 0  && $row->getStatus() == 1 && date('Y-m-d') < $row->getStartDate() ):
 
                                         ?>
                                         <tr>

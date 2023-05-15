@@ -1,6 +1,7 @@
 
  <?php
 
+
 ?>
 <section class="requests">
 
@@ -52,6 +53,19 @@
                     <td><?php echo $row["end_date"] ?></td>
                     <td><?php echo $row["destination"] ?></td>
                     <td class="req-btnName">
+                        <div class ="req-btns">
+                            <form style= "padding:0 0rem" action="" method="post" onsubmit="confirm('Are you sure want to confirm?')">
+                                <input type="text" name="action" value="Accept" hidden>
+                                <input type="text" name="res_id" value="<?=$row["reservation_id"]?>" hidden>
+                                <input class="accept" type="submit" value="Accept">
+                            </form>
+                            <form style= "padding:0 0rem" action="" method="post">
+                                <input type="text" name="action" value="Reject" hidden>
+                                <input type="text" name="res_id" value="<?=$row["reservation_id"]?>" hidden>
+                                <input class="reject" type="submit" value="Reject">
+                            </form>
+                        </div>
+
                     <?php
                     $status= $row["accept"];
                     if($status===1):
@@ -61,6 +75,10 @@
                         echo "Rejected";
                     endif;
                     if($status===0):
+                        echo '<pre>';
+                        var_dump($status);
+                        echo '</pre>';
+                        exit();
 
                      ?>
                         <div class ="req-btns"> 

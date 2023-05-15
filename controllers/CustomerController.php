@@ -7,6 +7,7 @@ use app\core\Controller;
 use app\core\middlewares\AuthMiddleware;
 use app\core\Request;
 use app\core\Response;
+use app\models\Adminnotification;
 use app\models\CancelBookings;
 use app\models\Customer;
 use app\models\customer_payment;
@@ -186,9 +187,11 @@ class CustomerController extends Controller
 
 
         if ($request->isPost()){
+
+            $vehicle = vehicle::findOne(['veh_Id' => $request->getBody()['veh_Id']]);
             $vehBooking->loadData($request->getBody());
             $vehBooking->setCusId($cus_Id);
-            $vehBooking->setVoId($request->getBody()['veh_Id']);
+            $vehBooking->setVoId($vehicle->getVoId());
 
             if ($vehBooking->saveAs(['booking_Id','status'])){
                 voNotifications::sendNotification($vehBooking->getVoId(),'New Vehicle Booking','You have a new booking','/CustomerPendingRequest');
@@ -291,7 +294,7 @@ class CustomerController extends Controller
     public function activeBookings(Request $request, Response $response)
     {
         $id=Application::$app->user->cus_Id;
-        $vehBooking = VehBooking::retrieveAll(['cus_Id' => $id, 'status' => 2]);
+        $vehBooking = VehBooking::retrieveAll(['cus_Id' => $id, 'status' => 1]);
 
         $vehicleById = [];
         $driverById = [];
@@ -301,7 +304,7 @@ class CustomerController extends Controller
         foreach ($vehBooking as $vehBook) {
             $vehicleById[$vehBook->getVehId()] = cusVehicle::findOne(['veh_Id' => $vehBook->getVehId()]);
             $cusPayment[$vehBook->getBookingId()] = customer_payment::findOne(['booking_Id' => $vehBook->getBookingId()]);
-            if ($vehBook->getDriverReq() == 1 && $vehBook->getStatus() == 2) {
+            if ($vehBook->getDriverReq() == 1 && $vehBook->getStatus() == 1 && ($vehBook->getPayStatus()==1 || $vehBook->getPayStatus()==2)) {
                 $driverReq[$vehBook->getBookingId()] = driver_requests::findOne(['reservation_id' => $vehBook->getBookingId()]);
                 $driverById[$driverReq[$vehBook->getBookingId()]->getDriverID()] = driver::findOne(['driver_ID' => $driverReq[$vehBook->getBookingId()]->getDriverID()]);
             }
@@ -648,7 +651,7 @@ class CustomerController extends Controller
 
         if ($customerPayment->save()) {
 
-            $vehBooking->setStatus(3);
+            $vehBooking->setStatus(1);
             if ($vehBooking->update($bookingId, ['status', 'pay_status'])) {
                 if ($request->isPost()) {
                     Application::$app->session->setFlash('success', 'Payment Successful!');
@@ -752,6 +755,7 @@ class CustomerController extends Controller
                 $this->cusComplaint($complaint, $cusId, $request);
 
                 if ($complaint->save()) {
+                    Adminnotification::sendNotification(1,"New Complaint","New Complaint from Hasantha Kariyawasam","/Admin/Complaints");
 
                     Application::$app->session->setFlash('success', 'Complaint sent successfully!');
                     $response->redirect('/Customer/Complaints');
@@ -788,6 +792,7 @@ class CustomerController extends Controller
                         }
 
                     if ($complaint->save()) {
+                        Adminnotification::sendNotification(1,"New Complaint","New Complaint from Hasantha Kariyawasam","/admin/vehicleComplaint");
                         Application::$app->session->setFlash('success', 'Complaint sent successfully!');
                         $response->redirect('/Customer/Complaints');
                         return;
@@ -813,6 +818,7 @@ class CustomerController extends Controller
                 $this->cusComplaint($complaint, $cusId, $request);
 
                 if ($complaint->save()) {
+                    Adminnotification::sendNotification(1,"New Complaint","New Complaint from Hasantha Kariyawasam","/admin/vehicleComplaint");
                     Application::$app->session->setFlash('success', 'Complaint sent successfully!');
                     $response->redirect('/Customer/Complaints');
                     return;

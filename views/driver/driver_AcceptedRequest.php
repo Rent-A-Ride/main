@@ -52,6 +52,7 @@
                     <td><?php echo $row["end_date"] ?></td>
                     <td><?php echo $row["destination"] ?></td>
                     <td class="req-btnName">
+                        Accepted
                     <?php
                     $status= $row["accept"];
                     if($status===1):
